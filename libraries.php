@@ -89,7 +89,7 @@ include_once(DOC_ROOT.'/classes/docente.class.php');
 $docente = new Docente();
 
 $db = new DB;
-$error = new Error;
+$error = new ErrorSystem;
 $util = new Util;
 $sendmail = new SendMail;
 $invoice = new Invoice;
