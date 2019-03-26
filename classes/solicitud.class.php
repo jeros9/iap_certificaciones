@@ -205,7 +205,7 @@ class Solicitud extends Module
 		return $result;
 	}
 	
-	public function enumarateSolicitudesAdmin($value)
+	public function enumarateSolicitudesAdmin($value = '')
 	{
 		$filtro = '';
 		

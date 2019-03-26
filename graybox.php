@@ -220,7 +220,10 @@ $pages = array(
 	'add-evaluar',
 	'add-certificacion-alumno',
 	'add-grupos',
-	'ver-foto'
+    'ver-foto',
+    'add-cedula',
+    'add-plan',
+    'view-doc'
 
 );
 

@@ -384,3 +384,152 @@ function buscarGrupoModal(){
 		}
     });
 }
+
+$(document).ready(function() {
+	$(document).on('click', '.btnAddPlan', function() {
+		var user = $(this).data('user');
+		var subject = $(this).data('subject');
+		AddPlanDiv(user, subject);
+	});
+
+	$(document).on('click', '.btnAddCedula', function() {
+		var user = $(this).data('user');
+		var subject = $(this).data('subject');
+		AddCedulaDiv(user, subject);
+	});
+
+	$(document).on('click', '#btnAddRow', function() {
+		addRowRequerimiento();
+	});
+});
+
+
+function AddCedulaDiv(user_id, subject_id)
+{
+  $.ajax({
+      url : WEB_ROOT+'/ajax/new/usuarios.php',
+      type: "POST",
+      data : {type: "addCedula", user_id: user_id, subject_id: subject_id},
+      success: function(data)
+      {
+        showModal("Agregar Cédula", data);
+        $('.submitForm').click(function() {
+          AddCedula();
+        });
+      },
+      error: function ()
+      {
+        alert('Algo salio mal, compruebe su conexion a internet');
+      }
+  });
+}
+
+
+function AddCedula()
+{
+	$.ajax({
+			url : WEB_ROOT+'/ajax/new/usuarios.php',
+			type: "POST",
+			data :  $('#addCedulaForm').serialize(),
+			success: function(data)
+			{
+					var splitResponse = data.split("[#]");
+
+					if(splitResponse[0] == "fail")
+					{
+							ShowStatusPopUp($(splitResponse[1]));
+					}
+					else
+					{
+							ShowStatus($(splitResponse[1]));
+							CloseFview();
+					}
+			},
+			error: function ()
+			{
+					alert('Algo salio mal, compruebe su conexion a internet');
+			}
+	});
+}
+
+
+function AddPlanDiv(user_id, subject_id)
+{
+  $.ajax({
+      url : WEB_ROOT+'/ajax/new/usuarios.php',
+      type: "POST",
+      data : {type: "addPlan", user_id: user_id, subject_id: subject_id},
+      success: function(data)
+      {
+        showModal("Agregar Plan", data);
+        $('.submitForm').click(function() {
+          AddPlan();
+        });
+      },
+      error: function ()
+      {
+        alert('Algo salio mal, compruebe su conexion a internet');
+      }
+  });
+}
+
+
+function AddPlan()
+{
+	var requerimientos = getRowsRequerimientos();
+	$.ajax({
+			url : WEB_ROOT+'/ajax/new/usuarios.php',
+			type: "POST",
+			data :  $('#addPlanForm').serialize()  + '&requerimientos=' + requerimientos,
+			success: function(data)
+			{
+					var splitResponse = data.split("[#]");
+
+					if(splitResponse[0] == "fail")
+					{
+							ShowStatusPopUp($(splitResponse[1]));
+					}
+					else
+					{
+							ShowStatus($(splitResponse[1]));
+							CloseFview();
+					}
+			},
+			error: function ()
+			{
+					alert('Algo salio mal, compruebe su conexion a internet');
+			}
+	});
+}
+
+
+function addRowRequerimiento() 
+{
+	var row = '<tr>' +
+							'<td>' +
+								'<input class="form-control" type="text" />' +
+							'</td>' +
+							'<td>' +
+								'<input class="form-control" type="text" />' +
+							'</td>' +
+						'</tr>';
+	$('#tb-requerimientos tr:last').after(row);
+}
+
+
+function getRowsRequerimientos() 
+{
+	var json = "[";
+	var total = $('#tb-requerimientos tr').length;
+	$('#tb-requerimientos tr').each(function (index) {
+			json += '{"cantidad":"'+$(this).find("td").eq(0).find('.form-control').val()+'", '; 
+			json += '"descripcion":"'+$(this).find("td").eq(1).find('.form-control').val()+'"}';
+			if (index === total - 1) {
+					
+			}else {
+					json += ', ';
+			}
+	});
+	json += ']';
+	return json;
+}

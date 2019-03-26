@@ -32,7 +32,7 @@
 		</i>	
 		</a>
 		{/if}
-		<a href="{$WEB_ROOT}/graybox.php?page=add-doc&id={$item.userId}&auxTpl=1&cId={$item.subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR PLAN">
+		<a href="javascript:;" class="btnAddPlan" title="AGREGAR PLAN" data-user="{$item.userId}" data-subject="{$item.subjectId}">
 		<i class="material-icons">
 		calendar_today
 		</i>	
@@ -42,7 +42,7 @@
 			chrome_reader_mode
 			</i>
 		</a>
-		<a href="{$WEB_ROOT}/graybox.php?page=add-doc&id={$item.userId}&auxTpl=3&cId={$item.subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR CEDULA">
+		<a href="javascript:;" class="btnAddCedula" title="AGREGAR CEDULA" data-user="{$item.userId}" data-subject="{$item.subjectId}">
 		<i class="material-icons">
 		aspect_ratio
 		</i>

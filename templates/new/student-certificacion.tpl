@@ -39,7 +39,7 @@
 					<td align="center" class="id">
 
 					
-					<a href="javascript:void(0)" onClick="verForm({$item.userId},{$item.subjectId},1)" title="AGREGAR PLAN">
+					<a href="javascript:void(0)" onClick="verFormEvaluacion({$item.suEvaluador.personalId},{$item.userId},{$item.subjectId},1)" title="AGREGAR PLAN">
 					<i class="material-icons">
 					calendar_today
 					</i>	
@@ -51,7 +51,7 @@
 					</i>	
 					</a>
 					
-					<a href="javascript:void(0)" onClick="verForm({$item.userId},{$item.subjectId},3)" title="AGREGAR CEDULA">
+					<a href="javascript:void(0)" onClick="verFormEvaluacion({$item.suEvaluador.personalId},{$item.userId},{$item.subjectId},3)" title="AGREGAR CEDULA">
 					<i class="material-icons">
 					aspect_ratio
 					</i>	
