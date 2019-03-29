@@ -851,7 +851,7 @@ class Student extends User
 	
 	}
 	
-	public function AddUserToCurricula($id, $curricula, $nombre, $email, $password, $major, $course,$tipo_beca,$por_beca,$matricula)
+	public function AddUserToCurricula($id, $curricula, $nombre, $email, $password, $major, $course,$tipo_beca,$por_beca,$matricula = null)
 	{
 	
 	 
