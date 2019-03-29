@@ -204,7 +204,7 @@
 				
 	}
 	
-	public function Info($Id){
+	public function Info($Id = 0){
 		
 		
 		$sql = "

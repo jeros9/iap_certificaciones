@@ -487,3 +487,129 @@ function verForm(userId,subjectId,tipo){
 		}
     });
 }
+
+function verFormEvaluacion(personalId, userId, subjectId, tipo){
+	
+	$.ajax({
+	  	type: "POST",
+	  	url: WEB_ROOT+'/ajax/new/usuarios.php',
+	  	data: $("#frmGral2").serialize(true)+'&type=verFormEvaluacion&userId='+userId+'&subjectId='+subjectId+'&tipo='+tipo+'&personalId='+personalId,
+		beforeSend: function(){			
+			$("#load").html(LOADER3);
+		},
+	  	success: function(response) {	
+		
+			console.log(response)
+			
+			$("#r_"+subjectId).toggle();
+			$("#r_"+subjectId).html(response);
+				
+
+		},
+		error:function(){
+			alert(msgError);
+		}
+    });
+}
+
+
+$(document).ready(function() {
+	$(document).on('click', '#btnAddCedula', function() {
+		AddCedula();
+	});
+
+	$(document).on('click', '#btnAddPlan', function() {
+		AddPlan();
+	});
+
+	$(document).on('click', '#btnAddRow', function() {
+		addRowRequerimiento();
+	});
+});
+
+function AddCedula()
+{
+	var subjectId = $('input[name=subject_id]').val();
+	$.ajax({
+			url : WEB_ROOT+'/ajax/new/usuarios.php',
+			type: "POST",
+			data :  $('#frmGralEval').serialize(),
+			success: function(data)
+			{
+					var splitResponse = data.split("[#]");
+
+					if(splitResponse[0] == "fail")
+					{
+						$("#r_"+subjectId).html("<div class='alert alert-danger'>"+splitResponse[1]+"</div>");
+					}
+					else
+					{
+						$("#r_"+subjectId).html("<div class='alert alert-success'>La cédula se añadió correctamente.</div>");
+					}
+			},
+			error: function ()
+			{
+					alert('Algo salio mal, compruebe su conexion a internet');
+			}
+	});
+}
+
+function AddPlan()
+{
+	var requerimientos = getRowsRequerimientos();
+	var subjectId = $('input[name=subject_id]').val();
+	$.ajax({
+			url : WEB_ROOT+'/ajax/new/usuarios.php',
+			type: "POST",
+			data :  $('#frmGralEval').serialize()  + '&requerimientos=' + requerimientos,
+			success: function(data)
+			{
+					var splitResponse = data.split("[#]");
+
+					if(splitResponse[0] == "fail")
+					{
+						$("#r_"+subjectId).html("<div class='alert alert-danger'>"+splitResponse[1]+"</div>");
+					}
+					else
+					{
+						$("#r_"+subjectId).html("<div class='alert alert-success'>El plan se añadió correctamente.</div>");
+					}
+			},
+			error: function ()
+			{
+					alert('Algo salio mal, compruebe su conexion a internet');
+			}
+	});
+}
+
+
+function addRowRequerimiento() 
+{
+	var row = '<tr>' +
+							'<td>' +
+								'<input class="form-control" type="text" />' +
+							'</td>' +
+							'<td>' +
+								'<input class="form-control" type="text" />' +
+							'</td>' +
+						'</tr>';
+	$('#tb-requerimientos tr:last').after(row);
+}
+
+
+function getRowsRequerimientos() 
+{
+	var json = "[";
+	var total = $('#tb-requerimientos tr').length;
+	$('#tb-requerimientos tr').each(function (index) {
+			json += '{"cantidad":"'+$(this).find("td").eq(0).find('.form-control').val()+'", '; 
+			json += '"descripcion":"'+$(this).find("td").eq(1).find('.form-control').val()+'"}';
+			if (index === total - 1) {
+					
+			}else {
+					json += ', ';
+			}
+	});
+	json += ']';
+	return json;
+}

@@ -79,7 +79,7 @@
 			return $this->courseModuleId;
 		}
 		
-		public function EnumerateById($id)
+		public function EnumerateById($id = 0)
 		{
 			$this->Util()->DB()->setQuery("
 				SELECT * FROM subject_module

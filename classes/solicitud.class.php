@@ -89,7 +89,7 @@ class Solicitud extends Module
 	}
 	
 	
-	public function Info($id)
+	public function Info($id = 0)
 	{
 		 $sqlQuery = 'SELECT 
 					u.*,
