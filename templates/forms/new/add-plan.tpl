@@ -1,3 +1,7 @@
+<center>
+    <a type="button" target='_blank' href='{$WEB_ROOT}/files/estandares/{$file_pdf}'  class="btn default red">Ver Estándar de Competencia</a>
+</center>
+<br>
 <form class="form-horizontal" id="addPlanForm" name="addPlanForm" method="post">
     <input type="hidden" id="type" name="type" value="saveAddPlan"/>
     <input type="hidden" id="type" name="personal_id" value="{$personal_id}"/>

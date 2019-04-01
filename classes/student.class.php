@@ -673,7 +673,7 @@ class Student extends User
 			$this->Util()->setError(10028, "complete", $complete1);
 			$complete2 = "En caso de no estar en tu bandeja de entrada, verifica en correos no deseados";
 			$this->Util()->setError(10028, "complete", $complete2);
-			$complete4 = "Cualquier problema que llegaras a tener, escribenos a enlinea@iapchiapas.org.mx";
+			$complete4 = "Cualquier problema que llegaras a tener, escribenos a enlinea@iapchiapas.edu.mx";
 			$this->Util()->setError(10028, "complete", $complete4);
 			
 			$complete3 = "Bienvenido";

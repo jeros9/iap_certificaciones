@@ -233,6 +233,9 @@ switch($_POST["type"])
 	break;
 
 	case "addPlan":
+		$subject->setSubjectId($_POST['subject_id']);
+		$data_subject = $subject->Info();
+		$smarty->assign('file_pdf', $data_subject['file_pdf']);
 		if(!$planes->hasPlan($_SESSION['User']['userId'], $_POST['user_id'], $_POST['subject_id']))
 		{
 			$smarty->assign("DOC_ROOT", DOC_ROOT);
@@ -292,6 +295,9 @@ switch($_POST["type"])
 			if($flag)
 				$id = $cedulas->findCedulaId($_POST['personalId'], $_POST['userId'], $_POST['subjectId']);
 		}
+		$subject->setSubjectId($_POST['subjectId']);
+		$data_subject = $subject->Info();
+		$smarty->assign('file_pdf', $data_subject['file_pdf']);
 		if(!$flag)
 		{
 			$smarty->assign("DOC_ROOT", DOC_ROOT);
