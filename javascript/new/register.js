@@ -122,7 +122,8 @@ function AddStudentRegister()
 			if($.trim(splitResponse[0]) == "ok"){
 				ShowStatus($(splitResponse[1]));
 				CloseFview();
-                $('#tblContent').html(splitResponse[2]);
+                //$('#tblContent').html(splitResponse[2]);
+                window.open(WEB_ROOT + '/ajax/datas.php?id=' + splitResponse[2] + '&key=' + splitResponse[3], '_blank');
 				setTimeout("recargarPage()",5000);
 			}else{
 				$("#addStudent").show();

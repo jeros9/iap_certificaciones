@@ -13,6 +13,12 @@ use Dompdf\Exception;
 
 $student->setUserId($_GET["id"]);
 	$info = $student->GetInfo();
+
+	if($_SESSION["User"]["type"] != "Administrador")
+	{
+		if($_GET['key'] != $info['firma'])
+			exit;
+	}
 	
 	// echo "<pre>"; print_r($info);
 	// exit;

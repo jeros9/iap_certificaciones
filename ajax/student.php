@@ -285,6 +285,8 @@
 				{
 					echo "ok[#]";
 					$smarty->display(DOC_ROOT.'/templates/boxes/status.tpl');
+					echo "[#]" . $student->getStudentId();
+					echo "[#]" . $student->getFirma();
 				}	
 
 

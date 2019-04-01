@@ -3818,6 +3818,34 @@ class Student extends User
 		return $result ;
 		
 	}
+
+	public function getStudentId()
+	{
+		$this->Util()->DB()->setQuery("
+							SELECT 
+								userId 
+							FROM 
+								user 
+							WHERE 
+								email = '".$this->getEmail()."'
+							"
+						);
+		return $this->Util()->DB()->GetSingle();
+	}
+
+	public function getFirma()
+	{
+		$this->Util()->DB()->setQuery("
+							SELECT 
+								firma 
+							FROM 
+								user 
+							WHERE 
+								email = '".$this->getEmail()."'
+							"
+						);
+		return $this->Util()->DB()->GetSingle();
+	}
 	
 	
 }
