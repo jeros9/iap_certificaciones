@@ -179,7 +179,8 @@ class Cedulas extends Main
                         CONCAT(p.name, ' ', p.lastname_paterno, ' ', p.lastname_materno) AS evaluador,
                         CONCAT(u.names, ' ', u.lastNamePaterno, ' ', u.lastNameMaterno) AS candidato,
                         s.name AS estandar,
-                        u.firma
+                        u.firma,
+						p.firma AS firma_personal
                     FROM cedulas c 
                         INNER JOIN personal p
                             ON p.personalId = c.personalId

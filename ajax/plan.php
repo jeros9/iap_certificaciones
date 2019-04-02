@@ -196,6 +196,7 @@
     $html .= '      <table style="width:100%;">
                         <tr>
                             <td style="padding-left:35px;width:50%;text-align:center;font-size:12px;">
+                                '.$info['firma_personal'].'<br>
                                 '.$info['evaluador'].'
                             </td>
                             <td style="padding-left:35px;width:50%;text-align:center;font-size:14px;">

@@ -53,7 +53,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN LOGO -->
 <div class="logo">
     <a href="index.html">
-        <img src="{$WEB_ROOT}/images/logos/Logo_3.png" width="250px" alt="" /> </a>
+        <img src="{$WEB_ROOT}/images/logos/Logo_4.png" width="250px" alt="" /> </a>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->

@@ -624,7 +624,7 @@ class Personal extends Main
 				echo "<font color='red'>El usuario ya existe</font>";
 				exit;
 			}
-			
+			$firma = uniqid();
 			
 			$sql = "INSERT INTO 
 					personal 
@@ -649,7 +649,8 @@ class Personal extends Main
 						profesion,
 						mostrar,
 						correo,
-						numero
+						numero,
+						firma
 					)
 				 VALUES 
 					(						
@@ -673,7 +674,8 @@ class Personal extends Main
 						'".$this->prof."',
 						'".$this->mostrar."',
 						'".$this->correo."',
-						'".$this->numero."'
+						'".$this->numero."',
+						'".$firma."'
 					)";
 								
 								
