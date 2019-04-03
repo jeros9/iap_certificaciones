@@ -628,7 +628,16 @@
 							)";
 			$this->Util()->DB()->setQuery($sql);
 			$subjectId = $this->Util()->DB()->InsertData();
-			
+
+			if(!empty($_FILES["estandar"]["name"]))
+			{
+				if(move_uploaded_file($_FILES['estandar']['tmp_name'], DOC_ROOT . '/files/estandares/' . $subjectId . '.pdf'))
+				{
+					$sql = "UPDATE subject SET file_pdf = '".$subjectId.".pdf' WHERE subjectId = " . $subjectId;
+					$this->Util()->DB()->setQuery($sql);
+					$this->Util()->DB()->UpdateData();
+				}
+			}
 
 			$sql = "INSERT INTO
 						subject_module
@@ -870,6 +879,17 @@
 						// exit;
 			$this->Util()->DB()->setQuery($sql);
 			$this->Util()->DB()->UpdateData();
+
+			if(!empty($_FILES["estandar"]["name"]))
+			{
+				$subjectId = $_POST["courseId"];
+				if(move_uploaded_file($_FILES['estandar']['tmp_name'], DOC_ROOT . '/files/estandares/' . $subjectId . '.pdf'))
+				{
+					$sql = "UPDATE subject SET file_pdf = '".$subjectId.".pdf' WHERE subjectId = " . $subjectId;
+					$this->Util()->DB()->setQuery($sql);
+					$this->Util()->DB()->UpdateData();
+				}
+			}
 			
 			//
 

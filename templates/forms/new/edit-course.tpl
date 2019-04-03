@@ -1,4 +1,4 @@
-<form id="editSubjectForm" name="editSubjectForm" method="post" class="form-horizontal" action="{$WEB_ROOT}/edit-course/id/{$id}">
+<form id="editSubjectForm" name="editSubjectForm" method="post" class="form-horizontal" action="{$WEB_ROOT}/edit-course/id/{$id}" enctype="multipart/form-data">
     <input type="hidden" id="courseId" name="courseId" value="{$id}"/>
     <div class="form-body">
 
@@ -16,6 +16,15 @@
             <label class="col-md-3 control-label">Nombre:</label>
             <div class="col-md-8">
                  <input type="text" name="nombre" id="nombre"  class="form-control" value="{$post.name}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Estandar (PDF):</label>
+            <div class="col-md-8" >
+				<div style="float:left">
+					<input type="file" name="estandar" id="estandar"  class="form-control" accept="application/pdf">
+				</div>
+				
             </div>
         </div>
 		<!--
