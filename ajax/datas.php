@@ -76,7 +76,7 @@ $student->setUserId($_GET["id"]);
 	<table style="width:90%; text-align:right; border:0px" boder=0 >
 	<tr>
 		<td style="height:100px" align=right>
-			Tuxtla Gutiérrez, Chiapas<br>
+			Tuxtla Guti&eacute;rrez, Chiapas<br>
 			Fecha: '.date("Y-m-d").'
 		</td>
 	</tr>
@@ -87,12 +87,23 @@ $student->setUserId($_GET["id"]);
 		</table> 
 	<table>
 		<tr>
-			<td>Usuario:</td>
-			<td>'.$info["controlNumber"].'</td>
+			<td>
+				<h3>
+					Tu registro se complet&oacute; de manera satisfactoria. Tus datos de acceso son los siguientes.
+				</h3>
+				<p>Por favor, guarda el archivo o copia los datos en un lugar seguro. Cualquier problema que llegaras a tener, escr&iacute;benos a enlinea@iapchiapas.edu.mx</p>
+			</td>
 		</tr>
 		<tr>
-			<td>Contraseña:</td>
-			<td>'.$info["password"].'</td>
+			<td>Usuario: '.$info["controlNumber"].'</td>
+		</tr>
+		<tr>
+			<td>Contrase&ntilde;a: '.$info["password"].'</td>
+		</tr>
+		<tr>
+			<td>
+				<h4>Puedes ingresar desde el siguiente enlace <a href="https://redconocer.iapchiapas.edu.mx" target="_top">redconocer.iapchiapas.edu.mx</a></h4>
+			</td>
 		</tr>
 	</table>
 	</td>

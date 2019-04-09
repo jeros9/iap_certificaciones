@@ -27,7 +27,15 @@ class SendMail extends Main
 	public function PrepareAttachment($subject, $body, $details_body, $details_subject, $to, $toName, $attachment = array(), $fileName = array(), $from = "enlinea@iapchiapas.edu.mx", $fromName = "Administrador del Sistema") 
 	{
 			$mail = new PHPMailer(); // defaults to using php "mail()"
-			
+			$mail->IsSMTP();
+			$mail->SMTPDebug  = 1;
+			$mail->SMTPAuth   = true;
+			$mail->SMTPSecure = "ssl";
+			$mail->Host       = "smtp.gmail.com";
+			$mail->Port       = 465;
+			$mail->Username   = "enlinea@iapchiapas.edu.mx";
+			$mail->Password   = "IAP*2018_chis";
+
 			$body = nl2br($this->Util()->handle_mail_patterns($body,$details_body));
 			$subject = $this->Util()->handle_mail_patterns($subject,$details_subject);
 			

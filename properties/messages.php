@@ -8,7 +8,7 @@ $message[1]["body"] = "
 	<b>|course|</b>
 	
 	Para ingresar a nuestro sistema, favor de dirigirte al siguiente enlace:
-	<a href=\"https://redconocer.iapchiapas.org.mx\">https://redconocer.iapchiapas.org.mx</a>
+	<a href=\"https://redconocer.iapchiapas.edu.mx\">https://redconocer.iapchiapas.edu.mx</a>
 	
 	Tu datos para ingresar son los siguientes:
 	<b>Usuario:</b> |email|
