@@ -129,7 +129,7 @@ function AddStudentRegister()
 				$("#addStudent").show();
                 ShowStatusPopUp($(splitResponse[1]));
                 window.open(WEB_ROOT + '/ajax/datas.php?id=' + splitResponse[2] + '&key=' + splitResponse[3], '_blank');
-				setTimeout("recargarPage()",5000);
+				//setTimeout("recargarPage()",5000);
 			}	
 			// $("#loader").html('');
             // var splitResponse = data.split("[#]");

@@ -424,7 +424,7 @@ class Student extends User
 	
 		public function EnumerateCiudades(){
 	
-	   $sql ="select * from municipio where estadoId='".$this->getState()."' ";
+	   $sql ="select * from municipio where estadoId='".$this->getState()."' ORDER BY nombre";
 	   $this->Util()->DB()->setQuery($sql);
 	   $result = $this->Util()->DB()->GetResult();
 	return $result;

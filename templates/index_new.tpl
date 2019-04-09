@@ -7,8 +7,8 @@
 <!-- BEGIN HEAD -->
 
 <head>
-	<meta charset="utf-8" />
-	<title>Sistema de Educaci&oacute;n en Linea | IAP Chiapas</title>
+	<meta charset="ISO-8859-1" />
+	<title>Sistema Red Conocer | IAP Chiapas</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1" name="viewport" />
 	<meta content="" name="description" />
