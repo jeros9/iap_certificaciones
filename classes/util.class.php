@@ -890,9 +890,14 @@ function HandleMultipages($page,$total,$link,$items_per_page=0,$pagevar="p"){
 	
 	function EncodeRow($row){
 		
-		foreach($row as $key => $val){
-			$info[$key] = $val;
+		if(is_array($row))
+		{
+			foreach($row as $key => $val){
+				$info[$key] = $val;
+			}
 		}
+		else
+			$info = null;
 		
 		return $info;
 		
