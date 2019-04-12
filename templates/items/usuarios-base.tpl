@@ -92,6 +92,9 @@
 					save_alt
 					</i>
 					</a>-->
+			<a href="javascript:;" class="btnShowInfo" title="VER INFORMACIÓN" data-user="{$item.userId}">
+				<i class="material-icons">info</i>	
+			</a>
 		{/if}
 		
 		<!--

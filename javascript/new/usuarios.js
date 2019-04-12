@@ -401,6 +401,11 @@ $(document).ready(function() {
 	$(document).on('click', '#btnAddRow', function() {
 		addRowRequerimiento();
 	});
+
+	$(document).on('click', '.btnShowInfo', function() {
+		var user = $(this).data('user');
+		showStudentInfo(user);
+	});
 });
 
 
@@ -532,4 +537,21 @@ function getRowsRequerimientos()
 	});
 	json += ']';
 	return json;
+}
+
+function showStudentInfo(user_id)
+{
+	$.ajax({
+		url : WEB_ROOT+'/ajax/new/usuarios.php',
+		type: "POST",
+		data : {type: "infoStudent", user_id: user_id},
+		success: function(data)
+		{
+			showModal("Información del Alumno", data);
+		},
+		error: function ()
+		{
+			alert('Algo salio mal, compruebe su conexion a internet');
+		}
+	});
 }

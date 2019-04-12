@@ -314,6 +314,16 @@ switch($_POST["type"])
 			$smarty->display(DOC_ROOT.'/templates/boxes/new/view-doc.tpl');
 		}
 	break;
+
+	case "infoStudent":
+		$student->setUserId($_POST['user_id']);
+		$data_student = $student->getInfo();
+		$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $data_student['curp'] . '.jpg');
+		$smarty->assign('data_student', $data_student);
+		$smarty->assign('has_photo', $has_photo);
+		$smarty->assign("DOC_ROOT", DOC_ROOT);
+		$smarty->display(DOC_ROOT.'/templates/forms/new/info-student.tpl');	
+	break;
 }
 
 ?>
