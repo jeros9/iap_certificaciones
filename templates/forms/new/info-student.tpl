@@ -51,10 +51,18 @@
                             </td>
                             <td>
                                 <p>
+                                    <b>Teléfono:</b><br>
+                                    {$data_student['mobile']}
+                                </p>
+                            </td>
+                            <td>
+                                <p>
                                     <b>CURP:</b><br>
                                     {$data_student['curp']}
                                 </p>
                             </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <p>
                                     <b>Domicilio:</b><br>
@@ -64,15 +72,13 @@
                                     Ciudad: {$data_student['ciudad2']}<br>
                                 </p>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <p>
                                     <b>Código Postal:</b><br>
                                     {$data_student['postalCode']}
                                 </p>
                             </td>
-                            <td colspan="2">
+                            <td>
                                 <p>
                                     <b>Último Grado de Estudios:</b><br>
                                     {$data_student['academicDegree']}
