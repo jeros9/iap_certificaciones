@@ -10,7 +10,6 @@
         <td align="center">{$item.email}</td>
         <td align="center">{$item.password}</td>
         <td align="center">{$item.certificacion}</td>
-        <td align="center">{$item.numCertificaciones}</td>
         <td align="center">{if $item.aprobado eq 'si'} Competente{else if $item.aprobado eq 'no'} No Competente {else} Sin asignar{/if}</td>
         <td align="center">{$item.countRepositorio}/4</td>
         <td align="center">   
@@ -74,24 +73,6 @@
 		{/if}
 		
 		{if $tipoUs eq "Docente"}
-			<a href="{$WEB_ROOT}/ajax/acuse.php?id={$item.userId}"   target='_blank' title='ACUSE'>
-						<i class="material-icons">how_to_reg</i>
-					</a>
-					<a href="{$WEB_ROOT}/ajax/dg.php?id={$item.userId}&cId={$item.activityId}"   target='_blank' title='EVALUACION'>
-					<i class="material-icons">ballot</i>	
-					</a>
-					<a href="{$WEB_ROOT}/ajax/reg.php?id={$item.userId}&courseId={$id}"   target='_blank' title='Ficha de Registro'>
-					<i class="material-icons">description</i>
-				
-					<a href="{$WEB_ROOT}/ajax/ine.php?id={$item.userId}"   target='_blank' title='INE'>	
-					<i class="material-icons">picture_in_picture</i>
-					</a>
-					<!--
-					<a href="{$WEB_ROOT}/ajax/download.php?userId={$item.userId}"  target="_blank" title="DESCARGAR">
-							<i class="material-icons">
-					save_alt
-					</i>
-					</a>-->
 			<a href="javascript:;" class="btnShowInfo" title="VER INFORMACIÓN" data-user="{$item.userId}">
 				<i class="material-icons">info</i>	
 			</a>
@@ -123,7 +104,23 @@
 		<img src="{$WEB_ROOT}/images/icons/16/document--arrow.png" title="Ficha de Registro" />
 		</a>     
 		{/if}-->
-        </td>       
+        </td> 
+		<td align="center">
+			{if $tipoUs eq "Docente"}
+				<a href="{$WEB_ROOT}/ajax/acuse.php?id={$item.userId}"   target='_blank' title='ACUSE'>
+					<i class="material-icons">how_to_reg</i>
+				</a>
+				<a href="{$WEB_ROOT}/ajax/dg.php?id={$item.userId}&cId={$item.activityId}"   target='_blank' title='EVALUACION'>
+				<i class="material-icons">ballot</i>	
+				</a>
+				<a href="{$WEB_ROOT}/ajax/reg.php?id={$item.userId}&courseId={$id}"   target='_blank' title='Ficha de Registro'>
+				<i class="material-icons">description</i>
+			
+				<a href="{$WEB_ROOT}/ajax/ine.php?id={$item.userId}"   target='_blank' title='INE'>	
+				<i class="material-icons">picture_in_picture</i>
+				</a>
+			{/if}
+		</td>      
     </tr>
 {foreachelse}
 	<tr>

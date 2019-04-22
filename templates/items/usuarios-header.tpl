@@ -8,10 +8,9 @@
     <th width="">No. Control</th>
     <th width="">Correo</th>
     <th width="">Password</th>
-	 <th width="">Certificacion</th>
-	 <th width="">Num. Certificaciones</th>
-	 <th width="">Evaluacion</th>
-	 <th width="">Elementos</th>
+	<th width="">Certificacion</th>
+	<th width="">Evaluacion</th>
+	<th width="">Elementos</th>
     <th width="">Acciones</th>
-   
+    <th width="">Descargas</th>
 </tr>

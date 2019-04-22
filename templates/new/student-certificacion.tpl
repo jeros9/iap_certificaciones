@@ -67,6 +67,12 @@
 						school
 						</i>
 					</a>
+
+					<a href="javascript:void(0)" onClick="verForm({$item.userId},{$item.subjectId},5)" title="AGREGAR CERTIFICACIÓN">
+						<i class="material-icons">
+							assignment_turned_in
+						</i>	
+					</a>
 					</td>
 					<td>
 					<a href="{$WEB_ROOT}/ajax/acuse.php?id={$item.userId}"   target='_blank' title='ACUSE'>

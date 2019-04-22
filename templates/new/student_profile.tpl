@@ -314,6 +314,7 @@
                                         <!--<th style="text-align: center"> Modulos </th>-->
                                        
                                         <th style="text-align: center"> Ingresar </th>
+                                        <th style="text-align: center"> Certificación </th>
                                     </tr>
                                     </thead>
                                     {foreach from=$activeCourses item=subject}
@@ -332,6 +333,19 @@
                                             <!--<a href="{$WEB_ROOT}/graybox.php?page=view-modules-course-student&id={$subject.courseId}" data-target="#ajax" data-toggle="modal" data-width="1000px">
                                             --><i class="fa fa-sign-in fa-lg"></i>
                                             </a>
+                                        </td>
+                                        <td align="center">
+                                            {if $subject.certificacion_pdf != ""}
+                                                <a href="{$WEB_ROOT}/alumnos/repositorio/{$subject.certificacion_pdf}" target="_blank">
+                                                    <i class="material-icons">
+                                                        assignment_returned
+                                                    </i>
+                                                </a>
+                                            {else}
+                                                <i class="material-icons" title="NO DISPONIBLE">
+                                                    block
+                                                </i>
+                                            {/if}
                                         </td>
                                      </tr>
                                         {foreachelse}
