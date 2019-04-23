@@ -1102,5 +1102,20 @@
 			
 			return $c;
 		}
+
+		public function subjectInfoFromTest($uId)
+		{
+			$sql = "SELECT  s.name,
+											(SELECT DATE_FORMAT(f.fecha, '%d/%m/%Y %H:%m:%i') FROM firma AS f WHERE f.userId = " . $uId . " AND f.registroFirmado = c.courseId ORDER BY firmaId DESC LIMIT 1) AS fecha_termino
+									FROM course c 
+							LEFT JOIN subject AS s 
+							ON s.subjectId = c.subjectId 
+							LEFT JOIN activity AS a 
+							ON a.subjectId = s.subjectId 
+									WHERE a.activityId =  " . $this->getActivityId() . "
+							GROUP BY s.subjectId";
+			$this->Util()->DB()->setQuery($sql);
+			return $this->Util()->DB()->GetRow();
+		}
 	}	
 ?>

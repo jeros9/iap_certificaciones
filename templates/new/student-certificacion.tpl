@@ -22,6 +22,7 @@
 						<th width="" height="28">Acciones</th>
 						<th width="" height="28">Descargas</th>
 						{else}
+						<th width="" height="28">Capacitador</th>
 						<th width="" height="28">Evaluador</th>
 						{/if}
 					</tr>
@@ -98,7 +99,15 @@
 					</td>
 					{else}
 						<td>
-						<select name="evaluador_{$item.subjectId}" class="form-control">
+							<select id="sel_capacitador" name="capacitador_{$item.subjectId}" class="form-control">
+								<option></option>
+								{foreach from=$item.evaluadores item=item2 key=key}
+								<option value="{$item2.personalId}" {if $item2.personalId eq $item.suCapacitador.personalId} selected{/if}>{$item2.name} {$item2.lastname_paterno} {$item2.lastname_materno} </option>
+								{/foreach}
+							</select>
+						</td>
+						<td>
+						<select id="sel_evaluador" name="evaluador_{$item.subjectId}" class="form-control">
 							<option></option>
 							{foreach from=$item.evaluadores item=item2 key=key}
 							<option value="{$item2.personalId}" {if $item2.personalId eq $item.suEvaluador.personalId} selected{/if}>{$item2.name} {$item2.lastname_paterno} {$item2.lastname_materno} </option>

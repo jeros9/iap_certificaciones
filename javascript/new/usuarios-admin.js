@@ -422,35 +422,44 @@ function busEval(){
 function sendInfoEvaluador(){
 	
 	Id = 1;
-	$.ajax({
-	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/new/usuarios.php',
-	  	data: "type=sendInfoEvaluador"+'&'+$("#frmGralEval").serialize(true),
-		beforeSend: function(){			
-			$("#msj").html('Cargando....');
-			$("#btnSaveEncuesta").hide();
+	var evaluador = $('#sel_evaluador').val();
+	var capacitador = $('#sel_capacitador').val();
+	if(evaluador != capacitador)
+	{
+		$.ajax({
+				type: "POST",
+				url: WEB_ROOT+'/ajax/new/usuarios.php',
+				data: "type=sendInfoEvaluador"+'&'+$("#frmGralEval").serialize(true),
+			beforeSend: function(){			
+				$("#msj").html('Cargando....');
+				$("#btnSaveEncuesta").hide();
 
-		},		
-	  	success: function(response) {		
-			$(".loader").html('');
-			console.log(response)
-			var splitResp = response.split("[#]");
-									
-			if($.trim(splitResp[0]) == "ok"){
-				// $("#msj").html(splitResp[1]);
-				// $("#contenido").html(splitResp[2]);
-				ShowStatus((splitResp[1]));
-				closeModal();
-			console.log(response)
-			}else if($.trim(splitResp[0]) == "fail"){
-				$("#msj").html(splitResp[1]);
-			}else{
-				alert("Ocurrio un error al cargar los datos.");
+			},		
+				success: function(response) {		
+				$(".loader").html('');
+				console.log(response)
+				var splitResp = response.split("[#]");
+										
+				if($.trim(splitResp[0]) == "ok"){
+					// $("#msj").html(splitResp[1]);
+					// $("#contenido").html(splitResp[2]);
+					ShowStatus((splitResp[1]));
+					closeModal();
+				console.log(response)
+				}else if($.trim(splitResp[0]) == "fail"){
+					$("#msj").html(splitResp[1]);
+				}else{
+					alert("Ocurrio un error al cargar los datos.");
+				}
+			},
+			error:function(){
+				
 			}
-		},
-		error:function(){
-			
-		}
-    });
+		});
+	}
+	else
+	{
+		ShowStatusPopUp("El evaluador y el capacitador deben ser diferentes.");
+	}
 
 }

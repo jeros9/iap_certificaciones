@@ -1580,14 +1580,13 @@ class Student extends User
 		
 		foreach($result7 as $key=>$aux){
 			
-			 $sql = "
-			SELECT 
-				activityId
-				
-			FROM 
-				course_module as cm 
-			left join activity as at on at.courseModuleId = cm.courseModuleId 
-			WHERE cm.courseId = ".$aux["courseId"]."";
+			 $sql = "SELECT  activityId
+								FROM course c 
+        					LEFT JOIN subject AS s 
+            				ON s.subjectId = c.subjectId 
+        					LEFT JOIN activity AS a 
+            				ON a.subjectId = s.subjectId 
+    							WHERE c.courseId =  ".$aux["courseId"]."";
 			
 			$this->Util()->DB()->setQuery($sql);
 			$acI = $this->Util()->DB()->GetSIngle();
@@ -3513,6 +3512,20 @@ class Student extends User
 			
 			$sql = "
 			SELECT 
+				u.personalId,
+				name,
+				lastname_paterno,
+				lastname_materno
+			FROM 
+				usuario_capacitador as u
+			left join personal as p on p.personalId= u.personalId
+			WHERE u.subjectId =  ".$aux["subjectId"]." and usuarioId = ".$Id."";
+			$this->Util()->DB()->setQuery($sql);
+
+			$cap = $this->Util()->DB()->GetRow();
+			
+			$sql = "
+			SELECT 
 				*
 			FROM 
 				personal_subject as u
@@ -3524,6 +3537,7 @@ class Student extends User
 			
 			$result[$key]["evaluadores"] = $res ;
 			$result[$key]["suEvaluador"] = $r ;
+			$result[$key]["suCapacitador"] = $cap ;
 			
 			
 			

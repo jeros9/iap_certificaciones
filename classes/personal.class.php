@@ -1988,6 +1988,34 @@ class Personal extends Main
 	}
 	
 	
+	public function saveCapacitadorUsuario(){
+		
+		
+		 $sql = 'DELETE FROM usuario_capacitador WHERE  usuarioId = '.$_POST["id"].' and subjectId = '.$_POST["subjectId"].'';
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->ExecuteQuery();
+		
+		 $sql = "INSERT INTO 
+					usuario_capacitador
+					(						
+						personalId, 
+						usuarioId,
+						subjectId
+					)
+				 VALUES 
+					(						
+						".$_POST["personalId"].",
+						".$_POST["id"].",
+						".$_POST["subjectId"]."
+					)";
+				// exit;				
+			$this->Util()->DB()->setQuery($sql);
+			$lastId = $this->Util()->DB()->InsertData();
+		// exit;
+		return true;
+	}
+	
+	
 	public function sendInfoEvaluador(){
 		
 		// echo "<pre>"; print_r($_POST);
@@ -2001,6 +2029,15 @@ class Personal extends Main
 				$_POST["subjectId"] = $f[1];
 				if($aux <> ''){
 					$this->saveCalificadorUsuario();
+				}
+				
+			}
+			if($f[0] == "capacitador"){				
+				$_POST["personalId"] = $aux;
+				$_POST["id"] = $_POST["id"];
+				$_POST["subjectId"] = $f[1];
+				if($aux <> ''){
+					$this->saveCapacitadorUsuario();
 				}
 				
 			}

@@ -29,6 +29,7 @@
 	$firma = $student->extraeFirma($_GET['id'],2);
 	// echo "<pre>"; print_r($firma );
 	// exit;
+	$subject_info = $test->subjectInfoFromTest($_GET['id']);
 	
 	$html .= "
 	<html>
@@ -57,7 +58,7 @@
 	}
 	
     @page { margin: 180px 50px; }
-    #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 150px;  text-align: center; }
+    #header { position: fixed; left: 0px; top: -160px; right: 0px; height: 150px;  text-align: center; }
     #footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 150px; text-align:center; font-size:9}
     #footer .page:after { content: counter(page, upper-roman); }
   
@@ -69,10 +70,10 @@
 		<table style='width:100%; '  >
 	<tr>
 		<td style='text-align:left; '>
-			<img src='".DOC_ROOT."/images/logo_correo.jpg' >
+			<img src='".DOC_ROOT."/images/logo_correo.jpg' width='150px;' >
 		</td>
 		<td style='text-align:right; '>
-			<img src='".DOC_ROOT."/images/logoconocer.png' >
+			<img src='".DOC_ROOT."/images/logoconocer.png' width='150px;' >
 		</td>
 	</tr>
 	<tr>
@@ -92,6 +93,14 @@
 	
 	$html .= '
 <div id="content">
+	<table>
+		<tr>
+			<td colspan="2">
+				<p><strong>Nombre de la Certificación:</strong> ' . $subject_info['name'] . '</p>
+				<p><strong>Fecha de Evaluación:</strong> ' . $subject_info['fecha_termino'] . '</p>
+			</td>
+		</tr>
+	</table>
 	';
 	
 			 
