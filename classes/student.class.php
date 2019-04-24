@@ -3534,10 +3534,22 @@ class Student extends User
 			$this->Util()->DB()->setQuery($sql);
 
 			$res = $this->Util()->DB()->GetResult();
+
+			$sql = "SELECT  activityId
+								FROM course c 
+        					LEFT JOIN subject AS s 
+            				ON s.subjectId = c.subjectId 
+        					LEFT JOIN activity AS a 
+            				ON a.subjectId = s.subjectId 
+    							WHERE c.courseId =  ".$aux["courseId"]."";
+			
+			$this->Util()->DB()->setQuery($sql);
+			$acI = $this->Util()->DB()->GetSIngle();
 			
 			$result[$key]["evaluadores"] = $res ;
 			$result[$key]["suEvaluador"] = $r ;
 			$result[$key]["suCapacitador"] = $cap ;
+			$result[$key]["activityId"] = $acI;
 			
 			
 			
