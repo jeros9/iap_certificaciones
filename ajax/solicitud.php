@@ -142,6 +142,12 @@ switch($_POST["type"])
 		$smarty->display(DOC_ROOT.'/templates/lists/new/reporte-b-detalle.tpl');
 		
 	break;
+
+	case 'buscarSolicitudEv': 
+		$result = $course->reporteEvaluadores();
+		$smarty->assign("result", $result);
+		$smarty->display(DOC_ROOT.'/templates/lists/new/reporte-evaluadores.tpl');
+	break;
 		
 }
 ?>

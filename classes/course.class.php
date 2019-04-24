@@ -1733,5 +1733,48 @@
 				
 				return $cal;
 		}
+
+		function reporteEvaluadores()
+		{
+			
+			$filtro = "";
+			
+			if($_POST["certificaciones"]){
+				
+				$filtro.= " AND up.subjectId = ".$_POST["certificaciones"]."";
+			}
+			
+			
+			
+		$sql = "
+				SELECT
+					u.names,
+					u.lastNamePaterno,
+					u.lastNameMaterno,
+					s.name as certificacion,
+					c.group,
+					CONCAT(p.name, ' ', p.lastname_paterno, ' ', p.lastname_materno) AS capacitador
+				FROM usuario_personal AS up
+					INNER JOIN user AS u
+						ON u.userId = up.usuarioId
+					INNER JOIN subject AS s 
+						ON s.subjectId = up.subjectId
+					LEFT JOIN usuario_capacitador uc
+						ON (uc.usuarioId = up.usuarioId AND uc.subjectId = up.subjectId)
+					LEFT JOIN personal AS p
+						ON p.personalId = uc.personalId
+					LEFT JOIN user_subject us 
+						ON us.alumnoId = up.usuarioId
+					LEFT JOIN course AS c
+						ON c.courseId = us.courseId
+				WHERE 1 AND up.personalId = " . $_POST['evaluador'] . $filtro . "
+				GROUP BY u.userId";
+				// exit;
+				$this->Util()->DB()->setQuery($sql);
+				$cal = $this->Util()->DB()->GetResult();
+				
+				return $cal;
+		
+		}
 }	
 ?>

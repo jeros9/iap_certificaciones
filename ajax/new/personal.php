@@ -620,6 +620,12 @@ switch($_POST["type"])
             $smarty->display(DOC_ROOT.'/templates/lists/personal.tpl');
 	
 	break;
+
+	case "buscarOptCertificaciones":
+		$lstCertificaciones = $subject->EnumerateCertificacion();
+		$smarty->assign('lstCertificaciones', $lstCertificaciones);
+		$smarty->display(DOC_ROOT.'/templates/lists/select-certificaciones.tpl');
+	break;
 }
 
 ?>

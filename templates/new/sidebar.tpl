@@ -155,6 +155,13 @@
 					</a>
                  </li>
 				 {/if}
+				 {if  $User.positionId == 1}
+				 <li class="nav-item  ">
+					<a href="{$WEB_ROOT}/reporte-evaluadores" class="nav-link ">
+						<span class="title">Evaluadores</span>
+					</a>
+                 </li>
+				 {/if}
 			</ul>
 		</li>
         {/if}

@@ -214,7 +214,8 @@ $pages = array(
     'gps',
     'usuarios-admin',
     'usuarios-doc',
-    'usuarios-sol'
+		'usuarios-sol',
+		'reporte-evaluadores'
 	
 	
 	
