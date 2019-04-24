@@ -98,7 +98,10 @@ switch($_POST["type"])
 	// exit;
 	$_GET = $_POST;
 		$student->setPages($_POST['page']);
-		$students = $student->enumerateOk();
+		if($_SESSION['User']['type'] == "Docente")
+			$students = $student->enumerateOkNum();
+		else
+			$students = $student->enumerateOk();
 		$smarty->assign("tipoUs", $_SESSION["User"]["type"]);	
 		 $smarty->assign("registros", $students);
 		$smarty->display(DOC_ROOT.'/templates/lists/usuarios.tpl');
