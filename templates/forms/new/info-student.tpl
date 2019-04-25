@@ -1,7 +1,7 @@
 <center>
     {if $has_photo eq true}
-        <img src="{$WEB_ROOT}/alumnos/fotos/{$data_student['curp']}.jpg" width="120" /><br>
-        <a type="button" download="{$data_student['curp']}.jpg" href="{$WEB_ROOT}/alumnos/fotos/{$data_student['curp']}.jpg"  class="btn default red">Descargar Foto</a>
+        <img src="{$WEB_ROOT}/alumnos/fotos/{$filename}" width="120" /><br>
+        <a type="button" download="{$filename}" href="{$WEB_ROOT}/alumnos/fotos/{$filename}"  class="btn default red">Descargar Foto</a>
     {else}
         <h3>
             <i class="material-icons">warning</i> 
