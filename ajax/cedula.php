@@ -11,7 +11,7 @@
 	
 	// echo "<pre>"; print_r($_SESSION["User"]);
 	// exit;
-	if($_SESSION["User"]["type"] != "Docente" && $_SESSION["User"]["type"] != "Administrador"){
+	if($_SESSION["User"]["type"] != "Docente" && $_SESSION["User"]["type"] != "Administrador" && $_SESSION['User']['type'] != ""){
 		exit;
 		
 	}
