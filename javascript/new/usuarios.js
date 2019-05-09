@@ -406,6 +406,11 @@ $(document).ready(function() {
 		var user = $(this).data('user');
 		showStudentInfo(user);
 	});
+
+	$(document).on('click', '.btnEditPlan', function() {
+		var planId = $(this).data('id');
+		EditPlanDiv(planId);
+	});
 });
 
 
@@ -553,5 +558,53 @@ function showStudentInfo(user_id)
 		{
 			alert('Algo salio mal, compruebe su conexion a internet');
 		}
+	});
+}
+
+function EditPlanDiv(planId)
+{
+  $.ajax({
+      url : WEB_ROOT+'/ajax/new/usuarios.php',
+      type: "POST",
+      data : {type: "editPlan", planId: planId},
+      success: function(data)
+      {
+        showModal("Editar Plan", data);
+        $('.submitForm').click(function() {
+          EditPlan();
+        });
+      },
+      error: function ()
+      {
+        alert('Algo salio mal, compruebe su conexion a internet');
+      }
+  });
+}
+
+function EditPlan()
+{
+	var requerimientos = getRowsRequerimientos();
+	$.ajax({
+			url : WEB_ROOT+'/ajax/new/usuarios.php',
+			type: "POST",
+			data :  $('#editPlanForm').serialize()  + '&requerimientos=' + requerimientos,
+			success: function(data)
+			{
+					var splitResponse = data.split("[#]");
+
+					if(splitResponse[0] == "fail")
+					{
+							ShowStatusPopUp($(splitResponse[1]));
+					}
+					else
+					{
+							ShowStatus($(splitResponse[1]));
+							CloseFview();
+					}
+			},
+			error: function ()
+			{
+					alert('Algo salio mal, compruebe su conexion a internet');
+			}
 	});
 }

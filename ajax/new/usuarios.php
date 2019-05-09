@@ -250,7 +250,9 @@ switch($_POST["type"])
 		else 
 		{
 			$planId = $planes->findPlanId($_SESSION['User']['userId'], $_POST['user_id'], $_POST['subject_id']);
+			$planes->setPlanId($planId);
 			$smarty->assign('id', $planId);
+			$smarty->assign('editable', $planes->isEditable());
 			$smarty->assign('btnTitle', 'Visualizar Plan');
 			$smarty->assign('type', 'plan');
 			$smarty->display(DOC_ROOT.'/templates/boxes/new/view-doc.tpl');
@@ -262,10 +264,8 @@ switch($_POST["type"])
         $planes->setUserId($_POST['user_id']);
         $planes->setSubjectId($_POST['subject_id']);
         $planes->setCapacitacion($_POST['capacitacion']);
-        $planes->setLugarDesarrollo($_POST['lugar_desarrollo']);
         $planes->setFechaDesarrollo($_POST['fecha_desarrollo']);
         $planes->setHorarioDesarrollo($_POST['horario_desarrollo']);
-        $planes->setLugarResultados($_POST['lugar_resultados']);
         $planes->setFechaResultados($_POST['fecha_resultados']);
 		$planes->setHorarioResultados($_POST['horario_resultados']);
 		$planes->setRequerimientos($_POST['requerimientos']);
@@ -328,6 +328,41 @@ switch($_POST["type"])
 		$smarty->assign('filename', $filename);
 		$smarty->assign("DOC_ROOT", DOC_ROOT);
 		$smarty->display(DOC_ROOT.'/templates/forms/new/info-student.tpl');	
+	break;
+
+	case "editPlan":
+		$planes->setPlanId($_POST['planId']);
+		$data_plan = $planes->getInfo();
+		$requerimientos = $planes->getInfoRequerimientos();
+		$subject->setSubjectId($data_plan['subjectId']);
+		$data_subject = $subject->Info();
+		$smarty->assign('plan', $data_plan);
+		$smarty->assign('requerimientos', $requerimientos);
+		$smarty->assign('file_pdf', $data_subject['file_pdf']);
+		$smarty->assign("DOC_ROOT", DOC_ROOT);
+		$smarty->display(DOC_ROOT.'/templates/forms/new/edit-plan.tpl');
+	break;
+
+	case "saveEditPlan":
+        $planes->setPlanId($_POST['planId']);
+        $planes->setCapacitacion($_POST['capacitacion']);
+        $planes->setFechaDesarrollo($_POST['fecha_desarrollo']);
+        $planes->setHorarioDesarrollo($_POST['horario_desarrollo']);
+        $planes->setFechaResultados($_POST['fecha_resultados']);
+		$planes->setHorarioResultados($_POST['horario_resultados']);
+		$planes->setRequerimientos($_POST['requerimientos']);
+		
+		if(!$planes->Update())
+        {
+            echo "fail[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/status_on_popup.tpl');
+        }
+        else
+        {
+            echo "ok[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/status.tpl');
+            echo "[#]";
+        }
 	break;
 }
 

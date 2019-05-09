@@ -149,7 +149,7 @@
                             <td style="text-align:center;width:20%;" class="bg-gray"><strong>Horario</strong></td>
                         </tr>
                         <tr>
-                            <td style="text-align:center;">'.$info['lugar_desarrollo'].'</td>
+                            <td style="text-align:center;">IAP-Chiapas, Libramiento Norte Poniente No. 2718, Fracc. Ladera de la Loma. Tuxtla Gutiérrez, Chiapas.</td>
                             <td style="text-align:center;">'.$info['fecha_desarrollo'].'</td>
                             <td style="text-align:center;">'.$info['horario_desarrollo'].'</td>
                         </tr>
@@ -164,7 +164,7 @@
                             <td style="text-align:center;width:20%;" class="bg-gray"><strong>Horario</strong></td>
                         </tr>
                         <tr>
-                            <td style="text-align:center;">'.$info['lugar_resultados'].'</td>
+                            <td style="text-align:center;">IAP-Chiapas, Libramiento Norte Poniente No. 2718, Fracc. Ladera de la Loma. Tuxtla Gutiérrez, Chiapas.</td>
                             <td style="text-align:center;">'.$info['fecha_resultados'].'</td>
                             <td style="text-align:center;">'.$info['horario_resultados'].'</td>
                         </tr>
@@ -197,11 +197,11 @@
                         <tr>
                             <td style="padding-left:35px;width:50%;text-align:center;font-size:12px;">
                                 '.$info['firma_personal'].'<br>
-                                '.$info['evaluador'].'
+                                '.strtoupper($info['evaluador']).'
                             </td>
                             <td style="padding-left:35px;width:50%;text-align:center;font-size:14px;">
                                 '.$info['firma'].'<br>
-                                '.$info['candidato'].'
+                                '.strtoupper($info['candidato']).'
                             </td>
                         </tr>
                         <tr>

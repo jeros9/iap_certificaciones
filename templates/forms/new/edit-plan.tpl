@@ -2,18 +2,21 @@
     <a type="button" target='_blank' href='{$WEB_ROOT}/files/estandares/{$file_pdf}'  class="btn default red">Ver Estándar de Competencia</a>
 </center>
 <br>
-<form class="form-horizontal" id="addPlanForm" name="addPlanForm" method="post">
-    <input type="hidden" id="type" name="type" value="saveAddPlan"/>
-    <input type="hidden" id="type" name="personal_id" value="{$personal_id}"/>
-    <input type="hidden" id="type" name="user_id" value="{$user_id}"/>
-    <input type="hidden" id="type" name="subject_id" value="{$subject_id}"/>
+<form class="form-horizontal" id="editPlanForm" name="editPlanForm" method="post">
+    <input type="hidden" id="type" name="type" value="saveEditPlan"/>
+    <input type="hidden" id="planId" name="planId" value="{$plan['planId']}"/>
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-3 control-label">Se sugirió capacitación:</label>
             <div class="col-md-8">
                 <select class="form-control" id="capacitacion" name="capacitacion">
-                    <option value="1">Si</option>
-                    <option value="0">No</option>
+                    {if $plan['capacitacion'] == 1}
+                        <option value="1" selected>Si</option>
+                        <option value="0">No</option>
+                    {else}
+                        <option value="1">Si</option>
+                        <option value="0" selected>No</option>
+                    {/if}
                 </select>
             </div>
         </div>
@@ -35,14 +38,16 @@
                         </tr>
                     </thead>
                     <tbody id="tb-requerimientos">
-                        <tr>
-                            <td>
-                                <input class="form-control" type="text" />
-                            </td>
-                            <td>
-                                <input class="form-control" type="text" />
-                            </td>
-                        </tr>
+                        {foreach from=$requerimientos item=req}
+                            <tr>
+                                <td>
+                                    <input class="form-control" type="text" value="{$req['cantidad']}" />
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" value="{$req['requerimiento']}" />
+                                </td>
+                            </tr>
+                        {/foreach}
                     </tbody>
                 </table>
             </div>
@@ -62,10 +67,10 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input class="form-control" type="date" id="fecha_desarrollo" name="fecha_desarrollo" />
+                                <input class="form-control" type="date" id="fecha_desarrollo" name="fecha_desarrollo" value="{$plan['fecha_desarrollo_ymd']}" />
                             </td>
                             <td>
-                                <input class="form-control" type="text" id="horario_desarrollo" name="horario_desarrollo" />
+                                <input class="form-control" type="text" id="horario_desarrollo" name="horario_desarrollo" value="{$plan['horario_desarrollo']}" />
                             </td>
                         </tr>
                     </tbody>
@@ -87,10 +92,10 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input class="form-control" type="date" id="fecha_resultados" name="fecha_resultados" />
+                                <input class="form-control" type="date" id="fecha_resultados" name="fecha_resultados" value="{$plan['fecha_resultados_ymd']}" />
                             </td>
                             <td>
-                                <input class="form-control" type="text" id="horario_resultados" name="horario_resultados" />
+                                <input class="form-control" type="text" id="horario_resultados" name="horario_resultados" value="{$plan['horario_resultados']}" />
                             </td>
                         </tr>
                     </tbody>

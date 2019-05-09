@@ -119,10 +119,8 @@ class Planes extends Main
 						userId,
                         subjectId,
                         capacitacion,
-                        lugar_desarrollo,
                         fecha_desarrollo,
                         horario_desarrollo,
-                        lugar_resultados,
                         fecha_resultados,
                         horario_resultados,
                         fecha 
@@ -133,13 +131,11 @@ class Planes extends Main
 						'".$this->userId."',
 						'".$this->subjectId."',
 						'".$this->capacitacion."',
-						'".$this->lugar_desarrollo."',
 						'".$this->fecha_desarrollo."',
 						'".$this->horario_desarrollo."',
-						'".$this->lugar_resultados."',
 						'".$this->fecha_resultados."',
 						'".$this->horario_resultados."',
-						CURDATE()
+						NOW()
 					)";	
 					
 		$this->Util()->DB()->setQuery($sql);
@@ -220,7 +216,11 @@ class Planes extends Main
                         CONCAT(u.names, ' ', u.lastNamePaterno, ' ', u.lastNameMaterno) AS candidato,
                         s.name AS estandar,
                         u.firma,
-						p.firma AS firma_personal
+						p.firma AS firma_personal,
+						pl.subjectId,
+						pl.fecha_desarrollo AS fecha_desarrollo_ymd,
+						pl.fecha_resultados AS fecha_resultados_ymd,
+						pl.planId
                     FROM planes pl 
                         INNER JOIN personal p
                             ON p.personalId = pl.personalId
@@ -240,6 +240,69 @@ class Planes extends Main
         $this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;
+	}
+	
+	public function isEditable()
+	{
+		$sql = "SELECT TIMESTAMPDIFF(HOUR, fecha, NOW()) AS period from planes where planId = " . $this->planId;
+		$this->Util()->DB()->setQuery($sql);
+		$hours = intval($this->Util()->DB()->GetSingle());
+		return ($hours >= 24 ? false : true);
+	}
+
+	public function Update(){
+		
+		if($this->Util()->PrintErrors()){ 
+			return false; 
+		}
+		
+		$sql = "UPDATE
+					`planes` 
+					SET
+                        capacitacion = '".$this->capacitacion."',
+                        fecha_desarrollo = '".$this->fecha_desarrollo."',
+                        horario_desarrollo = '".$this->horario_desarrollo."',
+                        fecha_resultados = '".$this->fecha_resultados."',
+                        horario_resultados = '".$this->horario_resultados."'
+					WHERE 
+					planId = " . $this->planId;	
+					
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->UpdateData();
+		
+		$sql = "DELETE FROM planes_requerimientos WHERE planId = '".$this->planId."'";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->DeleteData();
+        
+        if(count($this->requerimientos) > 0)
+        {
+            //$planId = $this->findPlanId($this->personalId, $this->userId, $this->subjectId);
+            foreach($this->requerimientos as $requerimiento => $propiedad)
+            {
+                $sql = "INSERT INTO 
+					`planes_requerimientos` 
+					(
+                        planId,
+						cantidad,
+						requerimiento
+					)
+					 VALUES 
+					 (
+                        '".$this->planId."',
+					 	'".$propiedad->cantidad."',
+						'".$propiedad->descripcion."'
+					)";	
+					
+                $this->Util()->DB()->setQuery($sql);
+                $this->Util()->DB()->ExecuteQuery();
+            }
+        }
+		
+		$this->Util()->setError(10073, "complete");
+		$this->Util()->PrintErrors();
+		
+		return true;
+				
     }
 	
 }
