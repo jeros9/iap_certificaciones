@@ -853,8 +853,8 @@ class Student extends User
 	
 	public function AddUserToCurricula($id, $curricula, $nombre, $email, $password, $major, $course,$tipo_beca,$por_beca,$matricula = null)
 	{
-	
-	 
+
+
 		include_once(DOC_ROOT."/properties/messages.php");
 
 			$sql = "SELECT COUNT(*) FROM user_subject WHERE alumnoId = '".$id."' AND courseId = '".$curricula."'";
@@ -959,7 +959,18 @@ class Student extends User
 				// $this->setProfesion($info['profesion']);				
 				
 			// }
-			
+			//enviar correo
+			$sendmail = new SendMail;
+			$details_body = array(
+				"email" => $info["controlNumber"],
+				"password" => $password,
+				"major" => utf8_decode($major),
+				"course" => utf8_decode($course),
+			);
+			$details_subject = array();
+			$attachment = "";
+			$fileName = "";
+			$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $email, $nombre, $attachment, $fileName);
 			//crear vencimientos
 			$this->AddInvoices($id, $curricula);
 			
@@ -968,24 +979,6 @@ class Student extends User
 			$files  = new Files;
 			//print_r($this);        //pdf del correo electronico
 			$file = $files->CedulaInscripcion($id, $curricula, $this, $major, $course);
-			//enviar correo
-			$sendmail = new SendMail;
-// echo "siga";
-			// exit;
-			$details_body = array(
-				"email" => $info["controlNumber"],
-				"password" => $password,
-				"major" => utf8_decode($major),
-				"course" => utf8_decode($course),
-			);
-			$details_subject = array();
-			//$email = "dlopez@trazzos.com";
-			
-			$attachment = "";
-			$fileName = "";
-
-						
-			$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $email, $nombre, $attachment, $fileName);
 			
 			return $complete; 
 

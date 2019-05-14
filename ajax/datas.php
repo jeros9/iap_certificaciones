@@ -4,6 +4,7 @@
 	include_once('../initPdf.php');
 	include_once('../config.php');
 	include_once(DOC_ROOT.'/libraries.php');
+	include_once(DOC_ROOT.'/libs/PHPQR/qrlib.php');
 
 use Dompdf\Adapter\CPDF;
 use Dompdf\Dompdf;
@@ -19,6 +20,10 @@ $student->setUserId($_GET["id"]);
 		if($_GET['key'] != $info['firma'])
 			exit;
 	}
+
+	$qr_content = $info['controlNumber'];
+	$qr_name = DOC_ROOT . '/alumnos/qr/' . $qr_content . '.png';
+	QRcode::png($qr_content, $qr_name, 'L', 10, 3); 
 	
 	// echo "<pre>"; print_r($info);
 	// exit;
@@ -87,7 +92,7 @@ $student->setUserId($_GET["id"]);
 		</table> 
 	<table>
 		<tr>
-			<td>
+			<td colspan="2">
 				<h3>
 					Tu registro se complet&oacute; de manera satisfactoria. Tus datos de acceso son los siguientes.
 				</h3>
@@ -95,13 +100,14 @@ $student->setUserId($_GET["id"]);
 			</td>
 		</tr>
 		<tr>
-			<td>Usuario: '.$info["controlNumber"].'</td>
+			<td width="80%">Usuario: '.$info["controlNumber"].'</td>
+			<td width="20%" rowspan="2"><img src="' . $qr_name . '" width="150" /></td>
 		</tr>
 		<tr>
 			<td>Contrase&ntilde;a: '.$info["password"].'</td>
 		</tr>
 		<tr>
-			<td>
+			<td colspan="2">
 				<h4>Puedes ingresar desde el siguiente enlace <a href="https://redconocer.iapchiapas.edu.mx" target="_top">redconocer.iapchiapas.edu.mx</a></h4>
 			</td>
 		</tr>
