@@ -620,6 +620,20 @@ class Student extends User
 						)";
 
 		$this->Util()->DB()->setQuery($sqlQuery);
+
+		include_once(DOC_ROOT."/properties/messages.php");
+		//enviar correo
+		$sendmail = new SendMail;
+		$details_body = array(
+			"email" => $this->getControlNumber(),
+			"password" => $this->getPassword(),
+			"major" => utf8_decode(''),
+			"course" => utf8_decode(''),
+		);
+		$details_subject = array();
+		$attachment = "";
+		$fileName = "";
+		$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $this->getEmail(), $this->getNames(), $attachment, $fileName);
 		
 		
 		if($id = $this->Util()->DB()->InsertData()){
