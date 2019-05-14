@@ -856,6 +856,20 @@ class Student extends User
 
 
 		include_once(DOC_ROOT."/properties/messages.php");
+		$this->setUserId($id);
+		$info = $this->GetInfo();
+		//enviar correo
+		$sendmail = new SendMail;
+		$details_body = array(
+			"email" => $info["controlNumber"],
+			"password" => $password,
+			"major" => utf8_decode($major),
+			"course" => utf8_decode($course),
+		);
+		$details_subject = array();
+		$attachment = "";
+		$fileName = "";
+		$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $email, $nombre, $attachment, $fileName);
 
 			$sql = "SELECT COUNT(*) FROM user_subject WHERE alumnoId = '".$id."' AND courseId = '".$curricula."'";
 			$this->Util()->DB()->setQuery($sql);
@@ -908,8 +922,6 @@ class Student extends User
             else  {$complete="no";}
 			// if($this->getNames() == "")
 			// {
-				$this->setUserId($id);
-				$info = $this->GetInfo();
 				
 				// echo ""
 				// exit;
@@ -959,18 +971,6 @@ class Student extends User
 				// $this->setProfesion($info['profesion']);				
 				
 			// }
-			//enviar correo
-			$sendmail = new SendMail;
-			$details_body = array(
-				"email" => $info["controlNumber"],
-				"password" => $password,
-				"major" => utf8_decode($major),
-				"course" => utf8_decode($course),
-			);
-			$details_subject = array();
-			$attachment = "";
-			$fileName = "";
-			$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $email, $nombre, $attachment, $fileName);
 			//crear vencimientos
 			$this->AddInvoices($id, $curricula);
 			

@@ -101,6 +101,11 @@
                                <i class="fa fa-adn" aria-hidden="true"></i>Acuse de Derecho
 							</a>
                         </li>
+                        <li>
+                           <a href="{$WEB_ROOT}/ajax/datas.php?id={$id}&key={$firma}" target="_blank">
+                               <i class="fa fa-adn" aria-hidden="true"></i> Ficha de Registro
+							</a>
+                        </li>
 						<li>
                             &nbsp;
 							<br>

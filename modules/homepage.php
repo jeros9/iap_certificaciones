@@ -28,6 +28,12 @@ $x=0;
 	$info = $student->GetInfo();
 	//userId
 	$smarty->assign("id",$_SESSION["User"]["userId"]);	
+	if($_SESSION['User']['type'] == 'student')
+	{
+		$student->setUserId($_SESSION['User']['userId']);
+		$data_student = $student->GetInfo();
+		$smarty->assign("firma", $data_student['firma']);
+	}
 	//tipo de usuario
 	$smarty->assign("positionId", $_SESSION['positionId']);	
 	
