@@ -322,7 +322,13 @@ switch($_POST["type"])
 		$student->setUserId($_POST['user_id']);
 		$data_student = $student->getInfo();
 		$filename = strtoupper(trim($data_student['curp'])) . '.jpg';
+		$has_photo = false;
 		$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+		if(!$has_photo)
+		{
+			$filename = $data_student['controlNumber'] . '.jpg';
+			$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+		}
 		$smarty->assign('data_student', $data_student);
 		$smarty->assign('has_photo', $has_photo);
 		$smarty->assign('filename', $filename);
