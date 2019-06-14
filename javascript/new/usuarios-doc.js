@@ -125,8 +125,7 @@ function enviarArchivo(){
 			// $("#erro_"+reqId).hide(0);
 		},
 		success: function(response){
-			
-			console.log(response);
+			//console.log(response);
 			var splitResp = response.split("[#]");
 
 			$("#loader").html("");
@@ -138,11 +137,17 @@ function enviarArchivo(){
 				closeModal();
 				buscarCertificacion()
 			}else if($.trim(splitResp[0]) == "fail"){
+				console.log(response);
+				alert('Ocurrió un error, verifique que su archivo no supere los 15 MB');
 				$("#txtErrMsg").show();
-	
 			}else{
-				alert(msgFail);
+				$("#txtErrMsg").show();
+				alert('Ocurrió un error, verifique que su archivo no supere los 15 MB');
 			}
+		},
+		error: function(response) {
+			console.log(response);
+			alert('Ocurrio un error');
 		},
 	})
 	

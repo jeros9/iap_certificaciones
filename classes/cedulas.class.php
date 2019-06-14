@@ -61,32 +61,32 @@ class Cedulas extends Main
 	public function setMejoresPracticas($value)
 	{
 		//$this->Util()->ValidateString($value, $max_chars=250, $minChars = 1, "Mejores Practicas");
-		$this->mejores_practicas = $value;
+		$this->mejores_practicas = addslashes($value);
 	}
 	
 	public function setAreasOportunidad($value)
 	{
-		$this->areas_oportunidad = $value;
+		$this->areas_oportunidad = addslashes($value);
 	}
 	
 	public function setCriteriosNoCumplidos($value)
 	{
-		$this->criterios_no_cumplidos = $value;
+		$this->criterios_no_cumplidos = addslashes($value);
 	}
 	
 	public function setRecomendaciones($value)
 	{
-		$this->recomendaciones = $value;
+		$this->recomendaciones = addslashes($value);
 	}
 	
 	public function setJuicioEvaluacion($value)
 	{
-		$this->juicio_evaluacion = $value;
+		$this->juicio_evaluacion = addslashes($value);
 	}
 	
 	public function setObservaciones($value)
 	{
-		$this->observaciones = $value;
+		$this->observaciones = addslashes($value);
 	}
 	
 	public function setFecha($value)
