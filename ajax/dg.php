@@ -143,6 +143,7 @@ $html .='<table style="width:100%" >
 	<tr>
 		<td><b>
 			Comentarios acerca del resultado del diagnóstico:
+			<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fortalecer sus conocimientos teóricos acerca de:
 				   <br>
 				   <br>
 					"; 
@@ -157,7 +158,7 @@ $html .='<table style="width:100%" >
 					Respuestas Correctas:".$resEstadoisticas["countOK"]."<br>
 					Puntos Obtenidos: ".$resEstadoisticas["puntosOk"]."<br>
 					Calificación: ".$resEstadoisticas["calificacion"]."(".$resEstadoisticas["puntosOk"]."/".$resEstadoisticas["totalPuntos"].")<br>
-					Sugerencia:"; if ($resEstadoisticas["countOK"] < $resEstadoisticas["limiteAprobatorio"]) { $html .= "Se recomienda  Certificación"; }  else { $html .= "Ninguna"; }
+					Sugerencia:"; if ($resEstadoisticas["countOK"] < $resEstadoisticas["limiteAprobatorio"]) { $html .= "Se recomienda  Certificación"; }  else { $html .= "Se le sugiere llevar curso de Capacitación"; }
 	$html .= "	</b>
 	
 	<br>
