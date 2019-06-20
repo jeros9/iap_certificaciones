@@ -608,3 +608,32 @@ function EditPlan()
 			}
 	});
 }
+
+function verFormEvaluacion(personalId, userId, subjectId, tipo){
+	var texto = "Agregar Cédula";
+	if(tipo == 1)
+		texto = "Agregar Plan";
+	$.ajax({
+	  	type: "POST",
+	  	url: WEB_ROOT+'/ajax/new/usuarios.php',
+	  	data: $("#frmGral2").serialize(true)+'&type=verFormEvaluacion&userId='+userId+'&subjectId='+subjectId+'&tipo='+tipo+'&personalId='+personalId,
+		beforeSend: function(){			
+			$("#load").html(LOADER3);
+		},
+	  	success: function(response) {	
+		
+			showModal(texto, response);
+			$('.submitForm').click(function() {
+				if(tipo == 1)
+					AddPlan();
+				else
+					AddCedula();
+			});
+				
+
+		},
+		error:function(){
+			alert(msgError);
+		}
+    });
+}

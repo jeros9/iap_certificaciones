@@ -31,21 +31,39 @@
 		</i>	
 		</a>
 		{/if}
-		<a href="javascript:;" class="btnAddPlan" title="AGREGAR PLAN" data-user="{$item.userId}" data-subject="{$item.subjectId}">
-		<i class="material-icons">
-		calendar_today
-		</i>	
-		</a>
+		{if $tipoUs ne "Docente"}
+			<a href="javascript:;" title="AGREGAR PLAN" onclick="verFormEvaluacion({$admin},{$item.userId},{$item.subjectId},1)">
+			<i class="material-icons">
+			calendar_today
+			</i>	
+			</a>
+		{/if}
+		{if $tipoUs eq "Docente"}
+			<a href="javascript:;" class="btnAddPlan" title="AGREGAR PLAN" data-user="{$item.userId}" data-subject="{$item.subjectId}">
+			<i class="material-icons">
+			calendar_today
+			</i>	
+			</a>
+		{/if}
 		<a href="{$WEB_ROOT}/graybox.php?page=add-doc&id={$item.userId}&auxTpl=2&cId={$item.subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR IEC">
 		<i class="material-icons">
 			chrome_reader_mode
 			</i>
 		</a>
-		<a href="javascript:;" class="btnAddCedula" title="AGREGAR CEDULA" data-user="{$item.userId}" data-subject="{$item.subjectId}">
-		<i class="material-icons">
-		aspect_ratio
-		</i>
-		</a>
+		{if $tipoUs ne "Docente"}
+			<a href="javascript:;" title="AGREGAR CEDULA" onclick="verFormEvaluacion({$admin},{$item.userId},{$item.subjectId},3)">
+			<i class="material-icons">
+			aspect_ratio
+			</i>
+			</a>
+		{/if}
+		{if $tipoUs eq "Docente"}
+			<a href="javascript:;" class="btnAddCedula" title="AGREGAR CEDULA" data-user="{$item.userId}" data-subject="{$item.subjectId}">
+			<i class="material-icons">
+			aspect_ratio
+			</i>
+			</a>
+		{/if}
 		<a href="{$WEB_ROOT}/graybox.php?page=add-doc&id={$item.userId}&auxTpl=4&cId={$item.subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR PRODUCTOS">
 		<i class="material-icons">
 			description
