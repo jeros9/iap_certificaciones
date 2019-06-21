@@ -98,7 +98,7 @@ switch($_POST["type"])
 	// exit;
 	$_GET = $_POST;
 		$student->setPages($_POST['page']);
-		if($_SESSION['User']['type'] == "Docente")
+		if($_SESSION['User']['type'] == "Docente" || $_SESSION['User']['type'] == "Administrador")
 			$students = $student->enumerateOkNum();
 		else
 			$students = $student->enumerateOk();

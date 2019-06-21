@@ -211,7 +211,7 @@ function buscarCertificacion(){
 
 
 function LoadPage(page){
-
+	
 	$("#type").val("LoadPage")
 	
 	$.ajax({

@@ -32,7 +32,7 @@
 		</a>
 		{/if}
 		{if $tipoUs ne "Docente"}
-			<a href="javascript:;" title="AGREGAR PLAN" onclick="verFormEvaluacion({$admin},{$item.userId},{$item.subjectId},1)">
+			<a href="javascript:;" title="AGREGAR PLAN" onclick="verFormEvaluacion({$item.personalId},{$item.userId},{$item.subjectId},1)">
 			<i class="material-icons">
 			calendar_today
 			</i>	
@@ -51,7 +51,7 @@
 			</i>
 		</a>
 		{if $tipoUs ne "Docente"}
-			<a href="javascript:;" title="AGREGAR CEDULA" onclick="verFormEvaluacion({$admin},{$item.userId},{$item.subjectId},3)">
+			<a href="javascript:;" title="AGREGAR CEDULA" onclick="verFormEvaluacion({$item.personalId},{$item.userId},{$item.subjectId},3)">
 			<i class="material-icons">
 			aspect_ratio
 			</i>

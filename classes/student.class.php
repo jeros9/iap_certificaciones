@@ -1560,6 +1560,7 @@ class Student extends User
 		 $sql = "
 				SELECT 
 					*,
+					up.personalId,
 					sb.subjectId,
 					sb.name as certificacion,
 					(select count(*) from repositorio as r where r.userId = u.userId and r.subjectId = sb.subjectId) as countRepositorio,
@@ -1570,7 +1571,7 @@ class Student extends User
 				left join user_subject as us on us.alumnoId = u.userId
 				left join course as cs on cs.courseId = us.courseId
 				left join subject as sb on sb.subjectId = cs.subjectId
-				inner join usuario_personal as up on up.usuarioId = u.userId
+				inner join usuario_personal as up on (up.usuarioId = u.userId and up.subjectId = sb.subjectId)
 				WHERE 
 					1 ".$sqlSearch." ".$filtro."
 				AND
