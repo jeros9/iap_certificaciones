@@ -88,6 +88,7 @@ include_once(DOC_ROOT.'/libs/pdf/dompdf_config.inc.php');
 include_once(DOC_ROOT.'/classes/docente.class.php');
 include_once(DOC_ROOT.'/classes/cedulas.class.php');
 include_once(DOC_ROOT.'/classes/planes.class.php');
+include_once(DOC_ROOT . '/classes/dictum.class.php');
 $docente = new Docente();
 
 $db = new DB;
@@ -147,6 +148,7 @@ $dbfire= new Dbfire;
 $encuesta= new Encuesta;
 $cedulas = new Cedulas;
 $planes = new Planes;
+$dictum = new Dictum;
 
 $smarty = new Smarty;
 

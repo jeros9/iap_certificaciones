@@ -690,6 +690,19 @@ public function Enumerate_p(){
 			return $this->Util()->DB()->GetResult();
 		}
 		
+		public function EnumerateByPersonal()
+		{
+			$this->Util()->DB()->setQuery("SELECT 
+												SUBSTRING(s.name, 1, 6) AS cve,
+										  		s.name
+											FROM 
+												personal_subject ps
+											LEFT JOIN subject s 
+												ON ps.subjectId = s.subjectId
+											WHERE ps.personalId = '".$this->personalId. "'" );
+			return $this->Util()->DB()->GetResult();
+		}
+		
 		public function Save()
 		{
 			if($this->Util()->PrintErrors())

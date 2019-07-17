@@ -40,6 +40,7 @@
 	<link href="{$WEB_ROOT}/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
 	<link href="{$WEB_ROOT}/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
 	<link href="{$WEB_ROOT}/assets/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
+	<link href="{$WEB_ROOT}/assets/global/plugins/jodit/build/jodit.min.css" rel="stylesheet" type="text/css" />
 	 <!-- <link href="{$WEB_ROOT}/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" />
         <link href="{$WEB_ROOT}/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
 		<link href="{$WEB_ROOT}/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />-->
@@ -191,6 +192,7 @@ $page == 'view-inbox' or
 <script src="{$WEB_ROOT}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="{$WEB_ROOT}/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 <script src="{$WEB_ROOT}/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="{$WEB_ROOT}/assets/global/plugins/jodit/build/jodit.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 
 

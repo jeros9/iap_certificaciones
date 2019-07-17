@@ -2118,6 +2118,23 @@ class Personal extends Main
 		return $result;
 		
 	}
+
+	public function EnumerateSubject($subjectId, $orden = 'name ASC')
+	{	
+		$sql = "SELECT 
+					p.*,
+					concat_ws(' ', p.name, p.lastname_materno, p.lastname_paterno) as nombrePersona
+				FROM personal AS p
+			 	INNER JOIN personal_subject AS ps ON p.personalId = ps.personalId
+				WHERE
+					p.perfil = 'Docente' AND 
+					p.estatus = 'activo' AND 
+					ps.subjectId = " . $subjectId . "
+				ORDER BY p.name ASC";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
 }
 
 

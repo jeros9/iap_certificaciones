@@ -41,7 +41,7 @@
 {if !$docente}
 {if $vistaPrevia ne 1}
         
-        <li class="nav-item {if  $page == "personal1" || $page == "role"} active {/if} ">
+        <li class="nav-item {if  $page == "personal1" || $page == "role" || $page == "major" || $page == "dictum"} active {/if} ">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="icon-diamond"></i>
                 <span class="title">Catálogos</span>
@@ -67,6 +67,13 @@
                 <li class="nav-item  ">
                     <a href="{$WEB_ROOT}/role" class="nav-link ">
                         <span class="title">Roles</span>
+                    </a>
+                </li>
+				{/if}
+				{if  $User.positionId == 1 || $AccessMod[49] == 1}
+                <li class="nav-item  ">
+                    <a href="{$WEB_ROOT}/dictum" class="nav-link ">
+                        <span class="title">Dictámenes</span>
                     </a>
                 </li>
 				{/if}

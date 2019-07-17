@@ -80,7 +80,7 @@ $pages = array(
 	'kardex-calificacion',
 	'register',
     'recuperacion',
-		'docente',
+	'docente',
 
 	//new
 	"new-subject",
@@ -89,33 +89,25 @@ $pages = array(
 	"history-subject",
 	"new-module",
 	"edit-module",
-
 	"edit-course",
 	"activities-course",
 	
 	//alumn
 	"curricula",
 	"alumn-services",
-
 	"payments",
 	"invoices",
 	"invoices-student",
-
 	"new-payment",
 	"view-payments",
-
 	"view-modules-course",
 	"add-modules-course",
 	"edit-modules-course",
-
 	"add-activity",
 	"edit-activity",
 	"view-description-activity",
-	
-
 	"configuracion-examen",
 	"edit-question",
-
 	"view-modules-course-student",
 	"view-modules-student",
 	"presentation-modules-student",
@@ -124,30 +116,24 @@ $pages = array(
 	"examen-modules-student",
 	"calendar-image-modules-student",
 	"resources-modules-student",
-
 	"forum-modules-student",
 	"forumsub-modules-student",
 	"add-topic",
 	"add-reply",	
 	"team-modules-student",
-
 	"add-resource",
 	"edit-resource",
-
 	"config-teams",
 	"score-activity",
-
 	"upload-homework",
 	"make-test",
 	"student-curricula",	
 	"ver-sabana-course",
-		"add-comment",
-
+	"add-comment",
 	"add-noticia",
 	"tv",
 	"recorded",
 	"recording",
-
 	"profesion",
 
 	//facturacion
@@ -214,12 +200,11 @@ $pages = array(
     'gps',
     'usuarios-admin',
     'usuarios-doc',
-		'usuarios-sol',
-		'reporte-evaluadores'
-	
-	
-	
-	
+	'usuarios-sol',
+	'reporte-evaluadores',
+
+	//dictamenes
+	'dictum'
 );
 
 if(!in_array($_GET['page'], $pages))
