@@ -122,26 +122,24 @@
                         <tr>
                             <td>
                                 <br><br><br>
-                                <strong>* Lic María Guadalupe Montoya Meza</strong><br>
-                                <small>Directora de la ECE</small>
+                                <strong>* ' . $info['director'] . '</strong><br>
+                                <small>Responsable de la ECE</small>
+                                <br><br><h3>INVITADOS</h3><br><br>
+                                <strong>* ' . $info['personal1'] . ', </strong><br> Evaluador Independiente ' . $subjects_p1 . '
                                 <br><br><br><br><br><br>
-                                <strong>* Integrante 1, </strong><br> Evaluador Independiente ' . $subjects_p1 . '
-                                <br><br><br><br><br><br>
-                                <strong>* Integrante 2, </strong><br> Evaluador Independiente ' . $subjects_p2 . '
+                                <strong>* ' . $info['personal2'] . ', </strong><br> Evaluador Independiente ' . $subjects_p2 . '
                                 <br><br><br><br><br><br>
                             </td>
                             <td style="text-align:center;">
-                                <br><br><br>
-                                <small>María Guadalupe Montoya Meza</small><br>
-                                <small>Nombre Director</small>
+                                <br><br><br><br><br>
+                                <small>' . $info['director'] . '</small><br>
+                                <small>' . $info['firma'] . '</small><br>
                                 <br><br><br><br>
                                 <small>' . $info['personal1'] . '</small><br>
                                 <small>' . $info['firma1'] . '</small><br>
-                                <small>Nombre Integrante 1</small><br>
                                 <br><br><br><br>
                                 <small>' . $info['personal2'] . '</small><br>
                                 <small>' . $info['firma2'] . '</small><br>
-                                <small>Nombre Integrante 2</small><br>
                                 <br><br><br><br><br><br>
                             </td>
                         </tr>
