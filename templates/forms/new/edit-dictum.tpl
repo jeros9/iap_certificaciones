@@ -6,7 +6,7 @@
         <div class="form-group">
             <label class="col-md-3 control-label" for="fecha">Fecha:</label>
             <div class="col-md-8">
-                <input type="text" name="fecha" id="fecha" class="form-control date-picker" placeholder="Fecha" autocomplete="off" value="{$info.date}" />
+                <input type="text" name="fecha" id="fecha" class="form-control date-picker" placeholder="Fecha" autocomplete="off" value="{$info.date_dmy}" />
             </div>
         </div>
         <!--div class="form-group">

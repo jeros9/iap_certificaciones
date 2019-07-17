@@ -137,7 +137,8 @@ class Dictum extends Main
                         CONCAT_WS(' ', p1.name, p1.lastname_materno, p1.lastname_paterno) AS personal1,
                         p1.firma AS firma1,
                         CONCAT_WS(' ', p2.name, p2.lastname_materno, p2.lastname_paterno) AS personal2,
-                        p2.firma AS firma2
+                        p2.firma AS firma2,
+                        DATE_FORMAT(d.date, '%d-%m-%Y') AS date_dmy
 				    FROM dictum d
                     LEFT JOIN subject s 
                         ON s.subjectId = d.subjectId
