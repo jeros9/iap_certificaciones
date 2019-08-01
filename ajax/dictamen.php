@@ -11,7 +11,7 @@
 	
 	// echo "<pre>"; print_r($_SESSION["User"]);
 	// exit;
-	if($_SESSION["User"]["type"] != "Administrador" && $_SESSION['User']['type'] != ""){
+	if($_SESSION["User"]["type"] != "Administrador"){
 		exit;
 	}
 	$dictum->setDictumId($_GET['id']);
@@ -52,7 +52,7 @@
                             border: 1px solid black;
                         }
                         table.cell-padding td {
-                            padding: 8px 5px;
+                            padding: 5px 3px;
                         }
                         .bg-gray {
                             background-color: #b2b2b2;
@@ -96,7 +96,7 @@
                             <td style="text-align:right;" class="bg-gray"><strong>Estándar de Competencia:</strong></td>
                             <td>'.$info['name'].'</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td class="bg-gray" style="text-align:center;"><strong>Folio</strong></td>
@@ -108,7 +108,7 @@
                             <td style="text-align:center;">' . $info['lot'] . '</td>
                             <td style="text-align:center;">' . $info['sample'] . '</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray" colspan="2">
@@ -143,7 +143,7 @@
                                 <br><br><br><br><br><br>
                             </td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray"><strong>Informe</strong></td>
@@ -162,7 +162,7 @@
                                 ' . $info['content'] . '
                             </td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray"><strong>Fallo</strong></td>
@@ -172,7 +172,7 @@
                                 <ul><li>' . $info['result'] . '</li></ul>
                             </td>
                         </tr>
-                    </table><br><br>';
+                    </table>';
     $html .= '  </body>
             </html>';
 	// echo $html;
