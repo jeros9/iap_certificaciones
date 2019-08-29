@@ -11,7 +11,7 @@
 	
 	// echo "<pre>"; print_r($_SESSION["User"]);
 	// exit;
-	if($_SESSION["User"]["type"] != "Docente" && $_SESSION["User"]["type"] != "Administrador" && $_SESSION['User']['type'] != ""){
+	if($_SESSION["User"]["type"] != "Docente" && $_SESSION["User"]["type"] != "Administrador" && $_SESSION['User']['type'] != "" && $_SESSION["User"]["type"] != "Director"){
 		exit;
 	}
 	$planes->setPlanId($_GET['id']);

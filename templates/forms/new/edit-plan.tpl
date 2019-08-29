@@ -102,6 +102,26 @@
                 </table>
             </div>
         </div>
+        {if $edit_fecha}
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Fecha de Elaboración del Plan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input class="form-control" type="date" id="fecha" name="fecha" value="{$plan['fecha_ymd']}" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {/if}
     </div>
     <div class="form-actions">
         <div class="row">

@@ -98,7 +98,7 @@ class Planes extends Main
 	
 	public function setFecha($value)
 	{
-		$this->fecha = $value;
+		$this->fecha = date("Y-m-d", strtotime($value));
     }
     
     public function setRequerimientos($value)
@@ -212,6 +212,7 @@ class Planes extends Main
                         DATE_FORMAT(pl.fecha_resultados, '%d-%m-%Y') AS fecha_resultados,
                         pl.horario_resultados, 
                         DATE_FORMAT(pl.fecha, '%d-%m-%Y') AS fecha,
+                        DATE_FORMAT(pl.fecha, '%Y-%m-%d') AS fecha_ymd,
                         CONCAT(p.name, ' ', p.lastname_paterno, ' ', p.lastname_materno) AS evaluador,
                         CONCAT(u.names, ' ', u.lastNamePaterno, ' ', u.lastNameMaterno) AS candidato,
                         s.name AS estandar,
@@ -258,6 +259,12 @@ class Planes extends Main
 		if($this->Util()->PrintErrors()){ 
 			return false; 
 		}
+
+		$fecha_update = '';
+		if($this->fecha != '')
+		{
+			$fecha_update = ", fecha = '".$this->fecha." 00:00:00'";
+		}
 		
 		$sql = "UPDATE
 					`planes` 
@@ -266,9 +273,10 @@ class Planes extends Main
                         fecha_desarrollo = '".$this->fecha_desarrollo."',
                         horario_desarrollo = '".$this->horario_desarrollo."',
                         fecha_resultados = '".$this->fecha_resultados."',
-                        horario_resultados = '".$this->horario_resultados."'
+                        horario_resultados = '".$this->horario_resultados."'". $fecha_update ."
 					WHERE 
 					planId = " . $this->planId;	
+		echo $sql;
 					
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->UpdateData();

@@ -4,8 +4,8 @@
         {if $type eq "plan"}
             <a target='_blank' href='{$WEB_ROOT}/files/estandares/{$file_pdf}' class="btn default red">Ver Estándar de Competencia</a>
         {/if}
-        {if $type eq "plan"}
-            {if $editable}
+        {if ($type eq "plan")}
+            {if $editable or ($perfil eq 'Administrador' or $perfil eq 'Director')}
                 <a href='javascript:;' class="btn default green btnEditPlan" data-id="{$id}">Editar Plan</a>
             {/if}
         {/if}

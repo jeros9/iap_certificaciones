@@ -313,6 +313,7 @@ switch($_POST["type"])
 		{
 			$smarty->assign('id', $id);
 			$smarty->assign('btnTitle', 'Visualizar ' . $php_name);
+			$smarty->assign('perfil', $_SESSION['User']['type']);
 			$smarty->assign('type', $php_name);
 			$smarty->display(DOC_ROOT.'/templates/boxes/new/view-doc.tpl');
 		}
@@ -342,6 +343,8 @@ switch($_POST["type"])
 		$requerimientos = $planes->getInfoRequerimientos();
 		$subject->setSubjectId($data_plan['subjectId']);
 		$data_subject = $subject->Info();
+		$edit_fecha = ($_SESSION['User']['type'] == 'Administrador' || $_SESSION['User']['type'] == 'Director' ? true : false);
+		$smarty->assign('edit_fecha', $edit_fecha);
 		$smarty->assign('plan', $data_plan);
 		$smarty->assign('requerimientos', $requerimientos);
 		$smarty->assign('file_pdf', $data_subject['file_pdf']);
@@ -357,6 +360,10 @@ switch($_POST["type"])
         $planes->setFechaResultados($_POST['fecha_resultados']);
 		$planes->setHorarioResultados($_POST['horario_resultados']);
 		$planes->setRequerimientos($_POST['requerimientos']);
+		if($_SESSION['User']['type'] == 'Director' || $_SESSION['User']['type'] == 'Administrador')
+		{
+			$planes->setFecha($_POST['fecha']);
+		}
 		
 		if(!$planes->Update())
         {
