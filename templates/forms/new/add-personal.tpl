@@ -45,6 +45,12 @@
                 <input type="text" name="lastname_materno" id="lastname_materno" class="form-control" value="{$info.lastname_materno}" placeholder="Apellido Materno" />
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Clave Red Conocer:</label>
+            <div class="col-md-8">
+                <input type="text" name="clave_conocer" id="clave_conocer" class="form-control" value="{$info.clave_conocer}" placeholder="Clave Red Conocer" />
+            </div>
+        </div>
 		<div class="form-group">
             <label class="col-md-3 control-label">Correo:</label>
             <div class="col-md-8">

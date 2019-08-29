@@ -41,6 +41,7 @@ class Personal extends Main
 	private $twitter;
 	private $mostrar;
 	private $numero;
+	private $claveConocer;
 	
 	public function setMostrar($value)
 	{
@@ -267,6 +268,11 @@ class Personal extends Main
 	{
 		$this->Util()->ValidateString($value, $max_chars=1000000, $minChars = 0, "Descripcion");
 		$this->description = $value;
+	}
+
+	public function setClaveConocer($value)
+	{
+		$this->claveConocer = mb_strtoupper($value);
 	}
 	
 	public function getPersonalId()
@@ -600,7 +606,8 @@ class Personal extends Main
 					profesion = '".$this->prof."',
 					firmaConstancia = '".$this->firmaConstancia."',
 					mostrar = '".$this->mostrar."',
-					numero = '".$this->numero."'
+					numero = '".$this->numero."',
+					clave_conocer='".$this->claveConocer."'
 				WHERE 
 					personalId = ".$_POST["personalId"];
 				// exit;	
@@ -650,7 +657,8 @@ class Personal extends Main
 						mostrar,
 						correo,
 						numero,
-						firma
+						firma,
+						clave_conocer
 					)
 				 VALUES 
 					(						
@@ -675,7 +683,8 @@ class Personal extends Main
 						'".$this->mostrar."',
 						'".$this->correo."',
 						'".$this->numero."',
-						'".$firma."'
+						'".$firma."',
+						'".$this->claveConocer."'
 					)";
 								
 								
@@ -2123,7 +2132,7 @@ class Personal extends Main
 	{	
 		$sql = "SELECT 
 					p.*,
-					concat_ws(' ', p.name, p.lastname_materno, p.lastname_paterno) as nombrePersona
+					concat_ws(' ', p.name, p.lastname_paterno, p.lastname_materno) as nombrePersona
 				FROM personal AS p
 			 	INNER JOIN personal_subject AS ps ON p.personalId = ps.personalId
 				WHERE

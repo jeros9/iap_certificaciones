@@ -17,6 +17,12 @@
                  <input type="text" name="nombre" id="nombre"  class="form-control"/>
             </div>
         </div>
+		<div class="form-group">
+            <label class="col-md-3 control-label">Peso Relativo (Primer Criterio):</label>
+            <div class="col-md-8">
+                 <input type="text" name="peso" id="peso"  class="form-control"/>
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-md-3 control-label">Estandar (PDF):</label>
             <div class="col-md-8" >

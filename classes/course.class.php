@@ -21,6 +21,7 @@
 		private $tipoCuatri;
 		private $name;
 		private $numero;
+		private $peso;
 		
 		
 		public function setNumero($value)
@@ -39,6 +40,11 @@
 		{
 			$this->Util()->ValidateString($value, 255, 0, 'Nombre ');
 			$this->name = $value;	
+		}
+		
+		public function setPeso($value)
+		{
+			$this->peso = $value;	
 		}
 		
 		
@@ -620,11 +626,13 @@
 						subject
 						( 	
 						 	name,
-						 	tipo
+						 	tipo,
+							peso
 						)
 					VALUES (
 							'" . $this->name . "',
-							'" .$_POST["subjectId"]. "'
+							'" .$_POST["subjectId"]. "',
+							'" . $this->peso . "'
 							)";
 			$this->Util()->DB()->setQuery($sql);
 			$subjectId = $this->Util()->DB()->InsertData();
@@ -873,7 +881,8 @@
 			 $sql = "UPDATE 
 						subject
 					SET
-						name='". $this->name."'
+						name='". $this->name."',
+						peso='".$this->peso."'
 						WHERE subjectId='".$_POST["courseId"]."'";
 						
 						// exit;

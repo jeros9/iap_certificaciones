@@ -46,6 +46,7 @@
 		// $course->setTipoCuatri($_POST["tipoCuatri"]);
 		// $course->setListar($_POST["listar"]);
 		$course->setName($_POST["nombre"]);
+		$course->setPeso($_POST['peso']);
 		// $course->setNumero($_POST["numero"]);
 		$course->Update();
 		header('Location: ../../history-subject'); 
@@ -64,8 +65,10 @@
 
 	// $course->setCourseId($_GET['id']);
 	// $post = $course->Info();
+	$info_subject = $subject->Info();
 	$subject->setSubjectId($_GET['id']);
-	$smarty->assign('post', $subject->Info());
+	$smarty->assign('file_exists', file_exists(DOC_ROOT . '/files/estandares/' . $info_subject['file_pdf']));
+	$smarty->assign('post', $info_subject);
 	$smarty->assign('id', $_GET['id']);
 	
 	// echo '<pre>'; print_r($post);

@@ -86,7 +86,8 @@ switch($_POST["type"])
         $personal->setCorreo($_POST['correo']);
         $personal->setName($_POST['name']);
         $personal->setLastnamePaterno($_POST['lastname_paterno']);
-        $personal->setLastnameMaterno($_POST['lastname_materno']);
+		$personal->setLastnameMaterno($_POST['lastname_materno']);
+		$personal->setClaveConocer($_POST['clave_conocer']);
         $personal->setUserName($_POST['username']);
         $personal->setPasswd($_POST['passwd']);
 

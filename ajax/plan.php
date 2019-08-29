@@ -5,7 +5,7 @@
 
 	use Dompdf\Adapter\CPDF;
 	use Dompdf\Dompdf;
-	use Dompdf\Exception;
+    use Dompdf\Exception;
 
 	session_start();
 	
@@ -15,7 +15,7 @@
 		exit;
 	}
 	$planes->setPlanId($_GET['id']);
-	$info = $planes->GetInfo();
+    $info = $planes->GetInfo();
 	
     //$firma = $student->extraeFirma($info["userId"],1,'course',$_GET['courseId']);
 	// echo "<pre>"; print_r($firma);
@@ -57,7 +57,10 @@
                             background-color: #b2b2b2;
                         }
                         @page {
-                            margin: 70px 35px;
+                            margin-top: 70px;
+                            margin-bottom: 55px;
+                            margin-left: 35px;
+                            margin-right: 35px;
                         }            
                         footer {
                             position: fixed; 
@@ -65,6 +68,12 @@
                             left: 0px; 
                             right: 0px;
                             height: 80px;
+                        }
+                        body {
+                            font-size: 10pt;
+                        }
+                        table {
+                            page-break-inside: avoid !important;
                         }
                     </style>
                 </head>
@@ -78,32 +87,32 @@
                                 <strong>Plan de Evaluación</strong>
                             </td>
                             <td style="text-align:center;width:33%;">
-                                <img src="'.DOC_ROOT.'/images/logo_correo.jpg" width="150px" >
+                                <img src="' . DOC_ROOT . '/images/logo_correo.jpg" width="150px" >
                             </td>
                         </tr>
                     </table>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Evaluador:</strong></td>
-                            <td>'.$info['evaluador'].'</td>
+                            <td>' . $info['clave_conocer'] . ' ' . mb_strtoupper($info['evaluador']) . '</td>
                         </tr>
                         <tr>
-                            <td style="text-align:right;" class="bg-gray"><strong>Clave de la ECE:</strong></td>
+                            <td style="text-align:right;" class="bg-gray"><strong>Centro de Evaluación:</strong></td>
                             <td>ECE213-15 Instituto de Administración Pública del Estado de Chiapas</td>
                         </tr>
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Candidato:</strong></td>
-                            <td>'.$info['candidato'].'</td>
+                            <td>' . mb_strtoupper($info['candidato']) . '</td>
                         </tr>
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Estándar de Competencia:</strong></td>
-                            <td>'.$info['estandar'].'</td>
+                            <td>' . $info['estandar'] . '</td>
                         </tr>
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Fecha:</strong></td>
-                            <td>'.$info['fecha'].'</td>
+                            <td>' . $info['fecha'] . '</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td colspan="5" class="bg-gray" style="text-align:center;"><strong>Resultados del Diágnostico</strong></td>
@@ -111,11 +120,26 @@
                         <tr>
                             <td class="bg-gray" style="width:70%;"><strong>Se sugirió capacitación:</strong></td>
                             <td class="bg-gray" style="width:10%;text-align:center;"><strong>Si</strong></td>
-                            <td style="width:5%;text-align:center;">'.($info['capacitacion'] == 1 ? 'X' : '').'</td>
+                            <td style="width:5%;text-align:center;">' . ($info['capacitacion'] == 1 ? 'X' : '') . '</td>
                             <td class="bg-gray" style="width:10%;text-align:center;"><strong>No</strong></td>
-                            <td style="width:5%;text-align:center;">'.($info['capacitacion'] == 0 ? 'X' : '').'</td>
+                            <td style="width:5%;text-align:center;">' . ($info['capacitacion'] == 0 ? 'X' : '') . '</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
+    $html .= '      <table style="width:100%;" class="tb-border cell-padding">
+                        <tr>
+                            <td class="bg-gray" style="text-align:center;"><strong>No.</strong></td>
+                            <td colspan="2" class="bg-gray" style="text-align:center;"><strong>Actividades y forma a desarrollar</strong></td>
+                            <td class="bg-gray" style="text-align:center;"><strong>Técnicas e Instrumentos de Evaluación</strong></td>
+                            <td class="bg-gray" style="text-align:center;"><strong>Fecha</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center;">
+                                ' . $info['estandar'] . '<br>
+                                <a href="' . WEB_ROOT . '/files/estandares/' . $info['file_pdf'] . '" target="_blank">
+                                    Descargue el PDF para explicar las actividades
+                                </a>
+                        </tr>
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray" colspan="2"><strong>Requerimientos para el desarrollo de la Evaluación</strong></td>
@@ -125,20 +149,20 @@
                             <td style="text-align:center;width:92%;" class="bg-gray"><strong>Requerimiento</strong></td>
                         </tr>
                         '.$tb_requerimientos.'
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray" colspan="2"><strong>Criterios para obtener juicio de competente</strong></td>
                         </tr>
                         <tr>
                             <td style="text-align:right;width:15%;" class="bg-gray"><strong>Primer criterio:</strong></td>
-                            <td style="width:75%;">La suma total del peso relativo a los reactivos del IEC que se aplique sea igual o mayor a: <strong>00.00 (depende del estándar)</strong></td>
+                            <td style="width:75%;">La suma total del peso relativo a los reactivos del IEC que se aplique sea igual o mayor a: <strong>' . $info['peso'] . '</strong></td>
                         </tr>
                         <tr>
                             <td style="text-align:right;width:18%;" class="bg-gray"><strong>Segundo criterio:</strong></td>
                             <td style="width:72%;">Existe al menos un reactivo cumplido para cada criterio de evaluación, aplica para reactivos de producto, desempeño, actitud/habito/valor</strong></td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray" colspan="3"><strong>Acuerdo para el desarrollo de la Evaluación</strong></td>
@@ -153,7 +177,7 @@
                             <td style="text-align:center;">'.$info['fecha_desarrollo'].'</td>
                             <td style="text-align:center;">'.$info['horario_desarrollo'].'</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray" colspan="3"><strong>Acuerdo para la presentación de los resultados de la evaluación</strong></td>
@@ -168,7 +192,7 @@
                             <td style="text-align:center;">'.$info['fecha_resultados'].'</td>
                             <td style="text-align:center;">'.$info['horario_resultados'].'</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%">
                         <tr>
                             <td>
@@ -181,7 +205,7 @@
                                 </ul>
                             </td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;width:10%;" class="bg-gray">
@@ -192,45 +216,30 @@
                                 El Certificado de Competencia será pagado previo al trámite del mismo, si y solo si, después de la evaluación y la emisión del juicio resulta Competente.
                             </td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;">
                         <tr>
-                            <td style="padding-left:35px;width:50%;text-align:center;font-size:12px;">
-                                '.$info['firma_personal'].'<br>
-                                '.strtoupper($info['evaluador']).'
-                            </td>
-                            <td style="padding-left:35px;width:50%;text-align:center;font-size:14px;">
-                                '.$info['firma'].'<br>
-                                '.strtoupper($info['candidato']).'
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:center;">
+                            <td style="padding-left:35px;width:50%;text-align:center;font-size:11pt;">
+                                ' . $info['firma_personal'] . '<br>
+                                ' . mb_strtoupper($info['evaluador']) . '<br>
                                 <strong>Nombre y Firma del Evaluador</strong>
                             </td>
-                            <td style="text-align:center;">
+                            <td style="padding-left:35px;width:50%;text-align:center;font-size:11pt;">
+                                ' . $info['firma'].'<br>
+                                ' . mb_strtoupper($info['candidato']) . '<br>
                                 <strong>Nombre y Firma del Candidato</strong>
                             </td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '  </body>
             </html>';
 	// echo $html;
 	// exit;
-	# Instanciamos un objeto de la clase DOMPDF.
-	$mipdf = new DOMPDF();
-	 
-	# Definimos el tamaño y orientación del papel que queremos.
-	# O por defecto cogerá el que está en el fichero de configuración.
+    # Instanciamos un objeto de la clase DOMPDF.
+	$mipdf = new DOMPDF($options);
 	$mipdf->setPaper("A4", "portrait");
-	 
-	# Cargamos el contenido HTML.
 	$mipdf->loadHtml($html);
-	 
-	# Renderizamos el documento PDF.
 	$mipdf->render();
-	 
-	# Enviamos el fichero PDF al navegador.
 	$mipdf->stream('cedula.pdf',array('Attachment' => 0));
 			
 

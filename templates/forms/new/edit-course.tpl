@@ -18,7 +18,18 @@
                  <input type="text" name="nombre" id="nombre"  class="form-control" value="{$post.name}"/>
             </div>
         </div>
+		<div class="form-group">
+            <label class="col-md-3 control-label">Peso Relativo (Primer Criterio):</label>
+            <div class="col-md-8">
+                 <input type="text" name="peso" id="peso"  class="form-control" value="{$post.peso}"/>
+            </div>
+        </div>
         <div class="form-group">
+            {if $file_exists}
+                <div class="col-md-12 text-center">
+                    <small style="color: red;">Si desea reemplazar el archivo, seleccione uno nuevo, en caso contrario deje el campo vacío.</small>
+                </div>
+            {/if}
             <label class="col-md-3 control-label">Estandar (PDF):</label>
             <div class="col-md-8" >
 				<div style="float:left">

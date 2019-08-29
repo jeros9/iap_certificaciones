@@ -49,7 +49,10 @@
                             background-color: #b2b2b2;
                         }
                         @page {
-                            margin: 70px 35px;
+                            margin-top: 70px;
+                            margin-bottom: 55px;
+                            margin-left: 35px;
+                            margin-right: 35px;
                         }            
                         footer {
                             position: fixed; 
@@ -58,16 +61,22 @@
                             right: 0px;
                             height: 80px;
                         }
+                        body {
+                            font-size: 10pt;
+                        }
+                        table {
+                            page-break-inside: avoid !important;
+                        }
                     </style>
                 </head>
                 <body>" . $footer;
 	$html .= '      <table style="width:100%;">
                         <tr>
                             <td style="text-align:right;padding-right:25px;">
-                                <img src="'.DOC_ROOT.'/images/logoconocer.png" width="150px" >
+                                <img src="' . DOC_ROOT . '/images/logoconocer.png" width="150px" >
                             </td>
                             <td style="text-align:left;padding-left:25px;">
-                                <img src="'.DOC_ROOT.'/images/logo_correo.jpg" width="150px" >
+                                <img src="' . DOC_ROOT . '/images/logo_correo.jpg" width="150px" >
                             </td>
                         </tr>
                         <tr>
@@ -79,7 +88,7 @@
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Evaluador:</strong></td>
-                            <td>'.$info['evaluador'].'</td>
+                            <td>' . $info['clave_conocer'] . ' ' . mb_strtoupper($info['evaluador']) . '</td>
                         </tr>
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Clave de la ECE:</strong></td>
@@ -87,17 +96,17 @@
                         </tr>
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Candidato:</strong></td>
-                            <td>'.$info['candidato'].'</td>
+                            <td>' . mb_strtoupper($info['candidato']) . '</td>
                         </tr>
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Estándar de Competencia:</strong></td>
-                            <td>'.$info['estandar'].'</td>
+                            <td>' . $info['estandar'] . '</td>
                         </tr>
                         <tr>
                             <td style="text-align:right;" class="bg-gray"><strong>Fecha:</strong></td>
-                            <td>'.$info['fecha'].'</td>
+                            <td>' . $info['fecha'] . '</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray" colspan="2"><strong>RESULTADO DE LA EVALUACIÓN</strong></td>
@@ -118,7 +127,7 @@
                             <td style="text-align:right;" class="bg-gray"><strong>Recomendaciones:</strong></td>
                             <td>'.$info['recomendaciones'].'</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:center;" class="bg-gray"><strong>JUICIO DE EVALUACIÓN</strong></td>
@@ -126,7 +135,7 @@
                         <tr>
                             <td>'.$info['juicio_evaluacion'].'</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;">
                         <tr>
                             <td style="text-align:center;padding-right:35px;width:50%;" class="bg-gray">
@@ -140,27 +149,21 @@
                             <td></td>
                             <td><small>Estoy de acuerdo con el juicio de evaluación y satisfecho con los comentarios emitidos.</small></td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;">
                         <tr>
-                            <td style="padding-left:35px;width:50%;text-align:center;font-size:12px;">
-                                '.$info['firma_personal'].'<br>
-                                '.$info['evaluador'].'
-                            </td>
-                            <td style="padding-left:35px;width:50%;text-align:center;font-size:14px;">
-                                '.$info['firma'].'<br>
-                                '.$info['candidato'].'
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:center;">
+                            <td style="padding-left:35px;width:50%;text-align:center;font-size:11pt;">
+                                ' . $info['firma_personal'] . '<br>
+                                ' . mb_strtoupper($info['evaluador']) . '<br>
                                 <strong>Nombre y Firma</strong>
                             </td>
-                            <td style="text-align:center;">
+                            <td style="padding-left:35px;width:50%;text-align:center;font-size:11pt;">
+                                ' . $info['firma'] . '<br>
+                                ' . mb_strtoupper($info['candidato']) . '<br>
                                 <strong>Nombre y Firma</strong>
                             </td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;">
                         <tr class="bg-gray">
                             <td style="text-align:center;width:10%;">
@@ -173,7 +176,7 @@
                                 </ul>
                             </td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '      <table style="width:100%;" class="tb-border cell-padding">
                         <tr>
                             <td style="text-align:right;" class="bg-gray">
@@ -181,25 +184,16 @@
                             </td>
                             <td>'.$info['observaciones'].'</td>
                         </tr>
-                    </table><br><br>';
+                    </table><br>';
     $html .= '  </body>
             </html>';
 	// echo $html;
 	// exit;
 	# Instanciamos un objeto de la clase DOMPDF.
 	$mipdf = new DOMPDF();
-	 
-	# Definimos el tamaño y orientación del papel que queremos.
-	# O por defecto cogerá el que está en el fichero de configuración.
 	$mipdf->setPaper("A4", "portrait");
-	 
-	# Cargamos el contenido HTML.
 	$mipdf->loadHtml($html);
-	 
-	# Renderizamos el documento PDF.
 	$mipdf->render();
-	 
-	# Enviamos el fichero PDF al navegador.
 	$mipdf->stream('cedula.pdf',array('Attachment' => 0));
 			
 

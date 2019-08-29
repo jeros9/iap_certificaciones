@@ -220,7 +220,10 @@ class Planes extends Main
 						pl.subjectId,
 						pl.fecha_desarrollo AS fecha_desarrollo_ymd,
 						pl.fecha_resultados AS fecha_resultados_ymd,
-						pl.planId
+						pl.planId,
+						s.file_pdf, 
+						s.peso,
+						p.clave_conocer
                     FROM planes pl 
                         INNER JOIN personal p
                             ON p.personalId = pl.personalId

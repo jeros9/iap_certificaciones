@@ -46,6 +46,7 @@
 		// $course->setListar($_POST["listar"]);
 		// $course->setTipoCuatri($_POST["tipoCuatri"]);
 		$course->setName($_POST["nombre"]);
+		$course->setPeso($_POST['peso']);
 		// $course->setNumero($_POST["numero"]);
 
 		$course->Open();
