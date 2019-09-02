@@ -27,7 +27,7 @@
                             Instituto de Administración Pública del Estado de Chiapas, A.C.<br>
                             Libramiento Norte Poniente No. 2718, Fracc Ladera de la Loma, C.P. 29026<br>
                             Tuxtla Gutiérrez, Chiapas; Teléfonos: (961) 12 515 08, 12 515 09, 12 51510, ext 107<br>
-                            <a href="http://www.iapchiapas.edu.mx" target="_blank">www.iapchiapas.org.mx</a>, <a href="mailto:redconocer@iapchiapas.org.mx" target="_top">redconocer@iapchiapas.org.mx</a>
+                            <a href="http://www.iapchiapas.edu.mx" target="_blank">www.iapchiapas.edu.mx</a>, <a href="mailto:redconocer@iapchiapas.edu.mx" target="_top">redconocer@iapchiapas.edu.mx</a>
                         </td>
                     </tr>
                 </table></footer>';
@@ -91,7 +91,7 @@
                             <td>' . $info['clave_conocer'] . ' ' . mb_strtoupper($info['evaluador']) . '</td>
                         </tr>
                         <tr>
-                            <td style="text-align:right;" class="bg-gray"><strong>Clave de la ECE:</strong></td>
+                            <td style="text-align:right;" class="bg-gray"><strong>Centro de Evaluación:</strong></td>
                             <td>ECE213-15 Instituto de Administración Pública del Estado de Chiapas</td>
                         </tr>
                         <tr>
