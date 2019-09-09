@@ -93,6 +93,7 @@ $student->setUserId($_GET["id"]);
 	<table>
 		<tr>
 			<td colspan="2">
+				<h2>C. ' . $info['names'] . ' ' . $info['lastNamePaterno'] . ' ' . $info['lastNameMaterno'] . '</h2>
 				<h3>
 					Tu registro se complet&oacute; de manera satisfactoria. Tus datos de acceso son los siguientes.
 				</h3>

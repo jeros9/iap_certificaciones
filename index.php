@@ -202,6 +202,7 @@ $pages = array(
     'usuarios-doc',
 	'usuarios-sol',
 	'reporte-evaluadores',
+	'reporte-certificaciones',
 
 	//dictamenes
 	'dictum'

@@ -1785,5 +1785,26 @@
 				return $cal;
 		
 		}
+
+		function reporteMunicipios($courseId)
+		{
+			$sql = "SELECT
+						mn.nombre,
+						COUNT(u.userId) AS cantidad
+					FROM 
+						user AS u
+					LEFT JOIN user_subject AS us ON us.alumnoId = u.userId
+					LEFT JOIN course AS cs ON cs.courseId = us.courseId
+					LEFT JOIN subject AS sb ON sb.subjectId = cs.subjectId
+					LEFT JOIN municipio AS mn ON mn.municipioId = u.ciudadt
+					WHERE 
+						us.courseId = " . $courseId . "
+					AND
+						type = 'student' GROUP BY u.ciudadt 
+					ORDER BY mn.nombre";
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetResult();
+			return $result;
+		}
 }	
 ?>

@@ -148,6 +148,21 @@ switch($_POST["type"])
 		$smarty->assign("result", $result);
 		$smarty->display(DOC_ROOT.'/templates/lists/new/reporte-evaluadores.tpl');
 	break;
+
+	case 'buscarSolicitudCer':
+		$courseId   = $_POST['grupos'];
+		$municipios = $course->reporteMunicipios($courseId);
+		$total_municipios = count($municipios);
+		$total_personas = 0;
+		foreach($municipios as $item)
+		{
+			$total_personas += $item['cantidad'];
+		}
+		$smarty->assign('municipios', $municipios);
+		$smarty->assign('total_municipios', $total_municipios);
+		$smarty->assign('total_personas', $total_personas);
+		$smarty->display(DOC_ROOT . '/templates/lists/new/reporte-certificaciones.tpl');
+		break;
 		
 }
 ?>

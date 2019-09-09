@@ -26,7 +26,6 @@
                     </select></td>
 					<td>Tipo de Solicitante:<br>
 					<select id="tipoSolicitante" name="tipoSolicitante" style="width:250px"   class="form-control">
-                        <option value="0">Selecciona....</option>
                         {foreach from=$lstSolicitante item=pais}
                             <option value="{$pais.tiposolicitanteId}">{$pais.nombre} </option>
                         {/foreach}
@@ -34,7 +33,7 @@
 					</td>
 					<td>Certificación:<br>
 					
-					  <select name='curricula' id="curricula" style="width:400px" class="form-control"><option value="0">Selecciona....</option>
+					  <select name='curricula' id="curricula" style="width:400px" class="form-control">
                         {foreach from=$activeCourses item=course}
                             <option value="{$course.courseId}">{$course.name} - {$course.group}</option>
                         {/foreach}

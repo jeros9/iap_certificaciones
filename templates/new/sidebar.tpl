@@ -169,6 +169,13 @@
 					</a>
                  </li>
 				 {/if}
+				 {if  $User.positionId == 1}
+				 <li class="nav-item  ">
+					<a href="{$WEB_ROOT}/reporte-certificaciones" class="nav-link ">
+						<span class="title">Certificaciones</span>
+					</a>
+                 </li>
+				 {/if}
 			</ul>
 		</li>
         {/if}

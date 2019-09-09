@@ -520,9 +520,54 @@ class Student extends User
 		
 		if($total > 0)
 		{
-			$this->Util()->setError(10028, "error", "Este e-mail ya ha sido registrado previamente");
-			$this->Util()->PrintErrors();
-			return false;
+			$this->Util()->DB()->setQuery("
+							SELECT 
+								userId 
+							FROM 
+								user 
+							WHERE 
+								email = '".$this->getEmail()."'
+							"
+						);
+			$studentId = $this->Util()->DB()->GetSingle();
+			$sql = "SELECT 
+					count(*) 
+				FROM 
+					user_subject
+				WHERE
+					alumnoId  = ".$studentId." and courseId = ".$_POST["curricula"]."";
+	
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetSingle();
+			
+			if($result >= 1)
+			{
+				$this->Util()->setError(10028, "error", "Este e-mail ya ha sido registrado previamente");
+				$this->Util()->PrintErrors();
+				return false;
+			}
+			else
+			{
+				$sql = "INSERT INTO 
+						user_subject 
+						(						
+							alumnoId, 
+							courseId,
+							status
+						)
+					VALUES 
+						(						
+							".$studentId.",
+							".$_POST["curricula"].",
+							'activo'
+						)";
+									
+				$this->Util()->DB()->setQuery($sql);
+				$lastId = $this->Util()->DB()->InsertData();
+				$this->Util()->setError(10028, "complete", "Registro Exitoso");
+				$this->Util()->PrintErrors();
+				return true;
+			}
 		}
                    //Validando contraseña de minimo 6 caracteres
 		// if(strlen($this->getPassword()) < 6)
