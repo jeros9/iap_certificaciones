@@ -2,6 +2,7 @@
 	<thead>
     	<tr>
 			<th width="">Municipio</th>	 
+			<th width="">Número de Control</th>	 
 			<th width="">Nombre</th>	 
 			<th width="">Certificacion</th>	 
 			<th width="">Correo</th>		 
@@ -18,6 +19,7 @@
     	{foreach from=$result item=item}
     	<tr>
 			<td align="center">{$item.municipio}</td>
+			<td align="center">{$item.controlNumber}</td>
 			<td align="center">{$item.names} {$item.lastNamePaterno} {$item.lastNameMaterno}</td>
 			<td align="center">{$item.certificacion}</td>
 			<td align="center">{$item.email}</td>

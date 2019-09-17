@@ -47,5 +47,28 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table width="100%" class="tblGral table table-bordered table-striped table-condensed flip-content">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Número de Control</th>	  
+                            <th class="text-center">Nombre</th>	  
+                            <th class="text-center">Municipio</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach from=$personas item=item}
+                            <tr>
+                                <td align="center">{$item.controlNumber}</td>
+                                <td align="center">{$item.nombre}</td>
+                                <td align="center">{$item.municipio}</td>
+                            </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

@@ -152,6 +152,7 @@ switch($_POST["type"])
 	case 'buscarSolicitudCer':
 		$courseId   = $_POST['grupos'];
 		$municipios = $course->reporteMunicipios($courseId);
+		$personas   = $course->reporteMunicipiosPersonas($courseId);
 		$total_municipios = count($municipios);
 		$total_personas = 0;
 		foreach($municipios as $item)
@@ -159,6 +160,7 @@ switch($_POST["type"])
 			$total_personas += $item['cantidad'];
 		}
 		$smarty->assign('municipios', $municipios);
+		$smarty->assign('personas', $personas);
 		$smarty->assign('total_municipios', $total_municipios);
 		$smarty->assign('total_personas', $total_personas);
 		$smarty->display(DOC_ROOT . '/templates/lists/new/reporte-certificaciones.tpl');

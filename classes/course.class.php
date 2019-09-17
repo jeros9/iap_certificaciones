@@ -1806,5 +1806,27 @@
 			$result = $this->Util()->DB()->GetResult();
 			return $result;
 		}
+
+		function reporteMunicipiosPersonas($courseId)
+		{
+			$sql = "SELECT
+						u.controlNumber,
+						CONCAT_WS(' ', u.lastNamePaterno, u.lastNameMaterno, u.names) AS nombre,
+						mn.nombre AS municipio
+					FROM 
+						user AS u
+					LEFT JOIN user_subject AS us ON us.alumnoId = u.userId
+					LEFT JOIN course AS cs ON cs.courseId = us.courseId
+					LEFT JOIN subject AS sb ON sb.subjectId = cs.subjectId
+					LEFT JOIN municipio AS mn ON mn.municipioId = u.ciudadt
+					WHERE 
+						us.courseId = " . $courseId . "
+					AND
+						type = 'student'
+					ORDER BY u.lastNamePaterno, u.lastNameMaterno, u.names";
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetResult();
+			return $result;
+		}
 }	
 ?>
