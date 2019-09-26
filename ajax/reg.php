@@ -38,6 +38,16 @@
 		$filename = $info['controlNumber'] . '.jpg';
 		$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
 	}
+	if(!$has_photo)
+	{
+		$filename = $info['controlNumber'] . '.JPG';
+		$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+	}
+	if(!$has_photo)
+	{
+		$filename = $info['controlNumber'] . '.JPG';
+		$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+	}
 	if($has_photo)
 		$foto = "<img src='" . DOC_ROOT . "/alumnos/fotos/" . $filename . "' width='90px' />";
 	

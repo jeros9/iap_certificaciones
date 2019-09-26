@@ -330,6 +330,16 @@ switch($_POST["type"])
 			$filename = $data_student['controlNumber'] . '.jpg';
 			$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
 		}
+		if(!$has_photo)
+		{
+			$filename = $info['controlNumber'] . '.JPG';
+			$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+		}
+		if(!$has_photo)
+		{
+			$filename = $info['controlNumber'] . '.JPG';
+			$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+		}
 		$smarty->assign('data_student', $data_student);
 		$smarty->assign('has_photo', $has_photo);
 		$smarty->assign('filename', $filename);
