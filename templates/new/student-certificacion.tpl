@@ -83,7 +83,7 @@
 					<i class="material-icons">ballot</i>	
 					</a>	
 					<!--<a href="{$WEB_ROOT}/files/solicitudes/{$item.userId}_{$item.courseId}.pdf"   target='_blank' title='REGISTRO'>	-->
-					<a href="{$WEB_ROOT}/ajax/reg.php?id={$item.userId}&courseId={$item.subjectId}"   target='_blank' title='Ficha de Registro'>
+					<a href="{$WEB_ROOT}/ajax/reg.php?id={$item.userId}&courseId={$item.courseId}"   target='_blank' title='Ficha de Registro'>
 					<i class="material-icons">description</i>
 				
 					<a href="{$WEB_ROOT}/ajax/ine.php?id={$item.userId}"   target='_blank' title='INE'>	

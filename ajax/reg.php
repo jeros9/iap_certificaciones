@@ -30,10 +30,16 @@
 	// echo "<pre>"; print_r($firma );
 	// exit;
 	
-	if($info["rutaFoto"]=="")
-		$foto = "<img src='".DOC_ROOT."/alumnos/no_foto.JPG' style='width:90%; '>";
-	else
-		$foto = "<img src='".DOC_ROOT."/alumnos/".$info["rutaFoto"]."' style ='width:90;'  >";
+	$filename = strtoupper(trim($info['curp'])) . '.jpg';
+	$has_photo = false;
+	$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+	if(!$has_photo)
+	{
+		$filename = $info['controlNumber'] . '.jpg';
+		$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+	}
+	if($has_photo)
+		$foto = "<img src='" . DOC_ROOT . "/alumnos/fotos/" . $filename . " width='90%' />";
 	
 	// $test->setActivityId($_GET["cId"]);
 	// $myTest = $test->Enumerate($verResultado,$_GET['id']);
