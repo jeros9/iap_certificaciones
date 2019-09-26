@@ -39,7 +39,7 @@
 		$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
 	}
 	if($has_photo)
-		$foto = "<img src='" . DOC_ROOT . "/alumnos/fotos/" . $filename . " width='90%' />";
+		$foto = "<img src='" . DOC_ROOT . "/alumnos/fotos/" . $filename . "' width='90px' />";
 	
 	// $test->setActivityId($_GET["cId"]);
 	// $myTest = $test->Enumerate($verResultado,$_GET['id']);
