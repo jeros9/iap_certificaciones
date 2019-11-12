@@ -20,6 +20,8 @@
 	$info = $student->GetInfo();
 	
 	$firma = $student->extraeFirma($info["userId"],1,'course',$_GET['courseId']); 
+	if(isset($_GET['courseId']))
+		$infoCertificacion = $student->infoCertificacion($_GET["courseId"]);
 	// echo "<pre>"; print_r($firma);
 	// exit;
 	$html .= "
@@ -68,7 +70,7 @@
 	<tr>
 		<td colspan=2 style="text-align:right; ">
 			Tuxtla Gutiérrez, Chiapas<br>
-			Fecha: '.$firma["fecha"].'
+			Fecha: '.$infoCertificacion['initialDate'].'
 			<br>
 			<br>
 			<br>

@@ -3654,7 +3654,9 @@ class Student extends User
 		
 		$sql = "
 			SELECT 
-				s.name as certificacion
+				s.name as certificacion,
+				c.initialDate,
+				c.finalDate
 			FROM 
 				user_subject as u
 			left join course as c on c.courseId = u.courseId 

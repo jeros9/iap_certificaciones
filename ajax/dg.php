@@ -26,10 +26,14 @@
 	
 	$resEstadoisticas = $test->estadisticas($_GET["cId"],$_GET['id']);
 	
-	$firma = $student->extraeFirma($_GET['id'],2);
+	//$firma = $student->extraeFirma($_GET['id'],2);
+	$firma = $student->extraeFirma($_GET['id'],1,'course',$_GET['courseId']); 
 	// echo "<pre>"; print_r($firma );
 	// exit;
 	$subject_info = $test->subjectInfoFromTest($_GET['id']);
+
+	if(isset($_GET['courseId']))
+		$infoCertificacion = $student->infoCertificacion($_GET["courseId"]);
 	
 	$html .= "
 	<html>
@@ -97,7 +101,7 @@
 		<tr>
 			<td colspan="2">
 				<p><strong>Nombre de la Certificación:</strong> ' . $subject_info['name'] . '</p>
-				<p><strong>Fecha de Evaluación:</strong> ' . $subject_info['fecha_termino'] . '</p>
+				<p><strong>Fecha de Evaluación:</strong> ' . $infoCertificacion['initialDate'] . '</p>
 			</td>
 		</tr>
 	</table>

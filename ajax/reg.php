@@ -117,7 +117,7 @@
 					<td>Estandar de Competencia:</td>
 					<td>".$infoCertificacion["certificacion"]."</td>
 					<td  style='background:#c4e9b9'>Fecha:</td>
-					<td>".$fj[0]."</td>
+					<td>".$infoCertificacion['initialDate']."</td>
 				</tr>
 			</table>
 			
