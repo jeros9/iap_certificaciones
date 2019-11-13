@@ -102,6 +102,7 @@
 			<td colspan="2">
 				<p><strong>Nombre de la Certificación:</strong> ' . $subject_info['name'] . '</p>
 				<p><strong>Fecha de Evaluación:</strong> ' . $infoCertificacion['initialDate'] . '</p>
+				<p><strong>Nombre del Candidato:</strong> ' . strtoupper($info["names"].' '.$info["lastNamePaterno"].'  '.$info["lastNameMaterno"]) . '</p>
 			</td>
 		</tr>
 	</table>
