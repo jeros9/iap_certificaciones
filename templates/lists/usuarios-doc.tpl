@@ -11,8 +11,6 @@
     <th width="">No. Control</th>
     <th width="">Correo</th>
 	 <th width="">Num. Certificaciones</th>
-	 <th width="">Evaluacion</th>
-	 <th width="">Elementos</th>
     <th width="">Acciones</th>
    
 </tr>
@@ -29,8 +27,6 @@
         <td align="center">{$item.controlNumber}</td>
         <td align="center">{$item.email}</td>
         <td align="center">{$item.numCertificaciones}</td>
-        <td align="center">{if $item.aprobado eq 'si'} Competente{else if $item.aprobado eq 'no'} No Competente {else} Sin asignar{/if}</td>
-        <td align="center">{$item.countRepositorio}/4</td>
         <td align="center">   
 	
 		{if $tipoUs ne "Docente"}

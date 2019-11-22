@@ -1735,6 +1735,8 @@ class Student extends User
 		
 		$resPage = $this->Util->HandlePagesAjax($this->pages, $total , '');		
 		$sqlLim = "LIMIT ".$resPage['pages']['start'].", ".$resPage['pages']['items_per_page'];
+		if($_POST['condPhoto']  == 1 || $_POST['condPhoto'] == 2)
+			$sqlLim = '';
 		
 
 		 $sql = "
@@ -1742,7 +1744,12 @@ class Student extends User
 					*,
 					sb.subjectId,
 					sb.name as certificacion,
-					(select count(*) from repositorio as r where r.userId = u.userId and r.subjectId = sb.subjectId) as countRepositorio,
+					(
+						(if((select count(*) from repositorio as r where r.userId = u.userId and r.subjectId = sb.subjectId and r.tipodocumentoId = 2) > 0, 1, 0)) +
+						(if((select count(*) from repositorio as r where r.userId = u.userId and r.subjectId = sb.subjectId and r.tipodocumentoId = 4) > 0, 1, 0)) +
+						(if((select count(*) from cedulas as ced where ced.userId = u.userId and ced.subjectId = sb.subjectId) > 0, 1, 0)) + 
+						(if((select count(*) from planes as pla where pla.userId = u.userId and pla.subjectId = sb.subjectId) > 0, 1, 0))
+					) as countRepositorio,
 					(select count(*) from user_subject usub where usub.alumnoId = us.alumnoId) as numCertificaciones,
 					(select count(*) from usuario_personal spusb where spusb.usuarioId = us.alumnoId ) as numEvaluadores
 				FROM 
@@ -1763,6 +1770,42 @@ class Student extends User
 
 		$this->Util()->DB()->setQuery($sql);
 		$result7 = $this->Util()->DB()->GetResult();
+
+		foreach($result7 as $key => $item)
+		{
+			$filename = strtoupper(trim($item['curp'])) . '.jpg';
+			$has_photo = false;
+			$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+			if(!$has_photo)
+			{
+				$filename = $item['controlNumber'] . '.jpg';
+				$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+			}
+			if(!$has_photo)
+			{
+				$filename = $item['controlNumber'] . '.JPG';
+				$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+			}
+			if(!$has_photo)
+			{
+				$filename = $item['controlNumber'] . '.JPG';
+				$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+			}
+			if(!$has_photo)
+			{
+				$filename = 'S/F';
+			}
+			$result7[$key]['photo_url'] = $filename; 
+			if($_POST['condPhoto'] == 1 && !$has_photo)
+				unset($result7[$key]);
+			if($_POST['condPhoto'] == 2 && $has_photo)
+				unset($result7[$key]);
+		}
+		if($_POST['condPhoto'] == 1 || $_POST['condPhoto'] == 2)
+		{
+			$total = count($result7);
+			$resPage = $this->Util->HandlePagesAjax(0, $total , '', $total);
+		}
 		
 		
 		
@@ -3534,8 +3577,14 @@ class Student extends User
 				c.numero,
 				at.activityId,
 				c.group,
-				s.subjectId
-				
+				s.subjectId,
+				u.aprobado,
+				(
+					(if((select count(*) from repositorio as r where r.userId = u.alumnoId and r.subjectId = s.subjectId and r.tipodocumentoId = 2) > 0, 1, 0)) +
+					(if((select count(*) from repositorio as r where r.userId = u.alumnoId and r.subjectId = s.subjectId and r.tipodocumentoId = 4) > 0, 1, 0)) +
+					(if((select count(*) from cedulas as ced where ced.userId = u.alumnoId and ced.subjectId = s.subjectId) > 0, 1, 0)) + 
+					(if((select count(*) from planes as pla where pla.userId = u.alumnoId and pla.subjectId = s.subjectId) > 0, 1, 0))
+				) as countRepositorio
 			FROM 
 				user_subject as u
 			left join course as c on c.courseId = u.courseId 

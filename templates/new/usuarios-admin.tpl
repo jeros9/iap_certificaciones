@@ -39,43 +39,63 @@
 	
 	 
     <div class="portlet-body" > 
-	<form id="frmBuscar">
-	<div style="display:-webkit-inline-box">
-	
-	<input type="hidden" name="id" id="id" value="{$id}">
-	<input type="hidden" name="pas" id="pas" value="usuarios-admin">
-	Nombre:
-	<input type="text" name="nombre" id="nombre" class="form-control" style="width:150px">
-	Apellido Paterno:
-	<input type="text" name="apellidoP" id="apellidoP" class="form-control" style="width:150px">
-	Apellido Materno:
-	<input type="text" name="apellidoM" id="apellidoM" class="form-control" style="width:150px">
-
-	
-	{if $tipoUs != "Docente"}
-	Certificaciones
-	 <select name="certificacionId" class="form-control" style="width:100px" onChange="buscarGrupos()">
-		<option></option>
-		{foreach from=$lstCertificaciones item=item key=key}
-		<option value="{$item.subjectId}">{$item.name}</option>
-		{/foreach}
-	 </select>
-	 Evaluador
-	 <select class="form-control" style="width:100px" name="evaluado">
-		<option value="">Todos</option>
-		<option>si</option>
-		<option>no</option>
-	 </select>
-
-
-	 Grupos:
-	 <div id="divGrupos">
-	 </div>
-	 {/if}
-	 </div>
+	<form id="frmBuscar" class="form-inline">
+		<div class="row">
+			<input type="hidden" name="id" id="id" value="{$id}">
+			<input type="hidden" name="pas" id="pas" value="usuarios-admin">
+			<div class="form-group col-md-3">
+				<label>Nombre:</label><br>
+				<input type="text" name="nombre" id="nombre" class="form-control" style="width:150px">
+			</div>
+			<div class="form-group col-md-3">
+				<label>Apellido Paterno:</label><br>
+				<input type="text" name="apellidoP" id="apellidoP" class="form-control" style="width:150px">
+			</div>
+			<div class="form-group col-md-3">
+				<label>Apellido Materno:</label><br>
+				<input type="text" name="apellidoM" id="apellidoM" class="form-control" style="width:150px">
+			</div>
+			<div class="form-group col-md-3">
+				<label>Fotografía</label><br>
+				<select class="form-control" id="condPhoto" name="condPhoto">
+					<option value="0">Todos</option>
+					<option value="1">Con Fotografía</option>
+					<option value="2">Sin Fotografía</option>
+				</select>
+			</div>
+		</div>
+		<div style="margin: 15px 0;">
+			{if $tipoUs != "Docente"}
+				<div class="form-group col-md-4">
+					<label>Certificaciones</label><br>
+					<select name="certificacionId" class="form-control" style="width:100px" onChange="buscarGrupos()">
+						<option></option>
+						{foreach from=$lstCertificaciones item=item key=key}
+						<option value="{$item.subjectId}">{$item.name}</option>
+						{/foreach}
+					</select>
+				</div>
+				<div class="form-group col-md-4">
+					<label>Evaluador</label><br>
+					<select class="form-control" style="width:100px" name="evaluado">
+						<option value="">Todos</option>
+						<option>si</option>
+						<option>no</option>
+					</select>
+				</div>
+				<div class="form-group col-md-4">
+					<label>Grupos:</label><br>
+					<div id="divGrupos"></div>
+				</div>
+			{/if}
+		</div>
 	 </form>
-	   <button type="submit" class="btn green submitForm" onClick="buscarCertificacion()">Buscar</button>
-        <div id="tblContent">{include file="lists/usuarios-admin.tpl"}</div>
+	<div class="row text-center">
+		<div class="col-md-12" style="padding: 15px 0;">
+			<button type="submit" class="btn green submitForm" onClick="buscarCertificacion()">Buscar</button>
+		</div>
+	</div>
+    <div id="tblContent">{include file="lists/usuarios-admin.tpl"}</div>
 
     </div>
         

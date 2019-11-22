@@ -135,11 +135,11 @@
                         <span class="title">Solicitudes</span>
                     </a>
                 </li>-->
-				<li class="nav-item  ">
+				<!--li class="nav-item  ">
                     <a href="{$WEB_ROOT}/usuarios-sol" class="nav-link ">
                         <span class="title">Solicitudes</span>
                     </a>
-                </li>
+                </li-->
 				<li class="nav-item  ">
                     <a href="{$WEB_ROOT}/usuarios-admin" class="nav-link ">
                         <span class="title">Usuarios</span>

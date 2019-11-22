@@ -16,6 +16,8 @@
 						<th width="" height="28">Nombre</th>		
 						<th width="" height="28">Grupo</th>			
 						<th width="" height="28">Municipio</th>	
+						<th width="" height="28">Evaluación</th>	
+						<th width="" height="28">Elementos</th>	
 						{if $cId ne 'usuarios-admin'}						
 						<th width="" height="28">Evaluador</th>	
 								
@@ -34,6 +36,8 @@
 					<td align="center" class="id">{$item.certificacion}</td>       
 					<td align="center" class="id">{$item.group}</td>            
 					<td align="center" class="id">{$item.municipio}</td>   
+					<td align="center" class="id">{if $item.aprobado eq 'si'} Competente{else if $item.aprobado eq 'no'} No Competente {else} Sin asignar{/if}</td>   
+					<td align="center" class="id">{$item.countRepositorio}/4</td>   
 					{if $cId ne 'usuarios-admin'}						
 					<td align="center" class="id">{$item.suEvaluador.name} {$item.suEvaluador.lastname_paterno} {$item.suEvaluador.lastname_materno}</td>
 										

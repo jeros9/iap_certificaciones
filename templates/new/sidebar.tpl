@@ -111,11 +111,11 @@
             </a>
 			<ul class="sub-menu">
 			{if  $User.positionId == 1 || $AccessMod[40] == 1}
-				<li class="nav-item  ">
+				<!--li class="nav-item  ">
                     <a href="{$WEB_ROOT}/usuarios-sol" class="nav-link ">
                         <span class="title">Solicitudes</span>
                     </a>
-                </li>
+                </li-->
 			{/if}
 			{if  $User.positionId == 1 || $AccessMod[4] == 1}
 				<li class="nav-item  ">

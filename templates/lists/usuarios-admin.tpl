@@ -9,6 +9,7 @@
     <th width="">Apellido Materno</th>
     <th width="">Nombre</th>
     <th width="">No. Control</th>
+    <th width="">Fotografía</th>
     <th width="">Correo</th>
     <th width="">Password</th>
 	 <th width="">Num. Certificaciones</th>
@@ -27,6 +28,13 @@
         <td align="center">{$item.lastNameMaterno|upper}</td>
          <td align="center">{$item.names|upper}</td>
         <td align="center">{$item.controlNumber}</td>
+        <td align="center">
+			{if $item.photo_url != 'S/F'}
+				<img src="{$WEB_ROOT}/alumnos/fotos/{$item.photo_url}" width="80" />
+			{else}	
+				{$item.photo_url}
+			{/if}
+		</td>
         <td align="center">{$item.email}</td>
         <td align="center">{$item.password}</td>
         <td align="center">{$item.numCertificaciones}</td>
