@@ -308,6 +308,9 @@
 					</td>
 				</tr>
 			</table>
+			<br><br><br><br><br><br><br><br><br><br><br>
+			<center><b>".$info["names"]." ".$info["lastNamePaterno"]." ".$info["lastNameMaterno"]."<br>
+						".$info["firma"]."</b></center>
 	  </div>
 	  
 	

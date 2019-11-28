@@ -163,7 +163,11 @@ $html .='<table style="width:100%" >
 					Respuestas Correctas:".$resEstadoisticas["countOK"]."<br>
 					Puntos Obtenidos: ".$resEstadoisticas["puntosOk"]."<br>
 					Calificación: ".$resEstadoisticas["calificacion"]."(".$resEstadoisticas["puntosOk"]."/".$resEstadoisticas["totalPuntos"].")<br>
-					Sugerencia:"; if ($resEstadoisticas["countOK"] < $resEstadoisticas["limiteAprobatorio"]) { $html .= "Se recomienda  Certificación"; }  else { $html .= "Se le sugiere llevar curso de Capacitación"; }
+					Sugerencia:"; 
+					if($resEstadoisticas["puntosOk"] > 8)
+						$html .= " Solicitar proceso de evaluación.";
+					else
+						$html .= " Se le sugiere llevar curso de capacitación.";
 	$html .= "	</b>
 	
 	<br>
