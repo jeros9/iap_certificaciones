@@ -74,7 +74,7 @@ class Student extends User
 	public function setNacionality($value)
 	{
 		$this->Util()->ValidateString($value, $max_chars=6000000000000000, $minChars = 1, "Nacionalidad");
-		$this->nacionality = $value;
+		$this->nacionality = mb_strtoupper($value);
 	}
 	
 	public function setLee($value)
@@ -91,7 +91,7 @@ class Student extends User
 	public function setDEstudios($value)
 	{
 		$this->Util()->ValidateString($value, $max_chars=6000000000000000, $minChars = 1, "studios");
-		$this->d_estudios = $value;
+		$this->d_estudios = mb_strtoupper($value);
 	}
 	public function setDiscapacidad($value)
 	{
@@ -106,7 +106,7 @@ class Student extends User
 	public function setIdiomas($value)
 	{
 		$this->Util()->ValidateString($value, $max_chars=6000000000000000, $minChars = 1, "Idiomas");
-		$this->idiomas = $value;
+		$this->idiomas = mb_strtoupper($value);
 	}
 	public function setTrabaja($value)
 	{
@@ -116,7 +116,7 @@ class Student extends User
 	public function setExperienciaLaboral($value)
 	{
 		$this->Util()->ValidateString($value, $max_chars=6000000000000000, $minChars = 1, "experiencia Laboral");
-		$this->experienciaLaboral = $value;
+		$this->experienciaLaboral = mb_strtoupper($value);
 	}
 	public function setCertificacion($value)
 	{
@@ -126,7 +126,7 @@ class Student extends User
 	public function setCertificaciones($value)
 	{
 		$this->Util()->ValidateString($value, $max_chars=6000000000000000, $minChars = 1, "Certificaciones");
-		$this->certificaciones = $value;
+		$this->certificaciones = mb_strtoupper($value);
 	}
 	public function setAnterior($value)
 	{

@@ -115,19 +115,19 @@ class User extends Main
 	public function setNames($value)
 	{
 		$this->Util()->ValidateString($value, $max_chars=60, $minChars = 1, "Nombre");
-		$this->names = $value;
+		$this->names = mb_strtoupper($value);
 	}
 	
 	public function setLastNamePaterno($value)
 	{
 		$this->Util()->ValidateString($value, $max_chars=60, $minChars = 1, "Apellido Paterno");
-		$this->lastNamePaterno = $value;
+		$this->lastNamePaterno = mb_strtoupper($value);
 	}
 	
 	public function setLastNameMaterno($value)
 	{
 		$this->Util()->ValidateString($value, $max_chars=60, $minChars = 1, "Apellido Materno");
-		$this->lastNameMaterno = $value;
+		$this->lastNameMaterno = mb_strtoupper($value);
 	}
 	/********************************************************************************/
 	public function setControlNumber()
@@ -201,21 +201,21 @@ class User extends Main
 		$this->Util()->ValidateString($value, $max_chars=255, $minChars = 1, "Calle");
 		
 		}
-		$this->street = $value;
+		$this->street = mb_strtoupper($value);
 	}
 	
 	public function setNumber($value)
 	{
 	    if($this->permiso==0)
 		$this->Util()->ValidateString($value, $max_chars=255, $minChars = 1, "Numero");
-		$this->number = $value;
+		$this->number = mb_strtoupper($value);
 	}
 	
 	public function setColony($value)
 	{
 	    if($this->permiso==0)
 		$this->Util()->ValidateString($value, $max_chars=255, $minChars = 1, "Colonia");
-		$this->colony = $value;
+		$this->colony = mb_strtoupper($value);
 	}
 	
 	public function setCity($value)
@@ -314,13 +314,13 @@ class User extends Main
 	{
 	    if($this->permiso==0)
 		$this->Util()->ValidateString($value, $max_chars=255, $minChars = 1, "CURP");
-		$this->curp = $value;
+		$this->curp = mb_strtoupper($value);
 	}	
 	
 	public function setCityBorn($value)
 	{
 	  
-		$this->cityBorn = $value;
+		$this->cityBorn = mb_strtoupper($value);
 	}
 	
 	public function setStateBorn($value)
@@ -807,7 +807,7 @@ class User extends Main
 	{
 	     if($this->permiso==0)
 		$this->Util()->ValidateString($value, $max_chars=255, $minChars = 1, "Puesto");
-		$this->workplacePosition = $value;
+		$this->workplacePosition = mb_strtoupper($value);
 	}
 	
 	public function getWorkplacePosition()
