@@ -460,7 +460,7 @@
 				
 				Cualquier duda, favor de contactarnos:<br>
 				Teléfonos: (961) 125-15-08, 125-15-09, 125-15-10 Ext. 106 o 114<br>
-				Correo: enlinea@iapchiapas.org.mx<br>
+				Correo: enlinea@iapchiapas.edu.mx<br>
 				Saludos.<br>
 				IAP-Chiapas<br>
 				<img src='".WEB_ROOT."/images/logo_correo.jpg'>

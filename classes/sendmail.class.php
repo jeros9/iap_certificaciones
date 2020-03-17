@@ -48,9 +48,12 @@ class SendMail extends Main
 			
 			if(is_array($attachment))
 			{
-				foreach($attachment as $key => $attach)
+				if(count($attachment) > 0)
 				{
-					$mail->AddAttachment($attach, $fileName[$key]);
+					foreach($attachment as $key => $attach)
+					{
+						$mail->AddAttachment($attach, $fileName[$key]);
+					}
 				}
 			}
 			$mail->Send();

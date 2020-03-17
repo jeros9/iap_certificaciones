@@ -695,15 +695,18 @@ function HandleMultipages($page,$total,$link,$items_per_page=0,$pagevar="p"){
 
 	function handle_mail_patterns($text,$values){
 	
-		$patterns = array_keys($values);
-		$patterns[] = "site_name";
-		$values["site_name"] = $GLOBALS["settings"]["site_name"];
-		foreach($patterns as $pat){
-			if($pat!="link")
-				$text = $this->hs_ereg_replace("\|".$pat."\|",$values[$pat],$text);
-			else
-				$text = $this->hs_ereg_replace("\|".$pat."\|","<a href=\"".$values[$pat]."\">".$values[$pat]."</a>",$text);
-		}//foreach
+		if(is_array($values))
+		{
+			$patterns = array_keys($values);
+			$patterns[] = "site_name";
+			$values["site_name"] = $GLOBALS["settings"]["site_name"];
+			foreach($patterns as $pat){
+				if($pat!="link")
+					$text = $this->hs_ereg_replace("\|".$pat."\|",$values[$pat],$text);
+				else
+					$text = $this->hs_ereg_replace("\|".$pat."\|","<a href=\"".$values[$pat]."\">".$values[$pat]."</a>",$text);
+			}//foreach
+		}
 
 	return $text;
 
