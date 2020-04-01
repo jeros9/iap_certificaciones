@@ -20,12 +20,31 @@ $message[1]["body"] = "
 
 $message[2]["subject"] = "Pago autorizado";
 $message[2]["body"] = "
-	El Instituto de Administraci�n P�blica del Estado de Chiapas, A. C., agradece tu pago y te informa que este ha sido autorizado. El acceso a:
+	El Instituto de Administración Pública del Estado de Chiapas, A. C., agradece tu pago y te informa que este ha sido autorizado. El acceso a:
 
 	El(la) |major| <b>|course|</b>
 
-Se encuentra activo por lo que ya puedes acceder a la curr�cula que hayas elegido.
+Se encuentra activo por lo que ya puedes acceder a la currícula que hayas elegido.
 	";
+
+
+$message[3]["subject"] = "Prueba Correo";
+$message[3]["body"] = "
+					Estimado usuario,<br>
+					De acuerdo a la evaluación realizada y al ser declarado competente, ya se encuentra disponible para su descarga el certificado digital del estándar: <b>|course|</b>  expedido por el Consejo Nacional de Normalización y Certificación de Competencias Laborales (CONOCER), con validez oficial de la SEP.<br><br>
+
+					Para descargarlo, deberá ingresar a nuestro Sistema RED CONOCER <a href='https://redconocer.iapchiapas.edu.mx/login'>https://redconocer.iapchiapas.edu.mx/login</a> con su usuario y contraseña:<br><br>
+
+					Usuario: <b>|username|</b> <br>
+					Contraseña: <b>|password|</b> <br><br>
+
+					Posterior a ello, debe seguir los siguientes pasos:<br>
+					<ol>
+						<li>Dar click sobre el botón 'Descargar' ubicado el la última columna de la tabla de certificaciones.</li>
+						<li>Responder una pequeña encuesta de satisfacción</li>
+					</ol><br>
+					En la siguiente imagen puede observar la ubicación del botón de descarga.
+					<center><img src='|screen|' width='70%' alt='' /></center>";
 	
 	
 ?>

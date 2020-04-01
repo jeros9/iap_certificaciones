@@ -212,6 +212,7 @@ $pages = array(
 	'add-resource-c',
 	'add-ine',
 	'student-certificacion',
+	'student-certificado',
 	'envia-info',
 	'registro-add',
 	'foto',

@@ -80,25 +80,32 @@
 					</a>
 					</td>
 					<td>
-					<a href="{$WEB_ROOT}/ajax/acuse.php?id={$item.userId}&courseId={$item.courseId}"   target='_blank' title='ACUSE'>
-						<i class="material-icons">how_to_reg</i>
-					</a>
-					<a href="{$WEB_ROOT}/ajax/dg.php?id={$item.userId}&cId={$item.activityId}&courseId={$item.courseId}"   target='_blank' title='EVALUACION'>
-					<i class="material-icons">ballot</i>	
-					</a>	
-					<!--<a href="{$WEB_ROOT}/files/solicitudes/{$item.userId}_{$item.courseId}.pdf"   target='_blank' title='REGISTRO'>	-->
-					<a href="{$WEB_ROOT}/ajax/reg.php?id={$item.userId}&courseId={$item.courseId}"   target='_blank' title='Ficha de Registro'>
-					<i class="material-icons">description</i>
-				
-					<a href="{$WEB_ROOT}/ajax/ine.php?id={$item.userId}"   target='_blank' title='INE'>	
-					<i class="material-icons">picture_in_picture</i>
-					</a>
+						<a href="{$WEB_ROOT}/ajax/acuse.php?id={$item.userId}&courseId={$item.courseId}"   target='_blank' title='ACUSE'>
+							<i class="material-icons">how_to_reg</i>
+						</a>
+						<a href="{$WEB_ROOT}/ajax/dg.php?id={$item.userId}&cId={$item.activityId}&courseId={$item.courseId}"   target='_blank' title='EVALUACION'>
+							<i class="material-icons">ballot</i>	
+						</a>	
+						<!--<a href="{$WEB_ROOT}/files/solicitudes/{$item.userId}_{$item.courseId}.pdf"   target='_blank' title='REGISTRO'>	-->
+						<a href="{$WEB_ROOT}/ajax/reg.php?id={$item.userId}&courseId={$item.courseId}"   target='_blank' title='Ficha de Registro'>
+							<i class="material-icons">description</i>
+						</a>
 					
-					<a href="{$WEB_ROOT}/ajax/download.php?userId={$item.userId}"  target="_blank" title="DESCARGAR">
-							<i class="material-icons">
-					save_alt
-					</i>
-					</a>
+						<a href="{$WEB_ROOT}/ajax/ine.php?id={$item.userId}"   target='_blank' title='INE'>	
+							<i class="material-icons">picture_in_picture</i>
+						</a>
+						
+						<a href="{$WEB_ROOT}/ajax/download.php?userId={$item.userId}"  target="_blank" title="DESCARGAR">
+							<i class="material-icons">save_alt</i>
+						</a>
+						
+						<a href="{$WEB_ROOT}/ajax/acuse_certificado.php?userId={$item.userId}&courseId={$item.courseId}"  target="_blank" title="ACUSE DE RECIBO DE CERTIFICADO">
+							<i class="material-icons">class</i>
+						</a>
+						
+						<a href="{$WEB_ROOT}/ajax/encuesta_satisfaccion.php?userId={$item.userId}&courseId={$item.courseId}"  target="_blank" title="ENCUESTA DE SATISFACCION">
+							<i class="material-icons">check_circle</i>
+						</a>
 
 					</td>
 					{else}

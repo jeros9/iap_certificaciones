@@ -12,6 +12,27 @@ switch($_POST["type"])
 	case 'enviarArchivo':
 	
 			if($docente->guadarDoc()){
+				$student->setUserId($_POST["usuarioId"]);
+				$data_user  = $student->GetInfo();
+				$user_email = $data_user["email"];
+				$user_names = $data_user["names"] . " " . $data_user["lastNamePaterno"] . " " . $data_user["lastNameMaterno"];
+				$subject->setSubjectId($_POST["subjectId"]);
+				$data_subject = $subject->Info();
+				if($_POST["tipoDocumentoId"] == 5)
+				{
+					include_once(DOC_ROOT."/properties/messages.php");
+					$sendmail     = new SendMail;
+					$details_body = [
+						"course"   => utf8_decode($data_subject["name"]),
+						"username" => $data_user["controlNumber"],
+						"password" => $data_user["password"],
+						"screen"   => WEB_ROOT . "/images/download.png"
+					];
+					$details_subject = [];
+					$attachment      = "";
+					$fileName        = "";
+					$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+				}
 				echo 'ok[#]';
 				echo '
 				El Documento se agrego correctamente
@@ -386,6 +407,36 @@ switch($_POST["type"])
             $smarty->display(DOC_ROOT.'/templates/boxes/status.tpl');
             echo "[#]";
         }
+	break;
+
+	case "saveSurvey":
+		$student->setUserId($_POST['userId']);
+		$student->setSubjectId($_POST['subjectId']);
+		$answers  = $_POST['answer'];
+		$comments = $_POST['comments'];
+		$total = 0;
+		foreach($answers as $item)
+		{
+			if($item[0] != '')
+				$total++;
+		}
+		if($total == 8)
+		{
+			if($student->saveSurvey($answers, $comments))
+			{
+				$ruta = $student->getDocumento(5);
+				$ruta = WEB_ROOT . "/alumnos/repositorio/" . $ruta;
+				$enlace = "<center><a href='" . $ruta . "' target='_blank' class='btn green'>
+								DESCARGAR CERTIFICADO
+							</a></center>";
+				echo "ok[#]La encuesta se guardo correctamente.[#]" . $enlace;
+			}
+			else
+				echo "fail[#]Por el momento el servicio no está disponible, por favor intente más tarde.";
+		}
+		else
+			echo "fail[#]Debe responder todas las preguntas. ";
+		//$smarty->display(DOC_ROOT.'/templates/boxes/status_on_popup.tpl');
 	break;
 }
 

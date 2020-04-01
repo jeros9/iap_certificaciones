@@ -467,3 +467,41 @@ function onDeleteCarta(id,ti)
         }
     });
 }
+
+
+function sendSurvey()
+{
+	let form = document.getElementById('frmSurvey');
+	if(!form.acuse.checked)
+	{
+		ShowStatusPopUp("<div>Por favor indique estar de acuerdo con las condiciones del sistema.</div>");
+		form.acuse.focus();
+	}
+	else
+	{
+		let data = $('#frmSurvey').serialize();
+		$.ajax({
+			url : WEB_ROOT+'/ajax/new/usuarios.php',
+			type: "POST",
+			data :  data,
+			success: function(data)
+			{
+					var splitResponse = data.split("[#]");
+
+					if(splitResponse[0] == "fail")
+					{
+						ShowStatusPopUp(splitResponse[1]);
+					}
+					else
+					{
+						$("#tblContent").html(splitResponse[2]);
+						ShowStatus(splitResponse[1]);
+					}
+			},
+			error: function ()
+			{
+					alert('Algo salio mal, compruebe su conexion a internet');
+			}
+		});
+	}
+}

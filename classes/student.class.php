@@ -3977,6 +3977,58 @@ class Student extends User
 						);
 		return $this->Util()->DB()->GetSingle();
 	}
+
+	function hasSurvey()
+	{
+		$this->Util()->DB()->setQuery("SELECT COUNT(*) FROM surveys WHERE userId = " . $this->userId . " AND subjectId = " . $this->subjectId);
+		$total = $this->Util()->DB()->GetSingle();		
+		return ($total > 0 ? true : false);
+	}
+
+	function saveSurvey($answers, $comments)
+	{
+		try
+		{
+			$sql = "INSERT INTO surveys(userId, subjectId, date, comments) VALUES(" . $this->userId . ", " . $this->subjectId . ", CURDATE(), '" . $comments . "')";						
+			$this->Util()->DB()->setQuery($sql);
+			$surveyId = $this->Util()->DB()->InsertData();
+			$sql = "";
+			for($i = 1; $i < 9; $i++)
+			{
+				$affirmative = ($answers[$i][0] == 1 ? 1 : 0); 
+				$negative    = ($answers[$i][0] == 0 ? 1 : 0); 
+				$sql = "INSERT INTO survey_answers(surveyId, questionNumber, affirmative, negative, details) VALUES(" . $surveyId . ", " . $i . ", " . $affirmative . ", " . $negative . ", '" . $answers[$i][1] . "')";
+				$this->Util()->DB()->setQuery($sql);
+				$this->Util()->DB()->InsertData();
+			}
+			return true;
+		}
+		catch(Exception $ex)
+		{
+			return false;
+		}
+	}
+
+	function getDocumento($tipoDocumento)
+	{
+		$sql = "SELECT ruta FROM repositorio WHERE userId = " . $this->userId . " AND subjectId = " . $this->subjectId . " AND tipoDocumentoId = " . $tipoDocumento . " LIMIT 1";
+		$this->Util()->DB()->setQuery($sql);
+		$ruta = $this->Util()->DB()->GetSingle();
+		return $ruta;
+	}
+
+	function getSurvey()
+	{
+		$sql = "SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_dmy FROM surveys WHERE userId = " . $this->userId . " AND subjectId = " . $this->subjectId;
+		$this->Util()->DB()->setQuery($sql);
+		$survey = $this->Util()->DB()->GetRow();
+
+		$this->Util()->DB()->setQuery("SELECT * FROM survey_answers WHERE surveyId = " . $survey['surveyId'] . ' ORDER BY questionNumber ASC');
+		$answers = $this->Util()->DB()->GetResult();
+
+		$survey['answers'] = $answers;
+		return $survey;
+	}
 	
 	
 }

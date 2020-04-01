@@ -114,7 +114,8 @@ function AddStudentRegister()
  //alert(response);
 			if(splitResponse[0] == "fail")
 			{
-			    $('redireccion').value=0;
+             $('redireccion').value=0;
+             console.log(splitResponse[1]);
 				ShowStatus(splitResponse[1]);
 			}
 			else
