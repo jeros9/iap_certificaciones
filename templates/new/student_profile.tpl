@@ -350,7 +350,6 @@
                                                     <i class="material-icons">assignment_returned</i>
                                                 </a> 
                                             {else}
-                                                Res: {$subject.certificacion_pdf}
                                                 <i class="material-icons" title="NO DISPONIBLE">
                                                     block
                                                 </i>
