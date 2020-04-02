@@ -1,5 +1,4 @@
 <?php
-ini_set('memory_limit', '-1');
 class Docente extends Empresa{
 
 	private $id_serie;
@@ -603,7 +602,7 @@ class Docente extends Empresa{
 	
 	
 	
-	public function guadarDoc($data = null)
+	public function guadarDoc()
 	{
 		
 		$sql = "INSERT INTO 
@@ -646,34 +645,6 @@ class Docente extends Empresa{
 							}   
 						}
 					break;
-			}
-		}
-
-		if($_POST["tipoDocumentoId"] == 5)
-		{
-			include_once(DOC_ROOT."/properties/messages.php");
-			try
-			{
-				$data_subject = $data['data_subject'];
-				$data_user = $data['data_user'];
-				$sendmail     = new SendMail;
-				$details_body = array(
-					"course"   => utf8_decode($data_subject["name"]),
-					"username" => $data_user["controlNumber"],
-					"password" => $data_user["password"]
-				);
-				$details_subject = array();
-				$attachment = "";
-				$fileName = "";
-				$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $data['user_email'], $data['user_names'], $attachment, $fileName);
-			}
-			catch(Exception $ex)
-			{
-				echo "Exception: " . $ex->getMessage();
-			}
-			catch(\Exception $ex)
-			{
-				echo "Global Exception: " . $ex->getMessage();
 			}
 		}
 		

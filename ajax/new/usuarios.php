@@ -10,16 +10,37 @@ switch($_POST["type"])
 {
    
 	case 'enviarArchivo':
-		$student->setUserId($_POST["usuarioId"]);
-		$data['data_user']  = $student->GetInfo();
-		$data['user_email'] = $data['data_user']["email"];
-		$data['user_names'] = $data['data_user']["names"] . " " . $data['data_user']["lastNamePaterno"] . " " . $data['data_user']["lastNameMaterno"];
-		$subject->setSubjectId($_POST["subjectId"]);
-		$data['data_subject'] = $subject->Info();
-		if($docente->guadarDoc($data))
-			echo 'ok[#]El Documento se agrego correctamente ';
-		else
-			echo 'fail[#]';
+	
+			if($docente->guadarDoc()){
+				$student->setUserId($_POST["usuarioId"]);
+				$data_user  = $student->GetInfo();
+				$user_email = $data_user["email"];
+				$user_names = $data_user["names"] . " " . $data_user["lastNamePaterno"] . " " . $data_user["lastNameMaterno"];
+				$subject->setSubjectId($_POST["subjectId"]);
+				$data_subject = $subject->Info();
+				if($_POST["tipoDocumentoId"] == 5)
+				{
+					include_once(DOC_ROOT."/properties/messages.php");
+					$sendmail     = new SendMail;
+					$details_body = [
+						"course"   => utf8_decode($data_subject["name"]),
+						"username" => $data_user["controlNumber"],
+						"password" => $data_user["password"],
+						"screen"   => WEB_ROOT . "/images/download.png"
+					];
+					$details_subject = [];
+					$attachment      = "";
+					$fileName        = "";
+					$sendmail->PrepareAttachment($message[2]["subject"], $message[2]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+				}
+				echo 'ok[#]';
+				echo '
+				El Documento se agrego correctamente
+				';
+				 echo '[#]';
+			}else{
+				echo 'fail[#]';
+			}
 	
 	break;
 	
