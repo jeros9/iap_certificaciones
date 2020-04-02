@@ -20,7 +20,7 @@ switch($_POST["type"])
 				$subject->setSubjectId($_POST["subjectId"]);
 				$data_subject = $subject->Info();
 				$text_email = '';
-				if($_POST["tipoDocumentoId"] == 5)
+				/* if($_POST["tipoDocumentoId"] == 5)
 				{
 					$sendmail     = new SendMail;
 					$details_body = [
@@ -32,7 +32,20 @@ switch($_POST["type"])
 					$details_subject = [];
 					$sendmail->enviarEmail($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names);
 					$text_email = "Se envió la notificación al candidato.";
-				}
+				} */
+				include_once(DOC_ROOT."/properties/messages.php");
+				//enviar correo
+				$sendmail = new SendMail;
+				$details_body = array(
+					"email" => $data_user["controlNumber"],
+					"password" => $data_user["password"],
+					"major" => utf8_decode(''),
+					"course" => utf8_decode(''),
+				);
+				$details_subject = array();
+				$attachment = "";
+				$fileName = "";
+				$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
 				echo 'ok[#]';
 				echo '
 				El Documento se agrego correctamente. 
