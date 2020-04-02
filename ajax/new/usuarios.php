@@ -31,9 +31,7 @@ switch($_POST["type"])
 						"screen"   => WEB_ROOT . "/images/download.png"
 					];
 					$details_subject = [];
-					$attachment      = "";
-					$fileName        = "";
-					$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+					$sendmail->enviarEmail($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names);
 					$text_email = "Se envió la notificación al candidato.";
 				}
 				echo 'ok[#]';

@@ -114,6 +114,30 @@ class SendMail extends Main
 			}
 			$mail->Send();
 	}
+
+	public function enviarEmail($subject, $body, $details_body, $details_subject, $to, $toName, $from = "prodim@iapchiapas.edu.mx", $fromName = "Administrador del Sistema") 
+	{
+			$mail = new PHPMailer();
+			$mail->IsSMTP();
+			$mail->SMTPDebug  = 1;
+			$mail->SMTPAuth   = true;
+			$mail->SMTPSecure = "ssl";
+			$mail->Host       = "smtp.gmail.com";
+			$mail->Port       = 465;
+			$mail->Username   = "prodim@iapchiapas.edu.mx";
+			$mail->Password   = "iap_2020prmx";
+
+			$body = nl2br($this->Util()->handle_mail_patterns($body, $details_body));
+			$subject = $this->Util()->handle_mail_patterns($subject, $details_subject);
+			
+			$mail->AddReplyTo($from, $fromName);
+			$mail->SetFrom($from, $fromName);
+			
+			$mail->AddAddress($to, $toName);
+			$mail->Subject    = $subject;
+			$mail->MsgHTML($body);
+			$mail->Send();
+	}
 	
 }
 
