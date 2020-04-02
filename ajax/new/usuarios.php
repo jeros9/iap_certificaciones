@@ -33,19 +33,22 @@ switch($_POST["type"])
 					$sendmail->enviarEmail($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names);
 					$text_email = "Se envió la notificación al candidato.";
 				} */
-				include_once(DOC_ROOT."/properties/messages.php");
-				//enviar correo
-				$sendmail = new SendMail;
-				$details_body = array(
-					"username" => $data_user["controlNumber"],
-					"password" => $data_user["password"],
-					"major" => utf8_decode(''),
-					"course" => utf8_decode(''),
-				);
-				$details_subject = array();
-				$attachment = "";
-				$fileName = "";
-				$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+				if($_POST["tipoDocumentoId"] == 5)
+				{
+					include_once(DOC_ROOT."/properties/messages.php");
+					//enviar correo
+					$sendmail = new SendMail;
+					$details_body = array(
+						"username" => $data_user["controlNumber"],
+						"password" => $data_user["password"],
+						"major" => utf8_decode(''),
+						"course" => utf8_decode(''),
+					);
+					$details_subject = array();
+					$attachment = "";
+					$fileName = "";
+					$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+				}
 				echo 'ok[#]';
 				echo '
 				El Documento se agrego correctamente. 
