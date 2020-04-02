@@ -28,7 +28,7 @@ Se encuentra activo por lo que ya puedes acceder a la currícula que hayas elegi
 	";
 
 
-$message[3]["subject"] = "Prueba Correo";
+$message[3]["subject"] = "Certificado Digital Red Conocer";
 $message[3]["body"] = "
 					Estimado usuario,<br>
 					De acuerdo a la evaluación realizada y al ser declarado competente, ya se encuentra disponible para su descarga el certificado digital del estándar: <b>|course|</b>  expedido por el Consejo Nacional de Normalización y Certificación de Competencias Laborales (CONOCER), con validez oficial de la SEP.<br><br>

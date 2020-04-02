@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '-1');
 class Docente extends Empresa{
 
 	private $id_serie;
@@ -646,6 +647,22 @@ class Docente extends Empresa{
 						}
 					break;
 			}
+		}
+
+		if($_POST["tipoDocumentoId"] == 5)
+		{
+			include_once(DOC_ROOT."/properties/messages.php");
+			$sendmail     = new SendMail;
+			$details_body = [
+				"course"   => utf8_decode($data_subject["name"]),
+				"username" => $data_user["controlNumber"],
+				"password" => $data_user["password"]
+			];
+			$details_subject = [];
+			$attachment      = "";
+			$fileName        = "";
+			$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+			$texto_email = 'Se envió la notificación por correo al candidato.';
 		}
 		
 		return true;
