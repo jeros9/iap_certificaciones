@@ -28,21 +28,18 @@ Se encuentra activo por lo que ya puedes acceder a la currícula que hayas elegi
 	";
 
 
-$message[3]["subject"] = "Certificado Digital Red Conocer";
+$message[3]["subject"] = "Certificado Red Conocer";
 $message[3]["body"] = "
-					Estimado usuario,<br>
-					De acuerdo a la evaluación realizada y al ser declarado competente, ya se encuentra disponible para su descarga el certificado digital del estándar: <b>|course|</b>  expedido por el Consejo Nacional de Normalización y Certificación de Competencias Laborales (CONOCER), con validez oficial de la SEP.<br><br>
-
-					Para descargarlo, deberá ingresar a nuestro Sistema RED CONOCER <a href='https://redconocer.iapchiapas.edu.mx/login'>https://redconocer.iapchiapas.edu.mx/login</a> con su usuario y contraseña:<br><br>
+					Estimado usuario,
+					De acuerdo a la evaluación realizada y al ser declarado competente, ya se encuentra disponible para su descarga el certificado digital del estándar: <b>|course|</b>  expedido por el Consejo Nacional de Normalización y Certificación de Competencias Laborales (CONOCER), con validez oficial de la SEP.
+					Para descargarlo, deberá ingresar a nuestro Sistema RED CONOCER <a href=\"https://redconocer.iapchiapas.edu.mx\">https://redconocer.iapchiapas.edu.mx</a> con su usuario y contraseña:
 
 					Usuario: <b>|username|</b> <br>
 					Contraseña: <b>|password|</b> <br><br>
 
-					Posterior a ello, debe seguir los siguientes pasos:<br>
-					<ol>
-						<li>Dar click sobre el botón 'Descargar' ubicado el la última columna de la tabla de certificaciones.</li>
-						<li>Responder una pequeña encuesta de satisfacción</li>
-					</ol><br>";
+					Posterior a ello, debe seguir los siguientes pasos:
+					1. Dar click sobre el botón 'Descargar' ubicado el la última columna de la tabla de certificaciones.
+					2. Responder una pequeña encuesta de satisfacción";
 	
 	
 ?>
