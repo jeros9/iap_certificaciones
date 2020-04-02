@@ -37,10 +37,10 @@ switch($_POST["type"])
 				//enviar correo
 				$sendmail = new SendMail;
 				$details_body = array(
-					"email" => $data_user["controlNumber"],
+					"username" => $data_user["controlNumber"],
 					"password" => $data_user["password"],
 					"major" => utf8_decode(''),
-					"course" => utf8_decode($data_subject["name"]),
+					"course" => utf8_decode(''),
 				);
 				$details_subject = array();
 				$attachment = "";
