@@ -18,6 +18,7 @@ switch($_POST["type"])
 				$user_names = $data_user["names"] . " " . $data_user["lastNamePaterno"] . " " . $data_user["lastNameMaterno"];
 				$subject->setSubjectId($_POST["subjectId"]);
 				$data_subject = $subject->Info();
+				$texto_email = '';
 				if($_POST["tipoDocumentoId"] == 5)
 				{
 					include_once(DOC_ROOT."/properties/messages.php");
@@ -26,18 +27,15 @@ switch($_POST["type"])
 						"course"   => utf8_decode($data_subject["name"]),
 						"username" => $data_user["controlNumber"],
 						"password" => $data_user["password"],
-						"screen"   => WEB_ROOT . "/images/download.png"
+						//"screen"   => WEB_ROOT . "/images/download.png"
 					];
 					$details_subject = [];
 					$attachment      = "";
 					$fileName        = "";
 					$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+					$texto_email = 'Se envió la notificación por correo al candidato.';
 				}
-				echo 'ok[#]';
-				echo '
-				El Documento se agrego correctamente
-				';
-				 echo '[#]';
+				echo 'ok[#]El Documento se agrego correctamente ' . $texto_email;
 			}else{
 				echo 'fail[#]';
 			}

@@ -42,9 +42,7 @@ $message[3]["body"] = "
 					<ol>
 						<li>Dar click sobre el botón 'Descargar' ubicado el la última columna de la tabla de certificaciones.</li>
 						<li>Responder una pequeña encuesta de satisfacción</li>
-					</ol><br>
-					En la siguiente imagen puede observar la ubicación del botón de descarga.
-					<center><img src='|screen|' width='70%' alt='' /></center>";
+					</ol><br>";
 	
 	
 ?>

@@ -73,7 +73,7 @@
 						</i>
 					</a>
 
-					<a href="javascript:void(0)" onClick="verForm({$item.userId},{$item.subjectId},5)" title="AGREGAR CERTIFICACIÓN">
+					<a href="javascript:void(0)" onClick="verForm({$item.userId},{$item.subjectId},5)" title="AGREGAR CERTIFICADO">
 						<i class="material-icons">
 							assignment_turned_in
 						</i>	
