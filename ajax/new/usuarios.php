@@ -20,8 +20,8 @@ switch($_POST["type"])
 				$subject->setSubjectId($_POST["subjectId"]);
 				$data_subject = $subject->Info();
 				$text_email = '';
-				if($_POST["tipoDocumentoId"] == 5)
-				{
+				/* if($_POST["tipoDocumentoId"] == 5)
+				{ */
 					include_once(DOC_ROOT."/properties/messages.php");
 					//enviar correo
 					$sendmail = new SendMail;
@@ -35,7 +35,7 @@ switch($_POST["type"])
 					$attachment = "";
 					$fileName = "";
 					$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
-				}
+				//}
 				echo 'ok[#]';
 				echo '
 				El Documento se agrego correctamente. 
