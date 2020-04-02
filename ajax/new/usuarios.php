@@ -42,7 +42,7 @@ switch($_POST["type"])
 						"username" => $data_user["controlNumber"],
 						"password" => $data_user["password"],
 						"major" => utf8_decode(''),
-						"course" => utf8_decode($data_subject["name"]),
+						"course" => $data_subject["name"],
 					);
 					$details_subject = array();
 					$attachment = "";
