@@ -12,7 +12,6 @@ switch($_POST["type"])
 {
    
 	case 'enviarArchivo':
-	
 			if($docente->guadarDoc()){
 				$student->setUserId($_POST["usuarioId"]);
 				$data_user  = $student->GetInfo();
