@@ -1,9 +1,11 @@
 <?php
 // echo "<pre>"; print_r($_POST);
 // exit;
+ini_set('memory_limit', '-1');
 include_once('../../init.php');
 include_once('../../config.php');
 include_once(DOC_ROOT.'/libraries.php');
+include_once(DOC_ROOT."/properties/messages.php");
 session_start();
 
 switch($_POST["type"])
@@ -18,9 +20,9 @@ switch($_POST["type"])
 				$user_names = $data_user["names"] . " " . $data_user["lastNamePaterno"] . " " . $data_user["lastNameMaterno"];
 				$subject->setSubjectId($_POST["subjectId"]);
 				$data_subject = $subject->Info();
+				$text_email = '';
 				if($_POST["tipoDocumentoId"] == 5)
 				{
-					include_once(DOC_ROOT."/properties/messages.php");
 					$sendmail     = new SendMail;
 					$details_body = [
 						"course"   => utf8_decode($data_subject["name"]),
@@ -31,12 +33,13 @@ switch($_POST["type"])
 					$details_subject = [];
 					$attachment      = "";
 					$fileName        = "";
-					$sendmail->PrepareAttachment($message[2]["subject"], $message[2]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+					$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+					$text_email = "Se envió la notificación al candidato.";
 				}
 				echo 'ok[#]';
 				echo '
-				El Documento se agrego correctamente
-				';
+				El Documento se agrego correctamente. 
+				' . $text_email;
 				 echo '[#]';
 			}else{
 				echo 'fail[#]';
