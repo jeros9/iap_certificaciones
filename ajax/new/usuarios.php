@@ -40,12 +40,12 @@ switch($_POST["type"])
 					"email" => $data_user["controlNumber"],
 					"password" => $data_user["password"],
 					"major" => utf8_decode(''),
-					"course" => utf8_decode($data_subject["name"]),
+					"course" => utf8_decode(''),
 				);
 				$details_subject = array();
 				$attachment = "";
 				$fileName = "";
-				$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
+				$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
 				echo 'ok[#]';
 				echo '
 				El Documento se agrego correctamente. 
