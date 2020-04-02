@@ -603,7 +603,7 @@ class Docente extends Empresa{
 	
 	
 	
-	public function guadarDoc()
+	public function guadarDoc($data = null)
 	{
 		
 		$sql = "INSERT INTO 
@@ -652,17 +652,18 @@ class Docente extends Empresa{
 		if($_POST["tipoDocumentoId"] == 5)
 		{
 			include_once(DOC_ROOT."/properties/messages.php");
+			$data_subject = $data['data_subject'];
+			$data_user = $data['data_user'];
 			$sendmail     = new SendMail;
-			$details_body = [
+			$details_body = array(
 				"course"   => utf8_decode($data_subject["name"]),
 				"username" => $data_user["controlNumber"],
 				"password" => $data_user["password"]
-			];
-			$details_subject = [];
-			$attachment      = "";
-			$fileName        = "";
-			$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names, $attachment, $fileName);
-			$texto_email = 'Se envió la notificación por correo al candidato.';
+			);
+			$details_subject = array();
+			$attachment = "";
+			$fileName = "";
+			$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $data['user_email'], $data['user_names'], $attachment, $fileName);
 		}
 		
 		return true;

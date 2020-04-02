@@ -10,18 +10,16 @@ switch($_POST["type"])
 {
    
 	case 'enviarArchivo':
-	
-			if($docente->guadarDoc()){
-				$student->setUserId($_POST["usuarioId"]);
-				$data_user  = $student->GetInfo();
-				$user_email = $data_user["email"];
-				$user_names = $data_user["names"] . " " . $data_user["lastNamePaterno"] . " " . $data_user["lastNameMaterno"];
-				$subject->setSubjectId($_POST["subjectId"]);
-				$data_subject = $subject->Info();
-				echo 'ok[#]El Documento se agrego correctamente ';
-			}else{
-				echo 'fail[#]';
-			}
+		$student->setUserId($_POST["usuarioId"]);
+		$data['data_user']  = $student->GetInfo();
+		$data['user_email'] = $data['data_user']["email"];
+		$data['user_names'] = $data['data_user']["names"] . " " . $data['data_user']["lastNamePaterno"] . " " . $data['data_user']["lastNameMaterno"];
+		$subject->setSubjectId($_POST["subjectId"]);
+		$data['data_subject'] = $subject->Info();
+		if($docente->guadarDoc($data))
+			echo 'ok[#]El Documento se agrego correctamente ';
+		else
+			echo 'fail[#]';
 	
 	break;
 	
