@@ -2295,7 +2295,7 @@ class Student extends User
 				LEFT JOIN course ON course.courseId = user_subject.courseId
 				LEFT JOIN subject ON subject.subjectId = course.subjectId	
 				LEFT JOIN major ON major.majorId = subject.tipo
-				LEFT JOIN repositorio ON (repositorio.userId = alumnoId AND repositorio.tipodocumentoId = 5)
+				LEFT JOIN repositorio ON (repositorio.userId = alumnoId AND repositorio.subjectId = course.subjectId AND repositorio.tipodocumentoId = 5)
 				WHERE
 					alumnoId = '".$this->getUserId()."'
 					".$status."
