@@ -1,0 +1,1 @@
+{include file="{$DOC_ROOT}/templates/forms/edit-group-question.tpl"}

@@ -370,6 +370,105 @@
 
 			return true;
 		}
+
+		// ACTUALIZADO RC
+		function EditScoreCapacitador($modality, $id, $scores, $retros)
+		{
+			$notificacion= new Notificacion;
+			foreach($scores as $key => $score)
+			{
+				$k = $key;
+				$this->Util()->ValidateFloat($score, 2, 100, 0);
+				if($modality == "Individual")
+				{
+					$this->Util()->DB()->setQuery("SELECT COUNT(*) FROM group_activity_score WHERE activityId = '" . $id . "' AND userId = '" . $key . "'");
+					$count = $this->Util()->DB()->GetSingle();
+					$this->Util()->DB()->setQuery("SELECT * FROM group_activity_score WHERE activityId = '" . $id . "' AND userId = '" . $key . "'");
+					$activityAnt = $this->Util()->DB()->GetRow();
+					//Obteniendo la informacion de la actividad
+				   	$group_activity = new GroupActivity();
+				   	$group_activity->setActivityId($id);
+				   	$infoActivity = $group_activity->Info();
+				    //Obteniendo informacion de Student
+					$student = new Student;
+					$student->setUserId($key);
+					$infoStudent = $student->GetInfo();
+					
+					if($count == 0)
+					{
+						$this->Util()->DB()->setQuery("INSERT INTO  group_activity_score(userId, activityId, retro, ponderation)
+														VALUES ('" . $key . "', '" . $id . "', '" . $retros[$key] . "', '" . $score . "');");
+						$result = $this->Util()->DB()->InsertData();	
+						$hecho = $_SESSION['User']['userId'] . "p";				       
+						$vista = "1p," . $hecho . "," . $key . "u";
+						$tablas = "group_activity_score";
+						$enlace = "/score-group-activity-new/id/" . $id;
+						$actividad = "Se ha calificado la Actividad " . $infoActivity['resumen'] . " para " . $infoStudent['names'] . " " . $infoStudent['lastNamePaterno'] . " " . $infoStudent['lastNameMaterno'] . " Calificación(" . number_format($score, 2, '.', '') . ") Retroalimentación(" . $retros[$key] . ")";
+								
+						if($score <> '0' or $score <> '')
+						{
+							$notificacion->setActividad($actividad);
+							$notificacion->setVista($vista);
+							$notificacion->setHecho($hecho);
+							$notificacion->setTablas($tablas);
+							$notificacion->setEnlace($enlace);
+							$notificacion->saveNotificacion();
+						}
+					}
+					else
+					{
+						$this->Util()->DB()->setQuery("UPDATE group_activity_score SET ponderation = '" . $score . "', retro = '" . $retros[$key] . "'
+														WHERE userId = '" . $key . "' AND activityId = '" . $id . "' LIMIT 1");
+						$this->Util()->DB()->UpdateData();	
+						$this->Util()->DB()->setQuery("SELECT activityScoreId FROM group_activity_score WHERE activityId = '" . $id . "' AND userId = '" . $key . "'");
+						$result = $this->Util()->DB()->GetSingle();
+						
+						$hecho = $_SESSION['User']['userId'] . "p";				       
+						$vista = "1p," . $hecho . "," . $key . "u";
+						$tablas = "group_activity_score";
+						$enlace = "/score-group-activity-new/id/" . $id;
+						if($activityAnt['ponderation'] == number_format($score,2,'.','') &&  $activityAnt['retro'] == $retros[$key])
+							$actividad="NO";                       
+						else					   
+							$actividad = "Se ha modificado calificación en " . $infoActivity['resumen'] . " para " . $infoStudent['names'] . " " . $infoStudent['lastNamePaterno'] . " " . $infoStudent['lastNameMaterno'] . " Calificación(" . number_format($score, 2, '.', '') . ") Retroalimentación(" . $retros[$key] . ")";
+						if($actividad != "NO")
+						{
+							$notificacion->setActividad($actividad);
+							$notificacion->setVista($vista);
+							$notificacion->setHecho($hecho);
+							$notificacion->setTablas($tablas);
+							$notificacion->setEnlace($enlace);
+							$notificacion->saveNotificacion();
+						}
+					}
+					$arch = "fileRetro_" . $key;
+					$url = DOC_ROOT;
+					foreach($_FILES as $key=>$var)
+					{
+						switch($key)
+						{
+							case $arch:
+								if($var["name"] <> "")
+								{
+									$aux = explode(".", $var["name"]);
+									$extencion = end($aux);
+									$temporal = $var['tmp_name'];
+									$foto_name = "doc_" . $result . "." . $extencion;
+									if(move_uploaded_file($temporal, $url . "/file_capacitador_retro/" . $foto_name))
+									{			
+										$sql = "UPDATE group_activity_score SET rutaArchivoRetro = '" . $foto_name . "' WHERE activityScoreId = " . $result;		
+										$this->Util()->DB()->setQuery($sql);		
+										$this->Util()->DB()->UpdateData();
+									}
+								}
+						}
+					}
+				}
+			}
+			$this->Util()->setError(90000, 'complete', "Has modificado las calificaciones");
+			$this->Util()->PrintErrors();
+			return true;
+		}
 		
 		public function ScoreGroup($modality, $type, $id)
 		{
@@ -491,6 +590,34 @@
 				// exit;
 			return $result;
 		
+		}
+
+		// ACTUALIZADO RC
+		public function ScoreGroupCapacitador($modality, $type, $id)
+		{
+			$result = [];
+			if($modality == "Individual")
+			{
+				$sql = "SELECT *, user_subject.status AS status FROM user_subject
+							LEFT JOIN user ON user_subject.alumnoId = user.userId
+						WHERE courseId = '" . $this->getCourseId() . "'
+						ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC";
+				$this->Util()->DB()->setQuery($sql);
+				$result = $this->Util()->DB()->GetResult();
+					
+				foreach($result as $key => $res)
+				{
+					$this->Util()->DB()->setQuery("SELECT ponderation FROM group_activity_score WHERE activityId = '" . $id . "' AND userId = '" . $res["alumnoId"] . "'");
+					$result[$key]["ponderation"] = $this->Util()->DB()->GetSingle();
+					$this->Util()->DB()->setQuery("SELECT retro FROM group_activity_score WHERE activityId = '" . $id . "' AND userId = '" . $res["alumnoId"] . "'");
+					$result[$key]["retro"] = $this->Util()->DB()->GetSingle();
+					$this->Util()->DB()->setQuery("SELECT rutaArchivoRetro FROM group_activity_score WHERE activityId = '" . $id . "' AND userId = '" . $res["alumnoId"] . "'");
+					$result[$key]["fileRetro"] = $this->Util()->DB()->GetSingle();
+					$this->Util()->DB()->setQuery("SELECT * FROM group_homework WHERE activityId = '" . $id . "' AND userId = '" . $res["alumnoId"] . "'");
+					$result[$key]["homework"] = $this->Util()->DB()->GetRow();
+				}
+			}
+			return $result;
 		}
 
 		

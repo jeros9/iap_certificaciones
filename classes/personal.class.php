@@ -2128,6 +2128,24 @@ class Personal extends Main
 		
 	}
 
+	// ACTUALIZADO RC
+	public function gruposCapacitador()
+	{
+		$sql = "SELECT c.courseId, c.group,
+					(SELECT COUNT(*) FROM user_subject u
+							INNER JOIN usuario_capacitador uc ON uc.usuarioId = u.alumnoId
+							INNER JOIN course ON course.courseId = u.courseId 
+						WHERE uc.personalId  = " . $_SESSION["User"]["userId"] . " AND course.subjectId = " . $_GET["id"] . " AND course.courseId = c.courseId
+					) AS cantidad
+			   	FROM usuario_capacitador uc
+					LEFT JOIN user_subject u ON u.alumnoId = uc.usuarioId
+					LEFT JOIN course c ON c.courseId = u.courseId
+			   WHERE uc.personalId  = " . $_SESSION["User"]["userId"] . " and c.subjectId = " . $_GET["id"] . " group by c.courseId";
+	   $this->Util()->DB()->setQuery($sql);
+	   $result = $this->Util()->DB()->GetResult();
+	   return $result;   
+   }
+
 	public function EnumerateSubject($subjectId, $orden = 'name ASC')
 	{	
 		$sql = "SELECT 

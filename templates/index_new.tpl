@@ -26,7 +26,7 @@
 	<link href="{$WEB_ROOT}/assets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
 	<!-- END THEME GLOBAL STYLES -->
 
-	{if ($page == 'homepage' && $User.type == 'student') || ($page == 'homepage' && $User.type == 'Docente') || $page == 'docente'}
+	{if ($page == 'homepage' && $User.type == 'student') || ($page == 'homepage' && $User.type == 'Docente') || $page == 'docente' || ($page == 'capacitador_profile' && $User.type == 'Docente')}
 		<link href="{$WEB_ROOT}/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
 	{/if}
 	{if $page == 'inbox' or $page == 'reply-inbox' or $page == 'view-inbox'}
@@ -105,7 +105,8 @@ $page == 'view-inbox' or
  $page == 'report-docentes' or 
  $page == 'perfil' or 
  $page == 'student' or 
- $page == 'materias'}
+ $page == 'materias' or
+ $page == 'capacitador_profile'}
 <style type="text/css">
 
 .btn-file {
@@ -152,7 +153,7 @@ $page == 'view-inbox' or
 </head>
 <!-- END HEAD -->
 
-<body class="page-header-fixed page-sidebar-closed-hide-logo {if $User.type == "student" || $User.type == "Docente" || $vistaPrevia eq 1 || $page == "register"} page-sidebar-closed {/if} page-content-white page-md {if ($page == 'homepage' && $User.type == 'student') || ($page == 'homepage' && $User.type == 'Docente') || $vistaPrevia eq 1} page-container-bg-solid {/if}">
+<body class="page-header-fixed page-sidebar-closed-hide-logo {if $User.type == "student" || $User.type == "Docente" || $vistaPrevia eq 1 || $page == "register"} page-sidebar-closed {/if} page-content-white page-md {if ($page == 'homepage' && $User.type == 'student') || ($page == 'homepage' && $User.type == 'Docente') || $vistaPrevia eq 1 || ($page == 'capacitador_profile' && $User.type == 'Docente')} page-container-bg-solid {/if}">
 <div class="page-wrapper">
 	{include file="new/header.tpl"}
 	<!-- BEGIN CONTAINER -->

@@ -224,7 +224,11 @@ $pages = array(
     'ver-foto',
     'add-cedula',
     'add-plan',
-    'view-doc'
+    'view-doc',
+    // Capacitador
+    'add-group-activity',
+    'edit-group-activity',
+    'edit-group-question'
 
 );
 

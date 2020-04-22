@@ -38,9 +38,7 @@
 </div>
 <!-- END PAGE BAR -->
 <!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> Bienvenido
-    <small></small>
-</h1>
+<h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Evaluador</strong></h1>
 <!-- END PAGE TITLE-->
 <!-- END PAGE HEADER-->
 <div class="row">
@@ -56,7 +54,10 @@
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name"> {$User.username} </div>
-                    <div class="profile-usertitle-job"> Docente </div>
+                    <div class="profile-usertitle-job">Evaluador</div>
+                    <a href="{$WEB_ROOT}/capacitador_profile" class="btn btn-primary">
+                        Ir al Módulo de Capacitador
+                    </a>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->

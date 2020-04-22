@@ -97,9 +97,8 @@ return $notificaciones;
 }
 
 public function saveNotificacion(){
-	 $sqlNot="insert into notificacion(notificacionId,actividad,vista,hecho,fecha_aplicacion,tablas,enlace)
+	 $sqlNot="insert into notificacion(actividad,vista,hecho,fecha_aplicacion,tablas,enlace)
 			   values(
-			              '',
 			            '".$this->actividad."', 
 			            '".$this->vista."',
 			            '".$this->hecho."',

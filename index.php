@@ -203,9 +203,16 @@ $pages = array(
 	//'usuarios-sol',
 	'reporte-evaluadores',
 	'reporte-certificaciones',
-
 	//dictamenes
-	'dictum'
+	'dictum',
+	// Rutas del Capacitador
+	'capacitador_profile',
+	'gpscap',
+	'edit-modules-group',
+	'add-group-activity',
+	'edit-group-activity',
+	'configuracion-group-examen',
+	'score-group-activity-new'
 );
 
 if(!in_array($_GET['page'], $pages))

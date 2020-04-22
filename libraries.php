@@ -89,6 +89,10 @@ include_once(DOC_ROOT.'/classes/docente.class.php');
 include_once(DOC_ROOT.'/classes/cedulas.class.php');
 include_once(DOC_ROOT.'/classes/planes.class.php');
 include_once(DOC_ROOT . '/classes/dictum.class.php');
+// Classes Capacitador
+include_once(DOC_ROOT . '/classes/group_activity.class.php');
+include_once(DOC_ROOT . '/classes/group_homework.class.php');
+include_once(DOC_ROOT . '/classes/group_test.class.php');
 $docente = new Docente();
 
 $db = new DB;
@@ -149,6 +153,11 @@ $encuesta= new Encuesta;
 $cedulas = new Cedulas;
 $planes = new Planes;
 $dictum = new Dictum;
+
+// Classes Capacitador
+$group_activity = new GroupActivity;
+$group_homework = new GroupHomework;
+$group_test     = new GroupTest;
 
 $smarty = new Smarty;
 
