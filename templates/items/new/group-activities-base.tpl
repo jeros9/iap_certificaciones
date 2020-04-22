@@ -4,13 +4,6 @@
         <td align="center">{$subject.activityType}</td>
         <td align="center">{$subject.initialDate|date_format:"%d-%m-%Y"} {$subject.horaInicial}</td>
         <td align="center">{$subject.finalDate|date_format:"%d-%m-%Y %H:%M:%S"}</td>
-        <td align="center">{$subject.modality}</td>
-        <td align="center">
-            {if $subject.requiredActivity != 0}
-                Id: {$subject.requiredActivity} Resumen: {$subject.requerida.resumen}
-            {else}
-                N/A
-            {/if}  </td>
         <td align="center">{$subject.score}%</td>
         <td align="center">{$subject.resumen}</td>
         <td align="center">

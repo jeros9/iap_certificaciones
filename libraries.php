@@ -93,6 +93,7 @@ include_once(DOC_ROOT . '/classes/dictum.class.php');
 include_once(DOC_ROOT . '/classes/group_activity.class.php');
 include_once(DOC_ROOT . '/classes/group_homework.class.php');
 include_once(DOC_ROOT . '/classes/group_test.class.php');
+include_once(DOC_ROOT . '/classes/group_resource.class.php');
 $docente = new Docente();
 
 $db = new DB;
@@ -158,6 +159,7 @@ $dictum = new Dictum;
 $group_activity = new GroupActivity;
 $group_homework = new GroupHomework;
 $group_test     = new GroupTest;
+$group_resource = new GroupResource;
 
 $smarty = new Smarty;
 

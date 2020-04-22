@@ -228,7 +228,9 @@ $pages = array(
     // Capacitador
     'add-group-activity',
     'edit-group-activity',
-    'edit-group-question'
+    'edit-group-question',
+    'add-group-resource',
+    'edit-group-resource',
 
 );
 

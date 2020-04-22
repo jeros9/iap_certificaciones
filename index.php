@@ -212,7 +212,9 @@ $pages = array(
 	'add-group-activity',
 	'edit-group-activity',
 	'configuracion-group-examen',
-	'score-group-activity-new'
+	'score-group-activity-new',
+	'add-group-resource',
+	'edit-group-resource',
 );
 
 if(!in_array($_GET['page'], $pages))

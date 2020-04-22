@@ -108,18 +108,15 @@ $cursos = $course->infoCoursem();
 	$totalPonderation = $group_activity->TotalPonderation();
 	$smarty->assign('totalPonderation', $totalPonderation);
 
-	$majorModality = $activity->GetMajorModality();
+	//$majorModality = $activity->GetMajorModality();
 
 	// echo ""; print_r($majorModality);
 	// exit;
-	$smarty->assign('majorModality', $majorModality);
+	//$smarty->assign('majorModality', $majorModality);
 
-	//recursos
-	$resource->setCourseModuleId($_GET["id"]);
-	$resources = $resource->Enumerate();
-
-	// echo '<pre>'; print_r($resources );
-	// exit;
+	// Recursos
+	$group_resource->setCourseId($_GET["id"]);
+	$resources = $group_resource->Enumerate();
 	$smarty->assign('resources', $resources);
 
 	$module->setCourseModuleId($_GET["id"]);

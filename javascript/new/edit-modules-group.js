@@ -51,35 +51,30 @@ function DeleteActivity(id)
     });
 }
 
+// ACTUALIZADO RC
 function DeleteResource(id)
 {
-
- // alert(id)
- var $message = "¿Está seguro de eliminar este recurso?";
- bootbox.confirm($message, function(result) {
-     if(result == false)
-     {
-         return;
-     }
-
-     $.ajax({
-         url : WEB_ROOT+'/ajax/new/resource.php',
-         type: "POST",
-         data : {type: "deleteResource", resourceId: id},
-         success: function(data, textStatus, jqXHR)
-         {
-             console.log(data)
-             var splitResponse = data.split("[#]");
-             ShowStatus(splitResponse[1]);
-             $('#tblContentResources').html(splitResponse[2]);
-         },
-         error: function (jqXHR, textStatus, errorThrown)
-         {
-             alert('Algo salio mal, compruebe su conexión a internet');
-         }
-     });
-
- });
+    var $message = "¿Está seguro de eliminar este recurso?";
+    bootbox.confirm($message, function(result) {
+        if(result == false)
+            return;
+        $.ajax({
+            url : WEB_ROOT+'/ajax/new/group-resource.php',
+            type: "POST",
+            data : {type: "deleteResource", resourceId: id},
+            success: function(data, textStatus, jqXHR)
+            {
+                console.log(data)
+                var splitResponse = data.split("[#]");
+                ShowStatus(splitResponse[1]);
+                $('#tblContentResources').html(splitResponse[2]);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Algo salio mal, compruebe su conexión a internet');
+            }
+        });
+    });
 }
 
 function SaveCalificacion(Id){

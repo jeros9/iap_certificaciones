@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="portlet-body">
-        <div style="text-align:left">Ponderaci&oacute;n Total del Modulo: <b>{$totalPonderation}%</b>
+        <div style="text-align:left">Ponderaci&oacute;n Total del Grupo: <b>{$totalPonderation}%</b>
             {if $totalPonderation < 100}
                 <span style="color:#C00"> La suma de las ponderaciones de las actividades es menor a 100%. Se recomienda que sea 100%</span>
             {/if}
@@ -79,13 +79,13 @@
             <i class="fa fa-gift"></i>.:: Recursos de Apoyo ::.
         </div>
         <div class="actions">
-            <a href="{$WEB_ROOT}/graybox.php?page=add-resource&id={$myModule.courseModuleId}&auxTpl=admin&cId={$myModule.courseModuleId}" data-target="#ajax" data-toggle="modal" class="btn btn-circle blue">
+            <a href="{$WEB_ROOT}/graybox.php?page=add-group-resource&id={$infoCourse.courseId}&auxTpl=admin&cId={$infoCourse.courseId}" data-target="#ajax" data-toggle="modal" class="btn btn-circle blue">
                 &raquo; Agregar Recurso de Apoyo
             </a>
         </div>
     </div>
     <div class="portlet-body">
-        <div id="tblContentResources">{include file="lists/new/resources.tpl"}</div>
+        <div id="tblContentResources">{include file="lists/new/group_resources.tpl"}</div>
     </div>
 </div>
 
