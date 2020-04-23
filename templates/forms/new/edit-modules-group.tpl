@@ -47,7 +47,7 @@
     </div>
 </div>{*}
 
-{*} ACTIVIDADES {*}
+{* ACTIVIDADES *}
 <div class="portlet box red">
     <div class="portlet-title">
         <div class="caption">
@@ -72,7 +72,7 @@
     </div>
 </div>
 
-{*} RECURSOS DE APOYO {*}
+{* RECURSOS DE APOYO *}
 <div class="portlet box red">
     <div class="portlet-title">
         <div class="caption">
@@ -89,21 +89,21 @@
     </div>
 </div>
 
-{*} AVISOS {*}
-{*}<div class="portlet box red">
+{* AVISOS *}
+<div class="portlet box red">
     <div class="portlet-title">
         <div class="caption">
-            <i class="fa fa-gift"></i>.:: Avisos ::.
+            <i class="fa fa-gift"></i> .:: Avisos ::.
         </div>
         <div class="actions">
-            <a href="{$WEB_ROOT}/graybox.php?page=add-noticia&id={$myModule.courseModuleId}&auxTpl=admin" data-target="#ajax" data-toggle="modal"  class="btn btn-circle blue">
+            <a href="{$WEB_ROOT}/graybox.php?page=add-group-noticia&id={$infoCourse.courseId}&auxTpl=admin" data-target="#ajax" data-toggle="modal"  class="btn btn-circle blue">
                 &raquo; Agregar Aviso
             </a>
         </div>
     </div>
     <div class="portlet-body">
-        <div id="tblContentNoticias">{include file="lists/new/module-announcements.tpl"}</div>
+        <div id="tblContentNoticias">{include file="lists/new/module-group-announcements.tpl"}</div>
     </div>
-</div>{*}
+</div>
 
 

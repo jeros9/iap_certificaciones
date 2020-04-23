@@ -94,6 +94,7 @@ include_once(DOC_ROOT . '/classes/group_activity.class.php');
 include_once(DOC_ROOT . '/classes/group_homework.class.php');
 include_once(DOC_ROOT . '/classes/group_test.class.php');
 include_once(DOC_ROOT . '/classes/group_resource.class.php');
+include_once(DOC_ROOT . '/classes/group_announcement.class.php');
 $docente = new Docente();
 
 $db = new DB;
@@ -156,10 +157,11 @@ $planes = new Planes;
 $dictum = new Dictum;
 
 // Classes Capacitador
-$group_activity = new GroupActivity;
-$group_homework = new GroupHomework;
-$group_test     = new GroupTest;
-$group_resource = new GroupResource;
+$group_activity     = new GroupActivity;
+$group_homework     = new GroupHomework;
+$group_test         = new GroupTest;
+$group_resource     = new GroupResource;
+$group_announcement = new GroupAnnouncement;
 
 $smarty = new Smarty;
 

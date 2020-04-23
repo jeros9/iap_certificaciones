@@ -215,6 +215,7 @@ $pages = array(
 	'score-group-activity-new',
 	'add-group-resource',
 	'edit-group-resource',
+	'add-group-noticia',
 );
 
 if(!in_array($_GET['page'], $pages))

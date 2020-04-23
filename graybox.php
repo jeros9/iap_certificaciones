@@ -231,6 +231,7 @@ $pages = array(
     'edit-group-question',
     'add-group-resource',
     'edit-group-resource',
+    'add-group-noticia',
 
 );
 

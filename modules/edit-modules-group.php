@@ -119,17 +119,11 @@ $cursos = $course->infoCoursem();
 	$resources = $group_resource->Enumerate();
 	$smarty->assign('resources', $resources);
 
-	$module->setCourseModuleId($_GET["id"]);
-	$info = $module->InfoCourseModule();
-
-
-
-
+	//$module->setCourseModuleId($_GET["id"]);
+	//$info = $module->InfoCourseModule();
 	$smarty->assign('mnuMain', "cursos");
 
-	$announcements = $announcement->Enumerate($info["courseId"], $_GET["id"]);
+	$announcements = $group_announcement->Enumerate($infoCourse["courseId"]);
 	$smarty->assign('usuariologId', $_SESSION['User']['userId']);
 	$smarty->assign('announcements', $announcements);
-
-
 ?>

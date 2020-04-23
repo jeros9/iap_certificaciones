@@ -620,6 +620,17 @@
 			return $result;
 		}
 
+		// ACTUALIZADO RC
+		public function GroupCapacitador()
+		{
+			$sql = "SELECT *, user_subject.status AS status FROM user_subject
+						LEFT JOIN user ON user_subject.alumnoId = user.userId
+					WHERE courseId = " . $this->getCourseId() . " ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC";
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetResult();
+			return $result;
+		}
+
 		
 		public function genera(){
 		        $this->Util()->DB()->setQuery("
