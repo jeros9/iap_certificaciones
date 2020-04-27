@@ -5,6 +5,30 @@
 	
 	$myUnicoModulo = $module->moduloDeCurso($_GET["id"]);
 	$infoUSubject = $module->infoUserSubject($_GET["id"],$_SESSION['User']['userId']);
+
+	$tipo  = "";
+	$titulo = "";
+	switch($_GET["tipo"])
+	{
+		case "actividades":
+			$tipo = "actividades";
+			$titulo = "Actividades";
+			break;
+
+		case "recursos":
+			$tipo = "recursos";
+			$titulo = "Recursos de Apoyo";
+			break;
+
+		case "avisos":
+			$tipo = "avisos";
+			$titulo = "Avisos";
+			break;
+
+		default:
+			$tipo = "resultado";
+			$titulo = "Evalución Diagnóstica";
+	}
 	
 	if($myUnicoModulo == null){
 		exit;
@@ -12,7 +36,7 @@
 
 	$module->setCourseModuleId($myUnicoModulo["courseModuleId"]);
 	$myModule = $module->InfoCourseModule();
-    $courseId=$myModule["courseId"];
+	$courseId = $myModule["courseId"];
 
 	if($infoUSubject["acuseDerecho"]=="si"){
 
@@ -20,12 +44,29 @@
 			$verResultado = true;
 			$resEstadoisticas = $test->estadisticas($myModule["infoActivity"]["activityId"],$_SESSION['User']['userId']);
 		}
-		
+
+		if($tipo == "actividades")
+		{
+
+		}
+
+		if($tipo == "recursos")
+		{
+
+		}
+
+		if($tipo == "avisos")
+		{
+			$announcements = $group_announcement->Enumerate($courseId);
+			$smarty->assign('announcements', $announcements);
+		}
 
 		$test->setActivityId($myModule["infoActivity"]["activityId"]);
 		$myTest = $test->Enumerate($verResultado,$_SESSION['User']['userId']);
 	}
 	
+	$smarty->assign('tipo', $tipo);
+	$smarty->assign('titulo', $titulo);
 	$smarty->assign('resEstadoisticas', $resEstadoisticas);
 	$smarty->assign('infoUSubject', $infoUSubject);
 	$smarty->assign('myModule', $myModule);

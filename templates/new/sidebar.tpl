@@ -23,8 +23,33 @@
                 <i class="icon-home"></i>
                 <span class="title">Inicio</span>
             </a>
-
         </li>
+
+        {if $User.type == "student" && $myModule.evalOk eq "si"}
+            <li class="nav-item {if $page == "examen-modules-student"} active {/if} ">
+                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}" class="nav-link nav-toggle">
+                    <i class="fa fa-check-square-o"></i> <span class="title">Evaluación Diagnóstica (Resultados)</span>
+                </a>
+            </li>
+
+            <li class="nav-item {if $page == "calendar-modules-student"} active {/if} ">
+                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=actividades" class="nav-link nav-toggle">
+                    <i class="fa fa-list"></i> <span class="title">Actividades</span>
+                </a>
+            </li>
+
+            <li class="nav-item {if $page == "resources-modules-student"} active {/if} ">
+                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=recursos" class="nav-link nav-toggle">
+                    <i class="fa fa-files-o"></i> <span class="title">Recursos de Apoyo</span>
+                </a>
+            </li>
+
+            <li class="nav-item {if $page == "information-modules-student"} active {/if} ">
+                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=avisos" class="nav-link nav-toggle">
+                    <i class="fa fa-bullhorn"></i> <span class="title"> Avisos</span>
+                </a>
+            </li>
+        {/if}
 		
         {if $AccessMod[32] == 1 || $AccessMod[33] == 1}
 {*
