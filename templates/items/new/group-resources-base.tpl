@@ -9,25 +9,25 @@
 				<a href="{$WEB_ROOT}/download.php?file=capacitador_resources/{$subject.path}"><i class="fa fa-download"></i></a>
 			{/if}
 		</td>
-        <td align="center">
-            {if $page != "resources-modules-student"}
+		{if $page != "view-modules-student"}
+			<td align="center">
 				{if $configMateria eq 'si'}
 					<a href="javascript:void(0)"  onClick="deleteResource('{$subject.resourceConfigId}')">
-					    <img src="{$WEB_ROOT}/images/icons/16/delete.png"  title="Eliminar" />&nbsp;
+						<img src="{$WEB_ROOT}/images/icons/16/delete.png"  title="Eliminar" />&nbsp;
 					</a>
 					<a href="{$WEB_ROOT}/graybox.php?page=add-resource-c&id={$subject.resourceConfigId}&auxTpl=admin&cId={$courseModuleId}" data-target="#ajax" data-toggle="modal">
 						<img src="{$WEB_ROOT}/images/icons/16/pencil.png" title="Editar" />
 					</a>
 				{else}
 					<a href="javascript:void(0)" onClick="DeleteResource({$subject.resourceId})" title="ELIMINAR">
-					    <img src="{$WEB_ROOT}/images/icons/16/delete.png" class="spanDeleteResource" id="d-{$subject.resourceId}" name="d-{$subject.name}" title="Eliminar" />
+						<img src="{$WEB_ROOT}/images/icons/16/delete.png" class="spanDeleteResource" id="d-{$subject.resourceId}" name="d-{$subject.name}" title="Eliminar" />
 					</a>&nbsp;
 					<a href="{$WEB_ROOT}/graybox.php?page=edit-group-resource&id={$subject.resourceId}&auxTpl=admin&cId={$infoCourse.courseId}" data-target="#ajax" data-toggle="modal">
-                        <img src="{$WEB_ROOT}/images/icons/16/pencil.png" class="spanEdit" id="d-{$subject.subjectId}" name="d-{$subject.name}" title="Editar" />
-                    </a>
+						<img src="{$WEB_ROOT}/images/icons/16/pencil.png" class="spanEdit" id="d-{$subject.subjectId}" name="d-{$subject.name}" title="Editar" />
+					</a>
 				{/if}
-            {/if}
-        </td>
+			</td>
+		{/if}
     </tr>
 {foreachelse}
     <tr>

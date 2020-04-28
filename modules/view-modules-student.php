@@ -52,7 +52,9 @@
 
 		if($tipo == "recursos")
 		{
-
+			$group_resource->setCourseId($courseId);
+			$resources = $group_resource->Enumerate();
+			$smarty->assign('resources', $resources);
 		}
 
 		if($tipo == "avisos")
