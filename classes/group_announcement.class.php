@@ -65,7 +65,7 @@
                 $theGroup = $group->GroupCapacitador();
 				$modulo = $this->Util()->acento($infoCourse["name"]);
                 $titulo = $this->Util()->acento($this->title);
-				$message[3]["subject"] = "Nuevo anuncio | " . $titulo;
+				$message[3]["subject"] = "Nuevo anuncio Red Conocer | " . $titulo;
 				$message[3]["body"] = $this->Util()->DecodeTiny($this->description);
 				$details_body = array();
                 $details_subject = array();
@@ -77,7 +77,7 @@
                     $nombremail = $this->Util()->acento($value["names"]);
                     $correo = strtolower($value['email']);
                     if($correo != '')
-				        $sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $correo, $nombremail, $attachment, $fileName); 		
+				        $sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, "carloszh04@gmail.com", $nombremail, $attachment, $fileName); 		
                 }
 			}
 			$this->Util()->DB()->setQuery("INSERT INTO group_announcement(courseId, courseModuleId, title, date, personalId, description)
@@ -100,7 +100,7 @@
             $theGroup = $group->GroupCapacitador();
             $modulo = $this->Util()->acento($infoCourse["name"]);
             $titulo = $this->Util()->acento($this->title);
-            $message[3]["subject"] = "Nuevo anuncio | " . $titulo;
+            $message[3]["subject"] = "Nuevo anuncio Red Conocer | " . $titulo;
             $message[3]["body"] = $this->Util()->DecodeTiny($this->description);
             $details_body = array();
             $details_subject = array();

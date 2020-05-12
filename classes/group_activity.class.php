@@ -279,7 +279,8 @@
 							description,
 							resumen,
 							ponderation,
-							requiredActivity
+							requiredActivity,
+							tries
 						)
 					VALUES (
 							'" . $this->getCourseId() . "', 
@@ -291,7 +292,8 @@
 							'" . $this->getDescription() . "',
 							'" . $this->resumen . "',
 							'" . $this->ponderation . "',
-							'" . $this->requiredActivity . "'
+							'" . $this->requiredActivity . "',
+							1
 							)";
 			//configuramos la consulta con la cadena de insercion
 			$this->Util()->DB()->setQuery($sql);
@@ -808,26 +810,16 @@
 			
 		}	
 		
+		// ACTUALIZADO RC
 		function deleteActividad($Id)
 		{
-			
-			 $sql ="
-				SELECT * FROM homework
-				WHERE activityId = '".$Id."' AND userId = '".$_SESSION['User']['userId']."'";
+			$sql = "SELECT * FROM group_homework WHERE activityId = " . $Id . " AND userId = " . $_SESSION['User']['userId'];
 			$this->Util()->DB()->setQuery($sql);
-			$count = $this->Util()->DB()->GetRow();	
+			$count = $this->Util()->DB()->GetRow();
+			@unlink(DOC_ROOT . "/capacitador_homework/" . $count['path']);	
 			
-			@unlink(DOC_ROOT."/homework/".$count['path']);	
-			
-			$sql = "UPDATE
-							homework
-							SET
-								path = ''
-							WHERE activityId = '".$Id."'  AND userId = '".$_SESSION['User']['userId']."'";
-			
-
+			$sql = "UPDATE group_homework SET path = '' WHERE activityId = " . $Id . " AND userId = " . $_SESSION['User']['userId'];
 			$this->Util()->DB()->setQuery($sql);
-
 			$result = $this->Util()->DB()->DeleteData();
 			$this->Util()->setError(90000, 'complete', "Se ha eliminado la actividad");
 			$this->Util()->PrintErrors();

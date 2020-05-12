@@ -20,32 +20,14 @@
                     <b>{$infoCourse.group}</b>
                 </div>
             </div>
+            <div class="col-md-12 text-center">
+                <a href="{$WEB_ROOT}/candidatos/id/{$infoCourse.courseId}" target="_blank" data-toggle="modal" class="btn green">
+                    &raquo; Ver Candidatos y Calificaciones
+                </a>
+            </div>
         </div>
     </div>
 </div>
-
-{*}<div class="portlet box red">
-    <div class="portlet-title">
-        <div class="caption">
-            <i class="fa fa-gift"></i> .:: Grupo ::.
-        </div>
-        <div class="actions"></div>
-    </div>
-    <div class="portlet-body" align="center">
-        <div class="clearfix margin-bottom-10"></div>
-        <div class="btn-group btn-group-circle btn-group btn-group-justified">
-            <a href="{$WEB_ROOT}/grupo/id/{$myModule.courseModuleId}" target="_blank" data-toggle="modal" class="btn blue">
-                &raquo; Ver Alumnos
-            </a>
-            <a href="{$WEB_ROOT}/calification/id/{$myModule.courseModuleId}" target="_blank" data-toggle="modal" class="btn green">
-                &raquo; Ver Calificaciones
-            </a>
-            <a href="{$WEB_ROOT}/graybox.php?page=config-teams&id={$myModule.courseModuleId}&auxTpl=admin" data-target="#ajax" data-toggle="modal"  class="btn blue">
-                &raquo; Configurar Equipos
-            </a>
-        </div>
-    </div>
-</div>{*}
 
 {* ACTIVIDADES *}
 <div class="portlet box red">

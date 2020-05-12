@@ -96,11 +96,11 @@
                                <i class="fa fa-adn" aria-hidden="true"></i>Registro
 							</a>
                         </li>
-						<li>
+						{*<li>
                            <a  href="{$WEB_ROOT}/ajax/acuse.php?id={$id}" target="_blank" >
                                <i class="fa fa-adn" aria-hidden="true"></i>Acuse de Derecho
 							</a>
-                        </li>
+                        </li>*}
                         <li>
                            <a href="{$WEB_ROOT}/ajax/datas.php?id={$id}&key={$firma}" target="_blank">
                                <i class="fa fa-adn" aria-hidden="true"></i> Ficha de Registro
@@ -215,7 +215,7 @@
                     <span class="profile-desc-text"> El <b>Instituto de Administración Pública del Estado de Chiapas, A. C.</b><br />te da la mas cordial bienvenida a nuestro Sistema de Educación en Línea.</span>
                     <div class="margin-top-20 profile-desc-link">
                         <i class="fa fa-globe"></i>
-                        <a href="https://iapchiapas.org.mx/">iapchiapas.org.mx</a>
+                        <a href="https://iapchiapas.edu.mx/" target="_blank">iapchiapas.edu.mx</a>
                     </div>
                     <div class="margin-top-20 profile-desc-link">
                         <i class="fa fa-facebook"></i>
@@ -334,10 +334,15 @@
                                         <!--<td align="center">{$subject.courseModule}-->
                                       
                                         <td align="center">
-											<a href="{$WEB_ROOT}/view-modules-student/id/{$subject.courseId}" title="Ver Modulo de Curso"  style="color:#000" target="_top" >
-                                            <!--<a href="{$WEB_ROOT}/graybox.php?page=view-modules-course-student&id={$subject.courseId}" data-target="#ajax" data-toggle="modal" data-width="1000px">
-                                            --><i class="fa fa-sign-in fa-lg"></i>
-                                            </a>
+											{if $subject.evalDocenteCompleta eq 'no'}
+                                                <a href="{$WEB_ROOT}/view-modules-student/id/{$subject.courseId}" title="Ver Modulo de Curso"  style="color:#000" target="_top" >
+                                                    <i class="fa fa-sign-in fa-lg"></i>
+                                                </a>
+                                            {else}
+                                                <a href="{$WEB_ROOT}/view-modules-student/id/{$subject.courseId}&tipo=avisos" title="Ver Modulo de Curso"  style="color:#000" target="_top" >
+                                                    <i class="fa fa-sign-in fa-lg"></i>
+                                                </a>
+                                            {/if}
                                         </td>
                                         <td align="center">
                                             {if $subject.certificacion_pdf != ""}

@@ -26,27 +26,29 @@
         </li>
 
         {if $User.type == "student" && $myModule.evalOk eq "si"}
-            <li class="nav-item {if $page == "examen-modules-student"} active {/if} ">
+            <li class="nav-item {if $page == "view-modules-student" and $tipo eq "resultado"} active {/if} ">
                 <a href="{$WEB_ROOT}/view-modules-student/id/{$id}" class="nav-link nav-toggle">
                     <i class="fa fa-check-square-o"></i> <span class="title">Evaluación Diagnóstica (Resultados)</span>
                 </a>
             </li>
-
-            <li class="nav-item {if $page == "calendar-modules-student"} active {/if} ">
+            <li class="nav-item {if $page == "view-modules-student" and $tipo eq "actividades"} active {/if} ">
                 <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=actividades" class="nav-link nav-toggle">
                     <i class="fa fa-list"></i> <span class="title">Actividades</span>
                 </a>
             </li>
-
-            <li class="nav-item {if $page == "resources-modules-student"} active {/if} ">
+            <li class="nav-item {if $page == "view-modules-student" and $tipo eq "recursos"} active {/if} ">
                 <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=recursos" class="nav-link nav-toggle">
                     <i class="fa fa-files-o"></i> <span class="title">Recursos de Apoyo</span>
                 </a>
             </li>
-
-            <li class="nav-item {if $page == "information-modules-student"} active {/if} ">
+            <li class="nav-item {if $page == "view-modules-student" and $tipo eq "avisos"} active {/if} ">
                 <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=avisos" class="nav-link nav-toggle">
                     <i class="fa fa-bullhorn"></i> <span class="title"> Avisos</span>
+                </a>
+            </li>
+            <li <li class="nav-item">
+                <a  href="{$WEB_ROOT}/ajax/acuse.php?id={$userId}&courseId={$id}" class="nav-link nav-toggle" target="_blank">
+                    <i class="fa fa-adn" aria-hidden="true"></i> <span class="title">Acuse de Derecho</span>
                 </a>
             </li>
         {/if}

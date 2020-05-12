@@ -861,6 +861,62 @@
 			// 
 			return $result;
 		}
+
+		// ACTUALIZADO RC
+		public function DefaultGroupCapacitador()
+		{
+			$this->Util()->DB()->setQuery("SELECT *, user_subject.status AS status 
+												FROM user_subject
+													LEFT JOIN user ON user_subject.alumnoId = user.userId
+												WHERE courseId = '" . $this->getCourseId() . "' AND user.activo = 1
+												ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC");
+			$result = $this->Util()->DB()->GetResult();
+			$student= new Student();
+			foreach($result as $fila)
+			{
+			    $x = 0;
+				$alumnos = $student->EnumerateTotal();	   
+				foreach($alumnos as $alumno)
+				{	
+					if($fila["alumnoId"] == $alumno["userId"] )
+						$x = 1;
+				}
+				if($x == 0)
+				{
+					$student->setAlumnoId($fila["alumnoId"]);
+					$student->DeleteLimpia();
+				}
+			}
+			
+			
+			foreach($result as $key => $res)
+			{
+				$group_activity = new GroupActivity;
+				$group_activity->setCourseId($this->getCourseId());
+				$actividades = $group_activity->Enumerate();
+				$result[$key]["names"] = $this->Util()->DecodeTiny($result[$key]["names"]);
+				$result[$key]["lastNamePaterno"] = $this->Util()->DecodeTiny($result[$key]["lastNamePaterno"]);
+				$result[$key]["lastNameMaterno"] = $this->Util()->DecodeTiny($result[$key]["lastNameMaterno"]);
+				
+				$result[$key]{"addepUp"} = 0;
+				foreach($actividades as $activity)
+				{
+					if($activity["score"] <= 0)
+						continue;
+
+					$this->Util()->DB()->setQuery("SELECT ponderation FROM group_activity_score
+													WHERE activityId = " . $activity["activityId"] . " AND userId = " . $res["alumnoId"]);
+					$score = $this->Util()->DB()->GetSingle();
+
+					$result[$key]{"score"}[] = $score;
+					$realScore = $score * $activity["score"] / 100;
+					$result[$key]{"realScore"}[] = $realScore;
+					
+					$result[$key]{"addepUp"} += $realScore;
+				}
+			}
+			return $result;
+		}
 		
 		public function TeamsModule()
 		{

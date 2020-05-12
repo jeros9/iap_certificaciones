@@ -19,9 +19,12 @@
                 <textarea name="description" id="description" value="" cols="30" class="form-control">{$infos.description}</textarea>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12 text-center" id="espere"></div>
+        </div>
         <div class="form-actions">
             <div class="row">
-                <div class="col-md-offset-3 col-md-9">
+                <div class="text-center col-md-12">
                     <input type="submit" class="btn green submitForm" id="addMajor" name="addMajor"/>
                     <button type="button" class="btn default closeModal">Cancelar</button>
                 </div>
@@ -36,4 +39,8 @@
         theme : "advanced",
         skin : "o2k7"
     });
+    
+    $(document).on('click', '#addMajor', function() {
+		$('#espere').html('<h3><i class="fa fa-spinner fa-pulse fa-fw"></i> Espere por favor...</h3><br><br>');
+    })
 </script>

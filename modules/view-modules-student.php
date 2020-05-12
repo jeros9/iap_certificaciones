@@ -47,7 +47,30 @@
 
 		if($tipo == "actividades")
 		{
+			$date = date("d-m-Y");
+			$smarty->assign('date', $date);
+			$group_activity->setCourseId($courseId);
+			$actividades = $group_activity->Enumerate();
+			$smarty->assign('actividades', $actividades);
 
+			$totalScore = 0;
+			foreach($actividades as $res)
+				$totalScore += $res["realScore"];
+			
+			$examenes = $group_activity->Enumerate("Examen");
+			
+			/* foreach($examenes as $res)
+				$totalScore += $res["realScore"]; */
+			
+			if($_SESSION["exito"] == "si")
+			{
+				$smarty->assign('exito', "si");
+				$smarty->assign('tareaId', $_SESSION["tareaId"]);
+				unset($_SESSION["exito"]);
+				unset($_SESSION["tareaId"]);
+			}
+			
+			$smarty->assign('totalScore', $totalScore);
 		}
 
 		if($tipo == "recursos")

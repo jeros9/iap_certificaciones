@@ -124,41 +124,30 @@
 			return $result;
 		}
 		
+		// ACTUALIZADO RC
 		function Randomize($questions, $max)
 		{
 			$keys = array_rand($questions, $max);
-			
 			foreach($keys as $key)
-			{
 				$returnArray[] = $questions[$key];
-			}
 			return $returnArray;
 		}
 
+		// ACTUALIZADO RC
 		public function Access($maxTries)
 		{
-			
-			 $sql = "
-				SELECT try FROM activity_score
-				WHERE activityId = '".$this->getActivityId()."'
-				AND userId = '".$this->getUserId()."'";
-			// exit;
+			$sql = "SELECT try FROM group_activity_score WHERE activityId = " . $this->getActivityId() . " AND userId = " . $this->getUserId();
 			$this->Util()->DB()->setQuery($sql);
 			$try = $this->Util()->DB()->GetSingle();
 			if($try < $maxTries)
-			{
 				return 1;
-			}
-			
 			return 0;
 		}
 
+		// ACTUALIZADO RC
 		public function TestScore()
 		{
-			$this->Util()->DB()->setQuery("
-				SELECT ponderation FROM activity_score
-				WHERE activityId = '".$this->getActivityId()."'
-				AND userId = '".$this->getUserId()."'");
+			$this->Util()->DB()->setQuery("SELECT ponderation FROM group_activity_score WHERE activityId = " . $this->getActivityId() . " AND userId = " . $this->getUserId());
 			$score = $this->Util()->DB()->GetSingle();
 			return $score;
 		}
@@ -211,96 +200,56 @@
 			return $result;			
 		}
 		
+		// ACTUALIZADO RC
 		function SendTest($answers)
 		{
-			//print_r($this);
 			$questionScore = $this->PonderationPerQuestion();
-			
 			$score = 0;
-			
 			if(is_array($answers))
 			{
 				foreach($answers as $key => $option)
 				{
-					$sql = "SELECT answer FROM 
-								activity_test 
-							WHERE
-									testId='" .$key. "'";
+					$sql = "SELECT answer FROM group_activity_test WHERE testId = " . $key;
 					$this->Util()->DB()->setQuery($sql);
 					$result = $this->Util()->DB()->GetSingle();
 					
 					if(!$result)
-					{
 						$result = "opcionA";
-					}
 					
 					if($option == $result)
-					{
 						$score += $questionScore;
-					}
 				}
 			}
 			
-			$this->Util()->DB()->setQuery("
-				SELECT COUNT(*)
-				FROM activity_score
-				WHERE activityId = '".$this->getActivityId()."' AND userId = '".$this->getUserId()."'");
+			$this->Util()->DB()->setQuery("SELECT COUNT(*) FROM group_activity_score WHERE activityId = " . $this->getActivityId() . " AND userId = " . $this->getUserId());
 			$count = $this->Util()->DB()->GetSingle();
-						
+
 			if($count == 0)
 			{
-				$this->Util()->DB()->setQuery("
-					INSERT INTO  `activity_score` (
-						`userId` ,
-						`activityId` ,
-						`try` ,
-						`ponderation`
-						)
-						VALUES (
-						'".$this->getUserId()."',  
-						'".$this->getActivityId()."',  
-						'1',  
-						'".$score."');");
+				$this->Util()->DB()->setQuery("INSERT INTO group_activity_score (userId, activityId, try, ponderation) VALUES(" . $this->getUserId() . ", " . $this->getActivityId() . ", 1, " . $score . ")");
 				$result = $this->Util()->DB()->InsertData();					
 			}
 			else
 			{
-				$this->Util()->DB()->setQuery("
-					UPDATE `activity_score` SET
-						`ponderation` = '".$score."',
-						try = try + 1
-					WHERE
-						`userId` = '".$this->getUserId()."' AND activityId = '".$this->getActivityId()."' LIMIT 1");
+				$this->Util()->DB()->setQuery("UPDATE group_activity_score SET ponderation = " . $score . ", try = try + 1 WHERE userId = " . $this->getUserId() . " AND activityId = " . $this->getActivityId() . " LIMIT 1");
 				$result = $this->Util()->DB()->UpdateData();					
 			}
-
 			unset($_SESSION["timeLimit"]);
-			
-			$student=new Student;
-			$student->setUserId($this->getUserId);
-			$infoStudent=$student->GetInfo();
-			
-			$mail = new PHPMailer(); // defaults to using php "mail()"
-			//contenido del correo
-			$body = "Has hecho realizado examen correctament <br/> Calificacion obtenida:  ".$score;
-			//asunto o tema
-			$subject ="Examen finalizado Correctamente";
-			//("quienloenvia@hotmail.com", "nombre de quien lo envia");
-			$mail->SetFrom("admin@iapchiapasonline.com", "Administrador del Sistema");
-			//correo y nombre del destinatario
-			$mail->AddAddress($infoStudent['email'], $infoStudent['names']);
-			
-			$mail->Subject    = $subject;
-			$mail->MsgHTML($body);
-			
-			$mail->Send();
-			
-			
-			
-			
+
+			$sendmail = new Sendmail();
+			$message[3]["subject"] = "Examen finalizado Correctamente";
+			$message[3]["body"] = "Has realizado el examen correctamente <br/> Calificacion obtenida: " . $score;
+			$details_body = array();
+			$details_subject = array();
+			$attachment = "";
+			$fileName = "";
+			$nombremail = $infoStudent['names'];
+            $correo = strtolower($infoStudent['email']);
+			if($correo != '')
+				$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $correo, $nombremail, $attachment, $fileName);
+				
 			$this->Util()->setError(90000, 'complete', "Has respondido el examen Satisfactoriamente. Tu resultado esta abajo.");
 			$this->Util()->PrintErrors();
-
 		}
 		
 	}

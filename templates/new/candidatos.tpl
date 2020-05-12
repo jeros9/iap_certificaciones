@@ -1,0 +1,1 @@
+<div id="tblContent">{include file="lists/new/candidatos.tpl"}</div>

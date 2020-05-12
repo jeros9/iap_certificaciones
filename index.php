@@ -216,6 +216,9 @@ $pages = array(
 	'add-group-resource',
 	'edit-group-resource',
 	'add-group-noticia',
+	'upload-group-homework',
+	'make-group-test',
+	'candidatos'
 );
 
 if(!in_array($_GET['page'], $pages))

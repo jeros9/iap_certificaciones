@@ -232,6 +232,9 @@ $pages = array(
     'add-group-resource',
     'edit-group-resource',
     'add-group-noticia',
+    'view-description-group-activity',
+    'upload-group-homework',
+    'make-group-test'
 
 );
 

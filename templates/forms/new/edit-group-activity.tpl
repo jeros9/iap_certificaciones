@@ -8,9 +8,9 @@
             <label class="col-md-3 control-label">Tipo de Actividad:</label>
             <div class="col-md-8">
                 <select id="activityType" name="activityType" class="form-control">
-                    <option value="Lectura" {if $actividad.activityType == "Lectura"} selected="selected"{/if}>Lectura</option>
                     <option value="Tarea" {if $actividad.activityType == "Tarea"} selected="selected"{/if}>Tarea</option>
                     <option value="Examen" {if $actividad.activityType == "Examen"} selected="selected"{/if}>Examen</option>
+                    <option value="Lectura" {if $actividad.activityType == "Lectura"} selected="selected"{/if}>Lectura</option>
                     <option value="Otro" {if $actividad.activityType == "Otro"} selected="selected"{/if}>Otro</option>
                 </select>
             </div>

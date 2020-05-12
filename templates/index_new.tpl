@@ -7,6 +7,10 @@
 <!-- BEGIN HEAD -->
 
 <head>
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
 	<meta charset="ISO-8859-1" />
 	<title>Sistema Red Conocer | IAP Chiapas</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

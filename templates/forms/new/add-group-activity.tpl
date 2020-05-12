@@ -7,9 +7,9 @@
             <label class="col-md-3 control-label">Tipo de Actividad:</label>
             <div class="col-md-8">
                 <select id="activityType" name="activityType" class="form-control">
-                    <option value="Lectura">Lectura</option>
                     <option value="Tarea">Tarea</option>
                     <option value="Examen">Examen</option>
+                    <option value="Lectura">Lectura</option>
                     <option value="Otro">Otro</option>
                 </select>
             </div>

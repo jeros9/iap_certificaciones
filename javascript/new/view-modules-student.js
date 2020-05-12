@@ -70,3 +70,43 @@ function send(){
     });
 	
 }
+
+
+
+// Actividades
+
+function deleteActividad(Id){
+	var resp = confirm("Esta seguro de eliminar la actividad?");
+	if(!resp)
+		return;
+	$.ajax({
+	  	type: "POST",
+	  	url: WEB_ROOT+'/ajax/group-module.php',
+	  	data: $("#frmGral").serialize(true)+'&Id='+Id+'&type=deleteActividad',
+		beforeSend: function(){			
+			// $('#tblContent').html(LOADER3);
+		},
+	  	success: function(response) {	
+			console.log(response)
+			var splitResp = response.split("[#]");
+			if($.trim(splitResp[0]) == "ok") {
+				location.reload();
+			}
+			else if($.trim(splitResp[0]) == "fail"){
+				alert(response);
+			}
+		}
+    });
+}
+
+function verRetro(Id) {
+	$("#divRetro_" + Id).toggle();
+}
+
+function DoTest(id)
+{
+    var con = confirm("¿Está seguro de que desea presentar este examen? El tiempo empezará a correr despues de aceptar.");
+    if(!con)
+        return;
+    window.location = WEB_ROOT + "/make-group-test/id/" + id;
+}

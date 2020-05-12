@@ -5,7 +5,7 @@
         <td align="center" style="width:20px !important">
             {if $item.homework.path ne ''}
                 {assign var="entrega" value="1"}
-                <a href="{$WEB_ROOT}/download.php?file=homework/{$item.homework.path}">
+                <a href="{$WEB_ROOT}/download.php?file=capacitador_homework/{$item.homework.path}">
                     {if $item.homework.nombre}
                         {$item.homework.nombre}
                     {else}
