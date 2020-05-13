@@ -26,9 +26,9 @@
         </li>
 
         {if $User.type == "student" && $myModule.evalOk eq "si"}
-            <li class="nav-item {if $page == "view-modules-student" and $tipo eq "resultado"} active {/if} ">
-                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}" class="nav-link nav-toggle">
-                    <i class="fa fa-check-square-o"></i> <span class="title">Evaluación Diagnóstica (Resultados)</span>
+            <li class="nav-item {if $page == "view-modules-student" and $tipo eq "avisos"} active {/if} ">
+                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=avisos" class="nav-link nav-toggle">
+                    <i class="fa fa-bullhorn"></i> <span class="title"> Avisos</span>
                 </a>
             </li>
             <li class="nav-item {if $page == "view-modules-student" and $tipo eq "actividades"} active {/if} ">
@@ -41,9 +41,9 @@
                     <i class="fa fa-files-o"></i> <span class="title">Recursos de Apoyo</span>
                 </a>
             </li>
-            <li class="nav-item {if $page == "view-modules-student" and $tipo eq "avisos"} active {/if} ">
-                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=avisos" class="nav-link nav-toggle">
-                    <i class="fa fa-bullhorn"></i> <span class="title"> Avisos</span>
+            <li class="nav-item {if $page == "view-modules-student" and $tipo eq "resultado"} active {/if} ">
+                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}" class="nav-link nav-toggle">
+                    <i class="fa fa-check-square-o"></i> <span class="title">Evaluación Diagnóstica (Resultados)</span>
                 </a>
             </li>
             <li <li class="nav-item">

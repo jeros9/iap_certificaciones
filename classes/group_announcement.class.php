@@ -77,7 +77,7 @@
                     $nombremail = $this->Util()->acento($value["names"]);
                     $correo = strtolower($value['email']);
                     if($correo != '')
-				        $sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, "carloszh04@gmail.com", $nombremail, $attachment, $fileName); 		
+				        $sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $correo, $nombremail, $attachment, $fileName); 		
                 }
 			}
 			$this->Util()->DB()->setQuery("INSERT INTO group_announcement(courseId, courseModuleId, title, date, personalId, description)

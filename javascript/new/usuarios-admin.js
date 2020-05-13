@@ -422,10 +422,10 @@ function busEval(){
 function sendInfoEvaluador(){
 	
 	Id = 1;
-	/* var evaluador = $('#sel_evaluador').val();
+	var evaluador = $('#sel_evaluador').val();
 	var capacitador = $('#sel_capacitador').val();
-	if(evaluador != capacitador)
-	{ */
+	if( (evaluador != capacitador) || (evaluador == "") || ("" == capacitador) )
+	{
 		$.ajax({
 				type: "POST",
 				url: WEB_ROOT+'/ajax/new/usuarios.php',
@@ -456,11 +456,11 @@ function sendInfoEvaluador(){
 				
 			}
 		});
-	/* }
+	}
 	else
 	{
 		ShowStatusPopUp("El evaluador y el capacitador deben ser diferentes.");
 		console.log('Evaluador: ' + evaluador + ' Capacitador: ' + capacitador);
-	} */
+	}
 
 }
