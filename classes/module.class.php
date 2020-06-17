@@ -1224,6 +1224,13 @@
 		return $result;
 		
 	}
-	
+
+	public function lives()
+	{
+		$sql = "SELECT * FROM past_lives WHERE courseModuleId = " . $this->courseModuleId;
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
 }	
 ?>

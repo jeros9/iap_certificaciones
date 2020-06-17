@@ -25,6 +25,16 @@
 			$titulo = "Avisos";
 			break;
 
+		case "live":
+			$tipo = "live";
+			$titulo = "Transmisiones en Vivo";
+			break;
+
+		case "videos":
+			$tipo = "videos";
+			$titulo = "Galería de Videos";
+			break;
+
 		default:
 			$tipo = "resultado";
 			$titulo = "Evalución Diagnóstica";
@@ -85,6 +95,16 @@
 			$announcements = $group_announcement->Enumerate($courseId);
 			$smarty->assign('announcements', $announcements);
 		}
+
+		//if($tipo == "videos")
+		//{
+			$videos = $module->lives();
+			$hasVideos = false;
+			if(count($videos) > 0)
+				$hasVideos = true;
+			$smarty->assign('videos', $videos);
+			$smarty->assign('hasVideos', $hasVideos);
+		//}
 
 		$test->setActivityId($myModule["infoActivity"]["activityId"]);
 		$myTest = $test->Enumerate($verResultado,$_SESSION['User']['userId']);

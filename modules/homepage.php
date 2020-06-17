@@ -47,7 +47,13 @@ $x=0;
 	// $activeCourses = $student->StudentCourses("activo", "si");
 	// echo "<pre>"; print_r($activeCourses);
 	// exit;
+	$live = $student->StudentLive();
+	$hasLive = false;
+	if($live != '')
+		$hasLive = true;
 	$smarty->assign("activeCourses", $activeCourses);	
+	$smarty->assign("hasLive", $hasLive);	
+	$smarty->assign("live", $live);	
 
 	$inactiveCourses = $student->StudentCourses("inactivo", "si");
 	$smarty->assign("inactiveCourses", $inactiveCourses);	

@@ -294,87 +294,102 @@
                 </div>
             </div>
 			{else}
-				  <div class="row">
-                <div class="col-md-12">
-                    <!-- BEGIN PORTLET -->
-                    <div class="portlet light ">
-                        <div class="portlet-title">
-                            <div class="caption caption-md">
-                                <i class="icon-bar-chart theme-font hide"></i>
-                                <span class="caption-subject font-blue-madison bold uppercase">Certificación Activa</span>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div class="table-scrollable table-scrollable-borderless">
-                                <table class="table table-hover table-light" >
-                                    <thead>
-                                    <tr class="uppercase">
-
-                                        <!-- <th style="text-align: center"> Tipo </th>-->
-                                        <th style="text-align: center"> Nombre </th>
-										 <th style="text-align: center"> Grupo </th>
-                                        <!--<th style="text-align: center"> Modalidad </th>-->
-                                        <th style="text-align: center"> Fecha Inicial </th>
-                                        <th style="text-align: center"> Fecha Final </th>
-                                        <!--<th style="text-align: center"> Modulos </th>-->
-                                       
-                                        <th style="text-align: center"> Ingresar </th>
-                                        <th style="text-align: center"> Certificado </th>
-                                    </tr>
-                                    </thead>
-                                    {foreach from=$activeCourses item=subject}
-                                    <tr>
-                                       
-                                       <!-- <td align="center">{$subject.majorName}</td>-->
-                                        <td align="center">{$subject.name}</td>
-										  <td align="center">{$subject.group}
-                                              <!-- <td align="center">{$subject.modality}</td>-->
-                                        <td align="center">{$subject.initialDate|date_format:"%d-%m-%Y"}</td>
-                                        <td align="center">{$subject.finalDate|date_format:"%d-%m-%Y"}</td>
-                                        <!--<td align="center">{$subject.courseModule}-->
-                                      
-                                        <td align="center">
-											{if $subject.evalDocenteCompleta eq 'no'}
-                                                <a href="{$WEB_ROOT}/view-modules-student/id/{$subject.courseId}" title="Ver Modulo de Curso"  style="color:#000" target="_top" >
-                                                    <i class="fa fa-sign-in fa-lg"></i>
-                                                </a>
-                                            {else}
-                                                <a href="{$WEB_ROOT}/view-modules-student/id/{$subject.courseId}&tipo=avisos" title="Ver Modulo de Curso"  style="color:#000" target="_top" >
-                                                    <i class="fa fa-sign-in fa-lg"></i>
-                                                </a>
-                                            {/if}
-                                        </td>
-                                        <td align="center">
-                                            {if $subject.certificacion_pdf != ""}
-                                                <!--a href="{$WEB_ROOT}/alumnos/repositorio/{$subject.certificacion_pdf}" target="_blank">
-                                                    <i class="material-icons">
-                                                        assignment_returned
-                                                    </i>
-                                                </a-->
-                                                <a href="{$WEB_ROOT}/graybox.php?page=student-certificado&userId={$subject.alumnoId}&subjectId={$subject.subjectId}&auxTpl=1" data-target="#ajax" data-toggle="modal" data-width="1000px" title="Descargar Certificado">
-                                                    <i class="material-icons">assignment_returned</i>
-                                                </a> 
-                                            {else}
-                                                <i class="material-icons" title="NO DISPONIBLE">
-                                                    block
-                                                </i>
-                                            {/if}
-                                        </td>
-                                     </tr>
-                                        {foreachelse}
-                                        <tr>
-                                            <td colspan="12" align="center">No se encontr&oacute; ning&uacute;n registro.</td>
-                                        </tr>
-
-                                    {/foreach}
-
-                                </table>
+                {if $hasLive eq true}
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6">
+                            <div class="panel panel-danger">
+                                <div class="panel-heading"><i class="fa fa-video-camera"></i> Transmisión en Vivo</div>
+                                <div class="panel-body text-center">
+                                    <h4><b>Certificación:</b> {$live['name']}</h4>
+                                    <a href="{$WEB_ROOT}/view-modules-student/id/{$live['courseId']}&tipo=live" title="Ver Transmisión" class="btn btn-danger">
+                                        <i class="fa fa-play"></i> Ver Transmisión
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- END PORTLET -->
+                {/if}
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BEGIN PORTLET -->
+                        <div class="portlet light ">
+                            <div class="portlet-title">
+                                <div class="caption caption-md">
+                                    <i class="icon-bar-chart theme-font hide"></i>
+                                    <span class="caption-subject font-blue-madison bold uppercase">Certificación Activa</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="table-scrollable table-scrollable-borderless">
+                                    <table class="table table-hover table-light" >
+                                        <thead>
+                                        <tr class="uppercase">
+
+                                            <!-- <th style="text-align: center"> Tipo </th>-->
+                                            <th style="text-align: center"> Nombre </th>
+                                            <th style="text-align: center"> Grupo </th>
+                                            <!--<th style="text-align: center"> Modalidad </th>-->
+                                            <th style="text-align: center"> Fecha Inicial </th>
+                                            <th style="text-align: center"> Fecha Final </th>
+                                            <!--<th style="text-align: center"> Modulos </th>-->
+                                        
+                                            <th style="text-align: center"> Ingresar </th>
+                                            <th style="text-align: center"> Certificado </th>
+                                        </tr>
+                                        </thead>
+                                        {foreach from=$activeCourses item=subject}
+                                        <tr>
+                                        
+                                        <!-- <td align="center">{$subject.majorName}</td>-->
+                                            <td align="center">{$subject.name}</td>
+                                            <td align="center">{$subject.group}
+                                                <!-- <td align="center">{$subject.modality}</td>-->
+                                            <td align="center">{$subject.initialDate|date_format:"%d-%m-%Y"}</td>
+                                            <td align="center">{$subject.finalDate|date_format:"%d-%m-%Y"}</td>
+                                            <!--<td align="center">{$subject.courseModule}-->
+                                        
+                                            <td align="center">
+                                                {if $subject.evalDocenteCompleta eq 'no'}
+                                                    <a href="{$WEB_ROOT}/view-modules-student/id/{$subject.courseId}" title="Ver Modulo de Curso"  style="color:#000" target="_top" >
+                                                        <i class="fa fa-sign-in fa-lg"></i>
+                                                    </a>
+                                                {else}
+                                                    <a href="{$WEB_ROOT}/view-modules-student/id/{$subject.courseId}&tipo=avisos" title="Ver Modulo de Curso"  style="color:#000" target="_top" >
+                                                        <i class="fa fa-sign-in fa-lg"></i>
+                                                    </a>
+                                                {/if}
+                                            </td>
+                                            <td align="center">
+                                                {if $subject.certificacion_pdf != ""}
+                                                    <!--a href="{$WEB_ROOT}/alumnos/repositorio/{$subject.certificacion_pdf}" target="_blank">
+                                                        <i class="material-icons">
+                                                            assignment_returned
+                                                        </i>
+                                                    </a-->
+                                                    <a href="{$WEB_ROOT}/graybox.php?page=student-certificado&userId={$subject.alumnoId}&subjectId={$subject.subjectId}&auxTpl=1" data-target="#ajax" data-toggle="modal" data-width="1000px" title="Descargar Certificado">
+                                                        <i class="material-icons">assignment_returned</i>
+                                                    </a> 
+                                                {else}
+                                                    <i class="material-icons" title="NO DISPONIBLE">
+                                                        block
+                                                    </i>
+                                                {/if}
+                                            </td>
+                                        </tr>
+                                            {foreachelse}
+                                            <tr>
+                                                <td colspan="12" align="center">No se encontr&oacute; ning&uacute;n registro.</td>
+                                            </tr>
+
+                                        {/foreach}
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PORTLET -->
+                    </div>
                 </div>
-            </div>
 			{/if}
             
         </div>

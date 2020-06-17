@@ -24,5 +24,6 @@ $group->setCourseId($_GET['id']);
 $theGroup = $group->DefaultGroupCapacitador();
 
 $smarty->assign('theGroup', $theGroup);
+$smarty->assign('groupId', $_GET["id"]);
 
 ?>

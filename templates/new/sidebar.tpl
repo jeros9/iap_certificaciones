@@ -26,6 +26,13 @@
         </li>
 
         {if $User.type == "student" && $myModule.evalOk eq "si"}
+            {if $myModule['ytLive'] neq ''}
+                <li class="nav-item {if $page == "view-modules-student" and $tipo eq "live"} active {/if} ">
+                    <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=live" class="nav-link nav-toggle">
+                        <i class="fa fa-video-camera"></i> <span class="title"> Live</span>
+                    </a>
+                </li>
+            {/if}
             <li class="nav-item {if $page == "view-modules-student" and $tipo eq "avisos"} active {/if} ">
                 <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=avisos" class="nav-link nav-toggle">
                     <i class="fa fa-bullhorn"></i> <span class="title"> Avisos</span>
@@ -51,6 +58,13 @@
                     <i class="fa fa-adn" aria-hidden="true"></i> <span class="title">Acuse de Derecho</span>
                 </a>
             </li>
+            {if $hasVideos eq true}
+                <li class="nav-item {if $page == "view-modules-student" and $tipo eq "videos"} active {/if} ">
+                    <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=videos" class="nav-link nav-toggle">
+                        <i class="fa fa-file-video-o"></i> <span class="title"> Videos</span>
+                    </a>
+                </li>
+            {/if}
         {/if}
 		
         {if $AccessMod[32] == 1 || $AccessMod[33] == 1}

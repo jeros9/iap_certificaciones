@@ -19,6 +19,10 @@
 					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-resources.tpl"}</div>
 				{elseif $tipo eq "avisos"}
 					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-announcements.tpl"}</div>
+				{elseif $tipo eq "live"}
+					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-live.tpl"}</div>
+				{elseif $tipo eq "videos"}
+					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-videos.tpl"}</div>
 				{/if}
 			{else}
 				<div id="tblContent">{include file="{$DOC_ROOT}/templates/forms/make-test.tpl"}</div>

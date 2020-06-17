@@ -4029,8 +4029,30 @@ class Student extends User
 		$survey['answers'] = $answers;
 		return $survey;
 	}
-	
-	
+
+	function StudentLive($status = NULL, $active = NULL)
+	{
+		
+		if($status != NULL)
+			$status = " AND status = '" . $status . "'";
+
+		if($active != NULL)
+			$active = " AND course.active = '" . $active . "'";
+		 $sql = "SELECT
+					*, subject.name AS name, major.name AS majorName, repositorio.ruta AS certificacion_pdf, course_module.ytLive
+				FROM
+					user_subject
+				LEFT JOIN course ON course.courseId = user_subject.courseId
+				LEFT JOIN subject ON subject.subjectId = course.subjectId	
+				LEFT JOIN major ON major.majorId = subject.tipo
+				LEFT JOIN repositorio ON (repositorio.userId = alumnoId AND repositorio.subjectId = course.subjectId AND repositorio.tipodocumentoId = 5)
+				INNER JOIN course_module ON course_module.courseId = course.courseId 
+				WHERE course_module.ytLive <> '' AND alumnoId = '" . $this->getUserId() . "' " . $status . " " . $active . " 
+				ORDER BY course_module.initialDate DESC LIMIT 1";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetRow();
+		return $result;
+	}
 }
 
 ?>
