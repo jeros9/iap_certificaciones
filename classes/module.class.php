@@ -1227,7 +1227,7 @@
 
 	public function lives()
 	{
-		$sql = "SELECT * FROM past_lives WHERE courseModuleId = " . $this->courseModuleId;
+		$sql = "SELECT *, DATE_FORMAT(created_at, '%d/%m/%Y') AS date_dmy FROM past_lives WHERE courseModuleId = " . $this->courseModuleId;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;

@@ -4,6 +4,7 @@
             {foreach from=$videos item=video}
                 <div class="col-md-6">
                     <iframe width="100%" height="315" src="https://www.youtube.com/embed/{$video.code}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <h5><i class="fa fa-calendar"></i> {$video.date_dmy}</h5>
                     <h3 class="text-center">{$video.title}</h3>
                 </div>
             {/foreach}
