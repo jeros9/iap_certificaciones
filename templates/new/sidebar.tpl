@@ -175,7 +175,7 @@
 			</ul>
 		</li>	
 		
-		 <li class="nav-item {if  $page == "reporte-region" || $page == "reporte-b"} active {/if} ">
+		 <li class="nav-item {if  $page == "reporte-region" || $page == "reporte-b" || $page == "reporte-certificaciones"} active {/if} ">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="icon-diamond"></i>
                 <span class="title">Reportes</span>
@@ -210,7 +210,7 @@
 					</a>
                  </li>
 				 {/if}
-				 {if  $User.positionId == 1}
+				 {if  $User.positionId == 1 || $AccessMod[45] == 1}
 				 <li class="nav-item  ">
 					<a href="{$WEB_ROOT}/reporte-certificaciones" class="nav-link ">
 						<span class="title">Certificaciones</span>
