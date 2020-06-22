@@ -151,8 +151,9 @@ switch($_POST["type"])
 
 	case 'buscarSolicitudCer':
 		$courseId   = $_POST['grupos'];
-		$municipios = $course->reporteMunicipios($courseId);
-		$personas   = $course->reporteMunicipiosPersonas($courseId);
+		$tipo       = $_POST['tipoSolicitante'];
+		$municipios = $course->reporteMunicipios($courseId, $tipo);
+		$personas   = $course->reporteMunicipiosPersonas($courseId, $tipo);
 		$total_municipios = count($municipios);
 		$total_personas = 0;
 		foreach($municipios as $item)

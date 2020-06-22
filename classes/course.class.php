@@ -1786,8 +1786,11 @@
 		
 		}
 
-		function reporteMunicipios($courseId)
+		function reporteMunicipios($courseId, $tipo)
 		{
+			$condicion = "";
+			if($tipo > 0)
+				$condicion = " AND u.tipoSolicitanteId = " . $tipo;
 			$sql = "SELECT
 						mn.nombre,
 						COUNT(u.userId) AS cantidad
@@ -1800,15 +1803,19 @@
 					WHERE 
 						us.courseId = " . $courseId . "
 					AND
-						type = 'student' GROUP BY u.ciudadt 
+						type = 'student' " . $condicion . "
+					GROUP BY u.ciudadt 
 					ORDER BY mn.nombre";
 			$this->Util()->DB()->setQuery($sql);
 			$result = $this->Util()->DB()->GetResult();
 			return $result;
 		}
 
-		function reporteMunicipiosPersonas($courseId)
+		function reporteMunicipiosPersonas($courseId, $tipo)
 		{
+			$condicion = "";
+			if($tipo > 0)
+				$condicion = " AND u.tipoSolicitanteId = " . $tipo;
 			$sql = "SELECT
 						u.controlNumber,
 						CONCAT_WS(' ', u.lastNamePaterno, u.lastNameMaterno, u.names) AS nombre,
@@ -1822,7 +1829,7 @@
 					WHERE 
 						us.courseId = " . $courseId . "
 					AND
-						type = 'student'
+						type = 'student' " . $condicion . "
 					ORDER BY u.lastNamePaterno, u.lastNameMaterno, u.names";
 			$this->Util()->DB()->setQuery($sql);
 			$result = $this->Util()->DB()->GetResult();

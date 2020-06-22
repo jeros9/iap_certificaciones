@@ -1,5 +1,4 @@
 function buscarSolicitud(){
-	
 	$.ajax({
 	  	type: "POST",
 	  	url: WEB_ROOT+'/ajax/solicitud.php',

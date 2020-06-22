@@ -7,8 +7,10 @@
 	$lstCertificaciones = $subject->Enumerate();
 	$smarty->assign('lstCertificaciones', $lstCertificaciones);
 	$smarty->assign('arrPage', $arrPage);
+	$lstSolicitante = $student->EnumerateSolicitantes();	
 	// -------------------------------------------------------------------------------------------------
 	
 	$smarty->assign('mnuMain','cursos');
 	$smarty->assign('mnuSubmain','historial');
+	$smarty->assign('lstSolicitante', $lstSolicitante);
 ?>
