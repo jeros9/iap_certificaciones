@@ -228,87 +228,87 @@
         <!-- END BEGIN PROFILE SIDEBAR -->
         <!-- BEGIN PROFILE CONTENT -->
         <div class="profile-content">
-		{if $info.actualizado eq "no"}
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- BEGIN PORTLET -->
-                    <div class="portlet light ">
-                        <div class="portlet-title tabbable-line">
-                            <div class="caption caption-md">
-                                <i class="icon-globe theme-font hide"></i>
-                                <span class="caption-subject font-blue-madison bold uppercase">Datos para fichas de registros CONOCER</span>
+            {if $hasLive eq true}
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-6">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading"><i class="fa fa-video-camera"></i> Transmisión en Vivo</div>
+                            <div class="panel-body text-center">
+                                <h4><b>Certificación:</b> {$live['name']}</h4>
+                                <a href="{$WEB_ROOT}/view-modules-student/id/{$live['courseId']}&tipo=live" title="Ver Transmisión" class="btn btn-danger">
+                                    <i class="fa fa-play"></i> Ver Transmisión
+                                </a>
                             </div>
                         </div>
-                        <div class="portlet-body">
-                            <!--BEGIN TABS-->
-                            <div class="tab-content">
-                                <div class="tab-pane " id="tab_1_2">
+                    </div>
+                </div>
+            {/if}
+		    {if $info.actualizado eq "no"}
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BEGIN PORTLET -->
+                        <div class="portlet light ">
+                            <div class="portlet-title tabbable-line">
+                                <div class="caption caption-md">
+                                    <i class="icon-globe theme-font hide"></i>
+                                    <span class="caption-subject font-blue-madison bold uppercase">Datos para fichas de registros CONOCER</span>
                                 </div>
-                                <div class="tab-pane active" id="tab_1_1">
-                                    <div class="scroller" style="height: 137px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
-										<div style="text-align:justify">
-											Doy mi consentimiento al CONOCER para que, en términos del artículo 22 de la LEY FEDERAL DE TRANSPARENCIA Y ACCESO A LA INFORMACIÓN PÚBLICA GUBERNAMENTAL, difunda, distribuya y publique la información contenida en el documento que se inscribe, para ser transmitida a instituciones públicas o privadas para agregar mi información a bolsas de trabajo electrónicas o en línea y facilitar mi localización en caso de que alguna otra Institución pública o privada requiera personal con las competencias certificadas con las que cuento.
-										</div>
-										<br>
-										<br>
-										<br>
-										
-										
+                            </div>
+                            <div class="portlet-body">
+                                <!--BEGIN TABS-->
+                                <div class="tab-content">
+                                    <div class="tab-pane " id="tab_1_2">
                                     </div>
-									<form id="frmConfirma">
-									<center>
-										<b>No autorizo</b>
-										<label class="switch">
-										  <input type="checkbox" name="confirma" id="confirma">
-										  <span class="slider round"></span>
-										</label>
-										<b>Si autorizo</b>
-									</form>
+                                    <div class="tab-pane active" id="tab_1_1">
+                                        <div class="scroller" style="height: 137px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                            <div style="text-align:justify">
+                                                Doy mi consentimiento al CONOCER para que, en términos del artículo 22 de la LEY FEDERAL DE TRANSPARENCIA Y ACCESO A LA INFORMACIÓN PÚBLICA GUBERNAMENTAL, difunda, distribuya y publique la información contenida en el documento que se inscribe, para ser transmitida a instituciones públicas o privadas para agregar mi información a bolsas de trabajo electrónicas o en línea y facilitar mi localización en caso de que alguna otra Institución pública o privada requiera personal con las competencias certificadas con las que cuento.
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            
+                                            
+                                        </div>
+                                        <form id="frmConfirma">
+                                        <center>
+                                            <b>No autorizo</b>
+                                            <label class="switch">
+                                            <input type="checkbox" name="confirma" id="confirma">
+                                            <span class="slider round"></span>
+                                            </label>
+                                            <b>Si autorizo</b>
+                                        </form>
+                                    </div>
                                 </div>
+                                <!--END TABS-->
                             </div>
-                            <!--END TABS-->
                         </div>
+                        <!-- END PORTLET -->
                     </div>
-                    <!-- END PORTLET -->
                 </div>
-            </div>
-           {/if}
+            {/if}
 			{if $info.actualizado eq "no"}
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- BEGIN PORTLET -->
-                    <div class="portlet light ">
-                        <div class="portlet-title">
-                            <div class="caption caption-md">
-                                <i class="icon-bar-chart theme-font hide"></i>
-                                <span class="caption-subject font-blue-madison bold uppercase"></span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BEGIN PORTLET -->
+                        <div class="portlet light ">
+                            <div class="portlet-title">
+                                <div class="caption caption-md">
+                                    <i class="icon-bar-chart theme-font hide"></i>
+                                    <span class="caption-subject font-blue-madison bold uppercase"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div class="table-scrollable table-scrollable-borderless">
-                                {include file="{$DOC_ROOT}/templates/forms/completo.tpl"}
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END PORTLET -->
-                </div>
-            </div>
-			{else}
-                {if $hasLive eq true}
-                    <div class="row">
-                        <div class="col-md-offset-3 col-md-6">
-                            <div class="panel panel-danger">
-                                <div class="panel-heading"><i class="fa fa-video-camera"></i> Transmisión en Vivo</div>
-                                <div class="panel-body text-center">
-                                    <h4><b>Certificación:</b> {$live['name']}</h4>
-                                    <a href="{$WEB_ROOT}/view-modules-student/id/{$live['courseId']}&tipo=live" title="Ver Transmisión" class="btn btn-danger">
-                                        <i class="fa fa-play"></i> Ver Transmisión
-                                    </a>
+                            <div class="portlet-body">
+                                <div class="table-scrollable table-scrollable-borderless">
+                                    {include file="{$DOC_ROOT}/templates/forms/completo.tpl"}
                                 </div>
                             </div>
                         </div>
+                        <!-- END PORTLET -->
                     </div>
-                {/if}
+                </div>
+			{else}
                 <div class="row">
                     <div class="col-md-12">
                         <!-- BEGIN PORTLET -->

@@ -29,11 +29,16 @@
 			{/if}
 			
 		</div>
+	{elseif $tipo eq "live"}
+		<div class="portlet-body">
+			{include file="boxes/status_no_ajax.tpl"}
+			<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-live.tpl"}</div>
+		</div>
 	{else}
-	  <div class="portlet-body">
-        {include file="boxes/status_no_ajax.tpl"}
-        {include file="{$DOC_ROOT}/templates/lists/new/acuse.tpl"}
-    </div>
+	  	<div class="portlet-body">
+			{include file="boxes/status_no_ajax.tpl"}
+			{include file="{$DOC_ROOT}/templates/lists/new/acuse.tpl"}
+		</div>
 	{/if}
 	
 	
