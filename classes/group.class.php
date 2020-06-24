@@ -593,14 +593,18 @@
 		}
 
 		// ACTUALIZADO RC
-		public function ScoreGroupCapacitador($modality, $type, $id)
+		public function ScoreGroupCapacitador($modality, $type, $id, $personalId = 0)
 		{
+			$personal = "";
+			if($personalId > 0)
+				$personal = " AND usuario_capacitador.personalId = " . $personalId;
 			$result = [];
 			if($modality == "Individual")
 			{
 				$sql = "SELECT *, user_subject.status AS status FROM user_subject
-							LEFT JOIN user ON user_subject.alumnoId = user.userId
-						WHERE courseId = '" . $this->getCourseId() . "'
+							LEFT JOIN user ON user_subject.alumnoId = user.userId 
+							INNER JOIN usuario_capacitador ON usuario_capacitador.usuarioId = user_subject.alumnoId 
+						WHERE courseId = '" . $this->getCourseId() . "' " . $personal . "
 						ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC";
 				$this->Util()->DB()->setQuery($sql);
 				$result = $this->Util()->DB()->GetResult();
@@ -863,12 +867,16 @@
 		}
 
 		// ACTUALIZADO RC
-		public function DefaultGroupCapacitador()
+		public function DefaultGroupCapacitador($personalId = 0)
 		{
+			$personal = "";
+			if($personalId > 0)
+				$personal = " AND usuario_capacitador.personalId = " . $personalId;
 			$this->Util()->DB()->setQuery("SELECT *, user_subject.status AS status 
 												FROM user_subject
 													LEFT JOIN user ON user_subject.alumnoId = user.userId
-												WHERE courseId = '" . $this->getCourseId() . "' AND user.activo = 1
+													INNER JOIN usuario_capacitador ON usuario_capacitador.usuarioId = user_subject.alumnoId 
+												WHERE courseId = '" . $this->getCourseId() . "' AND user.activo = 1 " . $personal . " 
 												ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC");
 			$result = $this->Util()->DB()->GetResult();
 			$student= new Student();

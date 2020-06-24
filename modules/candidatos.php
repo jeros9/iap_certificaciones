@@ -21,7 +21,7 @@ $smarty->assign('totalPonderation', $totalPonderation);
 $info = $course->Info(); */
 
 $group->setCourseId($_GET['id']);
-$theGroup = $group->DefaultGroupCapacitador();
+$theGroup = $group->DefaultGroupCapacitador($_SESSION["User"]["userId"]);
 
 $smarty->assign('theGroup', $theGroup);
 $smarty->assign('groupId', $_GET["id"]);

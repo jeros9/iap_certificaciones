@@ -95,6 +95,7 @@ include_once(DOC_ROOT . '/classes/group_homework.class.php');
 include_once(DOC_ROOT . '/classes/group_test.class.php');
 include_once(DOC_ROOT . '/classes/group_resource.class.php');
 include_once(DOC_ROOT . '/classes/group_announcement.class.php');
+include_once(DOC_ROOT . '/classes/group_forum.class.php');
 $docente = new Docente();
 
 $db = new DB;
@@ -162,6 +163,7 @@ $group_homework     = new GroupHomework;
 $group_test         = new GroupTest;
 $group_resource     = new GroupResource;
 $group_announcement = new GroupAnnouncement;
+$group_forum        = new GroupForum;
 
 $smarty = new Smarty;
 

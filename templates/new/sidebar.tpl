@@ -43,6 +43,11 @@
                     <i class="fa fa-list"></i> <span class="title">Actividades</span>
                 </a>
             </li>
+            {*<li class="nav-item {if $page == "view-modules-student" and $tipo eq "foro"} active {/if} ">
+                <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=foro" class="nav-link nav-toggle">
+                    <i class="fa fa-comments"></i> <span class="title">Foro</span>
+                </a>
+            </li>*}
             <li class="nav-item {if $page == "view-modules-student" and $tipo eq "recursos"} active {/if} ">
                 <a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=recursos" class="nav-link nav-toggle">
                     <i class="fa fa-files-o"></i> <span class="title">Recursos de Apoyo</span>

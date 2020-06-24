@@ -23,6 +23,8 @@
 					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-live.tpl"}</div>
 				{elseif $tipo eq "videos"}
 					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-videos.tpl"}</div>
+				{elseif $tipo eq "foro"}
+					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-foro.tpl"}</div>
 				{/if}
 			{else}
 				<div id="tblContent">{include file="{$DOC_ROOT}/templates/forms/make-test.tpl"}</div>

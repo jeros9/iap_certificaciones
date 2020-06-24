@@ -1,4 +1,6 @@
 <?php
+if(!isset($_SESSION["User"]))
+    session_start();
 if($_SESSION["User"]["type"] == "student")
     exit;
 	
@@ -17,7 +19,7 @@ foreach($actividades as $value)
 $totalPonderation = $group_activity->TotalPonderation();
 
 $group->setCourseId($_GET['id']);
-$theGroup = $group->DefaultGroupCapacitador();
+$theGroup = $group->DefaultGroupCapacitador($_SESSION["User"]["userId"]);
 $titulos = "";
 
 for($i = 1; $i <= $totalActividades; $i++)

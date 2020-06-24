@@ -27,7 +27,7 @@
     $info = $course->Info();
     
 	$group->setCourseId($actividad["courseId"]);
-	$theGroup = $group->ScoreGroupCapacitador($actividad["modality"], $actividad["activityType"], $_GET["id"]);
+	$theGroup = $group->ScoreGroupCapacitador($actividad["modality"], $actividad["activityType"], $_GET["id"], $_SESSION["User"]["userId"]);
 	$smarty->assign('theGroup', $theGroup);
 	$smarty->assign('cId', $_GET["cId"]);
 

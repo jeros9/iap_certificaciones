@@ -35,6 +35,11 @@
 			$titulo = "Galería de Videos";
 			break;
 
+		case "foro":
+			$tipo = "foro";
+			$titulo = "Foro";
+			break;
+
 		default:
 			$tipo = "resultado";
 			$titulo = "Evalución Diagnóstica";
@@ -105,6 +110,17 @@
 			$smarty->assign('videos', $videos);
 			$smarty->assign('hasVideos', $hasVideos);
 		//}
+
+		if($tipo == "foro")
+		{
+			$group_forum->setCourseId($myModule["courseId"]);
+			$forum = $group_forum->Enumeratesub();
+			$smarty->assign('positionId', $User["positionId"]);
+			$smarty->assign('forum', $forum);
+			if($User["positionId"] == 0)
+				$smarty->assign('mnuMain', "modulo");
+			$smarty->assign('mnuSubmain','foro');
+		}
 
 		$test->setActivityId($myModule["infoActivity"]["activityId"]);
 		$myTest = $test->Enumerate($verResultado,$_SESSION['User']['userId']);

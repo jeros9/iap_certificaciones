@@ -234,7 +234,8 @@ $pages = array(
     'add-group-noticia',
     'view-description-group-activity',
     'upload-group-homework',
-    'make-group-test'
+    'make-group-test',
+    'add-group-topic'
 
 );
 
