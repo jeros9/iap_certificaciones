@@ -603,8 +603,10 @@
 			{
 				$sql = "SELECT *, user_subject.status AS status FROM user_subject
 							LEFT JOIN user ON user_subject.alumnoId = user.userId 
-							INNER JOIN usuario_capacitador ON usuario_capacitador.usuarioId = user_subject.alumnoId 
-						WHERE courseId = '" . $this->getCourseId() . "' " . $personal . "
+							INNER JOIN course ON user_subject.courseId = course.courseId
+							INNER JOIN subject ON course.subjectId = subject.subjectId
+							INNER JOIN usuario_capacitador ON (usuario_capacitador.usuarioId = user_subject.alumnoId AND usuario_capacitador.subjectId = subject.subjectId) 
+						WHERE user_subject.courseId = '" . $this->getCourseId() . "' " . $personal . "
 						ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC";
 				$this->Util()->DB()->setQuery($sql);
 				$result = $this->Util()->DB()->GetResult();
@@ -875,8 +877,10 @@
 			$this->Util()->DB()->setQuery("SELECT *, user_subject.status AS status 
 												FROM user_subject
 													LEFT JOIN user ON user_subject.alumnoId = user.userId
-													INNER JOIN usuario_capacitador ON usuario_capacitador.usuarioId = user_subject.alumnoId 
-												WHERE courseId = '" . $this->getCourseId() . "' AND user.activo = 1 " . $personal . " 
+													INNER JOIN course ON user_subject.courseId = course.courseId
+        											INNER JOIN subject ON course.subjectId = subject.subjectId
+													INNER JOIN usuario_capacitador ON (usuario_capacitador.usuarioId = user_subject.alumnoId AND usuario_capacitador.subjectId = subject.subjectId)
+												WHERE user_subject.courseId = '" . $this->getCourseId() . "' AND user.activo = 1 " . $personal . " 
 												ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC");
 			$result = $this->Util()->DB()->GetResult();
 			$student= new Student();

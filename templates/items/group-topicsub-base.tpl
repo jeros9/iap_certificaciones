@@ -7,10 +7,9 @@
         </td>
         <td align="center" id="etitl1">{$topicsub.answers}</td>
         <td align="center">
-          	<a href="{$WEB_ROOT}/add-reply/id/{$id}/topicsubId/{$topicsub.topicsubId}">
-			 <i class="fa fa-sign-in fa-2x" aria-hidden="true" style='color:black'></i>
-			<!--<img src="{$WEB_ROOT}/images/arrow.png" class="spanEdit" id="e-{$position.positionId}" name="e-{$position.name}" title="Ver respuestas" />
-			--></a>
+          	<a href="{$WEB_ROOT}/view-modules-student/id/{$topicsub.courseId}&tipo=respuestas&topic={$topicsub.topicsubId}">
+			    <i class="fa fa-sign-in fa-2x" aria-hidden="true" style='color:black'></i>
+            </a>
         </td>
     </tr>
 {foreachelse}

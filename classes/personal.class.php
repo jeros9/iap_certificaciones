@@ -2129,13 +2129,17 @@ class Personal extends Main
 	}
 
 	// ACTUALIZADO RC
-	public function gruposCapacitador()
+	public function gruposCapacitador($personalId = 0)
 	{
+		$personal = "";
+			if($personalId > 0)
+				$personal = " AND uc.personalId = " . $personalId;
 		$sql = "SELECT c.courseId, c.group,
 					(SELECT COUNT(*) FROM user_subject u
-							INNER JOIN usuario_capacitador uc ON uc.usuarioId = u.alumnoId
 							INNER JOIN course ON course.courseId = u.courseId 
-						WHERE uc.personalId  = " . $_SESSION["User"]["userId"] . " AND course.subjectId = " . $_GET["id"] . " AND course.courseId = c.courseId
+							INNER JOIN subject ON course.subjectId = subject.subjectId
+        					INNER JOIN usuario_capacitador uc ON (uc.usuarioId = u.alumnoId AND uc.subjectId = subject.subjectId) 
+						WHERE uc.personalId  = " . $_SESSION["User"]["userId"] . " AND course.subjectId = " . $_GET["id"] . " AND course.courseId = c.courseId " . $personal  . "
 					) AS cantidad
 			   	FROM usuario_capacitador uc
 					LEFT JOIN user_subject u ON u.alumnoId = uc.usuarioId

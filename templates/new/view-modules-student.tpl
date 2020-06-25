@@ -25,6 +25,8 @@
 					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-videos.tpl"}</div>
 				{elseif $tipo eq "foro"}
 					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-foro.tpl"}</div>
+				{elseif $tipo eq "respuestas"}
+					<div id="tblContent">{include file="{$DOC_ROOT}/templates/new/view-group-replies.tpl"}</div>
 				{/if}
 			{else}
 				<div id="tblContent">{include file="{$DOC_ROOT}/templates/forms/make-test.tpl"}</div>

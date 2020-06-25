@@ -11,7 +11,6 @@
                     <span class="btnAdd" id="btnAddSubject">Agregar</span>
                 </a>
             {/if}
-
         </div>
     </div>
     <div class="portlet-body">

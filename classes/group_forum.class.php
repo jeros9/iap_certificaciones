@@ -270,122 +270,69 @@
 		
 		public function Replies()
 		{
-			$this->Util()->DB()->setQuery("
-				SELECT * FROM reply
-				LEFT JOIN user ON user.userId = reply.userId
-				LEFT JOIN personal ON personal.personalId = reply.personalId
-				WHERE topicId = ".$this->topicsubId." AND son = 0
-				ORDER BY replyDate ASC");
+			$this->Util()->DB()->setQuery("SELECT * FROM group_reply LEFT JOIN user ON user.userId = group_reply.userId LEFT JOIN personal ON personal.personalId = group_reply.personalId WHERE group_reply.topicsubId = " . $this->topicsubId . " AND son = 0 ORDER BY replyDate ASC");
 			$result = $this->Util()->DB()->GetResult();
-			
-			// echo "<pre>"; print_r($result);
-			// exit;
 			
 			foreach($result as $key => $res)
 			{
-				
-				
-				
-				
-				
 				$result[$key]["content"] = $this->Util()->DecodeTiny($result[$key]["content"]);
-				if(file_exists(DOC_ROOT."/forofiles/".$res["path"])){
+				if(file_exists(DOC_ROOT . "/gforofiles/" . $res["path"]))
+				{
 					$result[$key]["existeArchivo"] = "si";
 					$ext = explode(".",$res["path"]);
-					if($ext[1]=="png" or $ext[1]=="jpg" or $ext[1]=="jpeg"){
+					if($ext[1] == "png" or $ext[1] == "jpg" or $ext[1] == "jpeg")
 						$result[$key]["formato"] = "imagen";
-					}
-				}else{
-					$result[$key] ["existeArchivo"] = "no";
-				} 
+				}else
+					$result[$key]["existeArchivo"] = "no";
 				
-				if(file_exists(DOC_ROOT."/alumnos/".$res["userId"])){
-					$result[$key]["foto"] = '
-						<img src="'.WEB_ROOT.'/alumnos/'.$res["userId"].'.jpg" width="40" height="40" style=" height: auto; 
-					width: auto; 
-					max-width: 80px; 
-					max-height: 80px;"/>
-					</a>';
-				}else{
-					$result[$key]["foto"] ='
-						<img src="'.WEB_ROOT.'/images/new/user.png" width="40" height="40" style=" height: auto; 
-					width: auto; 
-					max-width: 80px; 
-					max-height: 80px;"/>
-					</a>';
-				} 
+				if(file_exists(DOC_ROOT . "/alumnos/" . $res["userId"]))
+					$result[$key]["foto"] = '<img src="' . WEB_ROOT . '/alumnos/' . $res["userId"] . '.jpg" width="40" height="40" style="height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
+				else
+					$result[$key]["foto"] = '<img src="' . WEB_ROOT . '/images/new/user.png" width="40" height="40" style="height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
 				
-				 $sql = "
-				SELECT count(*) FROM reply
-				LEFT JOIN user ON user.userId = reply.userId
-				LEFT JOIN personal ON personal.personalId = reply.personalId
-				WHERE son = '".$res["replyId"]."'
-				ORDER BY replyDate DESC";
+				 $sql = "SELECT count(*) FROM group_reply
+							LEFT JOIN user ON user.userId = group_reply.userId
+							LEFT JOIN personal ON personal.personalId = group_reply.personalId
+						WHERE son = " . $res["replyId"] . "
+						ORDER BY group_reply.replyDate DESC";
 				$this->Util()->DB()->setQuery($sql);
 				$countComen = $this->Util()->DB()->GetSingle();
 				$result[$key]["numComentarios"] = $countComen;
-// echo "<br>";
-// echo "<br>";
-// echo "<br>";
-// echo "<br>";
 			
-				
-				$this->Util()->DB()->setQuery("
-				SELECT * FROM reply
-				LEFT JOIN user ON user.userId = reply.userId
-				LEFT JOIN personal ON personal.personalId = reply.personalId
-				WHERE son = '".$res["replyId"]."'
-				ORDER BY replyDate ASC");
-
-				
+				$this->Util()->DB()->setQuery("SELECT * FROM group_reply
+													LEFT JOIN user ON user.userId = group_reply.userId
+													LEFT JOIN personal ON personal.personalId = group_reply.personalId
+												WHERE son = " . $res["replyId"] . "
+												ORDER BY group_reply.replyDate ASC");
 				
 				$result[$key]["replies"] = $this->Util()->DB()->GetResult();
 				foreach($result[$key]["replies"] as $keyReply => $reply)
 				{
-					if(file_exists(DOC_ROOT."/forofiles/".$reply["path"])){
+					if(file_exists(DOC_ROOT . "/gforofiles/" . $reply["path"]))
+					{
 						$result[$key]["replies"][$keyReply]["existeArchivo"] = "si";
 						$ext2 = explode(".",$reply["path"]);
-						if($ext2[1]=="png" or $ext2[1]=="jpg" or $ext2[1]=="jpeg"){
+						if($ext2[1] == "png" or $ext2[1] == "jpg" or $ext2[1] == "jpeg")
 							$result[$key]["replies"][$keyReply]["formato"]= "imagen";
-						}
-					}else{
+					}
+					else
 						$result[$key]["replies"][$keyReply]["existeArchivo"] = "no";
-					} 
 					
-					if(file_exists(DOC_ROOT."/alumnos/".$reply["userId"])){
-						$result[$key]["replies"][$keyReply]["foto"] = '
-							<img src="'.WEB_ROOT.'/alumnos/'.$reply["userId"].'.jpg" width="40" height="40" style=" height: auto; 
-						width: auto; 
-						max-width: 80px; 
-						max-height: 80px;"/>
-						</a>';
-					}else{
-						$result[$key]["replies"][$keyReply]["foto"] ='
-							<img src="'.WEB_ROOT.'/images/new/user.png" width="40" height="40" style=" height: auto; 
-						width: auto; 
-						max-width: 80px; 
-						max-height: 80px;"/>
-						</a>';
-					} 
+					if(file_exists(DOC_ROOT . "/alumnos/" . $reply["userId"]))
+						$result[$key]["replies"][$keyReply]["foto"] = '<img src="' . WEB_ROOT . '/alumnos/' . $reply["userId"] . '.jpg" width="40" height="40" style=" height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
+					else
+						$result[$key]["replies"][$keyReply]["foto"] ='<img src="'.WEB_ROOT.'/images/new/user.png" width="40" height="40" style=" height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
 					
 					$result[$key]["replies"][$keyReply]["content"] = $this->Util()->DecodeTiny($reply["content"]);
 				}
-
 			}
-			
-				// echo "<pre>"; print_r($result);
-			// exit;
 			return $result;
 		}
 
 		public function ReplyInfo()
 		{
-			$this->Util()->DB()->setQuery("
-				SELECT * FROM reply
-				LEFT JOIN topic ON topic.topicId = reply.topicId
-				WHERE replyId = '".$this->replyId."'");
+			$this->Util()->DB()->setQuery("SELECT * FROM group_reply LEFT JOIN group_topicsub ON group_topicsub.topicsubId = group_reply.topicsubId WHERE replyId = '".$this->replyId."'");
 			$result = $this->Util()->DB()->GetRow();
-
 			return $result;
 		}
 		
@@ -400,16 +347,13 @@ public function TopicInfo()
 			return $result;
 		}
 
-public function TopicsubInfo()
-		{
-			$this->Util()->DB()->setQuery("
-				SELECT * FROM topicsub
-				LEFT JOIN user ON user.userId = topicsub.userId
-				WHERE topicsubId = ".$this->topicsubId."");
-			$result = $this->Util()->DB()->GetRow();
-			
-			return $result;
-		}			
+	public function TopicsubInfo()
+	{
+		$sql = "SELECT * FROM group_topicsub LEFT JOIN user ON user.userId = group_topicsub.userId WHERE topicsubId = " . $this->topicsubId;
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetRow();
+		return $result;
+	}			
 
 		
 		public function Enumerateforos(){
@@ -561,223 +505,113 @@ public function TopicsubInfo()
 
 		public function AddReply()
 		{
+			try{
 			if($this->Util()->PrintErrors())
-			{
 				return false;
-			}
-
-		//echo $this->moduleId;exit;
-		$module= new Module;
+			
+			$module = new Module;
 			$module->setCourseModuleId($this->moduleId);
-			$detalleModulo=$module->InfoCourseModule();
-			//echo "<pre>". print_r($detalleModulo)."</pre>"; exit;
-		//	echo $detalleModulo['courseId'];
-		
-		//print_r($detalleModulo['access'][0]); exit;
-		
-		$course=new Course;
-		$course->setCourseId($detalleModulo['courseId']);
-		$infoCourse=$course->Info();
-		
-		
-		//print_r($infoCourse); exit;
-		//obteniendo el grupo que podra ver esta notificacion //
-		
-		$group=new Group;
-		$group->setCourseId($detalleModulo['courseId']);
-		$grupo=$group->DefaultGroup();
-		
-		$x=0;
-		foreach($grupo as $alumnos){
-		   if($x==0)
-		      $visto=$detalleModulo['access'][0]."p,1p,".$alumnos['alumnoId']."u";
-		 else 
-		      $visto=$visto.",".$alumnos['alumnoId']."u";
-		 
-		 
-		   $x++;
-		} 
-		
-		//print_r($visto);exit;
-		
-		
-		//fin de obtencion del grupo
-		
-			if($this->userId==0)
-			 $hecho=$this->personalId."p";
-			 else
-			 $hecho=$this->userId."u";
-		
-		
-		if($this->userId){
-			 $sql = "
-						SELECT * FROM user	WHERE userId = ".$this->userId."";
-			$this->Util()->DB()->setQuery($sql);
-			$infoAlumno = $this->Util()->DB()->GetRow();
+			$detalleModulo = $module->InfoCourseModule();
 			
-		}
-		
-		$visto=$visto.",".$hecho;
-		//$visto = explode(",", $visto);
-		
-//	print_r($visto);exit;
- 		$sqlSub="select * from topicsub where topicsubId='".$this->topicsubId."'";
-	    $this->Util()->DB()->setQuery($sqlSub);
-		$datSub = $this->Util()->DB()->GetRow();
-		// print_r($datSub); exit;
-
-		$sqlTop="select * from topic where topicId='".$datSub['topicId']."'  "; 
-	    $this->Util()->DB()->setQuery($sqlTop);
-		$datTop = $this->Util()->DB()->GetRow();
-	   //    print_r($datTop); exit;
-		$ruta=WEB_ROOT;
-		$imagen="<label style=\"color:#ff0000;font-size:200%\"><strong>&raquo;</strong></label>";
-	    $fecha_aplicacion=date("Y-m-d H:i:s");     
-		$actividad="HAN COMENTADO ".$infoCourse['majorName']." ".$infoCourse['name']." ".$imagen." ".$datTop['subject']." ".$imagen." ".$datSub['nombre'];
-		
-
+			$course = new Course;
+			$course->setCourseId($detalleModulo['courseId']);
+			$infoCourse = $course->Info();
 			
-		$enlace="/add-reply/id/".$this->moduleId."/topicsubId/".$this->topicsubId;	 
-		//echo $enlace; exit;
+			$group = new Group;
+			$group->setCourseId($detalleModulo['courseId']);
+			$grupo = $group->DefaultGroup();
+			
+			$x=0;
+			foreach($grupo as $alumnos)
+			{
+		   		if($x==0)
+		      		$visto = $detalleModulo['access'][0] . "p,1p," . $alumnos['alumnoId'] . "u";
+		 		else 
+		      		$visto = $visto . "," . $alumnos['alumnoId'] . "u";
+		   		$x++;
+			}
+		
+			if($this->userId == 0)
+			 	$hecho = $this->personalId . "p";
+			else
+				$hecho = $this->userId."u";
+		
+			if($this->userId)
+			{
+				$sql = "SELECT * FROM user	WHERE userId = " . $this->userId;
+				$this->Util()->DB()->setQuery($sql);
+				$infoAlumno = $this->Util()->DB()->GetRow();
+			}
+		
+			$visto = $visto . "," . $hecho;
+			$sqlSub = "SELECT * FROM group_topicsub WHERE topicsubId = '" . $this->topicsubId . "'";
+	    	$this->Util()->DB()->setQuery($sqlSub);
+			$datSub = $this->Util()->DB()->GetRow();
+			
+			$ruta = WEB_ROOT;
+			$imagen = "<label style=\"color:#ff0000;font-size:200%\"><strong>&raquo;</strong></label>";
+			$fecha_aplicacion = date("Y-m-d H:i:s");     
+			$actividad = "HAN COMENTADO " . $infoCourse['majorName'] . " " . $infoCourse['name'] . " " . $imagen . " " . $imagen . " " . $datSub['nombre'];
+			$enlace = "/view-modules-student/id/" . $this->moduleId . "&tipo=respuestas&topic=" . $this->topicsubId;
 
-//---------------------------------ALE agregado
-
-            $target_path = DOC_ROOT."/forofiles/"; // carpeta destino de los archivos
-         
-        	//check cuantas replyes tiene el usuario del mismo subtipico
-			$this->Util()->DB()->setQuery("
-				SELECT COUNT(*) FROM reply
-				WHERE topicId = '".$this->topicsubId."' AND userId = '".$this->userId."'");
-			$count = $this->Util()->DB()->GetSingle(); // cuenta los registros encontrados
-            
-            // count le asignamas mas 1
-            if ($count==0)
-                $count=1;
+            $target_path = DOC_ROOT."/gforofiles/";
+			$this->Util()->DB()->setQuery("SELECT COUNT(*) FROM group_reply WHERE topicsubId = '" . $this->topicsubId . "' AND userId = '" . $this->userId . "'");
+			$count = $this->Util()->DB()->GetSingle();
+            if ($count == 0)
+                $count = 1;
             else 
-                $count=$count+1;
-                   
-            //complemento del nombre del archivo cargado	
-            $anexo = "archivo";
-            	
-            $ext = end(explode('.', basename($_FILES['path']['name'])));			
-			$target_path = $target_path . $this->userId. "_".$this->topicsubId ."_".$anexo."_".$count.".".$ext; // directorio y nuevo nombre del archivo cargado
-			$relative_path = $this->userId. "_".$this->topicsubId ."_".$anexo."_".$count.".".$ext; //nuevo nombre del archivo cargado                
-                
-        //if(move_uploaded_file($file['tmp_name'], $target_path)) 
-		//$target_path="/home/iapchiap/public_html/homework/archivo1.jpg";
-	    move_uploaded_file($_FILES['path']['tmp_name'], $target_path);
-            
-			 
-            	$sql = "INSERT INTO
-						reply
-						( content, replyDate, topicId, userId, personalId, notificado, path, mime, son )
-                        VALUES (
-							'" . $this->reply . "', 
-							'" . date("Y-m-d H:i:s"). "',
-							'" . $this->topicsubId . "',
-							'" . $this->userId . "',
-							'" . $this->personalId . "',
-							'".$_SESSION['User']['userId']."',
-							'" . $relative_path ."',
-                            '" . $file["type"] ."',
-                            '" . $this->replyId ."'
-                            )";
-
-				//$target_path =""; 
-//---------------ALE -fin del agregado
-		
-		/*	$sql = "INSERT INTO
-						reply
-						( 	
-						 	content,
-							replyDate,
-							topicId,
-							userId,
-							personalId,
-							notificado
-						)
-					VALUES (
-							'" . $this->reply . "', 
-							'" . date("Y-m-d H:i:s"). "',
-							'" . $this->topicsubId . "',
-							'" . $this->userId . "',
-							'" . $this->personalId . "',
-							'".$_SESSION['User']['userId']."'
-							)";
-*/
+				$count=$count+1;
+				
+			$anexo = "archivo";	
+			$temporal = basename($_FILES['path']['name']);
+            $ext = end(explode('.', $temporal));			
+			$target_path = $target_path . $this->userId . "_" . $this->topicsubId . "_" . $anexo . "_" . $count . "." .$ext;
+			$relative_path = $this->userId . "_" . $this->topicsubId . "_" . $anexo . "_" . $count . "." . $ext;
+			move_uploaded_file($_FILES['path']['tmp_name'], $target_path);
+			if($this->replyId == '')
+				$this->setReplyId(0);
+			$sql = "INSERT INTO group_reply(content, replyDate, topicsubId, userId, personalId, notificado, path, mime, son)
+						VALUES('" . $this->reply . "', '" . date("Y-m-d H:i:s") . "', " . $this->topicsubId . ", " . $this->userId . ", " . $this->personalId . ", " . $_SESSION['User']['userId'] . ", '" . $relative_path . "', '" . $file["type"] . "', " . $this->replyId . ")";
 			$this->Util()->DB()->setQuery($sql);
-			//ejecutamos la consulta y guardamos el resultado, que sera el ultimo positionId generado
 			$this->Util()->DB()->InsertData();
-			
 		
-			 $sqlNot="insert into notificacion(notificacionId,actividad,vista,hecho,fecha_aplicacion,tablas,enlace)
-			   values(
-			              '',
-			            '".$actividad."', 
-			            '".$visto."',
-			            '".$hecho."',
-			            '".$fecha_aplicacion."',
-			            'reply',
-						'".$enlace."'
-			     
-			         )";
-					 
+			$sqlNot = "INSERT INTO notificacion(notificacionId, actividad, vista, hecho, fecha_aplicacion, tablas, enlace)
+						   VALUES('', '" . $actividad . "', '" . $visto . "', '" . $hecho . "', '" . $fecha_aplicacion . "', 'reply', '" . $enlace . "')";
 			$this->Util()->DB()->setQuery($sqlNot);
-			//ejecutamos la consulta y guardamos el resultado, que sera el ultimo positionId generado
 			$this->Util()->DB()->InsertData();
-				
-			$sendmail = new SendMail;	
-			
-			$concatMsj = 
-			'<table>
-			<tr>
-				<td>Alumno:</td><td>'.$infoAlumno['names'].' '.$infoAlumno['lastNamePaterno'].' '.$infoAlumno['lastNameMaterno'].'</td>
-			</tr>
-			<tr>
-				<td>Materia:</td><td>'.$infoCourse['name'].'</td>
-			</tr>
-			<tr>
-				<td>Grupo:</td><td>'.$infoCourse['group'].'</td>
-			</tr>
-			<tr>			
-				<td>Foro:</td><td>'.$datTop['subject'].'</td>
-			</tr>
-			</table><br><br>';
+			$sendmail = new SendMail;
+			$concatMsj = '<table>
+							<tr>
+								<td>Alumno:</td><td>' . $infoAlumno['names'] . ' ' . $infoAlumno['lastNamePaterno'] . ' ' . $infoAlumno['lastNameMaterno'] . '</td>
+							</tr>
+							<tr>
+								<td>Materia:</td><td>' . $infoCourse['name'] . '</td>
+							</tr>
+							<tr>
+								<td>Grupo:</td><td>' . $infoCourse['group'] . '</td>
+							</tr>
+						</table><br><br>';
 			
 			
-		if( $_SESSION['User']['perfil']<>'Administrador')	{
-			if($datTop["tipo"] == "dudas"){
-				
-				 $sql = "
-					SELECT * FROM topic
-					LEFT JOIN course as c ON c.courseId = topic.courseId
-					LEFT JOIN subject_group as s ON s.subjectId = c.subjectId
-					LEFT JOIN personal as p ON p.personalId = s.personalId
-					WHERE topicId = ".$datSub['topicId']."";
+			if( $_SESSION['User']['perfil'] <> 'Administrador')	
+			{
+				$sql = "SELECT * FROM group_topicsub
+							LEFT JOIN course as c ON c.courseId = group_topicsub.courseId
+							LEFT JOIN subject_group as s ON s.subjectId = c.subjectId
+							LEFT JOIN personal as p ON p.personalId = s.personalId
+						WHERE topicsubId = " . $this->topicsubId;
 				$this->Util()->DB()->setQuery($sql);
 				$infoDu = $this->Util()->DB()->GetRow();
-				// echo "<pre>"; print_r($concatMsj );
-				// exit;
-				//admin docente
-				$sendmail->PrepareAttachment("Dudas para el Docente", $concatMsj.$this->reply, "","", $infoDu["correo"], $infoDu["name"], $attachment, $fileName);
-				$sendmail->PrepareAttachment("Asesoria Academica",$this->reply, "", "", " enlinea@iapchiapas.org.mx", "Administrador", $attachment, $fileName);
-			}
-			
-			if($datTop["tipo"] == "asesoria"){
-				//admin 
-					// echo "<pre>"; print_r($concatMsj );
-				// exit;
-				 $sql = "
-					SELECT * FROM personal
-					WHERE perfil = 'Administrador'";
-				$this->Util()->DB()->setQuery($sql);
-				$infoDu = $this->Util()->DB()->GetRow();
-				$sendmail->PrepareAttachment("Asesoria Academica",$concatMsj.$this->reply, "", "", " enlinea@iapchiapas.org.mx", "Administrador", $attachment, $fileName);
-			}
-		}	
+				//$sendmail->PrepareAttachment("Dudas para el Docente", $concatMsj . $this->reply, "", "", $infoDu["correo"], $infoDu["name"], $attachment, $fileName);
+				//$sendmail->PrepareAttachment("Asesoria Academica", $this->reply, "", "", "enlinea@iapchiapas.org.mx", "Administrador", $attachment, $fileName);
+			}	
 			$this->Util()->setError(90000, 'complete', "Has respondido al Topico");
 			$this->Util()->PrintErrors();
 			return true;
+			}catch(Exception $ex)
+			{
+				echo "Error: " . $ex->getMessage(); exit;
+			}
 		}
 		
 	public function DeleteReply(){
