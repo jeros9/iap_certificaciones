@@ -221,7 +221,9 @@ $pages = array(
 	'make-group-test',
 	'candidatos',
 	'add-group-topic',
-	'add-group-comment'
+	'add-group-comment',
+	'foro',
+	'respuestas'
 );
 
 if(!in_array($_GET['page'], $pages))

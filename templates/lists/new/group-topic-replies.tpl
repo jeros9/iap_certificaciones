@@ -44,7 +44,7 @@
                         <br>
                         <font style="font-size:9px; color:gray" >
                             {if $item.positionId == NULL || $item.positionId == 0}
-                                {$item.names} {$item.lastNamePaterno} {$item.lastNameMaterno}
+                                {if $item.names}{$item.names} {$item.lastNamePaterno} {$item.lastNameMaterno}{else}Profesor{/if}
                             {else}
                                 {$item.name} {$item.lastname_paterno} {$item.lastname_materno}
                             {/if}
@@ -72,7 +72,7 @@
                         {/if}
                         <hr>
                         <div>
-                            <a href="{$WEB_ROOT}/graybox.php?page=add-group-comment&id={$item.replyId}&courseId={$courseId}&topicsubId={$topicsubId}" data-target="#ajax" data-toggle="modal" >
+                            <a href="{$WEB_ROOT}/graybox.php?page=add-group-comment&id={$item.replyId}&courseId={$courseId}&topicsubId={$topicsubId}&modulo={$module}" data-target="#ajax" data-toggle="modal" >
                                 <img src="{$WEB_ROOT}/images/add.png" style="max-width: 16px;height: auto;" title="AGREGAR COMENTARIO"> 
                             </a>
                             {if $item.numComentarios <= 0}
@@ -107,7 +107,7 @@
                                                 {$reply.foto}<br>
                                                 <font style="font-size:9px; color:gray" >
                                                     {if $reply.positionId == NULL || $reply.positionId == 0}
-                                                        {$reply.names}  {$reply.lastNamePaterno} {$reply.lastNameMaterno}
+                                                        {if $reply.names}{$reply.names} {$reply.lastNamePaterno} {$reply.lastNameMaterno}{else}Profesor{/if}
                                                     {else}
                                                         {$reply.names} {$reply.lastname_paterno} {$reply.lastname_materno}
                                                     {/if}
@@ -127,8 +127,8 @@
                                                 <div>{$reply.content}</div>
                                                 {if $reply.formato eq "imagen"}
                                                     <hr>
-                                                    <a href="{$WEB_ROOT}/graybox.php?page=zoom&id={$WEB_ROOT}/gforofiles/{$item.path}" data-target="#ajax" data-toggle="modal" >
-                                                        <img src="{$WEB_ROOT}/gforofiles/{$item.path}" style="max-width: 200px;height: auto;" title="VER ARCHIVO ADJUNTO">
+                                                    <a href="{$WEB_ROOT}/graybox.php?page=zoom&id={$WEB_ROOT}/gforofiles/{$reply.path}" data-target="#ajax" data-toggle="modal" >
+                                                        <img src="{$WEB_ROOT}/gforofiles/{$reply.path}" style="max-width: 200px;height: auto;" title="VER ARCHIVO ADJUNTO">
                                                     </a>			
                                                 {/if}
                                                 <br><hr>

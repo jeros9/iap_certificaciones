@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="addMajorForm" name="addMajorForm" method="post" action="{$WEB_ROOT}/add-group-topic/id/{$courseId}">
+<form class="form-horizontal" id="addMajorForm" name="addMajorForm" method="post" action="{$WEB_ROOT}/add-group-topic/id/{$courseId}&modulo={$module}">
     <input type="hidden" id="courseId" name="courseId" value="{$courseId}"/>
     <input type="hidden" id="userId" name="userId" value="{$userId}"/>
     <input type="hidden" id="type" name="type" value="saveAddMajor"/>

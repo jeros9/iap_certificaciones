@@ -1,0 +1,1 @@
+{include file="{$DOC_ROOT}/templates/new/view-group-foro.tpl"}

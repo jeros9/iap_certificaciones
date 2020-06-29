@@ -286,7 +286,7 @@
 					$result[$key]["existeArchivo"] = "no";
 				
 				if(file_exists(DOC_ROOT . "/alumnos/" . $res["userId"]))
-					$result[$key]["foto"] = '<img src="' . WEB_ROOT . '/alumnos/' . $res["userId"] . '.jpg" width="40" height="40" style="height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
+					$result[$key]["foto"] = '<img src="' . WEB_ROOT . '/images/new/user.png" width="40" height="40" style="height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
 				else
 					$result[$key]["foto"] = '<img src="' . WEB_ROOT . '/images/new/user.png" width="40" height="40" style="height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
 				
@@ -319,7 +319,7 @@
 						$result[$key]["replies"][$keyReply]["existeArchivo"] = "no";
 					
 					if(file_exists(DOC_ROOT . "/alumnos/" . $reply["userId"]))
-						$result[$key]["replies"][$keyReply]["foto"] = '<img src="' . WEB_ROOT . '/alumnos/' . $reply["userId"] . '.jpg" width="40" height="40" style=" height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
+						$result[$key]["replies"][$keyReply]["foto"] = '<img src="' . WEB_ROOT . '/images/new/user.png" width="40" height="40" style="height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
 					else
 						$result[$key]["replies"][$keyReply]["foto"] ='<img src="'.WEB_ROOT.'/images/new/user.png" width="40" height="40" style=" height: auto; width: auto; max-width: 80px; max-height: 80px;"/></a>';
 					

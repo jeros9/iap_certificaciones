@@ -1,5 +1,9 @@
 <script type="text/javascript" src="{$WEB_ROOT}/tinymce/tiny_mce.js"></script>
+{if $User["type"] == "Docente"}
+<form class="form-horizontal" id="addNoticia" name="addNoticia" method="post" action="{$WEB_ROOT}/respuestas/id/{$courseId}&topic={$topicsubId}" enctype="multipart/form-data">
+{else}
 <form class="form-horizontal" id="addNoticia" name="addNoticia" method="post" action="{$WEB_ROOT}/view-modules-student/id/{$courseId}&tipo=respuestas&topic={$topicsubId}" enctype="multipart/form-data">
+{/if}
     <input type="hidden" id="type" name="type" value="saveAddMajor"/>
     <input type="hidden" id="topicsubId" name="topicsubId" value="{$topicsubId}"/>
     <input type="hidden" id="courseId" name="courseId" value="{$courseId}"/>

@@ -4,7 +4,11 @@
             <i class="fa fa-bullhorm"></i><font color="#73b760">Topico {$topic.nombre}</font>
         </div>
         <div class="actions">
+        {if $User["type"] eq "Docente"}
+            <a href="{$WEB_ROOT}/foro/id/{$courseId}" class="btn btn-default btn-sm" style="background:#73AD21; color:white">Regresar</a>
+        {else}
             <a href="{$WEB_ROOT}/view-modules-student/id/{$courseId}&tipo=foro" class="btn btn-default btn-sm" style="background:#73AD21; color:white">Regresar</a>
+        {/if}
             <a href="javascript:void(0)" onClick="updateForo()" class="btn btn-default btn-sm" style="background:#1687ff; color:white">Actualizar</a>
         </div>
     </div>

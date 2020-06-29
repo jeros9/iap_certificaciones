@@ -7,9 +7,15 @@
         </td>
         <td align="center" id="etitl1">{$topicsub.answers}</td>
         <td align="center">
-          	<a href="{$WEB_ROOT}/view-modules-student/id/{$topicsub.courseId}&tipo=respuestas&topic={$topicsub.topicsubId}">
-			    <i class="fa fa-sign-in fa-2x" aria-hidden="true" style='color:black'></i>
-            </a>
+            {if $User["type"] eq "Docente"}
+                <a href="{$WEB_ROOT}/respuestas/id/{$topicsub.courseId}&topic={$topicsub.topicsubId}">
+                    <i class="fa fa-sign-in fa-2x" aria-hidden="true" style='color:black'></i>
+                </a>
+            {else}
+                <a href="{$WEB_ROOT}/view-modules-student/id/{$topicsub.courseId}&tipo=respuestas&topic={$topicsub.topicsubId}">
+                    <i class="fa fa-sign-in fa-2x" aria-hidden="true" style='color:black'></i>
+                </a>
+            {/if}
         </td>
     </tr>
 {foreachelse}

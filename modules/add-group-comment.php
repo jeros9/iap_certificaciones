@@ -19,7 +19,11 @@
             }
             $group_forum->AddReply();
         }
-        header("Location:" . WEB_ROOT . "/view-modules-student/id/" . $_POST["courseId"] . "&tipo=respuestas&topic=" . $_POST["topicsubId"]);
+        
+        if($_GET['modulo'] == 'respuestas')
+            header("Location:" . WEB_ROOT . "/respuestas/id/" . $_POST["courseId"] . "&topic=" . $_POST["topicsubId"]);
+		else
+            header("Location:" . WEB_ROOT . "/view-modules-student/id/" . $_POST["courseId"] . "&tipo=respuestas&topic=" . $_POST["topicsubId"]);
         exit;
     }
 
@@ -33,4 +37,5 @@
 
     if($_SESSION["User"]["positionId"] != 1 && $_SESSION["User"]["positionId"] != 4)
         $smarty->assign('mnuMain', "modulo");
+    $smarty->assign("module", $_GET["modulo"]);
 ?>

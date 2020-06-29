@@ -1,5 +1,5 @@
 <script type="text/javascript" src="{$WEB_ROOT}/tinymce/tiny_mce.js"></script>
-<form class="form-horizontal" id="addNoticia" name="addNoticia" method="post" action="{$WEB_ROOT}/add-group-comment/id/{$reply.replyId}" enctype="multipart/form-data">
+<form class="form-horizontal" id="addNoticia" name="addNoticia" method="post" action="{$WEB_ROOT}/add-group-comment/id/{$reply.replyId}&modulo={$module}" enctype="multipart/form-data">
     <input type="hidden" id="type" name="type" value="saveAddMajor"/>
     <input type="hidden" id="replyId" name="replyId" value="{$reply.replyId}"/>
     <input type="hidden" id="courseId" name="courseId" value="{$courseId}"/>

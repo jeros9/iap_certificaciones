@@ -123,7 +123,8 @@
 			$smarty->assign('forum', $forum);
 			if($User["positionId"] == 0)
 				$smarty->assign('mnuMain', "modulo");
-			$smarty->assign('mnuSubmain','foro');
+			$smarty->assign('mnuSubmain', 'foro');
+			$smarty->assign('module', 'view-modules-student');
 		}
 		
 		if($tipo == "respuestas")
@@ -167,6 +168,7 @@
 			$smarty->assign('id', $_GET["topic"]);
 			if($User["positionId"] != 1 && $User["positionId"] != 4)
 				$smarty->assign('mnuMain', "modulo");
+			$smarty->assign('module', 'view-modules-student');
 		}
 
 		$test->setActivityId($myModule["infoActivity"]["activityId"]);

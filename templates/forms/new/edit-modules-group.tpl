@@ -24,9 +24,9 @@
                 <a href="{$WEB_ROOT}/candidatos/id/{$infoCourse.courseId}" target="_blank" data-toggle="modal" class="btn green">
                     &raquo; Ver Candidatos y Calificaciones
                 </a>
-                {*<a href="{$WEB_ROOT}/foro/id/{$infoCourse.courseId}" target="_blank" data-toggle="modal" class="btn blue">
+                <a href="{$WEB_ROOT}/foro/id/{$infoCourse.courseId}" target="_blank" data-toggle="modal" class="btn blue">
                     &raquo; Ver Foro
-                </a>*}
+                </a>
             </div>
         </div>
     </div>

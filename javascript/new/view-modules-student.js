@@ -136,3 +136,9 @@ function verComentario(Id)
 {
    $("#divCom_" + Id).toggle();
 }
+
+function closeModal()
+{	
+	$("#ajax").hide();
+	$("#ajax").modal("hide");	
+}
