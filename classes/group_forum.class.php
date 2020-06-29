@@ -602,8 +602,8 @@ public function TopicInfo()
 						WHERE topicsubId = " . $this->topicsubId;
 				$this->Util()->DB()->setQuery($sql);
 				$infoDu = $this->Util()->DB()->GetRow();
-				//$sendmail->PrepareAttachment("Dudas para el Docente", $concatMsj . $this->reply, "", "", $infoDu["correo"], $infoDu["name"], $attachment, $fileName);
-				//$sendmail->PrepareAttachment("Asesoria Academica", $this->reply, "", "", "enlinea@iapchiapas.org.mx", "Administrador", $attachment, $fileName);
+				$sendmail->PrepareAttachment("Dudas para el Docente", $concatMsj . $this->reply, "", "", $infoDu["correo"], $infoDu["name"], $attachment, $fileName);
+				$sendmail->PrepareAttachment("Asesoria Academica", $this->reply, "", "", "enlinea@iapchiapas.org.mx", "Administrador", $attachment, $fileName);
 			}	
 			$this->Util()->setError(90000, 'complete', "Has respondido al Topico");
 			$this->Util()->PrintErrors();
