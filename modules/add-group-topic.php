@@ -7,7 +7,13 @@
 		
 		$group_forum->setSubject($_POST["subject"]);
 		$group_forum->setReply($_POST["reply"]);
-		$group_forum->AddTopic();
+		$personalId = 0;
+		if($_SESSION['User']['perfil'] == 'Docente')
+			$personalId = $_SESSION['User']['userId'];
+		else
+			$personalId = $group_forum->getCapacitador();
+
+		$group_forum->AddTopic($personalId);
 	
 		if($_GET['modulo'] == 'foro')
 			header("Location:" . WEB_ROOT . "/foro/id/" . $_GET["id"]);

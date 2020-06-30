@@ -368,11 +368,14 @@ public function TopicInfo()
 		return $result;
 		}
 		
-	    public function Enumeratesub()
+	    public function Enumeratesub($personalId = 0)
 		{
+			$personal = "";
+			if($personalId > 0)
+				$personal = " AND group_topicsub.personalId = " . $personalId;
 			 $sql = "SELECT * FROM group_topicsub
-				        LEFT JOIN user ON user.userId = group_topicsub.userId
-				    WHERE group_topicsub.courseId = " . $this->courseId . " 
+				        LEFT JOIN user ON user.userId = group_topicsub.userId  
+				    WHERE group_topicsub.courseId = " . $this->courseId . " " . $personal . "
 				    ORDER BY topicsubDate DESC";
 			$this->Util()->DB()->setQuery($sql);
 			$result = $this->Util()->DB()->GetResult();
@@ -448,7 +451,7 @@ public function TopicInfo()
 		}
 		
 		
-		public function AddTopic()
+		public function AddTopic($personalId)
 		{
 			if($this->Util()->PrintErrors())
 				return false;
@@ -456,8 +459,8 @@ public function TopicInfo()
 			if($this->subject == "General")
 			    $this->reply = "Bienvenidos.";
 			
-			$sql = "INSERT INTO group_topicsub(nombre, descripcion, topicsubDate, userId, courseId)
-					VALUES ('" . $this->subject . "', '" . $this->reply . "', '" . date("Y-m-d H:i:s") . "', " . $this->userId . ", " . $this->courseId . ")";
+			$sql = "INSERT INTO group_topicsub(nombre, descripcion, topicsubDate, userId, personalId, courseId)
+					VALUES ('" . $this->subject . "', '" . $this->reply . "', '" . date("Y-m-d H:i:s") . "', " . $this->userId . ", '" . $personalId . "', " . $this->courseId . ")";
 			$this->Util()->DB()->setQuery($sql);
 			//ejecutamos la consulta y guardamos el resultado, que sera el ultimo positionId generado
 			$id = $this->Util()->DB()->InsertData();
@@ -736,6 +739,16 @@ public function DeleteNotificacion(){
 		
 		return true;
 				
+	}
+
+	public function getCapacitador()
+	{
+		$sql = "SELECT uc.personalId 
+					FROM usuario_capacitador uc 
+					INNER JOIN course c ON c.subjectId = uc.subjectId 
+				WHERE uc.usuarioId = " . $this->userId . " AND c.courseId = " . $this->courseId;
+		$this->Util()->DB()->setQuery($sql);
+		return $this->Util()->DB()->GetSingle();
 	}
 		
 			

@@ -118,7 +118,9 @@
 		if($tipo == "foro")
 		{
 			$group_forum->setCourseId($myModule["courseId"]);
-			$forum = $group_forum->Enumeratesub();
+			$group_forum->setUserId($User["userId"]);
+			$personalId = $group_forum->getCapacitador();
+			$forum = $group_forum->Enumeratesub($personalId);
 			$smarty->assign('positionId', $User["positionId"]);
 			$smarty->assign('forum', $forum);
 			if($User["positionId"] == 0)

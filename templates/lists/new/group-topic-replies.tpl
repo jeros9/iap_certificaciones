@@ -66,7 +66,7 @@
                         <div style="clear: both"></div>
                         {if $item.formato eq "imagen"}
                             <hr>
-                            <a href="{$WEB_ROOT}/graybox.php?page=zoom&id={$WEB_ROOT}/gforofiles/{$item.path}" data-target="#ajax" data-toggle="modal" >
+                            <a href="{$WEB_ROOT}/graybox.php?page=zoom&id={$WEB_ROOT}/gforofiles/{$item.path}" data-target="#ajax" data-toggle="modal" download>
                                 <img src="{$WEB_ROOT}/gforofiles/{$item.path}" style="max-width: 200px;height: auto;" title="VER ARCHIVO ADJUNTO">
                             </a>	
                         {/if}
@@ -84,7 +84,7 @@
                             {/if}
                             {if $item.existeArchivo eq "si"}
                                 {if $item.path}
-                                    <a href="{$WEB_ROOT}/gforofiles/{$item.path}" target="_black" title="VER ARCHIVO ADJUNTO">
+                                    <a href="{$WEB_ROOT}/gforofiles/{$item.path}" target="_black" title="VER ARCHIVO ADJUNTO" download>
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </a>
                                 {/if}
@@ -127,7 +127,7 @@
                                                 <div>{$reply.content}</div>
                                                 {if $reply.formato eq "imagen"}
                                                     <hr>
-                                                    <a href="{$WEB_ROOT}/graybox.php?page=zoom&id={$WEB_ROOT}/gforofiles/{$reply.path}" data-target="#ajax" data-toggle="modal" >
+                                                    <a href="{$WEB_ROOT}/graybox.php?page=zoom&id={$WEB_ROOT}/gforofiles/{$reply.path}" data-target="#ajax" data-toggle="modal" download>
                                                         <img src="{$WEB_ROOT}/gforofiles/{$reply.path}" style="max-width: 200px;height: auto;" title="VER ARCHIVO ADJUNTO">
                                                     </a>			
                                                 {/if}
@@ -135,7 +135,7 @@
                                                 <div>
                                                     {if $reply.existeArchivo eq "si"}
                                                         {if $reply.path}
-                                                            <a href="{$WEB_ROOT}/gforofiles/{$reply.path}" target="_black" title="VER ARCHIVO ADJUNTO">
+                                                            <a href="{$WEB_ROOT}/gforofiles/{$reply.path}" target="_black" title="VER ARCHIVO ADJUNTO" download>
                                                                 <i class="fa fa-file" aria-hidden="true"></i>
                                                             </a>
                                                         {/if}

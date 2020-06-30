@@ -5,7 +5,7 @@
 	
 	$group_forum->setCourseId($myModule["courseId"]);
     $smarty->assign('id', $myModule["courseId"]);
-    $forum = $group_forum->Enumeratesub();
+    $forum = $group_forum->Enumeratesub($User["userId"]);
     
     $smarty->assign('positionId', $User["positionId"]);
 	$smarty->assign('forum', $forum);
