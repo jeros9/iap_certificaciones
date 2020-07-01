@@ -391,7 +391,28 @@
                     </div>
                 </div>
 			{/if}
-            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light ">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Acerca de la Plataforma</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row clearfix">
+                                <div class="col-md-6">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/WTxKWMQQ2EE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="col-md-6">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/Dw5akhfWaEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- END PROFILE CONTENT -->
     </div>
