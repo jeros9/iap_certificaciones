@@ -1,4 +1,5 @@
 <?php
+//var_dump($_SESSION['User']['autorizo']);exit;
 	/* For Session Control - Don't remove this */
 $x=0;	
 // echo '<pre>'; print_r($_SESSION);

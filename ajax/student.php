@@ -1084,6 +1084,25 @@
 			$smarty->display(DOC_ROOT.'/templates/forms/new/municipio.tpl');
 		
 		break;
+
+		case "saveautorizaFirma":
+			if(!isset($_POST["autorizaFirma"]))
+				$autorizo = "no";
+			else
+				$autorizo = "si";
+			$student->setUserId($_POST['userId']);
+			$student->setAutorizoFirma($autorizo);
+			if(!$student->UpdateAutorizoFirma())
+			{
+				echo "fail[#]";
+				$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
+			}
+			else
+			{
+				echo "ok[#]";
+				$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
+			}
+			break;
 	}
 
 ?>

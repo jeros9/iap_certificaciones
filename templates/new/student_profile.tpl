@@ -106,21 +106,28 @@
                                <i class="fa fa-adn" aria-hidden="true"></i> Ficha de Registro
 							</a>
                         </li>
+                        <li>
+                           <a href="{$WEB_ROOT}/docs/dyo.pdf" target="_blank">
+                               <i class="fa fa-adn" aria-hidden="true"></i> Derechos y Obligaciones
+							</a>
+                        </li>
 						<li>
                             &nbsp;
 							<br>
 							<br>
                         </li>
-						<li>
-						<a href="{$WEB_ROOT}/graybox.php?page=add-ine&id=1" data-target="#ajax" data-toggle="modal" data-width="1000px">
-						  <i class="fa fa-newspaper-o" style="color:green" aria-hidden="true"></i>INE Frente
-						</a>
-						</li>
-						<li>
-						<a href="{$WEB_ROOT}/graybox.php?page=add-ine&id=2" data-target="#ajax" data-toggle="modal" data-width="1000px">
-						    <i class="fa fa-newspaper-o" style="color:#2ab4c0" aria-hidden="true"></i>INE Vuelta
-						</a>
-						</li>
+                        {if $info.autorizo eq 'si'}
+                            <li>
+                                <a href="{$WEB_ROOT}/graybox.php?page=add-ine&id=1" data-target="#ajax" data-toggle="modal" data-width="1000px">
+                                    <i class="fa fa-newspaper-o" style="color:green" aria-hidden="true"></i> INE Frente
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{$WEB_ROOT}/graybox.php?page=add-ine&id=2" data-target="#ajax" data-toggle="modal" data-width="1000px">
+                                    <i class="fa fa-newspaper-o" style="color:#2ab4c0" aria-hidden="true"></i> INE Vuelta
+                                </a>
+                            </li>
+                        {/if}
 						<!--<li>
                             <a href="{$WEB_ROOT}/perfil" >
                                <i class="fa fa-user" aria-hidden="true"></i>Perfil 
@@ -228,22 +235,50 @@
         <!-- END BEGIN PROFILE SIDEBAR -->
         <!-- BEGIN PROFILE CONTENT -->
         <div class="profile-content">
-            {if $hasLive eq true}
+            {if $info.autorizoFirma eq "no"}
                 <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <div class="panel panel-danger">
-                            <div class="panel-heading"><i class="fa fa-video-camera"></i> Transmisión en Vivo</div>
-                            <div class="panel-body text-center">
-                                <h4><b>Certificación:</b> {$live['name']}</h4>
-                                <a href="{$WEB_ROOT}/view-modules-student/id/{$live['courseId']}&tipo=live" title="Ver Transmisión" class="btn btn-danger">
-                                    <i class="fa fa-play"></i> Ver Transmisión
-                                </a>
+                    <div class="col-md-12">
+                        <div class="portlet light ">
+                            <div class="portlet-title tabbable-line">
+                                <div class="caption caption-md">
+                                    <i class="icon-globe theme-font hide"></i>
+                                    <span class="caption-subject font-blue-madison bold uppercase">Datos para fichas de registros CONOCER</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane " id="tab_1_2">
+                                    </div>
+                                    <div class="tab-pane active" id="tab_1_1">
+                                        <div class="scroller" style="height: 137px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                            <div style="text-align:justify">
+                                                Autorizo la creación de mi código individual de identificación para utilizarlo como firma electrónica dentro de los documentos que se requieran en el Sistema de Red CONOCER del Instituto de Administración Pública del Estado de Chiapas, A. C.
+                                            </div>
+                                            <br>
+                                            <br>
+                                        </div>
+                                        <form id="frmAutorizaFirma">
+                                            <input type="hidden" id="type" name="type" value="saveautorizaFirma"/>
+                                            <input type="hidden" id="userId" name="userId" value="{$info.userId}"/>
+                                            <center>
+                                                <b>No autorizo</b>
+                                                <label class="switch">
+                                                <input type="checkbox" name="autorizaFirma" id="autorizaFirma">
+                                                <span class="slider round"></span>
+                                                </label>
+                                                <b>Si autorizo</b>
+                                            </center>
+                                        </form><br>
+                                        <center>
+                                            <button type="button" class="btn green submitForm" onclick="authorizeSignature();" id="authorizeSignature">Guardar</button>
+                                        </center>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            {/if}
-		    {if $info.actualizado eq "no"}
+		    {elseif $info.actualizado eq "no"}
                 <div class="row">
                     <div class="col-md-12">
                         <!-- BEGIN PORTLET -->
@@ -271,14 +306,18 @@
                                             
                                         </div>
                                         <form id="frmConfirma">
-                                        <center>
-                                            <b>No autorizo</b>
-                                            <label class="switch">
-                                            <input type="checkbox" name="confirma" id="confirma">
-                                            <span class="slider round"></span>
-                                            </label>
-                                            <b>Si autorizo</b>
+                                            <center>
+                                                <b>No autorizo</b>
+                                                <label class="switch">
+                                                <input type="checkbox" name="confirma" id="confirma" onChange="showMessage(this)">
+                                                <span class="slider round"></span>
+                                                </label>
+                                                <b>Si autorizo</b>
+                                            </center>
                                         </form>
+                                        <div id="autorizaText" style="margin-top: 20px; display: none;" class="text-center">
+                                            Al autorizar que el CONOCER publique su información en el RENAP, deberá subir copia de ambos lados de su Credencial de Elector (INE).
+                                        </div>
                                     </div>
                                 </div>
                                 <!--END TABS-->
@@ -287,8 +326,6 @@
                         <!-- END PORTLET -->
                     </div>
                 </div>
-            {/if}
-			{if $info.actualizado eq "no"}
                 <div class="row">
                     <div class="col-md-12">
                         <!-- BEGIN PORTLET -->
@@ -309,6 +346,21 @@
                     </div>
                 </div>
 			{else}
+                {if $hasLive eq true}
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6">
+                            <div class="panel panel-danger">
+                                <div class="panel-heading"><i class="fa fa-video-camera"></i> Transmisión en Vivo</div>
+                                <div class="panel-body text-center">
+                                    <h4><b>Certificación:</b> {$live['name']}</h4>
+                                    <a href="{$WEB_ROOT}/view-modules-student/id/{$live['courseId']}&tipo=live" title="Ver Transmisión" class="btn btn-danger">
+                                        <i class="fa fa-play"></i> Ver Transmisión
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {/if}
                 <div class="row">
                     <div class="col-md-12">
                         <!-- BEGIN PORTLET -->
@@ -390,30 +442,40 @@
                         <!-- END PORTLET -->
                     </div>
                 </div>
-			{/if}
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="portlet light ">
-                        <div class="portlet-title">
-                            <div class="caption caption-md">
-                                <i class="icon-bar-chart theme-font hide"></i>
-                                <span class="caption-subject font-blue-madison bold uppercase">Acerca de la Plataforma</span>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/WTxKWMQQ2EE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light ">
+                            <div class="portlet-title">
+                                <div class="caption caption-md">
+                                    <i class="icon-bar-chart theme-font hide"></i>
+                                    <span class="caption-subject font-blue-madison bold uppercase">Acerca de la Plataforma</span>
                                 </div>
-                                <div class="col-md-6">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/Dw5akhfWaEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="row clearfix">
+                                    <div class="col-md-6">
+                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/WTxKWMQQ2EE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/Dw5akhfWaEw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+			{/if}
         </div>
         <!-- END PROFILE CONTENT -->
     </div>
 </div>
+
+<script>
+    function showMessage(element)
+    {
+        if(element.checked == true)
+            $("#autorizaText").css("display", "block");
+        else
+            $("#autorizaText").css("display", "none");
+    }
+</script>

@@ -36,6 +36,7 @@ class Student extends User
 	private $tipoSolicitante;
 	private $sectorId;
 	private $autorizoj;
+	private $autorizoFirma;
 		
 		//new
 		
@@ -45,10 +46,15 @@ class Student extends User
 	}	
 		
 		
-		public function setAutorizoj($value)
-		{
-			$this->autorizoj = $value;
-		}
+	public function setAutorizoj($value)
+	{
+		$this->autorizoj = $value;
+	}
+
+	public function setAutorizoFirma($value)
+	{
+		$this->autorizoFirma = $value;
+	}
 	
 	public function setSectorId($value)
 	{
@@ -4052,6 +4058,21 @@ class Student extends User
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetRow();
 		return $result;
+	}
+
+
+	public function UpdateAutorizoFirma()
+	{
+		if($this->Util()->PrintErrors()){ 
+			return false; 
+		}
+		$sqlQuery = "UPDATE user SET autorizoFirma = '" . $this->autorizoFirma . "' WHERE userId = " . $this->getUserId();
+		$this->Util()->DB()->setQuery($sqlQuery);
+		$this->Util()->DB()->ExecuteQuery();
+		$this->Util()->setError(10030, "complete");
+		$this->Util()->PrintErrors();
+		
+		return true;
 	}
 }
 

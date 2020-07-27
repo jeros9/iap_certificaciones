@@ -1332,6 +1332,7 @@ class User extends Main
 						$card['type'] = 'student';
 						$card['activo'] = $row['activo'];
 						$card['isLogged'] = true;
+						$card['autorizo'] = $row['autorizo'];
 						$_SESSION['User'] = $card;
 						$_SESSION["lastClick"] = time();	
 
