@@ -223,7 +223,8 @@ $pages = array(
 	'add-group-topic',
 	'add-group-comment',
 	'foro',
-	'respuestas'
+	'respuestas',
+	'make-group-final-test'
 );
 
 if(!in_array($_GET['page'], $pages))

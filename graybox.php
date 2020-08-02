@@ -236,7 +236,8 @@ $pages = array(
     'upload-group-homework',
     'make-group-test',
     'add-group-topic',
-    'add-group-comment'
+    'add-group-comment',
+    'view-description-group-final-test'
 
 );
 

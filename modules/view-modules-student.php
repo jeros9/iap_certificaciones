@@ -90,6 +90,11 @@
 			}
 			
 			$smarty->assign('totalScore', $totalScore);
+
+			// Examen Final
+			$group_final_test->setCourseId($courseId);
+			$final_test = $group_final_test->Enumerate();
+			$smarty->assign('final_test', $final_test);
 		}
 
 		if($tipo == "recursos")

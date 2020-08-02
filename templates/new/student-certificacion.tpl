@@ -107,6 +107,12 @@
 							<i class="material-icons">check_circle</i>
 						</a>
 
+						<a href="{$WEB_ROOT}/ajax/examen_final.php?userId={$item.userId}&courseId={$item.courseId}"  target="_blank" title="EXAMEN FINAL">
+							<i class="material-icons">
+								wysiwyg
+							</i>	
+						</a>
+
 					</td>
 					{else}
 						<td>

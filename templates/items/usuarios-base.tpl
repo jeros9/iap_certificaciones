@@ -137,6 +137,12 @@
 				<a href="{$WEB_ROOT}/ajax/ine.php?id={$item.userId}"   target='_blank' title='INE'>	
 				<i class="material-icons">picture_in_picture</i>
 				</a>
+
+				<a href="{$WEB_ROOT}/ajax/examen_final.php?userId={$item.userId}&courseId={$item.courseId}"  target="_blank" title="EXAMEN FINAL">
+					<i class="material-icons">
+						wysiwyg
+					</i>	
+				</a>
 			{/if}
 		</td>      
     </tr>

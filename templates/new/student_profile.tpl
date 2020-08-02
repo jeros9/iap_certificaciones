@@ -254,23 +254,14 @@
                                             <div style="text-align:justify">
                                                 Autorizo la creación de mi código individual de identificación para utilizarlo como firma electrónica dentro de los documentos que se requieran en el Sistema de Red CONOCER del Instituto de Administración Pública del Estado de Chiapas, A. C.
                                             </div>
-                                            <br>
-                                            <br>
                                         </div>
                                         <form id="frmAutorizaFirma">
                                             <input type="hidden" id="type" name="type" value="saveautorizaFirma"/>
                                             <input type="hidden" id="userId" name="userId" value="{$info.userId}"/>
-                                            <center>
-                                                <b>No autorizo</b>
-                                                <label class="switch">
-                                                <input type="checkbox" name="autorizaFirma" id="autorizaFirma">
-                                                <span class="slider round"></span>
-                                                </label>
-                                                <b>Si autorizo</b>
-                                            </center>
-                                        </form><br>
+                                            <input type="hidden" name="autorizaFirma" id="autorizaFirma" value="1">
+                                        </form>
                                         <center>
-                                            <button type="button" class="btn green submitForm" onclick="authorizeSignature();" id="authorizeSignature">Guardar</button>
+                                            <button type="button" class="btn green submitForm" onclick="authorizeSignature();" id="authorizeSignature">Si autorizo</button>
                                         </center>
                                     </div>
                                 </div>

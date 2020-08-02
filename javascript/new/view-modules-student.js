@@ -111,6 +111,14 @@ function DoTest(id)
     window.location = WEB_ROOT + "/make-group-test/id/" + id;
 }
 
+function DoFinalTest(id)
+{
+    var con = confirm("¿Está seguro de que desea presentar este examen? El tiempo empezará a correr despues de aceptar.");
+    if(!con)
+        return;
+    window.location = WEB_ROOT + "/make-group-final-test/id/" + id;
+}
+
 function updateForo()
 {	
 	$("#type").val("updateForo")
