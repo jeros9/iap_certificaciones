@@ -31,8 +31,4 @@
             <a style="cursor:pointer; color:#000" onclick="DoFinalTest({$final_test.testId})" class="btn btn-xs green-jungle">Presentar Ex&aacute;men.</a>
         {/if} 
     {/if}
-    {if $final_test.ponderation}
-        <br />
-        <b>Puntaje Obtenido:</b> {$final_test.ponderation}
-    {/if}
 </div>
