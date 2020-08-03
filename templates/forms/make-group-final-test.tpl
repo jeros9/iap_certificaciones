@@ -59,7 +59,7 @@
         </ul>    
     </form>
 {else}
-	<p>Has agotado tus oportunidades para hacer este examen. Tu calificacion fue de: <b>{$score}%</b></p>
+	<p>Has agotado tus oportunidades para hacer este examen. Tu puntaje obtenido es: <b>{$score}%</b></p>
     <div class="row">
 		<div class="col-md-12 text-center">
 			<a href="{$WEB_ROOT}/view-modules-student/id/{$final_test.courseId}&tipo=avisos" title="Ver Modulo de Curso"  class="btn blue" target="_top" >

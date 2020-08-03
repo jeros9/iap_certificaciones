@@ -33,7 +33,6 @@
     {/if}
     {if $final_test.ponderation}
         <br />
-        <b>Calificación:</b> {$final_test.ponderation}
-        <b>Porcentaje obtenido:</b> {$final_test.realScore}%
+        <b>Puntaje Obtenido:</b> {$final_test.ponderation}
     {/if}
 </div>
