@@ -125,13 +125,13 @@
         </td> 
 		<td align="center">
 			{if $tipoUs eq "Docente"}
-				<a href="{$WEB_ROOT}/ajax/acuse.php?id={$item.userId}&courseId={$id}"   target='_blank' title='ACUSE'>
+				<a href="{$WEB_ROOT}/ajax/acuse.php?id={$item.userId}&courseId={$item.courseId}"   target='_blank' title='ACUSE'>
 					<i class="material-icons">how_to_reg</i>
 				</a>
-				<a href="{$WEB_ROOT}/ajax/dg.php?id={$item.userId}&cId={$item.activityId}&courseId={$id}"   target='_blank' title='EVALUACION'>
+				<a href="{$WEB_ROOT}/ajax/dg.php?id={$item.userId}&cId={$item.activityId}&courseId={$item.courseId}"   target='_blank' title='EVALUACION'>
 				<i class="material-icons">ballot</i>	
 				</a>
-				<a href="{$WEB_ROOT}/ajax/reg.php?id={$item.userId}&courseId={$id}"   target='_blank' title='Ficha de Registro'>
+				<a href="{$WEB_ROOT}/ajax/reg.php?id={$item.userId}&courseId={$item.courseId}"   target='_blank' title='Ficha de Registro'>
 				<i class="material-icons">description</i>
 			
 				<a href="{$WEB_ROOT}/ajax/ine.php?id={$item.userId}"   target='_blank' title='INE'>	
