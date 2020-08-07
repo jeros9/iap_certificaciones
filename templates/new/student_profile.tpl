@@ -66,8 +66,7 @@
             <!-- PORTLET MAIN -->
             <div class="portlet light profile-sidebar-portlet ">
                 <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    <img src="{{$infoStudent.imagen}}" class="img-responsive" alt=""> </div>
+                <div class="profile-userpic">{$imgFoto}</div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">

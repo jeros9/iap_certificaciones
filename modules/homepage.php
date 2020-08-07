@@ -34,6 +34,29 @@ $x=0;
 		$student->setUserId($_SESSION['User']['userId']);
 		$data_student = $student->GetInfo();
 		$smarty->assign("firma", $data_student['firma']);
+
+		$imgFoto = '';
+		$filename = strtoupper(trim($info['curp'])) . '.jpg';
+		$has_photo = false;
+		$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+		if(!$has_photo)
+		{
+			$filename = $info['controlNumber'] . '.jpg';
+			$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+		}
+		if(!$has_photo)
+		{
+			$filename = $info['controlNumber'] . '.JPG';
+			$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+		}
+		if(!$has_photo)
+		{
+			$filename = $info['controlNumber'] . '.JPG';
+			$has_photo = file_exists(DOC_ROOT . '/alumnos/fotos/' . $filename);
+		}
+		if($has_photo)
+			$imgFoto = "<img src='" . WEB_ROOT . "/alumnos/fotos/" . $filename . "' class='img-responsive' />";
+		$smarty->assign("imgFoto", $imgFoto);	
 	}
 	//tipo de usuario
 	$smarty->assign("positionId", $_SESSION['positionId']);	
