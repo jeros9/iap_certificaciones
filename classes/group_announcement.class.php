@@ -62,7 +62,7 @@
                 $infoCourse = $course->Info();
 				$group = new Group;
 				$group->setCourseId($this->getCourseId());
-                $theGroup = $group->GroupCapacitador();
+                $theGroup = $group->GroupCapacitador($_SESSION["User"]["userId"]);
 				$modulo = $this->Util()->acento($infoCourse["name"]);
                 $titulo = $this->Util()->acento($this->title);
 				$message[3]["subject"] = "Nuevo anuncio Red Conocer | " . $titulo;
@@ -75,7 +75,7 @@
 				foreach($theGroup as $key => $value)
 				{
                     $nombremail = $this->Util()->acento($value["names"]);
-                    $correo = strtolower($value['email']);
+					$correo = strtolower($value['email']);
                     if($correo != '')
 				        $sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $correo, $nombremail, $attachment, $fileName); 		
                 }

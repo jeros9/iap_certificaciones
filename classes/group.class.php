@@ -627,11 +627,22 @@
 		}
 
 		// ACTUALIZADO RC
-		public function GroupCapacitador()
+		public function GroupCapacitador($personalId = null)
 		{
-			$sql = "SELECT *, user_subject.status AS status FROM user_subject
-						LEFT JOIN user ON user_subject.alumnoId = user.userId
-					WHERE courseId = " . $this->getCourseId() . " ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC";
+			if($personalId == null)
+			{
+				$sql = "SELECT *, user_subject.status AS status FROM user_subject
+							LEFT JOIN user ON user_subject.alumnoId = user.userId
+						WHERE courseId = " . $this->getCourseId() . " ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC";
+			}
+			else
+			{
+				$sql = "SELECT *, user_subject.status AS status FROM user_subject
+							LEFT JOIN user ON user_subject.alumnoId = user.userId
+							LEFT JOIN usuario_capacitador ON user_subject.alumnoId = usuario_capacitador.usuarioId
+						WHERE courseId = " . $this->getCourseId() . " AND usuario_capacitador.personalId = " . $personalId . " 
+						ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC";
+			}
 			$this->Util()->DB()->setQuery($sql);
 			$result = $this->Util()->DB()->GetResult();
 			return $result;
