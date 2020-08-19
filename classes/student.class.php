@@ -3599,7 +3599,7 @@ class Student extends User
 			left join municipio as m on m.municipioId = us.ciudadt 
 			left join course_module as cm on cm.courseId = c.courseId 
 			left join activity as at on at.courseModuleId = cm.courseModuleId 
-			WHERE 1 ".$filtro."";
+			WHERE 1 AND u.courseId > 0 ".$filtro."";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		
