@@ -97,7 +97,7 @@
             $infoCourse = $course->Info();
             $group = new Group;
             $group->setCourseId($this->getCourseId());
-            $theGroup = $group->GroupCapacitador();
+            $theGroup = $group->GroupCapacitador($_SESSION["User"]["userId"]);
             $modulo = $this->Util()->acento($infoCourse["name"]);
             $titulo = $this->Util()->acento($this->title);
             $message[3]["subject"] = "Nuevo anuncio Red Conocer | " . $titulo;
