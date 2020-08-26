@@ -41,10 +41,31 @@
         // ACTUALIZADO RC
 		public function Enumerate($courseId = 0)
 		{	
+			$condition = '';
+			if($_SESSION['User']['type'] == 'Docente')
+				$condition = ' AND personalId = ' . $_SESSION['User']['userId'];
             if($this->limit)
-				$sql = "SELECT * FROM group_announcement WHERE courseId = '" . $courseId . "' ORDER BY date DESC LIMIT 5";
+				$sql = "SELECT * FROM group_announcement WHERE courseId = '" . $courseId . "' " . $condition . " ORDER BY date DESC LIMIT 5";
             else
-                $sql = "SELECT * FROM group_announcement WHERE courseId = '" . $courseId . "' ORDER BY date DESC LIMIT 20";
+                $sql = "SELECT * FROM group_announcement WHERE courseId = '" . $courseId . "' " . $condition . " ORDER BY date DESC LIMIT 20";
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetResult();
+			foreach($result as $key => $res)
+				$result[$key]["description"] = $this->Util()->DecodeTiny($result[$key]["description"]);
+			return $result;
+		}
+        
+        // ACTUALIZADO RC
+		public function EnumerateStudents($courseId = 0)
+		{	
+            $sql = "SELECT A.* 
+						FROM group_announcement A
+							INNER JOIN usuario_capacitador B
+								ON A.personalId = B.personalId 
+							INNER JOIN course C
+								ON A.courseId = C.courseId 
+						WHERE A.courseId = '" . $courseId . "' AND B.usuarioId = " . $_SESSION['User']['userId'] . "
+						ORDER BY date DESC LIMIT 20";
 			$this->Util()->DB()->setQuery($sql);
 			$result = $this->Util()->DB()->GetResult();
 			foreach($result as $key => $res)

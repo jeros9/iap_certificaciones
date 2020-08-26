@@ -106,7 +106,7 @@
 
 		if($tipo == "avisos")
 		{
-			$announcements = $group_announcement->Enumerate($courseId);
+			$announcements = $group_announcement->EnumerateStudents($courseId);
 			$smarty->assign('announcements', $announcements);
 		}
 
