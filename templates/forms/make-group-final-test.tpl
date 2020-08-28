@@ -55,19 +55,19 @@
                                     {/if}
                                     {if $subject.opcionB}
                                         <div style="clear:both"></div>
-                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta2]" id="anwer[{$subject.questionId}][respuesta2]" value="opcionB" /> {$subject.opcionB}</label>
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta1]" id="anwer[{$subject.questionId}][respuesta1]" value="opcionB" /> {$subject.opcionB}</label>
                                     {/if}
                                     {if $subject.opcionC}
                                         <div style="clear:both"></div>
-                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta3]" id="anwer[{$subject.questionId}][respuesta3]" value="opcionC" /> {$subject.opcionC}</label>
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta1]" id="anwer[{$subject.questionId}][respuesta1]" value="opcionC" /> {$subject.opcionC}</label>
                                     {/if}
                                     {if $subject.opcionD}
                                         <div style="clear:both"></div>
-                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta4]" id="anwer[{$subject.questionId}][respuesta4]" value="opcionD" /> {$subject.opcionD}</label>
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta1]" id="anwer[{$subject.questionId}][respuesta1]" value="opcionD" /> {$subject.opcionD}</label>
                                     {/if}
                                     {if $subject.opcionE}
                                         <div style="clear:both"></div>
-                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta5]" id="anwer[{$subject.questionId}][respuesta5]" value="opcionE" /> {$subject.opcionE}</label><br />
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta1]" id="anwer[{$subject.questionId}][respuesta1]" value="opcionE" /> {$subject.opcionE}</label><br />
                                     {/if}
                                 {/if}
                             </div>
