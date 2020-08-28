@@ -53,10 +53,50 @@
             $numCat = 1;
         }
         $tbody .= $rowCat;
+        // RESPUESTAS EXAMEN
+        $respuestas_examen    = '';
+        if($item['answer1'] != '')
+            $respuestas_examen .= $options[$item['questionType']][$item['answer1']];
+        if($respuestas_examen != '' && $item['answer2'] != '')
+            $respuestas_examen .= ', ';
+        if($item['answer2'] != '')
+            $respuestas_examen .= $options[$item['questionType']][$item['answer2']];
+        if($respuestas_examen != '' && $item['answer3'] != '')
+            $respuestas_examen .= ', ';
+        if($item['answer3'] != '')
+            $respuestas_examen .= $options[$item['questionType']][$item['answer3']];
+        if($respuestas_examen != '' && $item['answer4'] != '')
+            $respuestas_examen .= ', ';
+        if($item['answer4'] != '')
+            $respuestas_examen .= $options[$item['questionType']][$item['answer4']];
+        if($respuestas_examen != '' && $item['answer5'] != '')
+            $respuestas_examen .= ', ';
+        if($item['answer5'] != '')
+            $respuestas_examen .= $options[$item['questionType']][$item['answer5']];
+        // RESPUESTAS CANDIDATO
+        $respuestas_candidato = '';
+        if($item['respuesta1'] != '')
+            $respuestas_candidato .= $options[$item['questionType']][$item['respuesta1']];
+        if($respuestas_candidato != '' && $item['respuesta2'] != '')
+            $respuestas_candidato .= ', ';
+        if($item['respuesta2'] != '')
+            $respuestas_candidato .= $options[$item['questionType']][$item['respuesta2']];
+        if($respuestas_candidato != '' && $item['respuesta3'] != '')
+            $respuestas_candidato .= ', ';
+        if($item['respuesta3'] != '')
+            $respuestas_candidato .= $options[$item['questionType']][$item['respuesta3']];
+        if($respuestas_candidato != '' && $item['respuesta4'] != '')
+            $respuestas_candidato .= ', ';
+        if($item['respuesta4'] != '')
+            $respuestas_candidato .= $options[$item['questionType']][$item['respuesta4']];
+        if($respuestas_candidato != '' && $item['respuesta5'] != '')
+            $respuestas_candidato .= ', ';
+        if($item['respuesta5'] != '')
+            $respuestas_candidato .= $options[$item['questionType']][$item['answer5']];
         $tbody .= '<tr>
                         <td style="border: 0;border-right: 1px solid #000 !important;">' . $item['question'] . '</td>
-                        <td style="border: 0;text-align: center;border-right: 1px solid #000 !important;">' . $options[$item['questionType']][$item['answer']] . '</td>
-                        <td style="border: 0;text-align: center;border-right: 1px solid #000 !important;">' . $options[$item['questionType']][$item['respuesta']] . '</td>
+                        <td style="border: 0;text-align: center;border-right: 1px solid #000 !important;">' . $respuestas_examen . '</td>
+                        <td style="border: 0;text-align: center;border-right: 1px solid #000 !important;">' . $respuestas_candidato . '</td>
                     </tr>';
         $numCat++;
         if ($item == $last_element)

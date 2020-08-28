@@ -944,7 +944,11 @@
             $result['info'] = $info;
 			
             $sql = "SELECT A. *, 
-                            B.respuesta,
+                            B.respuesta1,
+                            B.respuesta2,
+                            B.respuesta3,
+                            B.respuesta4,
+                            B.respuesta5,
                             B.puntos,
                             C.codes,
                             C.category

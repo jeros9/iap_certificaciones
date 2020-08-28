@@ -7,6 +7,9 @@
 
 	if($_POST)
 	{
+		/* echo "<pre>";
+		var_dump($_POST["anwer"]); */
+		//exit;
 		$group_questions_final_test->setUserId($_SESSION["User"]["userId"]);
 		$group_questions_final_test->setActivityId($_GET["id"]);
 		$group_questions_final_test->SendTest($_POST["anwer"]);

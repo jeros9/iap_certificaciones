@@ -29,24 +29,46 @@
                                 <b>{$subject.question}</b><br><br><br>
                             </div>
                             <div style="text-align:left">
-                                {if $subject.opcionA}
-                                    <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}]" id="anwer[{$subject.questionId}]" value="opcionA" /> {$subject.opcionA}</label>
-                                {/if}
-                                {if $subject.opcionB}
-                                    <div style="clear:both"></div>
-                                    <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}]" id="anwer[{$subject.questionId}]" value="opcionB" /> {$subject.opcionB}</label>
-                                {/if}
-                                {if $subject.opcionC}
-                                    <div style="clear:both"></div>
-                                    <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}]" id="anwer[{$subject.questionId}]" value="opcionC" /> {$subject.opcionC}</label>
-                                {/if}
-                                {if $subject.opcionD}
-                                    <div style="clear:both"></div>
-                                    <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}]" id="anwer[{$subject.questionId}]" value="opcionD" /> {$subject.opcionD}</label>
-                                {/if}
-                                {if $subject.opcionE}
-                                    <div style="clear:both"></div>
-                                    <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}]" id="anwer[{$subject.questionId}]" value="opcionE" /> {$subject.opcionE}</label><br />
+                                {if $subject.answers > 1}
+                                    {if $subject.opcionA}
+                                        <label><input style="width:50px" type="checkbox" name="anwer[{$subject.questionId}][respuesta1]" id="anwer[{$subject.questionId}][respuesta1]" value="opcionA" /> {$subject.opcionA}</label>
+                                    {/if}
+                                    {if $subject.opcionB}
+                                        <div style="clear:both"></div>
+                                        <label><input style="width:50px" type="checkbox" name="anwer[{$subject.questionId}][respuesta2]" id="anwer[{$subject.questionId}][respuesta2]" value="opcionB" /> {$subject.opcionB}</label>
+                                    {/if}
+                                    {if $subject.opcionC}
+                                        <div style="clear:both"></div>
+                                        <label><input style="width:50px" type="checkbox" name="anwer[{$subject.questionId}][respuesta3]" id="anwer[{$subject.questionId}][respuesta3]" value="opcionC" /> {$subject.opcionC}</label>
+                                    {/if}
+                                    {if $subject.opcionD}
+                                        <div style="clear:both"></div>
+                                        <label><input style="width:50px" type="checkbox" name="anwer[{$subject.questionId}][respuesta4]" id="anwer[{$subject.questionId}][respuesta4]" value="opcionD" /> {$subject.opcionD}</label>
+                                    {/if}
+                                    {if $subject.opcionE}
+                                        <div style="clear:both"></div>
+                                        <label><input style="width:50px" type="checkbox" name="anwer[{$subject.questionId}][respuesta5]" id="anwer[{$subject.questionId}][respuesta5]" value="opcionE" /> {$subject.opcionE}</label><br />
+                                    {/if}
+                                {else}
+                                    {if $subject.opcionA}
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta1]" id="anwer[{$subject.questionId}][respuesta1]" value="opcionA" /> {$subject.opcionA}</label>
+                                    {/if}
+                                    {if $subject.opcionB}
+                                        <div style="clear:both"></div>
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta2]" id="anwer[{$subject.questionId}][respuesta2]" value="opcionB" /> {$subject.opcionB}</label>
+                                    {/if}
+                                    {if $subject.opcionC}
+                                        <div style="clear:both"></div>
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta3]" id="anwer[{$subject.questionId}][respuesta3]" value="opcionC" /> {$subject.opcionC}</label>
+                                    {/if}
+                                    {if $subject.opcionD}
+                                        <div style="clear:both"></div>
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta4]" id="anwer[{$subject.questionId}][respuesta4]" value="opcionD" /> {$subject.opcionD}</label>
+                                    {/if}
+                                    {if $subject.opcionE}
+                                        <div style="clear:both"></div>
+                                        <label><input style="width:50px" type="radio" name="anwer[{$subject.questionId}][respuesta5]" id="anwer[{$subject.questionId}][respuesta5]" value="opcionE" /> {$subject.opcionE}</label><br />
+                                    {/if}
                                 {/if}
                             </div>
                         </div>

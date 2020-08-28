@@ -210,27 +210,53 @@
 			{
 				foreach($answers as $key => $option)
 				{
-					$sql = "SELECT answer FROM group_questions_final_test WHERE questionId = " . $key;
+					$opciones = 0;
+					$sql = "SELECT * FROM group_questions_final_test WHERE questionId = " . $key;
 					$this->Util()->DB()->setQuery($sql);
-					$result = $this->Util()->DB()->GetSingle();
-					$sql = "SELECT points FROM group_questions_final_test WHERE questionId = " . $key;
-					$this->Util()->DB()->setQuery($sql);
-					$questionScore = $this->Util()->DB()->GetSingle();
-					
-					if(!$result)
-						$result = "opcionA";
-					
+					$question = $this->Util()->DB()->GetRow();
+
 					$puntosPregunta = 0;
-					if($option == $result)
+					if(($option['respuesta1'] != '' && $option['respuesta1'] != null) && ($option['respuesta1'] == $question['answer1'] || $option['respuesta1'] == $question['answer2'] || $option['respuesta1'] == $question['answer3'] || $option['respuesta1'] == $question['answer4'] || $option['respuesta1'] == $question['answer5']))
 					{
-						$score += $questionScore;
-						$puntosPregunta = $questionScore;
-						$incorrectas--;
-						$correctas++;
+						$opciones++;
 					}
 
-					$sql = "INSERT INTO group_answers_final_test(questionId, respuesta, testId, usuarioId, puntos)
-							VALUES(" . $key . ", '" . $option . "', " . $this->getActivityId() . ", " . $this->getUserId() . ", '" . $puntosPregunta . "')";
+					if(($option['respuesta2'] != '' && $option['respuesta2'] != null) && ($option['respuesta2'] == $question['answer1'] || $option['respuesta2'] == $question['answer2'] || $option['respuesta2'] == $question['answer3'] || $option['respuesta2'] == $question['answer4'] || $option['respuesta2'] == $question['answer5']))
+					{
+						$opciones++;
+					}
+
+					if(($option['respuesta3'] != '' && $option['respuesta3'] != null) && ($option['respuesta3'] == $question['answer1'] || $option['respuesta3'] == $question['answer2'] || $option['respuesta3'] == $question['answer3'] || $option['respuesta3'] == $question['answer4'] || $option['respuesta3'] == $question['answer5']))
+					{
+						$opciones++;
+					}
+
+					if(($option['respuesta4'] != '' && $option['respuesta4'] != null) && ($option['respuesta4'] == $question['answer1'] || $option['respuesta4'] == $question['answer2'] || $option['respuesta4'] == $question['answer3'] || $option['respuesta4'] == $question['answer4'] || $option['respuesta4'] == $question['answer5']))
+					{
+						$opciones++;
+					}
+
+					if(($option['respuesta5'] != '' && $option['respuesta5'] != null) && ($option['respuesta5'] == $question['answer1'] || $option['respuesta5'] == $question['answer2'] || $option['respuesta5'] == $question['answer3'] || $option['respuesta5'] == $question['answer4'] || $option['respuesta5'] == $question['answer5']))
+					{
+						$opciones++;
+					}
+					
+					if($opciones == $question['answers'])
+					{
+						if(is_array($option))
+						{
+							if(count($option) == $opciones)
+							{
+								$score += $question['points'];
+								$puntosPregunta = $question['points'];
+								$incorrectas--;
+								$correctas++;
+							}
+						}
+					}
+
+					$sql = "INSERT INTO group_answers_final_test(questionId, respuesta1, respuesta2, respuesta3, respuesta4, respuesta5, testId, usuarioId, puntos)
+							VALUES(" . $key . ", '" . $option['respuesta1'] . "', '" . $option['respuesta2'] . "', '" . $option['respuesta3'] . "', '" . $option['respuesta4'] . "', '" . $option['respuesta5'] . "', " . $this->getActivityId() . ", " . $this->getUserId() . ", '" . $puntosPregunta . "')";
 					$this->Util()->DB()->setQuery($sql);
 					$this->Util()->DB()->InsertData(); 
 				}
@@ -250,20 +276,8 @@
 				$result = $this->Util()->DB()->UpdateData();					
 			}
 			unset($_SESSION["timeLimit"]);
-
-			/* $sendmail = new Sendmail();
-			$message[3]["subject"] = "Examen finalizado Correctamente";
-			$message[3]["body"] = "Has realizado el examen correctamente <br/> Calificacion obtenida: " . $score;
-			$details_body = array();
-			$details_subject = array();
-			$attachment = "";
-			$fileName = "";
-			$nombremail = $infoStudent['names'];
-            $correo = strtolower($infoStudent['email']);
-			if($correo != '')
-				$sendmail->PrepareAttachment($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $correo, $nombremail, $attachment, $fileName); */
 				
-			$this->Util()->setError(90000, 'complete', "Has respondido el examen Satisfactoriamente. Tu resultado esta abajo.");
+			$this->Util()->setError(90000, 'complete', "Has respondido el examen Satisfactoriamente.");
 			$this->Util()->PrintErrors();
 		}
 
