@@ -42,7 +42,7 @@
 	$smarty->assign('myTest', $myTest);
     
     $hora_actual = time();
-	if(!$_SESSION["timeLimit"])
+	//if(!$_SESSION["timeLimit"])
 		$_SESSION["timeLimit"] = $hora_actual + ($final_test["timeLimit"] * 60);
 	
 	$rest = $_SESSION["timeLimit"] - $hora_actual;
