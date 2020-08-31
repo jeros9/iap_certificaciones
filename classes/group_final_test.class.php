@@ -954,10 +954,10 @@
                             C.category
                         FROM group_questions_final_test A 
                             LEFT JOIN group_answers_final_test B 
-                                ON A.questionId = B.questionId AND A.testId = B.testId 
-                            LEFT JOIN group_categories_final_test C
+                                ON A.questionId = B.questionId " . " AND B.usuarioId = " . $usuarioId . 
+                            " LEFT JOIN group_categories_final_test C
                                 ON A.categoryId = C.categoryId
-                        WHERE A.testId = " . $result['testId'] . " AND B.usuarioId = " . $usuarioId;
+                        WHERE A.testId = " . $result['testId'] . " ORDER BY A.questionId";
             $this->Util()->DB()->setQuery($sql);
             $questions = $this->Util()->DB()->GetResult();
             $result['questions'] = $questions;
