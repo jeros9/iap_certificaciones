@@ -23,6 +23,8 @@
                         <option value="10" {if $activity.noQuestions == 10} selected="selected" {/if}>10</option>
                         <option value="20" {if $activity.noQuestions == 20} selected="selected" {/if}>20</option>
                         <option value="25" {if $activity.noQuestions == 25} selected="selected" {/if}>25</option>
+                        <option value="30" {if $activity.noQuestions == 30} selected="selected" {/if}>30</option>
+                        <option value="40" {if $activity.noQuestions == 40} selected="selected" {/if}>40</option>
                         <option value="50" {if $activity.noQuestions == 50} selected="selected" {/if}>50</option>
                         <option value="100" {if $activity.noQuestions == 100} selected="selected" {/if}>100</option>
                     </select>
