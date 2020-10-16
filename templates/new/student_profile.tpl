@@ -412,9 +412,15 @@
                                                         <i class="material-icons">assignment_returned</i>
                                                     </a> 
                                                 {else}
-                                                    <i class="material-icons" title="NO DISPONIBLE">
-                                                        block
-                                                    </i>
+                                                    {if $subject.courseId == 50}
+                                                        <i class="material-icons" title="NO DISPONIBLE" style="cursor:pointer;" onclick="alert('Su certificado digital estará disponible en próximas fechas, le enviaremos un correo informándole en cuanto se encuentre disponible para su descarga.')">
+                                                            info
+                                                        </i>
+                                                    {else}
+                                                        <i class="material-icons" title="NO DISPONIBLE">
+                                                            block
+                                                        </i>
+                                                    {/if}
                                                 {/if}
                                             </td>
                                         </tr>
