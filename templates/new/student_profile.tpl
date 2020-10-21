@@ -402,7 +402,7 @@
                                                 {/if}
                                             </td>
                                             <td align="center">
-                                                {if $subject.certificacion_pdf != "" && $subject.courseId != 50}
+                                                {if $subject.certificacion_pdf != ""}
                                                     <!--a href="{$WEB_ROOT}/alumnos/repositorio/{$subject.certificacion_pdf}" target="_blank">
                                                         <i class="material-icons">
                                                             assignment_returned
@@ -412,15 +412,9 @@
                                                         <i class="material-icons">assignment_returned</i>
                                                     </a> 
                                                 {else}
-                                                    {if $subject.courseId == 50}
-                                                        <i class="material-icons" title="NO DISPONIBLE" style="cursor:pointer;" onclick="alert('Su certificado digital estará disponible en próximas fechas, le enviaremos un correo informándole en cuanto se encuentre disponible para su descarga.')">
-                                                            info
-                                                        </i>
-                                                    {else}
-                                                        <i class="material-icons" title="NO DISPONIBLE">
-                                                            block
-                                                        </i>
-                                                    {/if}
+                                                    <i class="material-icons" title="NO DISPONIBLE">
+                                                        block
+                                                    </i>
                                                 {/if}
                                             </td>
                                         </tr>
