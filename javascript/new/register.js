@@ -8,6 +8,25 @@ $(document).ready(function(){
     $("#estado").change(function(){ ciudad_dependencia();});
     $("#paist").change(function(){ estado_dependenciat();});
     $("#estadot").change(function(){ ciudad_dependenciat();});
+
+    $("#estados").change(function() {
+        let estado = $(this).val();
+        $.ajax({
+            url : WEB_ROOT + '/ajax/new/location.php',
+            type: "POST",
+            data : {type: "getMunicipios", state: estado},
+            success: function(data)
+            {
+                $('#ciudad').html(data);
+                /* var splitResponse = data.split("[#]");
+                $('#Statepositiont').html(splitResponse[0]); */
+            },
+            error: function ()
+            {
+                alert('Algo salio mal, compruebe su conexión a internet');
+            }
+        });
+    });
 });
 
 
