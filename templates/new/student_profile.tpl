@@ -402,7 +402,7 @@
                                                 {/if}
                                             </td>
                                             <td align="center">
-                                                {if $subject.certificacion_pdf != "" && $subject.courseId != 69 && $subject.courseId != 73 && $subject.courseId != 66 && $subject.courseId != 41 && $subject.courseId != 40 && $subject.courseId != 62 && $subject.courseId != 61}
+                                                {if $subject.certificacion_pdf != ""}
                                                     <!--a href="{$WEB_ROOT}/alumnos/repositorio/{$subject.certificacion_pdf}" target="_blank">
                                                         <i class="material-icons">
                                                             assignment_returned
