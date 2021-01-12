@@ -674,7 +674,7 @@ class Student extends User
 
 		include_once(DOC_ROOT."/properties/messages.php");
 		//enviar correo
-		$sendmail = new SendMail;
+		/* $sendmail = new SendMail;
 		$details_body = array(
 			"email" => $this->getControlNumber(),
 			"password" => $this->getPassword(),
@@ -684,7 +684,7 @@ class Student extends User
 		$details_subject = array();
 		$attachment = "";
 		$fileName = "";
-		$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $this->getEmail(), $this->getNames(), $attachment, $fileName);
+		$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $this->getEmail(), $this->getNames(), $attachment, $fileName); */
 		
 		
 		if($id = $this->Util()->DB()->InsertData()){
