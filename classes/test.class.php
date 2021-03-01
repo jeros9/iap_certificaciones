@@ -292,7 +292,7 @@
 			foreach($_POST["preguntas"] as $key=>$aux){
 				if($answers[$key]==null){
 						echo "fail[#]";
-						echo "<font  color='red'>Necesita responder la pregunta numero ".($key)."</font>";
+						echo "<font  color='red'>Necesita responder todas las preguntas..</font>";
 						exit;
 					}
 				
