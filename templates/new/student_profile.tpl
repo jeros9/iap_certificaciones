@@ -403,14 +403,12 @@
                                             </td>
                                             <td align="center">
                                                 {if $subject.certificacion_pdf != ""}
-                                                    <!--a href="{$WEB_ROOT}/alumnos/repositorio/{$subject.certificacion_pdf}" target="_blank">
-                                                        <i class="material-icons">
-                                                            assignment_returned
-                                                        </i>
-                                                    </a-->
-                                                    <a href="{$WEB_ROOT}/graybox.php?page=student-certificado&userId={$subject.alumnoId}&subjectId={$subject.subjectId}&auxTpl=1" data-target="#ajax" data-toggle="modal" data-width="1000px" title="Descargar Certificado">
+                                                    <i class="material-icons" title="NO DISPONIBLE">
+                                                        block
+                                                    </i>
+                                                    {*<a href="{$WEB_ROOT}/graybox.php?page=student-certificado&userId={$subject.alumnoId}&subjectId={$subject.subjectId}&auxTpl=1" data-target="#ajax" data-toggle="modal" data-width="1000px" title="Descargar Certificado">
                                                         <i class="material-icons">assignment_returned</i>
-                                                    </a>
+                                                    </a>*}
                                                 {else}
                                                     <i class="material-icons" title="NO DISPONIBLE">
                                                         block

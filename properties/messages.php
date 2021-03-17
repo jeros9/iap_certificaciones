@@ -32,7 +32,7 @@ $message[3]["subject"] = "Certificado Red Conocer";
 $message[3]["body"] = "
 					Estimado usuario,
 					De acuerdo a la evaluación realizada y al ser declarado competente, ya se encuentra disponible para su descarga el certificado digital del estándar: <b>|course|</b>  expedido por el Consejo Nacional de Normalización y Certificación de Competencias Laborales (CONOCER), con validez oficial de la SEP.
-					Para descargarlo, deberá ingresar a nuestro Sistema RED CONOCER <a href=\"https://redconocer.iapchiapas.edu.mx\">https://redconocer.iapchiapas.edu.mx</a> con su usuario y contraseña:
+					Para descargarlo, deberá ingresar partir de las 12:00 pm del día 19 de marzo de 2021 a nuestro Sistema RED CONOCER <a href=\"https://redconocer.iapchiapas.edu.mx\">https://redconocer.iapchiapas.edu.mx</a> con su usuario y contraseña:
 
 					Usuario: <b>|username|</b> <br>
 					Contraseña: <b>|password|</b> <br><br>
