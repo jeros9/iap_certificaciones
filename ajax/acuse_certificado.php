@@ -99,7 +99,7 @@
                             <td style="padding-left:35px;width:50%;text-align:center;font-size:11pt;">
                                 <strong>Atentamente</strong><br>
                                 ' . $data_user['firma'] . '<br>
-                                ' . mb_strtoupper($data_user['names'] . ' ' . $data['lastNamePaterno'] . ' ' . $data_user['lastNameMaterno']) . '
+                                ' . mb_strtoupper($data_user['names'] . ' ' . $data_user['lastNamePaterno'] . ' ' . $data_user['lastNameMaterno']) . '
                             </td>
                         </tr>
                     </table><br>';
