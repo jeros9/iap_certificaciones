@@ -431,6 +431,26 @@ function ciudad_dependenciat(subjectId){
     });
 }
 
+function ciudad_domt(){
+	var e = $("#estadotId").val();
+	
+	$.ajax({
+	  	type: "POST",
+	  	url: WEB_ROOT+'/ajax/student.php',
+	  	data: "type=ciudad_domt&estadotId="+e,
+		beforeSend: function(){			
+			// $("#td_"+id).html(LOADER3);
+		},
+	  	success: function(response) {	
+			console.log(response)
+			$("#divMunicipiot").html(response);
+		},
+		error:function(){
+			alert(msgError);
+		}
+    });
+}
+
 
 
 

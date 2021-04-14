@@ -39,25 +39,38 @@ return (key <= 13 || (key >= 48 && key <= 57) || key == 46);
 		<b>Si autorizo</b>
 	</center>
 	{/if}
-	  <table width="100%" class="tblGral table table-bordered table-striped table-condensed flip-content" >
-		<tr>
-			<td colspan="2" {if $info.ciudad ne ""} style="background:#e7505a33" {/if}>Municipio:<br>
-			<select id="municipiotId" name="municipiotId"  style="width:250px" class="form-control" >
-                            <option value="0">Selecciona </option>
-							  {foreach from=$lst item=pais}
-                            <option value="{$pais.municipioId}" {if $info.ciudadt == $pais.municipioId} selected="selected" {/if}>{$pais.nombre} </option>
-                        {/foreach}
-
-                        </select>
-			
+	  <table width="100%" class="tblGral table table-bordered table-striped table-condensed flip-content">
+	  	<tr>
+		  	<td colspan="6">
+		  		<b>Lugar de Trabajo</b>
 			</td>
-			<td {if $info.names ne ""} style="background:#e7505a33" {/if}>Nombre:<br><input type="text" name="names" class="form-control" value="{$info.names}"></td>
-			<td {if $info.lastNamePaterno ne ""} style="background:#e7505a33" {/if}>Apellido Paterno:<br><input type="text" name="lastNamePaterno" class="form-control" value="{$info.lastNamePaterno}"></td>
-			<td colspan="2" {if $info.lastNameMaterno ne ""} style="background:#e7505a33" {/if}>Apellido Materno:<br><input type="text" name="lastNameMaterno" class="form-control" value="{$info.lastNameMaterno}"></td>
-
+		</tr>
+	  	<tr>
+			<td colspan="3" {if $info.estadot ne ""} style="background:#e7505a33" {/if}>
+				Estado:<br>
+				<select id="estadotId" name="estadotId" class="form-control" onChange="ciudad_domt();">
+					<option value="0">Selecciona</option>
+					{foreach from=$lstEstados item=pais}
+						<option value="{$pais.estadoId}" {if $info.estadot == $pais.estadoId} selected="selected" {/if}>
+							{$pais.nombre}
+						</option>
+					{/foreach}
+                </select>
+			</td>  
+			<td colspan="3" {if $info.ciudadt ne ""} style="background:#e7505a33" {/if}>
+				Municipio:<br>
+				<div id="divMunicipiot">
+					{include file="{$DOC_ROOT}/templates/forms/new/municipiot.tpl"}
+				</div>
+			</td>  
 		</tr>
 		<tr>
-			<td colspan="2">Lugar de Nacimiento:<br><input type="text" name="cityBorn" class="form-control" value="{$info.cityBorn}"></td>
+			<td colspan="2" {if $info.names ne ""} style="background:#e7505a33" {/if}>Nombre:<br><input type="text" name="names" class="form-control" value="{$info.names}"></td>
+			<td colspan="2" {if $info.lastNamePaterno ne ""} style="background:#e7505a33" {/if}>Apellido Paterno:<br><input type="text" name="lastNamePaterno" class="form-control" value="{$info.lastNamePaterno}"></td>
+			<td colspan="2" {if $info.lastNameMaterno ne ""} style="background:#e7505a33" {/if}>Apellido Materno:<br><input type="text" name="lastNameMaterno" class="form-control" value="{$info.lastNameMaterno}"></td>
+		</tr>
+		<tr>
+			<td colspan="2">Lugar de Nacimiento (Ciudad, Estado):<br><input type="text" name="cityBorn" class="form-control" value="{$info.cityBorn}"></td>
 			<td>Nacionalidad:<br><input type="text" name="nacionality" class="form-control" value="{$info.nacionality}"></td>
 			<td style="width:180px" colspan="3">
 			Fecha de Nacimiento:<br>
@@ -163,13 +176,13 @@ return (key <= 13 || (key >= 48 && key <= 57) || key == 46);
 			<td>CP:<br><input type="text" name="postalCode" class="form-control" value="{$info.postalCode}"></td>
 			<td>Colonia:<br><input type="text" name="colony" class="form-control"  value="{$info.colony}"></td>
 			<td>Estado:<br>
-			<select id="estado" name="estado" onChange='ciudad_dependenciat();' style="width:150px" class="form-control" >
-                            <option value="0">Selecciona tu Estado</option>
-							  {foreach from=$lstEstados item=pais}
-                            <option value="{$pais.estadoId}" {if $info.estado == $pais.estadoId} selected="selected" {/if}>{$pais.nombre} </option>
-                        {/foreach}
+				<select id="estado" name="estado" onChange='ciudad_dependenciat();' style="width:150px" class="form-control" >
+                	<option value="0">Selecciona tu Estado</option>
+					{foreach from=$lstEstados item=pais}
+                        <option value="{$pais.estadoId}" {if $info.estado == $pais.estadoId} selected="selected" {/if}>{$pais.nombre} </option>
+                    {/foreach}
 							
-                        </select>
+                </select>
 			</td>
 			<td>Ciudad:<br>
 			<div id="divMunicipio">

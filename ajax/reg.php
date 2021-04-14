@@ -170,7 +170,7 @@
 										<td style='background:#c4e9b9' colspan='2'>Nombre Completo:</td><td colspan='3'>".$info["names"]." ".$info["lastNamePaterno"]." ".$info["lastNameMaterno"]."</td>
 									</tr>
 									<tr>
-										<td style='background:#c4e9b9' colspan='2'>Lugar de Nacimiento:</td><td colspan='3'>".$info["cityBorn"].", ".$info["nombreEstado"]."</td>
+										<td style='background:#c4e9b9' colspan='2'>Lugar de Nacimiento:</td><td colspan='3'>".$info["cityBorn"]."</td>
 									</tr>
 									<tr>
 										<td style='background:#c4e9b9' colspan='2'>Nacionalidad:</td><td colspan='3'>".$info["nacionality"]."</td>

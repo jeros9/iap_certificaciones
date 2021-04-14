@@ -1038,6 +1038,7 @@
 				$student->setColony($_POST['colony']);
 				$student->setCity($_POST['municipioId']);
 				$student->setCiudadT($_POST['municipiotId']);
+				$student->setEstadoT($_POST['estadotId']);
 				$student->setState($_POST['estado']);  
 				// $student->setCountry($_POST['pais']);
 				$student->setPostalCode($_POST['postalCode']);
@@ -1074,6 +1075,12 @@
 					$smarty->display(DOC_ROOT.'/templates/boxes/status.tpl');
 				}	
 
+		break;
+		
+		case "ciudad_domt":
+			$lstt = $student->enumerateMunicipio($_POST["estadotId"]);
+			$smarty->assign("lstt", $lstt);	
+			$smarty->display(DOC_ROOT.'/templates/forms/new/municipiot.tpl');
 		break;
 		
 		case "ciudad_dependenciat":

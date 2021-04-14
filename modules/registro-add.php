@@ -69,8 +69,10 @@ $x=0;
 	// echo '_'.$_SESSION['msjC'];
 // exit;
 
-	$lst = $student->enumerateMunicipio(7);
-			$smarty->assign("lst", $lst);	
+	$lstt = $student->enumerateMunicipio($info['estadot']);
+	$smarty->assign("lstt", $lstt);	
+	$lst = $student->enumerateMunicipio($info['estado']);
+	$smarty->assign("lst", $lst);	
 
 	$notificaciones=$notificacion->Enumerate();
 	$smarty->assign('notificaciones', $notificaciones);
