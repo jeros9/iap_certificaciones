@@ -928,8 +928,8 @@ class Student extends User
 		$details_body = array(
 			"email" => $info["controlNumber"],
 			"password" => $password,
-			"major" => utf8_decode($major),
-			"course" => utf8_decode($course),
+			"major" => $major,
+			"course" => $course,
 		);
 		$details_subject = array();
 		$attachment = "";
