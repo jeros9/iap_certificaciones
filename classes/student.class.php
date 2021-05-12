@@ -920,7 +920,7 @@ class Student extends User
 	{
 
 
-		//include_once(DOC_ROOT."/properties/messages.php");
+		include_once(DOC_ROOT."/properties/messages.php");
 		$this->setUserId($id);
 		$info = $this->GetInfo();
 		//enviar correo
@@ -934,21 +934,7 @@ class Student extends User
 		$details_subject = array();
 		$attachment = "";
 		$fileName = "";
-		$sbj = "Bienvenido a la Entidad de Certificacion y Evaluacion del IAP Chiapas";
-		$msg = "Bienvenido a la Entidad de Certificacion y Evaluacion ECE213-15 del Instituto de Administracion Publica del Estado de Chiapas. Estamos muy agradecidos que nos hayas elegido.
-				
-				La Certificacion de tu eleccion es:
-				<b>|course|</b>
-				
-				Para ingresar a nuestro sistema, favor de dirigirte al siguiente enlace:
-				<a href=\"https://redconocer.iapchiapas.edu.mx\">https://redconocer.iapchiapas.edu.mx</a>
-				
-				Tu datos para ingresar son los siguientes:
-				<b>Usuario:</b> |email|
-				<b>Contrase&ntilde;a:</b>	|password|
-				
-				<b>¡Bienvenido!</b>";
-		$sendmail->PrepareAttachment($sbj, $msg, $details_body, $details_subject, $email, $nombre, $attachment, $fileName);
+		$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $email, $nombre, $attachment, $fileName);
 
 			$sql = "SELECT COUNT(*) FROM user_subject WHERE alumnoId = '".$id."' AND courseId = '".$curricula."'";
 			$this->Util()->DB()->setQuery($sql);

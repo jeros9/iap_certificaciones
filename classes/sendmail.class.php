@@ -36,7 +36,9 @@ class SendMail extends Main
 			$mail->Username   = "enlinea@iapchiapas.edu.mx";
 			$mail->Password   = "IAP*2018_chis";
 
-			$body = nl2br($this->Util()->handle_mail_patterns($body,$details_body));
+			$tmp_body = nl2br($this->Util()->handle_mail_patterns($body,$details_body));
+			if($tmp_body == '')
+				$tmp_body = nl2br($this->Util()->str_replace_mail($body, $details_body));
 			$subject = $this->Util()->handle_mail_patterns($subject,$details_subject);
 			
 			$mail->AddReplyTo($from, $fromName);
@@ -44,7 +46,7 @@ class SendMail extends Main
 			
 			$mail->AddAddress($to, $toName);
 			$mail->Subject    = $subject;
-			$mail->MsgHTML($body);
+			$mail->MsgHTML($tmp_body);
 			
 			if(is_array($attachment))
 			{
@@ -57,7 +59,6 @@ class SendMail extends Main
 				}
 			}
 			$mail->Send();
-			echo "Error Mailer: " . $mail->ErrorInfo;
 	}
 
 		
