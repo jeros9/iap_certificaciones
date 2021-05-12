@@ -57,6 +57,7 @@ class SendMail extends Main
 				}
 			}
 			$mail->Send();
+			echo "Error Mailer: " . $mail->ErrorInfo;
 	}
 
 		
