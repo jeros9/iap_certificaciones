@@ -672,7 +672,7 @@ class Student extends User
 
 		$this->Util()->DB()->setQuery($sqlQuery);
 
-		include_once(DOC_ROOT."/properties/messages.php");
+		//include_once(DOC_ROOT."/properties/messages.php");
 		//enviar correo
 		/* $sendmail = new SendMail;
 		$details_body = array(
@@ -928,8 +928,8 @@ class Student extends User
 		$details_body = array(
 			"email" => $info["controlNumber"],
 			"password" => $password,
-			"major" => $major,
-			"course" => $course,
+			"major" => utf8_decode($major),
+			"course" => utf8_decode($course),
 		);
 		$details_subject = array();
 		$attachment = "";
