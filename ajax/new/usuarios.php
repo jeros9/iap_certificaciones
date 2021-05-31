@@ -348,6 +348,7 @@ switch($_POST["type"])
 		}
 		else 
 		{
+			$smarty->assign('personal_id', $_POST['personalId']);
 			$smarty->assign('id', $id);
 			$smarty->assign('btnTitle', 'Visualizar ' . $php_name);
 			$smarty->assign('perfil', $_SESSION['User']['type']);
