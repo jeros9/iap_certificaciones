@@ -1,7 +1,7 @@
-<tr class="text-center">
-    <th>ID</th>
-    <th>Presidente Electo</th>
-    <th>Municipio</th>
-    <th>Partido Pol&iacute;tico</th>
-    <th>Acciones</th>
+<tr>
+    <th class="text-center">ID</th>
+    <th class="text-center">Presidente Electo</th>
+    <th class="text-center">Municipio</th>
+    <th class="text-center">Partido Pol&iacute;tico</th>
+    <th class="text-center">Acciones</th>
 </tr>

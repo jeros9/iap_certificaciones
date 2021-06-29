@@ -199,7 +199,7 @@
                     <li class="nav-item {if  $page == "invitacion"} active {/if}">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
-                            <span class="title">Autoridades Electas</span>
+                            <span class="title">Proceso de Certificaci&oacute;n</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">

@@ -3,6 +3,7 @@
 class Invitation extends Main
 {
 	private $invitationId;
+	private $periodId;
 	private $municipalityId;
 	private $presidentName;
 	private $politicalGroup;
@@ -16,7 +17,7 @@ class Invitation extends Main
 	private $onfirmedPhone;
 	private $confirmedEmail;
 	private $confirmedFile;
-	
+
 	public function setInvitationId($value)
 	{
 		$this->Util()->ValidateInteger($value);
@@ -26,6 +27,17 @@ class Invitation extends Main
 	public function getInvitationId()
 	{
 		return $this->invitationId;
+	}
+
+	public function setPeriodId($value)
+	{
+		$this->Util()->ValidateInteger($value);
+		$this->periodId = $value;
+	}
+
+	public function getPeriodId()
+	{
+		return $this->periodId;
 	}
 	
 	public function setMunicipalityId($value)
@@ -148,97 +160,150 @@ class Invitation extends Main
 		return $this->confirmedEmail;
 	}
 
-
+	// Listar Invitaciones
 	public function Enumerate()
 	{
-		$sql = "SELECT * FROM ae_invitations ORDER BY presidentName ASC";
+		$sql = "SELECT pc_invitations.*, municipio.nombre AS municipio 
+					FROM pc_invitations
+						INNER JOIN municipio 
+							ON pc_invitations.municipalityId = municipio.municipioId 
+					ORDER BY presidentName ASC";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;
 	}
 	
-	public function Save(){
-		
-		if($this->Util()->PrintErrors()){ 
+	// Crear Invitacion
+	public function Save()
+	{
+		if($this->Util()->PrintErrors()) 
 			return false; 
-		}
-		
-		$sql = "INSERT INTO 
-					`major` 
-					(
-						name,
-						description 
-					)
-					 VALUES 
-					 (
-					 	'".$this->name."',
-						'".$this->description."'
-					)";	
-					
+
+		$sql = "SELECT count(*) FROM pc_invitations WHERE municipalityId = " . $this->municipalityId;
 		$this->Util()->DB()->setQuery($sql);
-		$this->Util()->DB()->ExecuteQuery();
+		$totalInvitations = $this->Util()->DB()->GetSingle();
 		
-		$this->Util()->setError(10073, "complete");
-		$this->Util()->PrintErrors();
-		
-		return true;
-				
-	}
-	
-	public function Edit(){
-		
-		if($this->Util()->PrintErrors()){ 
-			return false; 
+		if($totalInvitations == 0)
+		{
+			$sql = "INSERT INTO pc_invitations(periodId, municipalityId, presidentName, politicalGroup, agreement, dateInvitation) VALUES(" . $this->periodId . ", " . $this->municipalityId . ", '" . $this->presidentName . "', '" . $this->politicalGroup . "', '" . $this->agreement . "', CURDATE())";
+			$this->Util()->DB()->setQuery($sql);
+			$invitationId = $this->Util()->DB()->InsertData();
+
+			if(isset($_FILES))
+			{
+				$ext = end(explode('.', basename($_FILES['invitationFile']['name'])));
+				$filename = "invitacion_" . $invitationId . "." . $ext;
+				$sql = "UPDATE pc_invitations SET invitationFile = '" . $filename . "', invitationStatus = 1 WHERE invitationId = " . $invitationId;
+				$this->Util()->DB()->setQuery($sql);
+				$this->Util()->DB()->ExecuteQuery();
+				$target_path = DOC_ROOT . "/proceso/invitaciones/" . $filename;
+				move_uploaded_file($_FILES['invitationFile']['tmp_name'], $target_path);
+			}	
+			$this->Util()->setError(40108, "complete");
+			$this->Util()->PrintErrors();
 		}
-		
-		$sql = "UPDATE 
-					`major` 
-				SET
-					 name = '".$this->name."',
-					 description = '".$this->description."'
-				WHERE
-					majorId = ".$this->majorId;	
-					
-		$this->Util()->DB()->setQuery($sql);
-		$this->Util()->DB()->ExecuteQuery();
-		
-		$this->Util()->setError(10075, "complete");
-		$this->Util()->PrintErrors();
-		
-		return true;
-				
-	}
-	
-	public function Delete(){
-		
-		if($this->Util()->PrintErrors()){ 
-			return false; 
+		else
+		{
+			echo "fail[#]";
+			echo "<font color='red'>Ya se ha creado una invitacion para ese Municipio..</font>";
+			exit;
 		}
-		
-		$sql = "DELETE FROM 
-					`major`
-				WHERE 
-					majorId = ".$this->majorId;		
-		$this->Util()->DB()->setQuery($sql);
-		$this->Util()->DB()->ExecuteQuery();
-		
-				
-		$this->Util()->setError(10074, "complete");
-		$this->Util()->PrintErrors();
-		
-		return true;
-				
+		return true;		
 	}
 
-	
+	// Obtener Informacion de la Invitacion
 	public function Info()
 	{
-		$this->Util()->DB()->setQuery("SELECT * FROM major WHERE majorId = '".$this->majorId."'");
+		$sql = "SELECT pc_invitations.*, pc_periods.name periodName, municipio.nombre AS municipalityName
+					FROM pc_invitations
+						INNER JOIN pc_periods
+							ON pc_invitations.periodId = pc_periods.periodId 
+						INNER JOIN municipio
+							ON pc_invitations.municipalityId = municipio.municipioId 
+					WHERE invitationId = " . $this->invitationId;
+		$this->Util()->DB()->setQuery($sql);
 		$row = $this->Util()->DB()->GetRow();
-		
-		$row["decodedDescription"] = $this->Util()->DecodeString($row["description"]);
 		return $row;
-	}	
+	}
+
+	// Agregar Datos de Recepción
+	public function Receive()
+	{	
+		if($this->Util()->PrintErrors()) 
+			return false;
+		$sql = "UPDATE pc_invitations SET
+					receiverName = '" . $this->receiverName . "',
+					receiverCharge = '" . $this->receiverCharge . "',
+					receiverPhone = '" . $this->receiverPhone . "',
+					receiverEmail = '" . $this->receiverEmail . "',
+					receiverStatus = 1,
+					dateReceiver = CURDATE()
+				WHERE invitationId = " . $this->invitationId;
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->ExecuteQuery();
+		$this->Util()->setError(40109, "complete");
+		$this->Util()->PrintErrors();
+		return true;			
+	}
+
+	// Agregar Datos de Confirmación
+	public function Confirm()
+	{	
+		if($this->Util()->PrintErrors()) 
+			return false;
+		if(isset($_FILES))
+		{
+			$ext = end(explode('.', basename($_FILES['confirmedFile']['name'])));
+			$filename = "confirmacion_" . $this->invitationId . "." . $ext;
+			$sql = "UPDATE pc_invitations SET confirmedFile = '" . $filename . "', confirmedStatus = 1 WHERE invitationId = " . $this->invitationId;
+			$this->Util()->DB()->setQuery($sql);
+			$this->Util()->DB()->ExecuteQuery();
+			$target_path = DOC_ROOT . "/proceso/confirmaciones/" . $filename;
+			move_uploaded_file($_FILES['confirmedFile']['tmp_name'], $target_path);
+		}	
+		$sql = "UPDATE pc_invitations SET
+					confirmedName = '" . $this->confirmedName . "',
+					confirmedPhone = '" . $this->confirmedPhone . "',
+					confirmedEmail = '" . $this->confirmedEmail . "',
+					confirmedStatus = 1,
+					dateConfirmed = CURDATE()
+				WHERE invitationId = " . $this->invitationId;
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->ExecuteQuery();
+		$this->Util()->setError(40110, "complete");
+		$this->Util()->PrintErrors();
+		return true;			
+	}
+	
+	public function Edit()
+	{	
+		if($this->Util()->PrintErrors()) 
+			return false;		
+		$sql = "UPDATE pc_invitations SET 
+					periodId = " . $this->periodId . ", 
+					municipalityId = " . $this->municipalityId . ",
+					presidentName = '" . $this->presidentName . "',
+					politicalGroup = '" . $this->politicalGroup . "',
+					agreement = '" . $this->agreement . "'
+				WHERE invitationId = " . $this->invitationId;
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->ExecuteQuery();
+		if(isset($_FILES))
+		{
+			$ext = end(explode('.', basename($_FILES['invitationFile']['name'])));
+			$filename = "invitacion_" . $this->invitationId . "." . $ext;
+			$sql = "UPDATE pc_invitations SET invitationFile = '" . $filename . "', invitationStatus = 1 WHERE invitationId = " . $this->invitationId;
+			$this->Util()->DB()->setQuery($sql);
+			$this->Util()->DB()->ExecuteQuery();
+			$target_path = DOC_ROOT . "/proceso/invitaciones/" . $filename;
+			move_uploaded_file($_FILES['invitationFile']['tmp_name'], $target_path);
+		}	
+		$this->Util()->setError(40111, "complete");
+		$this->Util()->PrintErrors();
+		
+		return true;
+				
+	}
 	
 	public function GetNameById(){
 			

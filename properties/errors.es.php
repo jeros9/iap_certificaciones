@@ -217,6 +217,11 @@ $property["error"][40105] = "El dictamen ha sido reado correctamente";
 $property["error"][40106] = "El dictamen ha sido eliminado correctamente";
 $property["error"][40107] = "El dictamen ha sido actualizado correctamente";
 
+$property["error"][40108] = "La invitacion ha sido creada correctamente";
+$property["error"][40109] = "La invitacion ha sido recibida correctamente";
+$property["error"][40110] = "La invitacion ha sido confirmada correctamente";
+$property["error"][40111] = "La invitacion ha sido actualizada correctamente";
+
 // mensajes para los datos de prueba creados -- eliminar en cuanto este listo
 $property["error"][99100] = "Paso por codigo verificacion eliminacion Recuperacion R1";
 
