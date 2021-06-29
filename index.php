@@ -224,7 +224,10 @@ $pages = array(
 	'add-group-comment',
 	'foro',
 	'respuestas',
-	'make-group-final-test'
+	'make-group-final-test',
+
+	// Autoridades Electas
+	'invitacion'
 );
 
 if(!in_array($_GET['page'], $pages))

@@ -98,6 +98,8 @@ include_once(DOC_ROOT . '/classes/group_announcement.class.php');
 include_once(DOC_ROOT . '/classes/group_forum.class.php');
 include_once(DOC_ROOT . '/classes/group_final_test.class.php');
 include_once(DOC_ROOT . '/classes/group_questions_final_test.class.php');
+// Classes Autoridades Electas
+include_once(DOC_ROOT . '/classes/invitation.class.php');
 $docente = new Docente();
 
 $db = new DB;
@@ -168,6 +170,9 @@ $group_announcement           = new GroupAnnouncement;
 $group_forum                  = new GroupForum;
 $group_final_test             = new GroupFinalTest;
 $group_questions_final_test   = new GroupQuestionsFinalTest;
+
+// Classes Autoridades Electas
+$invitation = new Invitation;
 
 $smarty = new Smarty;
 
