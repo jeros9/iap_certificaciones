@@ -49,6 +49,7 @@ switch($_POST["type"])
 		$course->setAparece($_POST["apareceT"]);
 		$course->setListar($_POST["listar"]);
 		$course->setTipoCuatri($_POST["tipoCuatri"]);
+		$course->setPeriodId($_POST["period"]);
 
 		$course->setNumero($_POST["numero"]);
 

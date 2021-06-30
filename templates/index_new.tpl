@@ -99,6 +99,7 @@
 
 <link href="{$WEB_ROOT}/assets/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
 <link href="{$WEB_ROOT}/css/switch.css" rel="stylesheet" type="text/css"/>
+<link href="{$WEB_ROOT}/css/common.css" rel="stylesheet" type="text/css"/>
 {if $page == 'reply-inbox' or 
 $page == 'view-inbox' or
  $page == 'edit-modules-course' or

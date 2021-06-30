@@ -45,6 +45,51 @@ class Period extends Main
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;
-	}	
+	}
+
+	public function Progress()
+	{
+		// INFO PERIOD
+		$sql = "SELECT * FROM pc_periods WHERE periodId = " . $this->periodId;
+		$this->Util()->DB()->setQuery($sql);
+		$periodInfo = $this->Util()->DB()->GetRow();
+		$result['info'] = $periodInfo;
+		// GROUP
+		$sql = "SELECT c.courseId, c.initialDate, c.finalDate, c.group AS groupName, s.name AS subjectName 
+					FROM course c
+						LEFT JOIN subject s
+							ON c.subjectId = s.subjectId
+					WHERE c.periodId = " . $this->periodId;
+		$this->Util()->DB()->setQuery($sql);
+		$groups = $this->Util()->DB()->GetResult();
+		$result['groups'] = $groups;
+		// INVITATIONS
+		$sql = "SELECT pci.invitationId, pci.presidentName, pci.politicalGroup, pci.agreement, pci.invitationFile, pci.receiverName, pci.receiverCharge, pci.receiverPhone, pci.receiverEmail, pci.confirmedName, pci.confirmedPhone, pci.confirmedEmail, pci.confirmedFile, pci.invitationStatus, pci.receiverStatus, pci.confirmedStatus, m.municipioId AS municipalityId, m.nombre AS municipality
+					FROM pc_invitations pci
+						INNER JOIN municipio m 
+							ON pci.municipalityId = m.municipioId
+					WHERE pci.periodId = " . $this->periodId . "
+					ORDER BY m.nombre";
+		$this->Util()->DB()->setQuery($sql);
+		$invitations = $this->Util()->DB()->GetResult();
+		$result['invitations'] = $invitations;
+		// PARTICIPANTS
+		$result['participants'] = [];
+		foreach($groups as $key => $value)
+		{
+			foreach($invitations as $inv)
+			{
+				$sql = "SELECT u.userId, u.names, u.lastNamePaterno, u.lastNameMaterno 
+						FROM user_subject us 
+							INNER JOIN user u
+								ON us.alumnoId = u.userId
+						WHERE us.courseId = " . $value['courseId'] . " AND u.ciudad = " . $inv['municipalityId'];
+				$this->Util()->DB()->setQuery($sql);
+				$participants = $this->Util()->DB()->GetResult();
+				$result['participants'][$value['courseId']][$inv['municipalityId']] = $participants;
+			}
+		}
+		return $result;
+	}
 }
 ?>

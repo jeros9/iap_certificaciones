@@ -21,6 +21,8 @@
 	$course->setCourseId($_GET['id']);
 	$smarty->assign('post', $course->Info());
 	$smarty->assign('mnuMain','cursos');
+	$periods = $period->Enumerate();
+    $smarty->assign("periods", $periods);
 
 // exit;
 ?>

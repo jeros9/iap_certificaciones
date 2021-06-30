@@ -194,9 +194,9 @@
                         {/if}
                     </ul>
 		        </li>
-                {* REPORTES *}
+                {* PROCESO DE CERTIFICACION *}
                 {if $User.positionId == 1 || $AccessMod[45] == 1}
-                    <li class="nav-item {if  $page == "invitacion"} active {/if}">
+                    <li class="nav-item {if  $page == "invitacion" || $page == "progreso"} active {/if}">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
                             <span class="title">Proceso de Certificaci&oacute;n</span>
@@ -206,6 +206,11 @@
                             <li class="nav-item">
                                 <a href="{$WEB_ROOT}/invitacion" class="nav-link">
                                     <span class="title">Invitación</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{$WEB_ROOT}/progreso" class="nav-link">
+                                    <span class="title">Progreso</span>
                                 </a>
                             </li>
                         </ul>

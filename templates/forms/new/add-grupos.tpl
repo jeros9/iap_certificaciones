@@ -34,14 +34,14 @@
         <div class="form-group">
             <label class="col-md-3 control-label">Fecha Inicial:</label>
             <div class="col-md-8">
-                <input type="text" name="initialDate" id="initialDate" size="10" class="form-control date-picker " required value="{$post.initialDate}" />
+                <input type="text" name="initialDate" id="initialDate" size="10" class="form-control date-picker " required value="{$post.initialDate}" autocomplete="off" />
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-3 control-label"> Fecha Final:</label>
             <div class="col-md-8">
-                <input type="text" name="finalDate" id="finalDate" size="10"  class="form-control date-picker" value="{$post.finalDate}" />
+                <input type="text" name="finalDate" id="finalDate" size="10"  class="form-control date-picker" value="{$post.finalDate}" autocomplete="off" />
             </div>
         </div>
 <!--
@@ -78,6 +78,18 @@
             <label class="col-md-3 control-label"> Grupo:</label>
             <div class="col-md-8">
                 <input type="text" name="group" id="group" value="{$post.group}"  class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="period">Periodo:</label>
+            <div class="col-md-8">
+                <select id="period" name="period" class="form-control">
+                    <option value="0">Ninguno</option>
+                    {foreach from=$periods item=item}
+                        <option value="{$item.periodId}">{$item.name}</option>
+                    {/foreach}}
+                </select>
             </div>
         </div>
 <!--

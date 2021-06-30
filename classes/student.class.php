@@ -640,7 +640,7 @@ class Student extends User
 							'".$this->getStreet()."', 
 							'".$this->getNumer()."', 
 							'".$this->getColony()."', 
-							'".$this->getCity()."', 
+							'".$this->getCiudadT()."', 
 							'".$this->getState()."', 
 							'".$this->getCountry()."', 
 							'".$this->getPostalCode()."', 

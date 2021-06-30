@@ -228,7 +228,8 @@ $pages = array(
 
 	// Autoridades Electas
 	'invitacion',
-	'preregistro'
+	'preregistro',
+	'progreso'
 );
 
 if(!in_array($_GET['page'], $pages))

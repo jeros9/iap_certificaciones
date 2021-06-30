@@ -22,6 +22,7 @@
 		private $name;
 		private $numero;
 		private $peso;
+		private $periodId;
 		
 		
 		public function setNumero($value)
@@ -357,6 +358,17 @@
 		public function getCourseId()
 		{
 			return $this->courseId;
+		}
+
+		public function setPeriodId($value)
+		{
+			$this->Util()->ValidateInteger($value);
+			$this->periodId = $value;
+		}
+
+		public function getPeriodId()
+		{
+			return $this->periodId;
 		}
 		
 
@@ -775,13 +787,14 @@
 						apareceTabla='".$this->aparece."',
 						listar='".$this->listar."',
 						numero='".$this->numero."',
+						periodId='".$this->periodId."',
 						access='".$this->personalId."|".$this->teacherId."|".$this->tutorId."|".$this->extraId."'
 						WHERE courseId='" . utf8_decode($this->courseId) . "'";
 
 			$this->Util()->DB()->setQuery($sql);
 			$this->Util()->DB()->UpdateData();
 			$subId = 1;
-			
+
 		}else{
 			$sql = "INSERT INTO
 						course
@@ -803,7 +816,8 @@
 							apareceTabla,
 							listar,
 							tipo,
-							numero
+							numero,
+							periodId
 						)
 					VALUES (
 							'" . $this->subjectId . "',
@@ -823,7 +837,8 @@
 							'".$this->aparece."',
 							'".$this->listar."',
 							'".$this->tipoCuatri."',
-							'".$this->numero."'
+							'".$this->numero."',
+							'".$this->periodId."'
 							)";
 
 			$this->Util()->DB()->setQuery($sql);
@@ -844,7 +859,6 @@
 								)";
 				$this->Util()->DB()->setQuery($sql);
 				$this->Util()->DB()->InsertData();
-		
 		}	
 				
 
