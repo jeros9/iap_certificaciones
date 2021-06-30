@@ -227,7 +227,8 @@ $pages = array(
 	'make-group-final-test',
 
 	// Autoridades Electas
-	'invitacion'
+	'invitacion',
+	'preregistro'
 );
 
 if(!in_array($_GET['page'], $pages))
