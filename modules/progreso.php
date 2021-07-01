@@ -8,6 +8,9 @@
     //echo "<pre>"; 
     //print_r($progress); exit;
 	$smarty->assign('progress', $progress);
+    $periods = $period->Enumerate();
+    $smarty->assign('periods', $periods);
+    $smarty->assign('periodo', $_GET['periodo']);
     $smarty->assign('i', $i);
     	
 	$smarty->assign('mnuMain','proceso');

@@ -82,13 +82,18 @@ class Period extends Main
 				$sql = "SELECT u.userId, 
 							u.names, 
 							u.lastNamePaterno, 
-							u.lastNameMaterno, 
+							u.lastNameMaterno,
+							u.rutaFoto,
+							u.actualizado, 
 							us.acuseDerecho, 
 							us.evalDocenteCompleta, 
 							IFNULL(up.personalId, 'no') AS hasEvaluator, 
 							IFNULL(p.planId, 'no') AS hasPlan, 
+							IFNULL(cd.cedulaId, 'no') AS hasCedula, 
+							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 2), 'no') AS hasIec,
 							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4), 'no') AS hasProducts,
-							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 5), 'no') AS hasCertificate
+							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 5), 'no') AS hasCertificate,
+							pcto.orderName
 						FROM user_subject us 
 							INNER JOIN user u
 								ON us.alumnoId = u.userId
@@ -98,12 +103,28 @@ class Period extends Main
 								ON c.subjectId = up.subjectId AND us.alumnoId = up.usuarioId
 							LEFT JOIN planes p 
 								ON c.subjectId = p.subjectId AND us.alumnoId = p.userId
+							LEFT JOIN cedulas cd 
+								ON c.subjectId = cd.subjectId AND us.alumnoId = cd.userId
+							LEFT JOIN pc_typeorder pcto
+								ON u.typeOrderId = pcto.typeOrderId
 						WHERE us.courseId = " . $value['courseId'] . " AND u.ciudad = " . $inv['municipalityId'];
 				$this->Util()->DB()->setQuery($sql);
 				$participants = $this->Util()->DB()->GetResult();
 				$result['participants'][$value['courseId']][$inv['municipalityId']] = $participants;
 			}
 		}
+		return $result;
+	}
+
+	public function GetCourse($typeOrderId)
+	{
+		$sql = "SELECT c.courseId, c.group AS groupName
+					FROM pc_order_course pcoc 
+						INNER JOIN course c 
+							ON pcoc.courseId = c.courseId 
+					WHERE pcoc.periodId = " . $this->periodId . " AND pcoc.typeOrderId = " . $typeOrderId;
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetRow();
 		return $result;
 	}
 }

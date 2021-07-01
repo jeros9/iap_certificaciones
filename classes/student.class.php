@@ -37,6 +37,7 @@ class Student extends User
 	private $sectorId;
 	private $autorizoj;
 	private $autorizoFirma;
+	private $typeOrderId;
 		
 		//new
 		
@@ -249,6 +250,13 @@ class Student extends User
 		$this->por_beca = $value;
 	}
 	
+	public function setTypeOrderId($value)
+	{
+		$this->Util()->ValidateInteger($value);
+		 $this->typeOrderId = $value;
+
+	}
+
 	public function UpdateFoto()
 	{
 			$ext = end(explode('.', basename($_FILES['foto']['name'])));
@@ -624,7 +632,8 @@ class Student extends User
 							mastersSchool,
 							highSchool,
 							tipoSolicitanteId,
-							firma
+							firma,
+							typeOrderId
 						)
 							VALUES
 						(
@@ -666,7 +675,8 @@ class Student extends User
 							'".$this->getMastersSchool()."', 
 							'".$this->getHighSchool()."',
 							'".$this->tipoSolicitante."',
-							'".$firma."' 
+							'".$firma."',
+							'".$this->typeOrderId."'
 							
 						)";
 

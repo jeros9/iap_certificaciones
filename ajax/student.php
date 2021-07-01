@@ -247,6 +247,16 @@
 				// $student->setPhone($_POST['phone']);
 				// $student->setFax($_POST['fax']);
 				$student->setMobile($_POST['mobile']);
+				if(isset($_POST['typeOrder']))
+				{
+					$pcOrder->setTypeOrderId($_POST['typeOrder']);
+					$typeOrder = $pcOrder->Info();
+					$period->setPeriodId($_POST['period']);
+					$courseInfo = $period->GetCourse($_POST['typeOrder']);
+					$student->setWorkplacePosition($typeOrder['orderName']);
+					$student->setTypeOrderId($_POST['typeOrder']);
+					$_POST["curricula"] = $courseInfo['courseId'];
+				}
 
 				//datos laborales
 				// $student->setWorkplace($_POST['workplace']);

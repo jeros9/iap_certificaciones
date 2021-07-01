@@ -1,17 +1,19 @@
 <form class="form-horizontal" id="addStudentForm" name="addStudentForm" method="post"   >
     <input type="hidden" id="type" name="type" value="saveAddStudentRegister"/>
     <input type="hidden" id="redireccion" name="redireccion" value="1"/>
+    <input type="hidden" id="tipoSolicitante" name="tipoSolicitante" value="2"/>
+    <input type="hidden" id="period" name="period" value="1"/>
     <input type="hidden" id="tam" name="tam" value="0"/>
     <input type="hidden" id="permiso" name="permiso" value="0"/>
 	<center>
 	    <table style="border-collapse: separate;border-spacing: 4px 30px;">
             <tr>
-                <td>Nombre:<br><input type="text" name="names" class="form-control"></td>
+                <td colspan="2">Nombre(s):<br><input type="text" name="names" class="form-control"></td>
                 <td>Apellido Paterno:<br><input type="text" name="lastNamePaterno" class="form-control"></td>
                 <td>Apellido Materno:<br><input type="text" name="lastNameMaterno" class="form-control"></td>
-                <td>Email:<br><input type="text" name="email" class="form-control"></td>
             </tr>
             <tr>
+                <td>Email:<br><input type="text" name="email" class="form-control"></td>
                 <td>Celular:<br><input type="text" name="mobile" class="form-control"></td>
                 <td>Municipio:<br>
                     <select id="ciudad" name="ciudad" style="width:250px"   class="form-control">
@@ -21,27 +23,22 @@
                         {/foreach}
                     </select>
                 </td>
-                <td>
-                    Tipo de Solicitante:<br>
-                    <select id="tipoSolicitante" name="tipoSolicitante" style="width:250px"   class="form-control">
-                        <option value="7">Presidente Municipal</option>
-                        <option value="8">Secretario Municipal</option>
-                        <option value="9">Tesorero</option>
-                        <option value="10">Director de Obras Públicas</option>
-                        <option value="11">Director de Policia Municipal</option>
-                        <option value="12">Contralor</option>
-                        <option value="13">Secretario de Protección Civil</option>
-                        <option value="14">Secretario de Planeación</option>
+                <td >
+                    Cargo:<br>
+                    <select id="typeOrder" name="typeOrder" style="width:250px"   class="form-control">
+                        {foreach from=$orders item=item}
+                            <option value="{$item.typeOrderId}">{$item.orderName}</option>
+                        {/foreach}
                     </select>
                 </td>
-                <td>
+                {*<td>
                     Certificación:<br>
                     <select name='curricula' id="curricula" style="width:400px" class="form-control">
                         {foreach from=$activeCourses item=course}
                             <option value="{$course.courseId}">{$course.name} - {$course.group}</option>
                         {/foreach}
                     </select>
-                </td>
+                </td>*}
             </tr>
 		</table>
 	</center>

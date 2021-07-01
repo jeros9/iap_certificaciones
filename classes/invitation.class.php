@@ -319,6 +319,18 @@ class Invitation extends Main
 		return $this->Util()->DB()->GetSingle();
 		
 	}
+
+	public function EnumerateCiudades()
+	{
+		$sql ="SELECT m.municipioId, m.nombre
+				FROM pc_invitations pci
+					INNER JOIN municipio m 
+						ON pci.municipalityId = m.municipioId 
+				WHERE pci.periodId = " . $this->periodId . " ORDER BY nombre";
+	   	$this->Util()->DB()->setQuery($sql);
+	   	$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
 	
 }
 ?>
