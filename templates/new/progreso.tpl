@@ -23,14 +23,32 @@
                                 <table class="table table-bordered table-hover table-sm">
                                     <thead>
                                         <tr>
-                                            <th colspan="5" class="bg-dark text-white">{$group.subjectName} [{$group.groupName}]</th>
+                                            <th colspan="13" class="bg-dark text-white">{$group.subjectName} [{$group.groupName}]</th>
                                         </tr>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Cargo</th>
-                                            <th class="text-center">Invitaci&oacute;n</th>
-                                            <th class="text-center">Recepci&oacute;n</th>
-                                            <th class="text-center">Confirmaci&oacute;n</th>
+                                            <th rowspan="2">Nombre</th>
+                                            <th rowspan="2">Cargo</th>
+                                            <th colspan="3" class="text-center th-sm">Invitaci&oacute;n</th>
+                                            <th colspan="4" class="text-center th-sm">Registro</th>
+                                            <th colspan="3" class="text-center th-sm">Portafolio</th>
+                                            <th class="text-center th-sm">Certificado</th>
+                                        </tr>
+                                        <tr>
+                                            {* Invitacion *}
+                                            <th class="text-center th-sm">Invitaci&oacute;n</th>
+                                            <th class="text-center th-sm">Recepci&oacute;n</th>
+                                            <th class="text-center th-sm">Confirmaci&oacute;n</th>
+                                            {* Registro *}
+                                            <th class="text-center th-sm">Ficha</th>
+                                            <th class="text-center th-sm">Fotograf&iacute;a</th>
+                                            <th class="text-center th-sm">Acuse</th>
+                                            <th class="text-center th-sm">Diagn&oacute;stico</th>
+                                            {* Portafolio *}
+                                            <th class="text-center th-sm">Evaluador</th>
+                                            <th class="text-center th-sm">Plan de Evaluaci&oacute;n</th>
+                                            <th class="text-center th-sm">IEC/Productos</th>
+                                            {* Certificado *}
+                                            <th class="text-center th-sm">Certificado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,24 +57,68 @@
                                                 <td>{$participant.names} {$participant.lastNamePaterno} {$participant.lastNameMaterno}</td>
                                                 <td></td>
                                                 <td class="text-center">
-                                                    {if $item.invitationStatus eq 1}
+                                                    {if $invitation.invitationStatus eq 1}
                                                         <i class="fa fa-check-circle text-success"></i>
                                                     {else}
                                                         <i class="fa fa-times-circle text-danger"></i>
                                                     {/if}
                                                 </td>
                                                 <td class="text-center">
-                                                    {if $item.receiverStatus eq 1}
+                                                    {if $invitation.receiverStatus eq 1}
                                                         <i class="fa fa-check-circle text-success"></i>
                                                     {else}
                                                         <i class="fa fa-times-circle text-danger"></i>
                                                     {/if}
                                                 </td>
                                                 <td class="text-center">
-                                                    {if $item.confirmedStatus eq 1}
+                                                    {if $invitation.confirmedStatus eq 1}
                                                         <i class="fa fa-check-circle text-success"></i>
                                                     {else}
                                                         <i class="fa fa-times-circle text-danger"></i>
+                                                    {/if}
+                                                </td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    {if $participant.acuseDerecho eq 'si'}
+                                                        <i class="fa fa-check-circle text-success"></i>
+                                                    {else}
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    {/if}
+                                                </td>
+                                                <td class="text-center">
+                                                    {if $participant.evalDocenteCompleta eq 'si'}
+                                                        <i class="fa fa-check-circle text-success"></i>
+                                                    {else}
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    {/if}
+                                                </td>
+                                                <td class="text-center">
+                                                    {if $participant.hasEvaluator eq 'no'}
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    {else}
+                                                        <i class="fa fa-check-circle text-success"></i>
+                                                    {/if}
+                                                </td>
+                                                <td class="text-center">
+                                                    {if $participant.hasPlan eq 'no'}
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    {else}
+                                                        <i class="fa fa-check-circle text-success"></i>
+                                                    {/if}
+                                                </td>
+                                                <td class="text-center">
+                                                    {if $participant.hasProducts eq 'no'}
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    {else}
+                                                        <i class="fa fa-check-circle text-success"></i>
+                                                    {/if}
+                                                </td>
+                                                <td class="text-center">
+                                                    {if $participant.hasCertificate eq 'no'}
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    {else}
+                                                        <i class="fa fa-check-circle text-success"></i>
                                                     {/if}
                                                 </td>
                                             </tr>

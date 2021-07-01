@@ -79,10 +79,25 @@ class Period extends Main
 		{
 			foreach($invitations as $inv)
 			{
-				$sql = "SELECT u.userId, u.names, u.lastNamePaterno, u.lastNameMaterno 
+				$sql = "SELECT u.userId, 
+							u.names, 
+							u.lastNamePaterno, 
+							u.lastNameMaterno, 
+							us.acuseDerecho, 
+							us.evalDocenteCompleta, 
+							IFNULL(up.personalId, 'no') AS hasEvaluator, 
+							IFNULL(p.planId, 'no') AS hasPlan, 
+							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4), 'no') AS hasProducts,
+							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 5), 'no') AS hasCertificate
 						FROM user_subject us 
 							INNER JOIN user u
 								ON us.alumnoId = u.userId
+							INNER JOIN course c  
+								ON us.courseId = c.courseId 
+							LEFT JOIN usuario_personal up 
+								ON c.subjectId = up.subjectId AND us.alumnoId = up.usuarioId
+							LEFT JOIN planes p 
+								ON c.subjectId = p.subjectId AND us.alumnoId = p.userId
 						WHERE us.courseId = " . $value['courseId'] . " AND u.ciudad = " . $inv['municipalityId'];
 				$this->Util()->DB()->setQuery($sql);
 				$participants = $this->Util()->DB()->GetResult();
