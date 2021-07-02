@@ -55,7 +55,7 @@ class Period extends Main
 		$periodInfo = $this->Util()->DB()->GetRow();
 		$result['info'] = $periodInfo;
 		// GROUP
-		$sql = "SELECT c.courseId, c.initialDate, c.finalDate, c.group AS groupName, s.name AS subjectName 
+		$sql = "SELECT c.courseId, c.initialDate, c.finalDate, c.group AS groupName, s.name AS subjectName, (DATEDIFF(c.finalDate, c.initialDate) + 1) AS courseDays, ((DATEDIFF(c.finalDate, c.initialDate) + 1)*2) AS totalAttendance
 					FROM course c
 						LEFT JOIN subject s
 							ON c.subjectId = s.subjectId
@@ -93,7 +93,8 @@ class Period extends Main
 							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 2), 'no') AS hasIec,
 							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4), 'no') AS hasProducts,
 							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 5), 'no') AS hasCertificate,
-							pcto.orderName
+							pcto.orderName,
+							(SELECT COUNT(attendanceId) FROM pc_attendance_list WHERE us.alumnoId = pc_attendance_list.userId AND c.courseId = pc_attendance_list.courseId) AS userAttendance
 						FROM user_subject us 
 							INNER JOIN user u
 								ON us.alumnoId = u.userId

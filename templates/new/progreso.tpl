@@ -40,13 +40,14 @@
                                 <table class="table table-bordered table-hover table-sm">
                                     <thead>
                                         <tr>
-                                            <th colspan="15" class="bg-dark text-white">{$group.subjectName} [{$group.groupName}]</th>
+                                            <th colspan="16" class="bg-dark text-white">{$group.subjectName} [{$group.groupName}]</th>
                                         </tr>
                                         <tr>
                                             <th rowspan="2">Nombre</th>
                                             <th rowspan="2">Cargo</th>
                                             <th colspan="3" class="text-center th-sm">Invitaci&oacute;n</th>
                                             <th colspan="4" class="text-center th-sm">Registro</th>
+                                            <th class="text-center th-sm">Capacitaci&oacute;n</th>
                                             <th colspan="5" class="text-center th-sm">Portafolio</th>
                                             <th class="text-center th-sm">Certificado</th>
                                         </tr>
@@ -60,6 +61,8 @@
                                             <th class="text-center th-sm">Fotograf&iacute;a</th>
                                             <th class="text-center th-sm">Acuse</th>
                                             <th class="text-center th-sm">Diagn&oacute;stico</th>
+                                            {* Capacitacion *}
+                                            <th class="text-center th-sm">Capacitaci&oacute;n</th>
                                             {* Portafolio *}
                                             <th class="text-center th-sm">Evaluador</th>
                                             <th class="text-center th-sm">Plan de Evaluaci&oacute;n</th>
@@ -119,6 +122,13 @@
                                                 </td>
                                                 <td class="text-center">
                                                     {if $participant.evalDocenteCompleta eq 'si'}
+                                                        <i class="fa fa-check-circle text-success"></i>
+                                                    {else}
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    {/if}
+                                                </td>
+                                                <td class="text-center">
+                                                    {if $participant.userAttendance eq $group.totalAttendance}
                                                         <i class="fa fa-check-circle text-success"></i>
                                                     {else}
                                                         <i class="fa fa-times-circle text-danger"></i>
