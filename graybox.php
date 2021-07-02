@@ -239,7 +239,8 @@ $pages = array(
     'add-group-comment',
     'view-description-group-final-test',
     'add-group-inform',
-    'show-informs'
+    'show-informs',
+    'add-group-attendance'
 
 );
 

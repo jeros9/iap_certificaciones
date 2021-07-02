@@ -1844,6 +1844,35 @@
 		imagejpeg($tmp,$ruta.$nombreN,$calidad);
     
 	}
+
+
+	public function DefaultGroupAttendanceCapacitador($personalId = 0)
+		{
+			$personal = "";
+			if($personalId > 0)
+				$personal = " AND usuario_capacitador.personalId = " . $personalId;
+			$this->Util()->DB()->setQuery("SELECT *, user_subject.status AS status 
+												FROM user_subject
+													LEFT JOIN user ON user_subject.alumnoId = user.userId
+													INNER JOIN course ON user_subject.courseId = course.courseId
+        											INNER JOIN subject ON course.subjectId = subject.subjectId
+													INNER JOIN usuario_capacitador ON (usuario_capacitador.usuarioId = user_subject.alumnoId AND usuario_capacitador.subjectId = subject.subjectId)
+												WHERE user_subject.courseId = '" . $this->getCourseId() . "' AND user.activo = 1 " . $personal . " 
+												ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC");
+			$result = $this->Util()->DB()->GetResult();
+			
+			foreach($result as $key => $res)
+			{
+				$sql = "SELECT * 
+							FROM pc_attendance_list 
+						WHERE personalId = " . $personalId . " AND userId = " . $res['alumnoId'] . " AND courseId = " . $this->getCourseId()
+						. " ORDER BY attendanceDay, attendanceHour, typeAttendance";
+				$this->Util()->DB()->setQuery($sql);
+				$attendance = $this->Util()->DB()->GetResult();
+				$result[$key]["attendance"] = $attachment;
+			}
+			return $result;
+		}
 		
 	}	
 ?>

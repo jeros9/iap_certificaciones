@@ -6,3 +6,7 @@
 .text-white {
     color: #ffffff !important;
 }
+
+.text-uppercase {
+    text-transform: uppercase !important;
+}

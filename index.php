@@ -230,7 +230,8 @@ $pages = array(
 	'invitacion',
 	'preregistro',
 	'progreso',
-	'add-group-inform'
+	'add-group-inform',
+	'add-group-attendance'
 );
 
 if(!in_array($_GET['page'], $pages))

@@ -1037,7 +1037,9 @@
 						*, 
 						major.name AS majorName, 
 						subject.name AS name,
-						course.tipo as tipoCuatri
+						course.tipo as tipoCuatri,
+						(DATEDIFF(course.finalDate, course.initialDate) + 1) AS courseDays,
+						((DATEDIFF(course.finalDate, course.initialDate) + 1)*2) AS totalAttendance
 					FROM
 						course
 					LEFT JOIN subject ON subject.subjectId = course.subjectId

@@ -4084,6 +4084,25 @@ class Student extends User
 		
 		return true;
 	}
+
+	public function Attendance($userId, $courseId, $personalId, $attendanceDay, $typeAttendance)
+	{
+		$sql = "SELECT COUNT(attendanceId) FROM pc_attendance_list WHERE userId = " . $userId . " AND courseId = " . $courseId . " AND personalId = " . $personalId . " AND attendanceDay = '" . $attendanceDay . "' AND typeAttendance = '" . $typeAttendance . "'";
+		$this->Util()->DB()->setQuery($sql);
+		$total = $this->Util()->DB()->GetSingle();
+		$attendance = true;
+		if($total == 0)
+			$attendance = false;
+		return $attendance;
+	}
+
+	public function setAttendance($userId, $courseId, $personalId, $attendanceDay, $typeAttendance)
+	{
+		$sql = "INSERT INTO pc_attendance_list(courseId, personalId, userId, attendanceDay, attendanceHour, typeAttendance) VALUES(" . $courseId . ", " . $personalId . ", " . $userId . ", '" . $attendanceDay . "', CURTIME(), '" . $typeAttendance . "')";
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->InsertData();
+		return true;
+	}
 }
 
 ?>
