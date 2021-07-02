@@ -5,9 +5,11 @@
             <i class="fa fa-gift"></i> .:: Datos del Grupo ::.
         </div>
         <div class="actions">
-            <a href="{$WEB_ROOT}/graybox.php?page=add-group-inform&id={$infoCourse.courseId}&auxTpl=admin&cId={$infoCourse.courseId}" data-target="#ajax" data-toggle="modal" class="btn btn-circle blue">
-                &raquo; Agregar Informe del Curso
-            </a>
+            {if !isset($informe)}
+                <a href="{$WEB_ROOT}/graybox.php?page=add-group-inform&id={$infoCourse.courseId}&auxTpl=admin&cId={$infoCourse.courseId}" data-target="#ajax" data-toggle="modal" class="btn btn-circle blue">
+                    &raquo; Agregar Informe del Curso
+                </a>
+            {/if}
         </div>
     </div>
     <div class="portlet-body">
@@ -33,6 +35,19 @@
                     &raquo; Ver Foro
                 </a>
             </div>
+            {if $informe}
+                <div class="col-md-12 text-center" style="margin-top: 30px;">
+                    <h4><b><i class="fa fa-hand-o-right"></i> Informe del Curso <i class="fa fa-hand-o-left"></i></b></h4>
+                    <a href="{$WEB_ROOT}/capacitador_informs/{$informe.file}" target="_blank" class="btn btn-success">
+                        <i class="fa fa-file-pdf-o"></i> Descargar
+                    </a>
+                </div>
+                <div class="col-md-12 text-center" style="margin-top: 10px;">
+                    <button class="btn btn-danger" onclick="DeleteInform({$informe.informId})">
+                        <i class="fa fa-trash"></i> Eliminar
+                    </button>
+                </div>
+            {/if}
         </div>
     </div>
 </div>

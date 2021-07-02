@@ -213,6 +213,16 @@
                                     <span class="title">Progreso</span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{$WEB_ROOT}/" class="nav-link">
+                                    <span class="title">Reporte de Evaluaciones</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{$WEB_ROOT}/" class="nav-link">
+                                    <span class="title">Reporte de Certificados</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 {/if}

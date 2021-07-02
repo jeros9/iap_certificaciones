@@ -11,14 +11,14 @@
             <input type="hidden" id="cId" name="cId" value="{$cId}"/>
             <div class="form-body">
                 <div class="form-group col-md-12 text-center">
-                    <label for="informe">Informe del Curso:</label>
+                    <label for="informe">Informe del Curso (PDF):</label>
                     <center><input type="file" name="informe" id="informe" /></center>
                 </div>
         
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <input type="submit" class="btn green submitForm" id="addMajor" name="addMajor"/>
+                            <input type="submit" class="btn green submitForm" id="addMajor" name="addMajor" accept="application/pdf" />
                             <button type="button" class="btn default closeModal">Cancelar</button>
                         </div>
                     </div>

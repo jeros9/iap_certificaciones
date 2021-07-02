@@ -82,16 +82,51 @@
 			$this->Util()->PrintErrors();
 		}
 
-        
-		public function Info($id = null)
+		public function Info()
 		{
-			$sql = "SELECT * FROM group_resource WHERE resourceId = '" . $this->getResourceId() . "'";
+			$sql = "SELECT * FROM pc_course_inform WHERE informId = " . $this->informId;
 			$this->Util()->DB()->setQuery($sql);
 			$result = $this->Util()->DB()->GetRow();
 			if($result)
 				$result = $this->Util->EncodeRow($result);
 			return $result;	
         }
+
+        
+		public function Inform()
+		{
+			$sql = "SELECT * FROM pc_course_inform WHERE personalId = " . $this->personalId . " AND courseId = " . $this->courseId;
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetRow();
+			if($result)
+				$result = $this->Util->EncodeRow($result);
+			return $result;	
+        }
+
+		public function Enumerate()
+		{
+			$sql = "SELECT p.name, p.lastname_paterno, p.lastname_materno, pcci.file 
+						FROM pc_course_inform pcci
+							INNER JOIN personal p 
+								ON pcci.personalId = p.personalId 
+						WHERE courseId = " . $this->courseId;
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetResult();
+			return $result;
+		}
+
+		public function Delete()
+		{
+			if($this->Util()->PrintErrors())
+				return false;
+			
+			$sql = "DELETE FROM pc_course_inform WHERE informId = " . $this->informId;
+			$this->Util()->DB()->setQuery($sql);
+			$this->Util()->DB()->DeleteData();
+			$this->Util()->setError(90000, 'complete', "Se ha eliminado el informe");
+			$this->Util()->PrintErrors();
+			return $result;
+		}
 				
 	}	
 ?>

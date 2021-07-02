@@ -647,3 +647,29 @@ function verTr(Id){
 
  $('#tr_'+Id).toggle();
 }
+
+
+function DeleteInform(id)
+{
+    var $message = "¿Está seguro de eliminar el informe?";
+    bootbox.confirm($message, function(result) {
+        if(result == false)
+            return;
+        $.ajax({
+            url : WEB_ROOT+'/ajax/new/group-inform.php',
+            type: "POST",
+            data : {type: "deleteInform", informId: id},
+            success: function(data, textStatus, jqXHR)
+            {
+                //console.log(data)
+                var splitResponse = data.split("[#]");
+                ShowStatus(splitResponse[1]);
+                window.location.href = splitResponse[2];
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Algo salio mal, compruebe su conexión a internet');
+            }
+        });
+    });
+}

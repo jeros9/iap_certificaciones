@@ -126,4 +126,9 @@ $cursos = $course->infoCoursem();
 	$announcements = $group_announcement->Enumerate($infoCourse["courseId"]);
 	$smarty->assign('usuariologId', $_SESSION['User']['userId']);
 	$smarty->assign('announcements', $announcements);
+
+	$course_inform->setPersonalId($_SESSION['User']['userId']);
+	$course_inform->setCourseId($infoCourse['courseId']);
+	$informe = $course_inform->Inform();
+	$smarty->assign('informe', $informe);
 ?>

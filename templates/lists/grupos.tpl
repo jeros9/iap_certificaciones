@@ -32,10 +32,12 @@
         <td align="center">{$subject.active}</td>
         {if !$docente}
             <td align="center">
-				<a href="{$WEB_ROOT}/graybox.php?page=add-grupos&id={$subject.courseId}" data-target="#ajax" data-toggle="modal">
-							<i class="material-icons md-16">create</i>
-							
-						</a>
+				<a href="{$WEB_ROOT}/graybox.php?page=add-grupos&id={$subject.courseId}" data-target="#ajax" data-toggle="modal" title="Editar Grupo">
+                    <i class="material-icons md-16">create</i>
+                </a>
+				<a href="{$WEB_ROOT}/graybox.php?page=show-informs&id={$subject.courseId}" data-target="#ajax" data-toggle="modal" title="Ver Informes">
+                    <i class="material-icons md-16">folder</i>
+                </a>
 				
 		
 				<div id="divAccion_{$subject.courseId}" >

@@ -238,7 +238,8 @@ $pages = array(
     'add-group-topic',
     'add-group-comment',
     'view-description-group-final-test',
-    'add-group-inform'
+    'add-group-inform',
+    'show-informs'
 
 );
 
