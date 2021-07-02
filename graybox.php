@@ -237,7 +237,8 @@ $pages = array(
     'make-group-test',
     'add-group-topic',
     'add-group-comment',
-    'view-description-group-final-test'
+    'view-description-group-final-test',
+    'add-group-inform'
 
 );
 

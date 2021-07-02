@@ -102,6 +102,7 @@ include_once(DOC_ROOT . '/classes/group_questions_final_test.class.php');
 include_once(DOC_ROOT . '/classes/invitation.class.php');
 include_once(DOC_ROOT . '/classes/period.class.php');
 include_once(DOC_ROOT . '/classes/order.class.php');
+include_once(DOC_ROOT . '/classes/course_inform.class.php');
 $docente = new Docente();
 
 $db = new DB;
@@ -174,9 +175,10 @@ $group_final_test             = new GroupFinalTest;
 $group_questions_final_test   = new GroupQuestionsFinalTest;
 
 // Classes Autoridades Electas
-$invitation = new Invitation;
-$period     = new Period;
-$pcOrder    = new Order;
+$invitation       = new Invitation;
+$period           = new Period;
+$pcOrder          = new Order;
+$course_inform    = new CourseInform;
 
 $smarty = new Smarty;
 

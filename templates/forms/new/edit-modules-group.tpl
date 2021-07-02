@@ -4,6 +4,11 @@
         <div class="caption">
             <i class="fa fa-gift"></i> .:: Datos del Grupo ::.
         </div>
+        <div class="actions">
+            <a href="{$WEB_ROOT}/graybox.php?page=add-group-inform&id={$infoCourse.courseId}&auxTpl=admin&cId={$infoCourse.courseId}" data-target="#ajax" data-toggle="modal" class="btn btn-circle blue">
+                &raquo; Agregar Informe del Curso
+            </a>
+        </div>
     </div>
     <div class="portlet-body">
 		<div id="msj"></div>
@@ -38,7 +43,7 @@
         <div class="caption">
             <i class="fa fa-gift"></i>.:: Actividades ::.
         </div>
-           <div class="actions">
+        <div class="actions">
             <a href="{$WEB_ROOT}/graybox.php?page=add-group-activity&id={$infoCourse.courseId}&auxTpl=admin" data-target="#ajax" data-toggle="modal" class="btn btn-circle blue">
                 &raquo; Agregar actividad
             </a>

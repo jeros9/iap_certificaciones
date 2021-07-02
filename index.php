@@ -229,7 +229,8 @@ $pages = array(
 	// Autoridades Electas
 	'invitacion',
 	'preregistro',
-	'progreso'
+	'progreso',
+	'add-group-inform'
 );
 
 if(!in_array($_GET['page'], $pages))
