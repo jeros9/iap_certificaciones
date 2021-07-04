@@ -13,11 +13,26 @@
         for($i = 1; $i <= $courseDays; $i++)
         {
             $asistencia = $_POST['asistencia' . $i];
+
             foreach($asistencia['Entrada'] as $key => $value)
-                $student->setAttendance($key, $_POST['courseId'], $_SESSION['User']['userId'], $value, 'Entrada');
+            {
+                $course_attendance->setUserId($key);
+                $course_attendance->setCourseId($_POST['courseId']);
+                $course_attendance->setPersonalId($_SESSION['User']['userId']);
+                $course_attendance->setAttendanceDay($value);
+                $course_attendance->setTypeAttendance('Entrada');
+                $course_attendance->Save();
+            }
 
             foreach($asistencia['Salida'] as $key => $value)
-                $student->setAttendance($key, $_POST['courseId'], $_SESSION['User']['userId'], $value, 'Salida');
+            {
+                $course_attendance->setUserId($key);
+                $course_attendance->setCourseId($_POST['courseId']);
+                $course_attendance->setPersonalId($_SESSION['User']['userId']);
+                $course_attendance->setAttendanceDay($value);
+                $course_attendance->setTypeAttendance('Salida');
+                $course_attendance->Save();
+            }
         }
         /* echo "<pre>";
         print_r($_POST); 

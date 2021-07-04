@@ -240,7 +240,8 @@ $pages = array(
     'view-description-group-final-test',
     'add-group-inform',
     'show-informs',
-    'add-group-attendance'
+    'add-group-attendance',
+    'show-attendances'
 
 );
 

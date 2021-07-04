@@ -231,7 +231,9 @@ $pages = array(
 	'preregistro',
 	'progreso',
 	'add-group-inform',
-	'add-group-attendance'
+	'add-group-attendance',
+	'reporte-evaluaciones',
+	'reporte-certificados'
 );
 
 if(!in_array($_GET['page'], $pages))

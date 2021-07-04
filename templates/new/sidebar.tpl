@@ -196,7 +196,7 @@
 		        </li>
                 {* PROCESO DE CERTIFICACION *}
                 {if $User.positionId == 1 || $AccessMod[45] == 1}
-                    <li class="nav-item {if  $page == "invitacion" || $page == "progreso"} active {/if}">
+                    <li class="nav-item {if  $page == "invitacion" || $page == "progreso" || $page == "reporte-evaluaciones" || $page == "reporte-certificados"} active {/if}">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
                             <span class="title">Proceso de Certificaci&oacute;n</span>
@@ -214,12 +214,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{$WEB_ROOT}/" class="nav-link">
+                                <a href="{$WEB_ROOT}/reporte-evaluaciones" class="nav-link">
                                     <span class="title">Reporte de Evaluaciones</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{$WEB_ROOT}/" class="nav-link">
+                                <a href="{$WEB_ROOT}/reporte-certificados" class="nav-link">
                                     <span class="title">Reporte de Certificados</span>
                                 </a>
                             </li>

@@ -38,6 +38,9 @@
 				<a href="{$WEB_ROOT}/graybox.php?page=show-informs&id={$subject.courseId}" data-target="#ajax" data-toggle="modal" title="Ver Informes">
                     <i class="material-icons md-16">folder</i>
                 </a>
+				<a href="{$WEB_ROOT}/graybox.php?page=show-attendances&id={$subject.courseId}" data-target="#ajax" data-toggle="modal" title="Lista de Asistencia">
+                    <i class="material-icons md-16">list</i>
+                </a>
 				
 		
 				<div id="divAccion_{$subject.courseId}" >

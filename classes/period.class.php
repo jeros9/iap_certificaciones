@@ -94,7 +94,8 @@ class Period extends Main
 							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4), 'no') AS hasProducts,
 							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 5), 'no') AS hasCertificate,
 							pcto.orderName,
-							(SELECT COUNT(attendanceId) FROM pc_attendance_list WHERE us.alumnoId = pc_attendance_list.userId AND c.courseId = pc_attendance_list.courseId) AS userAttendance
+							(SELECT COUNT(attendanceId) FROM pc_attendance_list WHERE us.alumnoId = pc_attendance_list.userId AND c.courseId = pc_attendance_list.courseId) AS userAttendance,
+							sv.date AS certificateDate
 						FROM user_subject us 
 							INNER JOIN user u
 								ON us.alumnoId = u.userId
@@ -108,6 +109,8 @@ class Period extends Main
 								ON c.subjectId = cd.subjectId AND us.alumnoId = cd.userId
 							LEFT JOIN pc_typeorder pcto
 								ON u.typeOrderId = pcto.typeOrderId
+							LEFT JOIN surveys sv
+								ON c.subjectId = sv.subjectId AND us.alumnoId = sv.userId
 						WHERE us.courseId = " . $value['courseId'] . " AND u.ciudad = " . $inv['municipalityId'];
 				$this->Util()->DB()->setQuery($sql);
 				$participants = $this->Util()->DB()->GetResult();

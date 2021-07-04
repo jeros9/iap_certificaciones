@@ -4095,14 +4095,6 @@ class Student extends User
 			$attendance = false;
 		return $attendance;
 	}
-
-	public function setAttendance($userId, $courseId, $personalId, $attendanceDay, $typeAttendance)
-	{
-		$sql = "INSERT INTO pc_attendance_list(courseId, personalId, userId, attendanceDay, attendanceHour, typeAttendance) VALUES(" . $courseId . ", " . $personalId . ", " . $userId . ", '" . $attendanceDay . "', CURTIME(), '" . $typeAttendance . "')";
-		$this->Util()->DB()->setQuery($sql);
-		$this->Util()->DB()->InsertData();
-		return true;
-	}
 }
 
 ?>
