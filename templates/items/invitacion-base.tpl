@@ -4,6 +4,7 @@
         <td>{$item.presidentName}</td>
         <td>{$item.municipio}</td>
         <td>{$item.politicalGroup}</td>
+        <td style="text-transform: capitalize;" class="text-center">{$item.agreement}</td>
         <td class="text-center">
             <button class="btn btn-info btn-xs spanInfo" id="{$item.invitationId}">
                 <i class="fa fa-info-circle"></i> Detalles
