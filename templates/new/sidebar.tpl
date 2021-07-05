@@ -209,11 +209,6 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{$WEB_ROOT}/progreso" class="nav-link">
-                                    <span class="title">Progreso</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{$WEB_ROOT}/reporte-evaluaciones" class="nav-link">
                                     <span class="title">Reporte de Evaluaciones</span>
                                 </a>
@@ -221,6 +216,11 @@
                             <li class="nav-item">
                                 <a href="{$WEB_ROOT}/reporte-certificados" class="nav-link">
                                     <span class="title">Reporte de Certificados</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{$WEB_ROOT}/progreso" class="nav-link">
+                                    <span class="title">Progreso</span>
                                 </a>
                             </li>
                         </ul>

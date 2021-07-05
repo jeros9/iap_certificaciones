@@ -288,7 +288,7 @@ class Invitation extends Main
 				WHERE invitationId = " . $this->invitationId;
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->ExecuteQuery();
-		if(isset($_FILES))
+		if(is_uploaded_file($_FILES['invitationFile']['tmp_name']))
 		{
 			$ext = end(explode('.', basename($_FILES['invitationFile']['name'])));
 			$filename = "invitacion_" . $this->invitationId . "." . $ext;
