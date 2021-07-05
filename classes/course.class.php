@@ -583,12 +583,19 @@
 			
 			
 			
-			$sql = '
-				SELECT *, major.name AS majorName, subject.name AS name  FROM course
-				LEFT JOIN subject ON course.subjectId = subject.subjectId 
-				LEFT JOIN major ON major.majorId = subject.tipo
-				where 1 '.$filtro.'
-				ORDER BY subject.tipo,  subject.name,  course.modality, initialDate ';
+			$sql = 'SELECT *, 
+						major.name AS majorName, 
+						subject.name AS name,
+						pcp.name AS periodName
+					FROM course
+					LEFT JOIN subject 
+						ON course.subjectId = subject.subjectId 
+					LEFT JOIN major 
+						ON major.majorId = subject.tipo
+					LEFT JOIN pc_periods pcp 
+						ON course.periodId = pcp.periodId 
+					WHERE 1 '.$filtro.'
+					ORDER BY subject.tipo,  subject.name,  course.modality, initialDate';
 			// exit;
 			$this->Util()->DB()->setQuery($sql);
 			

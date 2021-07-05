@@ -46,8 +46,8 @@
                                             <th class="text-center">No.</th>
                                             <th class="text-center">Nombre Candidato</th>
                                             <th class="text-center">Cargo</th>
-                                            <th class="text-center">Fecha de Evaluaci&oacute;n</th>
                                             <th class="text-center">Resultado de Evaluaci&oacute;n</th>
+                                            <th class="text-center">Fecha de Evaluaci&oacute;n</th>
                                         </tr>
                                     </thead>
                                     <tbody>

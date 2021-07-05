@@ -7,6 +7,7 @@
     <th width="100" style="text-align:center">Tipo</th>
     <th width="200" style="text-align:center">Nombre</th>
     <th width="200" style="text-align:center">Grupo</th>
+    <th width="120" style="text-align:center">Periodo</th>
     <th width="80" style="text-align:center">Fecha Inicial</th>
     <th width="80" style="text-align:center">Fecha Final</th>
    <!-- <th width="50" style="text-align:center">Dias Activo</th>-->
@@ -26,6 +27,7 @@
         <td align="center">{$subject.majorName}</td>
         <td align="center">{$subject.name}</td>
 		 <td align="center">{$subject.group}</td>
+		 <td align="center">{$subject.periodName}</td>
         <td align="center">{if $subject.initialDate != "0000-00-00"} {$subject.initialDate|date_format:"%d-%m-%Y"}{else} S/F {/if}</td>
         <td align="center">{if $subject.finalDate != "0000-00-00"}  {$subject.finalDate|date_format:"%d-%m-%Y"}  {else} S/F  {/if}   </td>
        
