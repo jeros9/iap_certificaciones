@@ -87,6 +87,8 @@ class Period extends Main
 							u.actualizado, 
 							us.acuseDerecho, 
 							us.evalDocenteCompleta, 
+							us.aprobado,
+							p.fecha_desarrollo AS fechaPlan,
 							IFNULL(up.personalId, 'no') AS hasEvaluator, 
 							IFNULL(p.planId, 'no') AS hasPlan, 
 							IFNULL(cd.cedulaId, 'no') AS hasCedula, 
