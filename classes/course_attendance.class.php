@@ -128,7 +128,7 @@
 
 		function AttendanceMunicipality($municipalityId)
 		{
-			$sql = "SELECT CONCAT_WS(' ', u.names, u.lastNamePaterno, u.lastNameMaterno) AS completeName, c.group AS courseName, s.name AS subjectName
+			$sql = "SELECT CONCAT_WS(' ', u.names, u.lastNamePaterno, u.lastNameMaterno) AS completeName, c.group AS courseName, s.name AS subjectName, u.workplacePosition
 						FROM pc_attendance_list pcal 
 							INNER JOIN user u 
 								ON pcal.userId = u.userId 

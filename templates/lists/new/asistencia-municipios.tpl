@@ -1,5 +1,10 @@
 <div class="panel panel-info" style="margin-top: 40px;">
-    <div class="panel-heading">Municipios Asistentes</div>
+    <div class="panel-heading clearfix">
+        Municipios Asistentes
+        <a href="{$WEB_ROOT}/ajax/attendance-municipalities.php?fecha={$fecha}" target="_blank" class="btn btn-success pull-right">
+            <i class="fa fa-file-pdf-o"></i> Imprimir
+        </a>
+    </div>
     <div class="panel-body">
         <div class="col-md-8">
             <div class="table-responsive">

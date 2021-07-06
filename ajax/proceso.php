@@ -34,6 +34,7 @@ switch($_POST["type"])
 		$smarty->assign('municipios', $municipios);
 		$smarty->assign('total_municipios', $total_municipios);
 		$smarty->assign('total_personas', $total_personas);
+		$smarty->assign('fecha', $attendanceDay);
 		$smarty->display(DOC_ROOT . '/templates/lists/new/asistencia-municipios.tpl');
 		break;
 }

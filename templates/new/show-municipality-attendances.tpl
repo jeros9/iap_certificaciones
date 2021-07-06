@@ -19,6 +19,7 @@
                     {foreach from=$group item=item}
                         <tr>
                             <td>{$item.completeName}</td>
+                            <td>{$item.workplacePosition}</td>
                             <td>{$item.subjectName} [{$item.courseName}]</td>
                         </tr>
                     {/foreach}
