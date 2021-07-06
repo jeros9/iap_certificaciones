@@ -226,14 +226,15 @@ $pages = array(
 	'respuestas',
 	'make-group-final-test',
 
-	// Autoridades Electas
+	// Proceso de Certificacion
 	'invitacion',
 	'preregistro',
 	'progreso',
 	'add-group-inform',
 	'add-group-attendance',
 	'reporte-evaluaciones',
-	'reporte-certificados'
+	'reporte-certificados',
+	'asistencia-municipios'
 );
 
 if(!in_array($_GET['page'], $pages))

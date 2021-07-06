@@ -21,5 +21,20 @@ switch($_POST["type"])
         $smarty->assign('i', $i);
         $smarty->display(DOC_ROOT.'/templates/lists/new/progreso.tpl');
 	    break;
+
+	case 'asistenciaMunicipios':
+		$attendanceDay = $_POST['fecha'];
+		$attendanceDay = date('Y-m-d', strtotime($attendanceDay));
+		$course_attendance->setAttendanceDay($attendanceDay);
+		$municipios = $course_attendance->AttendanceMunicipalities();
+		$total_municipios = count($municipios);
+		$total_personas = 0;
+		foreach($municipios as $item)
+			$total_personas += $item['cantidad'];
+		$smarty->assign('municipios', $municipios);
+		$smarty->assign('total_municipios', $total_municipios);
+		$smarty->assign('total_personas', $total_personas);
+		$smarty->display(DOC_ROOT . '/templates/lists/new/asistencia-municipios.tpl');
+		break;
 }
 ?>

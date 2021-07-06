@@ -241,7 +241,8 @@ $pages = array(
     'add-group-inform',
     'show-informs',
     'add-group-attendance',
-    'show-attendances'
+    'show-attendances',
+    'show-municipality-attendances'
 
 );
 

@@ -110,6 +110,39 @@
 			$result = $this->Util()->DB()->GetResult();
 			return $result;
 		}
-				
+
+		function AttendanceMunicipalities()
+		{
+			$sql = "SELECT m.municipioId, m.nombre, COUNT(pcal.userId) AS cantidad, pcal.attendanceDay
+						FROM pc_attendance_list pcal 
+							INNER JOIN user u 
+								ON pcal.userId = u.userId 
+							INNER JOIN municipio m 
+								ON u.workplaceCity = m.municipioId
+						WHERE pcal.attendanceDay = '" . $this->attendanceDay . "' AND pcal.typeAttendance = 'Entrada' 
+						GROUP BY m.municipioId ORDER BY m.nombre";
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetResult();
+			return $result;
+		}	
+
+		function AttendanceMunicipality($municipalityId)
+		{
+			$sql = "SELECT CONCAT_WS(' ', u.names, u.lastNamePaterno, u.lastNameMaterno) AS completeName, c.group AS courseName, s.name AS subjectName
+						FROM pc_attendance_list pcal 
+							INNER JOIN user u 
+								ON pcal.userId = u.userId 
+							INNER JOIN municipio m 
+								ON u.workplaceCity = m.municipioId
+							INNER JOIN course c 
+								ON pcal.courseId = c.courseId 
+							INNER JOIN subject s 
+								ON c.subjectId = s.subjectId 
+						WHERE pcal.attendanceDay = '" . $this->attendanceDay . "' AND pcal.typeAttendance = 'Entrada' AND u.workplaceCity = " . $municipalityId . " 
+						ORDER BY u.names, u.lastNamePaterno, u.lastNameMaterno";
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->GetResult();
+			return $result;
+		}
 	}	
 ?>

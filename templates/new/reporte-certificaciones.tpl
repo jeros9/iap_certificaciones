@@ -12,7 +12,7 @@
 		{/if}
 		<div id="msj"></div>
         {include file="boxes/status_no_ajax.tpl"}
-		<form id='frmFiltro'>
+		<form id="frmFiltro">
 			<div style="float:left;margin-left:8px;">
 				Tipo de Solicitante:
 				<select id="tipoSolicitante" name="tipoSolicitante" style="width:200px"   class="form-control">

@@ -19,9 +19,9 @@
                     </select>
                 </div>
             </form>
-                <div class="form-group col-md-6">
-                    <button type="button" class="btn btn-primary" onclick="buscar()">Buscar</button>
-                </div>
+            <div class="form-group col-md-6">
+                <button type="button" class="btn btn-primary" onclick="buscar()">Buscar</button>
+            </div>
         </div>
         <div id="loader"></div>
         <div id="contenido" class="table-responsive">{include file="{$DOC_ROOT}/templates/lists/new/progreso.tpl"}</div>
