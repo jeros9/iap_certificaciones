@@ -5,7 +5,7 @@
 <link rel="icon" 
       type="image/png" 
       href="http://www.iapchiapas.org.mx//images/favicon.png">                
-                <title>Sistema de Educaci&oacute;n en L&iacute;nea del IAP-Chiapas</title>
+                <title>Sistema Red Conocer | IAP Chiapas</title>
 <meta name="description" content=""  />
 <meta name="keywords" content=""  />
 
