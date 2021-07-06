@@ -2,8 +2,8 @@ function buscar()
 {	
 	$.ajax({
 	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/solicitud.php',
-	  	data: "type=buscarSolicitud&"+$("#frmFiltro").serialize(true),
+	  	url: WEB_ROOT+'/ajax/proceso.php',
+	  	data: "type=reporteProceso&" + $("#frmFilter").serialize(true),
 		beforeSend: function(){			
 			$("#loader").html(LOADER3);
 		},

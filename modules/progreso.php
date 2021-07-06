@@ -1,6 +1,5 @@
 <?php
-    if($_SESSION["User"]["type"]=="student")
-	    exit;
+    $user->allow_access(45);	
 	
     $i = 0;
     $period->setPeriodId(1);
