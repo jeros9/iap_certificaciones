@@ -534,23 +534,10 @@ class Student extends User
 		
 		if($total > 0)
 		{
-			$this->Util()->DB()->setQuery("
-							SELECT 
-								userId 
-							FROM 
-								user 
-							WHERE 
-								email = '".$this->getEmail()."'
-							"
-						);
+			$sql = "SELECT userId FROM user WHERE email = '" . $this->getEmail() . "'";
+			$this->Util()->DB()->setQuery($sql);
 			$studentId = $this->Util()->DB()->GetSingle();
-			$sql = "SELECT 
-					count(*) 
-				FROM 
-					user_subject
-				WHERE
-					alumnoId  = ".$studentId." and courseId = ".$_POST["curricula"]."";
-	
+			$sql = "SELECT count(*) FROM user_subject WHERE alumnoId  = " . $studentId . " AND courseId = " . $_POST["curricula"] . "";
 			$this->Util()->DB()->setQuery($sql);
 			$result = $this->Util()->DB()->GetSingle();
 			
@@ -562,22 +549,34 @@ class Student extends User
 			}
 			else
 			{
-				$sql = "INSERT INTO 
-						user_subject 
-						(						
-							alumnoId, 
-							courseId,
-							status
-						)
-					VALUES 
-						(						
-							".$studentId.",
-							".$_POST["curricula"].",
-							'activo'
-						)";
-									
+				include_once(DOC_ROOT."/properties/messages.php");
+				// UPDATE user information
+				$sql = "UPDATE user SET workplaceCity = '" . $this->getCiudadT() . "', ciudadt = '" . $this->getCiudadT() . "', workplacePosition = '" . $this->getWorkplacePosition() . "', typeOrderId = " . $this->typeOrderId . " WHERE userId = " . $studentId;
+				$this->Util()->DB()->setQuery($sql);
+				$this->Util()->DB()->ExecuteQuery();
+				// INSERT user_subject
+				$sql = "INSERT INTO user_subject(alumnoId, courseId, status) VALUES(" . $studentId . ", " . $_POST["curricula"] . ", 'activo')";
 				$this->Util()->DB()->setQuery($sql);
 				$lastId = $this->Util()->DB()->InsertData();
+				// Envio de Correo
+				$this->setUserId($studentId);
+				$info = $this->GetInfo();
+				$sendmail = new SendMail;
+				$course = new Course();
+				$course->setCourseId($_POST["curricula"]);
+				$courseInfo = $course->Info();
+				$details_body = array(
+					"email" => $info["controlNumber"],
+					"password" => $info["password"],
+					"major" => utf8_decode($courseInfo["majorName"]),
+					"course" => utf8_decode($courseInfo["name"])
+				);
+				$details_subject = array();
+				$attachment = "";
+				$fileName = "";
+				$nombre = $info['names'] . ' ' . $info['lastNamePaterno'] . ' ' . $info['lastNameMaterno'];  
+				$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $info["email"], $nombre, $attachment, $fileName);
+
 				$this->Util()->setError(10028, "complete", "Registro Exitoso");
 				$this->Util()->PrintErrors();
 				return true;
