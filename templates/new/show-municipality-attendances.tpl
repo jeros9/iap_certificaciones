@@ -11,7 +11,8 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Canditato</th>
+                        <th>Candidato</th>
+                        <th>Cargo</th>
                         <th>Certificaci&oacute;n</th>
                     </tr>
                 </thead>
