@@ -201,39 +201,47 @@
                         {/if}
                     </ul>
 		        </li>
-                {* PROCESO DE CERTIFICACION *}
-                {if $User.positionId == 1 || $AccessMod[45] == 1}
-                    <li class="nav-item {if  $page == "invitacion" || $page == "progreso" || $page == "reporte-evaluaciones" || $page == "reporte-certificados"} active {/if}">
-                        <a href="javascript:;" class="nav-link nav-toggle">
-                            <i class="icon-diamond"></i>
-                            <span class="title">Proceso de Certificaci&oacute;n</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/invitacion" class="nav-link">
-                                    <span class="title">Invitación</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/reporte-evaluaciones" class="nav-link">
-                                    <span class="title">Reporte de Evaluaciones</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/reporte-certificados" class="nav-link">
-                                    <span class="title">Reporte de Certificados</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/progreso" class="nav-link">
-                                    <span class="title">Progreso</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                {/if}
             {/if}
+        {/if}
+        {* PROCESO DE CERTIFICACION *}
+        {if $User.positionId == 1 || $AccessMod[50] == 1 || $AccessMod[51] == 1 || $AccessMod[52] == 1 || $AccessMod[53] == 1}
+            <li class="nav-item {if  $page == "invitacion" || $page == "progreso" || $page == "reporte-evaluaciones" || $page == "reporte-certificados"} active {/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-diamond"></i>
+                    <span class="title">Proceso de Certificaci&oacute;n</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if $User.positionId == 1 || $AccessMod[50] == 1}
+                        <li class="nav-item">
+                            <a href="{$WEB_ROOT}/invitacion" class="nav-link">
+                                <span class="title">Invitación</span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if $User.positionId == 1 || $AccessMod[51] == 1}
+                        <li class="nav-item">
+                            <a href="{$WEB_ROOT}/reporte-evaluaciones" class="nav-link">
+                                <span class="title">Reporte de Evaluaciones</span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if $User.positionId == 1 || $AccessMod[52] == 1}
+                        <li class="nav-item">
+                            <a href="{$WEB_ROOT}/reporte-certificados" class="nav-link">
+                                <span class="title">Reporte de Certificados</span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if $User.positionId == 1 || $AccessMod[53] == 1}
+                        <li class="nav-item">
+                            <a href="{$WEB_ROOT}/progreso" class="nav-link">
+                                <span class="title">Progreso</span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
         {/if}
         {* CURRICULA *}
         {if $AccessMod[11] == 1 || $User.positionId == 1 || $AccessMod[31] == 1 || $AccessMod[8] == 1 || $AccessMod[39] == 1}

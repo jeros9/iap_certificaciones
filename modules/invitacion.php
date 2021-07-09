@@ -1,5 +1,5 @@
 <?php
-	$user->allow_access(1);
+	$user->allow_access(50);
 	
 	$student->setState(7);	
 	$periods = $period->Enumerate();
