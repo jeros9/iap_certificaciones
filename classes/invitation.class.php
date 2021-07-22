@@ -332,5 +332,35 @@ class Invitation extends Main
 		return $result;
 	}
 	
+
+	public function OrderInfo()
+	{
+		$invitationInfo = $this->Info();
+		$sql = "SELECT * FROM pc_typeorder ORDER BY orderName";
+		$this->Util()->DB()->setQuery($sql);
+		$typeOrders = $this->Util()->DB()->GetResult();
+		foreach($typeOrders as $key => $value)
+		{
+			$sql = "SELECT COUNT(us.alumnoId) AS total,
+						c.group,
+						s.name
+					FROM course c
+						INNER JOIN subject s
+							ON c.subjectId = s.subjectId
+						INNER JOIN user_subject us
+							ON c.courseId = us.courseId 
+						INNER JOIN user u 
+							ON us.alumnoId = u.userId 
+						INNER JOIN pc_typeorder pcto
+							ON u.typeOrderId = pcto.typeOrderId 
+					WHERE c.periodId = " . $invitationInfo['periodId'] . " AND pcto.typeOrderId = " . $value['typeOrderId'];
+			$this->Util()->DB()->setQuery($sql);
+			$row = $this->Util()->DB()->GetRow();
+			$typeOrders[$key]['totalOrder'] = $row['total'];
+			$typeOrders[$key]['groupName'] = $row['group'];
+			$typeOrders[$key]['subjectName'] = $row['name'];
+		}
+		return $typeOrders;
+	}
 }
 ?>
