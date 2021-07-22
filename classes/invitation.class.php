@@ -189,7 +189,7 @@ class Invitation extends Main
 			$this->Util()->DB()->setQuery($sql);
 			$invitationId = $this->Util()->DB()->InsertData();
 
-			if(isset($_FILES))
+			if(is_uploaded_file($_FILES['invitationFile']['tmp_name']))
 			{
 				$ext = end(explode('.', basename($_FILES['invitationFile']['name'])));
 				$filename = "invitacion_" . $invitationId . "." . $ext;
@@ -251,7 +251,7 @@ class Invitation extends Main
 	{	
 		if($this->Util()->PrintErrors()) 
 			return false;
-		if(isset($_FILES))
+		if(is_uploaded_file($_FILES['confirmedFile']['tmp_name']))
 		{
 			$ext = end(explode('.', basename($_FILES['confirmedFile']['name'])));
 			$filename = "confirmacion_" . $this->invitationId . "." . $ext;
@@ -353,7 +353,7 @@ class Invitation extends Main
 							ON us.alumnoId = u.userId 
 						INNER JOIN pc_typeorder pcto
 							ON u.typeOrderId = pcto.typeOrderId 
-					WHERE c.periodId = " . $invitationInfo['periodId'] . " AND pcto.typeOrderId = " . $value['typeOrderId'];
+					WHERE c.periodId = " . $invitationInfo['periodId'] . " AND pcto.typeOrderId = " . $value['typeOrderId'] . " AND u.workplaceCity = " . $invitationInfo['municipalityId'];
 			$this->Util()->DB()->setQuery($sql);
 			$row = $this->Util()->DB()->GetRow();
 			$typeOrders[$key]['totalOrder'] = $row['total'];

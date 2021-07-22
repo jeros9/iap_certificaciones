@@ -46,7 +46,7 @@
     <div class="form-actions">
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="button" class="btn green submitForm">Guardar</button>
+                <button type="button" class="btn green submitForm btn-loading">Guardar</button>
                 <button type="button" class="btn default closeModal">Cancelar</button>
             </div>
         </div>

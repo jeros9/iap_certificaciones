@@ -48,6 +48,8 @@ function AddInvitationDiv()
 function AddInvitation()
 {
     var fd = new FormData(document.getElementById("addInvitationForm"));
+    $('.btn-loading').attr('disabled', true);
+	$('.btn-loading').html('<i class="fa fa-spinner fa-pulse fa-fw"></i> Espere por favor...');
     $.ajax({
         url : WEB_ROOT+'/ajax/new/invitation.php',
         type: "POST",
@@ -56,6 +58,8 @@ function AddInvitation()
 		contentType: false,
         success: function(data)
         {
+            $('.btn-loading').attr('disabled', false);
+			$('.btn-loading').html('GUARDAR');
             var splitResponse = data.split("[#]");
             if(splitResponse[0] == "fail")
             {
@@ -71,6 +75,8 @@ function AddInvitation()
         error: function ()
         {
             alert('Algo salio mal, compruebe su conexion a internet');
+            $('.btn-loading').attr('disabled', false);
+			$('.btn-loading').html('GUARDAR');
         }
     });
 }
@@ -98,12 +104,16 @@ function ReceiveInvitationPopup(id)
 
 function ReceiveInvitation()
 {
+    $('.btn-loading').attr('disabled', true);
+	$('.btn-loading').html('<i class="fa fa-spinner fa-pulse fa-fw"></i> Espere por favor...');
     $.ajax({
         url : WEB_ROOT+'/ajax/new/invitation.php',
         type: "POST",
         data :  $('#receiveInvitationForm').serialize(),
         success: function(data)
         {
+            $('.btn-loading').attr('disabled', false);
+			$('.btn-loading').html('GUARDAR');
             var splitResponse = data.split("[#]");
             if(splitResponse[0] == "fail")
             {
@@ -119,6 +129,8 @@ function ReceiveInvitation()
         error: function ()
         {
             alert('Algo salio mal, compruebe su conexion a internet');
+            $('.btn-loading').attr('disabled', false);
+			$('.btn-loading').html('GUARDAR');
         }
     });
 }
@@ -147,6 +159,8 @@ function ConfirmInvitationPopup(id)
 function ConfirmInvitation()
 {
     var fd = new FormData(document.getElementById("confirmInvitationForm"));
+    $('.btn-loading').attr('disabled', true);
+	$('.btn-loading').html('<i class="fa fa-spinner fa-pulse fa-fw"></i> Espere por favor...');
     $.ajax({
         url: WEB_ROOT+'/ajax/new/invitation.php',
         type: "POST",
@@ -155,6 +169,8 @@ function ConfirmInvitation()
 		contentType: false,
         success: function(data)
         {
+            $('.btn-loading').attr('disabled', false);
+			$('.btn-loading').html('GUARDAR');
             var splitResponse = data.split("[#]");
             if(splitResponse[0] == "fail")
             {
@@ -170,6 +186,8 @@ function ConfirmInvitation()
         error: function ()
         {
             alert('Algo salio mal, compruebe su conexion a internet');
+            $('.btn-loading').attr('disabled', false);
+			$('.btn-loading').html('GUARDAR');
         }
     });
 }
@@ -198,6 +216,8 @@ function EditInvitationPopup(id)
 function EditInvitation()
 {
     var fd = new FormData(document.getElementById("editInvitationForm"));
+    $('.btn-loading').attr('disabled', true);
+	$('.btn-loading').html('<i class="fa fa-spinner fa-pulse fa-fw"></i> Espere por favor...');
     $.ajax({
         url: WEB_ROOT+'/ajax/new/invitation.php',
         type: "POST",
@@ -206,6 +226,8 @@ function EditInvitation()
 		contentType: false,
         success: function(data)
         {
+            $('.btn-loading').attr('disabled', false);
+			$('.btn-loading').html('GUARDAR');
             var splitResponse = data.split("[#]");
             if(splitResponse[0] == "fail")
             {
@@ -221,6 +243,8 @@ function EditInvitation()
         error: function ()
         {
             alert('Algo salio mal, compruebe su conexion a internet');
+            $('.btn-loading').attr('disabled', false);
+			$('.btn-loading').html('GUARDAR');
         }
     });
 }
