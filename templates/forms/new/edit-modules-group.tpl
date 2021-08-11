@@ -129,4 +129,37 @@
     </div>
 </div>
 
-
+{* VIDEOS *}
+<div class="portlet box red">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i> .:: Videos ::.
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">T&iacute;tulo</th>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach from=$videos item=item}
+                        <tr>
+                            <td>{$item.title}</td>
+                            <td>{$item.created_at}</td>
+                            <td class="text-center"> 
+                                <a href="https://www.youtube.com/watch?v={$item.code}" class="btn btn-success">
+                                    Ver Video
+                                </a>
+                            </td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -119,8 +119,10 @@ $cursos = $course->infoCoursem();
 	$resources = $group_resource->Enumerate();
 	$smarty->assign('resources', $resources);
 
-	//$module->setCourseModuleId($_GET["id"]);
+	$module->setCourseModuleId($_GET["id"]);
+	$videos = $module->lives();
 	//$info = $module->InfoCourseModule();
+	$smarty->assign('videos', $videos);
 	$smarty->assign('mnuMain', "cursos");
 
 	$announcements = $group_announcement->Enumerate($infoCourse["courseId"]);
