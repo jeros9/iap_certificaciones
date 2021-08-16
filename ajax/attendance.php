@@ -20,7 +20,7 @@
     $infoPersonal = $personal->Info();
     $course->setCourseId($_GET['cId']);
     $infoCourse = $course->Info();
-    $days[0] = $infoCourse['initialDate'];
+    $days[0] = $infoCourse['initialDateTraining'];
     for($i = 1; $i < intval($infoCourse['courseDays']); $i++)
     {
         $date = date("Y-m-d", strtotime($days[$i - 1] . " + 1 days"));
@@ -119,15 +119,15 @@
                                 {
     $html .=                        '<td style="text-align: center;">';
                                         if($student->Attendance($item['userId'], $infoCourse['courseId'], $_GET['pId'], $key, 'Entrada'))
-                                            $html .= '<span style="color: white; background: green; padding: 3px;">S</span>';
+                                            $html .= '<span style="color: white; background: green; padding: 3px;"> </span>';
                                         else
-                                            $html .= '<span style="color: white; background: red; padding: 3px;">N</span>';
+                                            $html .= '<span style="color: white; background: red; padding: 3px;"> </span>';
     $html .=                        '</td>
                                     <td style="text-align: center;">';
                                         if($student->Attendance($item['userId'], $infoCourse['courseId'], $_GET['pId'], $key, 'Salida'))
-                                            $html .= '<span style="color: white; background: green; padding: 3px;">S</span>';
+                                            $html .= '<span style="color: white; background: green; padding: 3px;"> </span>';
                                         else
-                                            $html .= '<span style="color: white; background: red; padding: 3px;">N</span>';
+                                            $html .= '<span style="color: white; background: red; padding: 3px;"> </span>';
     $html .=                        '</td>';
                                 }
     $html .=               '</tr>';

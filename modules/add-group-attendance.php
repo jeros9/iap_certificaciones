@@ -45,7 +45,7 @@
     
     $course->setCourseId($_GET['id']);
     $infoCourse = $course->Info();
-    $days[0] = $infoCourse['initialDate'];
+    $days[0] = $infoCourse['initialDateTraining'];
     for($i = 1; $i < intval($infoCourse['courseDays']); $i++)
     {
         $date = date("Y-m-d", strtotime($days[$i - 1] . " + 1 days"));

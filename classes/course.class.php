@@ -23,6 +23,8 @@
 		private $numero;
 		private $peso;
 		private $periodId;
+		private $initialDateTraining;
+		private $finalDateTraining;
 		
 		
 		public function setNumero($value)
@@ -369,6 +371,36 @@
 		public function getPeriodId()
 		{
 			return $this->periodId;
+		}
+
+		public function setInitialDateTraining($value)
+		{
+			$this->Util()->ValidateString($value, 255, 1, 'Fecha Inicial de Capacitación');
+			$value = $this->Util()->FormatDateMySql($value);
+			$explode = explode("-", $value);
+			if(strlen($explode[0]) == 2)
+				$value = $this->Util()->FormatDateBack($value);
+			$this->initialDateTraining = $value;
+		}
+
+		public function getInitialDateTraining()
+		{
+			return $this->initialDateTraining;
+		}
+
+		public function setFinalDateTraining($value)
+		{
+			$this->Util()->ValidateString($value, 255, 1, 'Fecha Inicial de Capacitación');
+			$value = $this->Util()->FormatDateMySql($value);
+			$explode = explode("-", $value);
+			if(strlen($explode[0]) == 2)
+				$value = $this->Util()->FormatDateBack($value);
+			$this->finalDateTraining = $value;
+		}
+
+		public function getFinalDateTraining()
+		{
+			return $this->finalDateTraining;
 		}
 		
 
@@ -777,6 +809,8 @@
 						subjectId='" 	. $this->subjectId . "',
 						initialDate='" 	. $this->initialDate . "',
 						finalDate='" 	. $this->finalDate . "',
+						initialDateTraining='" 	. $this->initialDateTraining . "',
+						finalDateTraining='" 	. $this->finalDateTraining . "',
 						daysToFinish='" 	. $this->daysToFinish . "',
 						active='" 	. $this->active . "',
 						`group`='" 	. $this->group . "',
@@ -809,6 +843,8 @@
 						 	subjectId,
 							initialDate,
 							finalDate,
+							initialDateTraining,
+							finalDateTraining,
 							daysToFinish,
 							`group`,
 							turn,
@@ -830,6 +866,8 @@
 							'" . $this->subjectId . "',
 							'" . $this->initialDate . "',
 							'" . $this->finalDate . "',
+							'" . $this->initialDateTraining . "',
+							'" . $this->finalDateTraining . "',
 							'" . $this->daysToFinish . "',
 							'" . $this->group . "',
 							'" . $this->turn . "',
@@ -1045,8 +1083,8 @@
 						major.name AS majorName, 
 						subject.name AS name,
 						course.tipo as tipoCuatri,
-						(DATEDIFF(course.finalDate, course.initialDate) + 1) AS courseDays,
-						((DATEDIFF(course.finalDate, course.initialDate) + 1)*2) AS totalAttendance
+						(DATEDIFF(course.finalDateTraining, course.initialDateTraining) + 1) AS courseDays,
+						((DATEDIFF(course.finalDateTraining, course.initialDateTraining) + 1)*2) AS totalAttendance
 					FROM
 						course
 					LEFT JOIN subject ON subject.subjectId = course.subjectId

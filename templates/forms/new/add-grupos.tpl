@@ -12,24 +12,6 @@
                 </select>
             </div>
         </div>
-	
-		<!--
-		<div class="form-group">
-            <label class="col-md-3 control-label">Numero:</label>
-            <div class="col-md-8">
-                 <input type="text" name="numero" id="numero"  class="form-control" value="{$post.numero}"/>
-            </div>
-        </div>-->
-		<!--
-        <div class="form-group">
-            <label class="col-md-3 control-label">Modalidad:</label>
-            <div class="col-md-8">
-                <select name="modality" id="modality" class="form-control">
-                     <option value="Local" {if $post.modality == "Local"} selected="selected"{/if}>Presencial</option>
-                    <option value="Online" {if $post.modality == "Online"} selected="selected"{/if}>Online</option>
-                </select>
-            </div>
-        </div>-->
 
         <div class="form-group">
             <label class="col-md-3 control-label">Fecha Inicial:</label>
@@ -44,13 +26,20 @@
                 <input type="text" name="finalDate" id="finalDate" size="10"  class="form-control date-picker" value="{$post.finalDate}" autocomplete="off" />
             </div>
         </div>
-<!--
+
         <div class="form-group">
-            <label class="col-md-3 control-label"> Dias para terminar:</label>
+            <label class="col-md-3 control-label">Fecha Inicial de Capacitación:</label>
             <div class="col-md-8">
-                <input type="text" name="daysToFinish" id="daysToFinish" class="form-control" value="{$post.daysToFinish}"/>
+                <input type="text" name="initialDateTraining" id="initialDateTraining" size="10" class="form-control date-picker" required value="{$post.initialDateTraining}" autocomplete="off" />
             </div>
-        </div>-->
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label"> Fecha Final de Capacitación:</label>
+            <div class="col-md-8">
+                <input type="text" name="finalDateTraining" id="finalDateTraining" size="10"  class="form-control date-picker" value="{$post.finalDateTraining}" autocomplete="off" />
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="col-md-3 control-label">Personal Administrativo Asignado:</label>
@@ -87,7 +76,9 @@
                 <select id="period" name="period" class="form-control">
                     <option value="0">Ninguno</option>
                     {foreach from=$periods item=item}
-                        <option value="{$item.periodId}">{$item.name}</option>
+                        <option value="{$item.periodId}" {if $item.periodId == $post.periodId} selected {/if}>
+                            {$item.name}
+                        </option>
                     {/foreach}}
                 </select>
             </div>

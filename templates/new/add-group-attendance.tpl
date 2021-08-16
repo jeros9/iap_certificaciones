@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="portlet-body">
-        <div id="tblContent">
+        <div id="tblContent" class="table-responsive">
             <form id="addMajorForm" name="addMajorForm" method="POST" action="{$WEB_ROOT}/add-group-attendance/id/{$id}">
                 <input type="hidden" name="personalId" value="{$personalId}" />
                 <input type="hidden" name="courseId" value="{$course.courseId}" />

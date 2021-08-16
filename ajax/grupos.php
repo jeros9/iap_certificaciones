@@ -33,6 +33,8 @@ switch($_POST["type"])
 		$course->setModality($_POST["modality"]);
 		$course->setInitialDate($_POST["initialDate"]);
 		$course->setFinalDate($_POST["finalDate"]);
+		$course->setInitialDateTraining($_POST["initialDateTraining"]);
+		$course->setFinalDateTraining($_POST["finalDateTraining"]);
 		$course->setDaysToFinish($_POST["daysToFinish"]);
 		$course->setPersonalId($_POST["personalId"]);
 		$course->setTeacherId($_POST["teacherId"]);
