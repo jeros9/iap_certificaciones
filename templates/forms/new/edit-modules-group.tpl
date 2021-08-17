@@ -62,7 +62,7 @@
     <div class="portlet-body">
         <div class="row">
             <div class="col-md-12 text-center">
-                <a href="{$WEB_ROOT}/graybox.php?page=add-group-attendance&id={$infoCourse.courseId}&auxTpl=admin" data-target="#ajax" data-toggle="modal" class="btn btn-circle green">
+                <a href="{$WEB_ROOT}/graybox.php?page=add-group-attendance&id={$infoCourse.courseId}&auxTpl=admin" data-target="#ajax" data-toggle="modal" class="btn btn-circle green" data-backdrop="static" data-keyboard="false">
                     <i class="fa fa-calendar-check-o"></i> Marcar Asistencia
                 </a>
             </div>
