@@ -24,7 +24,7 @@
 
     {if ($timestamp > $final_test.initialDateTimestamp && $timestamp < $final_test.finalDateTimestamp && $final_test.available) || ($userId == 1601)}
         <b>Entregable: </b>
-        {if $final_test.ponderation} 
+        {if $final_test.ponderation and $final_test.finalDateTest} 
             Ex&aacute;men realizado.
         {else}
             <a id="presentarExamenFinal" style="display: none" class=" btn yellow btn-outline sbold" href="{$WEB_ROOT}/graybox.php?page=make-group-test&id={$final_test.testId}" data-target="#ajax" data-toggle="modal">Presentar examen</a>

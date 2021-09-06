@@ -7,7 +7,7 @@
 	});
 </script>
 
-{if $access == 1}
+{if $access == 1 or $is_alive == 1}
     <h5><b>IMPORTANTE:</b> {$final_test.description}</p>
     <form id="addFinalTest" name="addFinalTest" method="post">
         <input type="hidden" id="type" name="type" value="saveAddMajor"/>

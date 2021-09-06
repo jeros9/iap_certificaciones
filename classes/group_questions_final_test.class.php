@@ -149,6 +149,16 @@
 			$score = $this->Util()->DB()->GetSingle();
 			return $score;
 		}
+
+		// ACTUALIZADO RC
+		public function MyTestInfo()
+		{
+			$this->Util()->DB()->setQuery("SELECT * FROM group_final_test_score WHERE testId = " . $this->getActivityId() . " AND userId = " . $this->getUserId());
+			$result = $this->Util()->DB()->GetRow();
+			if($result)
+				$result = $this->Util->EncodeRow($result);
+			return $result;	
+		}
         
         // ACTUALIZADO RC
 		public function Info($id = null)

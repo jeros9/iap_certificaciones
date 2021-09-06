@@ -526,6 +526,7 @@
             $this->setActivityId($result["testId"]);
             $this->setUserId($this->getUserId());
             $result["ponderation"] = $this->Score();
+            $result["finalDateTest"] = $this->FinalDateTest();
             $realScore = $result["ponderation"] * $result["score"] / 100;
             $result{"realScore"} = $realScore;
                 
@@ -536,6 +537,14 @@
 		function Score()
 		{
 			$this->Util()->DB()->setQuery("SELECT ponderation FROM group_final_test_score WHERE testId = " . $this->getActivityId() . " AND userId = " . $this->getUserId());
+			$result = $this->Util()->DB()->GetSingle();
+			return $result;
+		}
+		
+		// ACTUALIZADO RC
+		function FinalDateTest()
+		{
+			$this->Util()->DB()->setQuery("SELECT finalDate FROM group_final_test_score WHERE testId = " . $this->getActivityId() . " AND userId = " . $this->getUserId());
 			$result = $this->Util()->DB()->GetSingle();
 			return $result;
 		}

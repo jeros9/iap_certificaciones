@@ -26,6 +26,8 @@
 	$access  = $group_questions_final_test->Access($final_test["tries"]);
 	$smarty->assign('access', $access);
 	
+	$group_questions_final_test->setActivityId($_GET["id"]);
+	$group_questions_final_test->setUserId($_SESSION["User"]["userId"]);
 	if(!$access)
 	{
 		$score  = $group_questions_final_test->TestScore();
@@ -33,18 +35,32 @@
     }
     else
     {
-        $group_questions_final_test->setActivityId($_GET["id"]);
-	    $group_questions_final_test->setUserId($_SESSION["User"]["userId"]);
         $group_questions_final_test->initFinalTest();
     }
 	
 	//$myTest = $group_test->Randomize($myTest, $final_test["noQuestions"]);
 	$smarty->assign('myTest', $myTest);
     
-    $hora_actual = time();
+	$myTestInfo = $group_questions_final_test->MyTestInfo();
+	if($myTestInfo != null)
+		$hora_actual = strtotime($myTestInfo['initialDate'] . ' ' . $myTestInfo['initialHour']);
+	else
+    	$hora_actual = time();
+	/* echo "<pre>";
+	var_dump($hora_actual);
+	exit; */
 	//if(!$_SESSION["timeLimit"])
-		$_SESSION["timeLimit"] = $hora_actual + ($final_test["timeLimit"] * 60);
+	$_SESSION["timeLimit"] = $hora_actual + ($final_test["timeLimit"] * 60);
 	
-	$rest = $_SESSION["timeLimit"] - $hora_actual;
+	$rest = $_SESSION["timeLimit"] - time();
+	/* echo "<pre>";
+	print_r($rest);
+	exit; */
     $smarty->assign('timeLeft', $rest);
+	$mins = $rest / 60;
+	if($myTestInfo['finalDate'] == null)
+		$is_alive = $mins > 1 ? 1 : 0;
+	else
+		$is_alive = 0;
+	$smarty->assign('is_alive', $is_alive);
 ?>
