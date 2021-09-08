@@ -37,5 +37,35 @@ switch($_POST["type"])
 		$smarty->assign('fecha', $attendanceDay);
 		$smarty->display(DOC_ROOT . '/templates/lists/new/asistencia-municipios.tpl');
 		break;
+
+	case 'reporteCertificados':
+		$periodId = $_POST['periodo'];
+        $i = 0;
+		$no = 1;
+		$period->setPeriodId($periodId);
+		$progress = $period->Progress();
+		$smarty->assign('progress', $progress);
+		$periods = $period->Enumerate();
+		$smarty->assign('periods', $periods);
+		$smarty->assign('periodo', $periodId);
+		$smarty->assign('i', $i);
+		$smarty->assign('no', $no);
+        $smarty->display(DOC_ROOT.'/templates/lists/new/reporte-certificados.tpl');
+		break;
+
+	case 'reporteEvaluaciones':
+		$periodId = $_POST['periodo'];
+		$i = 0;
+		$no = 1;
+		$period->setPeriodId($periodId);
+		$progress = $period->Progress();
+		$smarty->assign('progress', $progress);
+		$periods = $period->Enumerate();
+		$smarty->assign('periods', $periods);
+		$smarty->assign('periodo', $periodId);
+		$smarty->assign('i', $i);
+		$smarty->assign('no', $no);
+        $smarty->display(DOC_ROOT.'/templates/lists/new/reporte-evaluaciones.tpl');
+		break;
 }
 ?>
