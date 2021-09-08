@@ -1,5 +1,5 @@
 <?php
-$invitation->setPeriodId(1);	
+$invitation->setPeriodId(2);	
 $paises = $invitation->EnumerateCiudades();	
 $lstSolicitante=$student->EnumerateSolicitantes();	
 
