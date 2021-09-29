@@ -59,13 +59,13 @@
                         }
                         @page {
                             margin-top: 70px;
-                            margin-bottom: 55px;
+                            margin-bottom: 100px;
                             margin-left: 35px;
                             margin-right: 35px;
                         }            
                         footer {
                             position: fixed; 
-                            bottom: -35px; 
+                            bottom: -65px; 
                             left: 0px; 
                             right: 0px;
                             height: 80px;
@@ -74,7 +74,7 @@
                             font-size: 8pt;
                         }
                         table {
-                            page-break-inside: avoid !important;
+                            page-break-inside: auto !important;
                         }
                     </style>
                     <meta charset='UTF-8'/>
@@ -114,7 +114,7 @@
                         foreach($theGroup as $item)
                         {
     $html .=               '<tr>
-                                <td class="text-uppercase">' . $item['names'] . ' ' . $item['lastNamePaterno'] . ' ' . $item['lastNameMaterno'] . '</td>';
+                                <td class="text-uppercase">' . $item['names'] . ' ' . $item['lastNamePaterno'] . ' ' . $item['lastNameMaterno'] . '<br> / <small>' . $item['municipio'] . '</small></td>';
                                 foreach($days as $day => $key)
                                 {
     $html .=                        '<td style="text-align: center;">';

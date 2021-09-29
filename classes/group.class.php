@@ -1851,12 +1851,14 @@
 			$personal = "";
 			if($personalId > 0)
 				$personal = " AND usuario_capacitador.personalId = " . $personalId;
-			$this->Util()->DB()->setQuery("SELECT *, user_subject.status AS status 
+			$this->Util()->DB()->setQuery("SELECT *, user_subject.status AS status, municipio.nombre AS municipio
 												FROM user_subject
 													LEFT JOIN user ON user_subject.alumnoId = user.userId
 													INNER JOIN course ON user_subject.courseId = course.courseId
         											INNER JOIN subject ON course.subjectId = subject.subjectId
 													INNER JOIN usuario_capacitador ON (usuario_capacitador.usuarioId = user_subject.alumnoId AND usuario_capacitador.subjectId = subject.subjectId)
+													LEFT JOIN municipio
+													ON user.workplaceCity = municipio.municipioId
 												WHERE user_subject.courseId = '" . $this->getCourseId() . "' AND user.activo = 1 " . $personal . " 
 												ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC");
 			$result = $this->Util()->DB()->GetResult();

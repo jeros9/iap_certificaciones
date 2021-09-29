@@ -43,6 +43,14 @@
                             </td>
                         </tr>
                         <tr>
+                            <td colspan="3">
+                                <p>
+                                    <b>Municipio:</b></br>
+                                    {$data_student['nombreciudad']}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <p>
                                     <b>Correo:</b><br>
