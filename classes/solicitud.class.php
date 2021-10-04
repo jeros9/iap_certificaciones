@@ -1186,11 +1186,9 @@ class Solicitud extends Module
 	public function infoDoc()
 	{
 		
-		 $sqlQuery = 'SELECT 
-					*
-				FROM 
-					repositorio
-				WHERE   userId = '.$_GET["id"].' and tipoDocumentoId = '.$_GET["auxTpl"].' and subjectId = '.$_GET["cId"].'';
+		 $sqlQuery = "SELECT *
+						FROM repositorio
+					WHERE userId = " . $_GET["id"] . " AND tipoDocumentoId = " . $_GET["auxTpl"] . " AND subjectId = " . $_GET["cId"] . " ORDER BY repositorioId DESC";
 		// exit;
 		$this->Util()->DB()->setQuery($sqlQuery);
 		$infoFol = $this->Util()->DB()->GetRow();

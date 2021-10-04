@@ -92,9 +92,9 @@ class Period extends Main
 							IFNULL(up.personalId, 'no') AS hasEvaluator, 
 							IFNULL(p.planId, 'no') AS hasPlan, 
 							IFNULL(cd.cedulaId, 'no') AS hasCedula, 
-							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 2), 'no') AS hasIec,
-							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4), 'no') AS hasProducts,
-							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 5), 'no') AS hasCertificate,
+							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 2 ORDER BY repositorioId DESC LIMIT 1), 'no') AS hasIec,
+							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4 ORDER BY repositorioId DESC LIMIT 1), 'no') AS hasProducts,
+							IFNULL((SELECT repositorioId FROM repositorio WHERE c.subjectId = repositorio.subjectId AND us.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 5 ORDER BY repositorioId DESC LIMIT 1), 'no') AS hasCertificate,
 							pcto.orderName,
 							(SELECT COUNT(attendanceId) FROM pc_attendance_list WHERE us.alumnoId = pc_attendance_list.userId AND c.courseId = pc_attendance_list.courseId) AS userAttendance,
 							sv.date AS certificateDate
