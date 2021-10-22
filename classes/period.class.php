@@ -41,7 +41,7 @@ class Period extends Main
 
 	public function Enumerate()
 	{
-		$sql = "SELECT * FROM pc_periods ORDER BY name ASC";
+		$sql = "SELECT * FROM pc_periods ORDER BY periodId";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;
