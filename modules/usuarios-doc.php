@@ -42,7 +42,7 @@
 	// }//if	
 	
 	
-	$students = $student->enumerateOk();
+	/* $students = $student->enumerateOk(); */
 	$lstCertificaciones = $subject->Enumerate();
 	
 	
@@ -52,7 +52,7 @@
 	$smarty->assign("id", $_GET["id"]);	
 	$smarty->assign("lstCertificaciones", $lstCertificaciones);	
 	$smarty->assign("studentsCount", $studentsCount);	
-	$smarty->assign("registros", $students);	
+	/* $smarty->assign("registros", $students); */	
 	$smarty->assign('mnuMain','catalogos');
 	$smarty->assign('mnuSubmain','alumnos');	
 	

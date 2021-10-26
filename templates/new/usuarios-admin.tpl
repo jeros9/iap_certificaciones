@@ -95,7 +95,7 @@
 			<button type="submit" class="btn green submitForm" onClick="buscarCertificacion()">Buscar</button>
 		</div>
 	</div>
-    <div id="tblContent">{include file="lists/usuarios-admin.tpl"}</div>
+    <div id="tblContent">{*include file="lists/usuarios-admin.tpl"*}</div>
 
     </div>
         

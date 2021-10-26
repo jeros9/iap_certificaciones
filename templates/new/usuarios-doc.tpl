@@ -80,7 +80,7 @@
 	 </div>
 	 </form>
 	   <button type="submit" class="btn green submitForm" onClick="buscarCertificacion()">Buscar</button>
-        <div id="tblContent">{include file="lists/usuarios-doc.tpl"}</div>
+        <div id="tblContent">{*include file="lists/usuarios-doc.tpl"*}</div>
 
     </div>
         
