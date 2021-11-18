@@ -158,7 +158,7 @@ $page == 'view-inbox' or
 </head>
 <!-- END HEAD -->
 
-<body class="page-header-fixed page-sidebar-closed-hide-logo {if $User.type == "student" || $User.type == "Docente" || $vistaPrevia eq 1 || $page == "register" || $page == "registro" || $page == "preregistro"} page-sidebar-closed {/if} page-content-white page-md {if ($page == 'homepage' && $User.type == 'student') || ($page == 'homepage' && $User.type == 'Docente') || $vistaPrevia eq 1 || ($page == 'capacitador_profile' && $User.type == 'Docente')} page-container-bg-solid {/if}">
+<body class="page-header-fixed page-sidebar-closed-hide-logo {if $User.type == "student" || $User.type == "Docente" || $vistaPrevia eq 1 || $page == "register" || $page == 'registro2021' || $page == "registro" || $page == "preregistro"} page-sidebar-closed {/if} page-content-white page-md {if ($page == 'homepage' && $User.type == 'student') || ($page == 'homepage' && $User.type == 'Docente') || $vistaPrevia eq 1 || ($page == 'capacitador_profile' && $User.type == 'Docente')} page-container-bg-solid {/if}">
 <div class="page-wrapper">
 	{include file="new/header.tpl"}
 	<!-- BEGIN CONTAINER -->

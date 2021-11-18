@@ -234,7 +234,10 @@ $pages = array(
 	'add-group-attendance',
 	'reporte-evaluaciones',
 	'reporte-certificados',
-	'asistencia-municipios'
+	'asistencia-municipios',
+
+	// Registro 2021
+	'registro2021'
 );
 
 if(!in_array($_GET['page'], $pages))

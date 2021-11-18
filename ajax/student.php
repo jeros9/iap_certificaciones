@@ -1120,6 +1120,27 @@
 				$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
 			}
 			break;
+
+		case "saveAddRegister2021":
+			$register->setNames($_POST['names']);
+			$register->setFirstLastName($_POST['firstLastname']);
+			$register->setSecondLastName($_POST['secondLastname']);
+			$register->setEmail($_POST['email']);
+			$register->setPhone($_POST['phone']);
+			$register->setMunicipalityId($_POST['municipality']);
+			if(!$register->Save())
+			{
+				echo "fail[#]";
+				$smarty->display(DOC_ROOT.'/templates/boxes/status.tpl');
+				echo "[#]Error en el registro";
+			}
+			else
+			{
+				echo "ok[#]";
+				$smarty->display(DOC_ROOT.'/templates/boxes/status.tpl');
+				echo "[#]<div class='alert alert-success text-center' role='alert'><p>El registro se realizó de manera exitosa. Gracias..</p><a href='registro2021' class='btn btn-info'>Realizar otro registro</a></div>";
+			}
+		break;	
 	}
 
 ?>
