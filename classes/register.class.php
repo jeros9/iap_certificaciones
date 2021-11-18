@@ -82,8 +82,8 @@ class Register extends Main
 		if($this->Util()->PrintErrors())
 			return false;
 		
-		$query = "INSERT INTO register(names, first_lastname, second_lastname, email, phone, municipalityId, created_at, assistance)
-				    VALUES('" . $this->getNames() . "', '" . $this->getFirstLastname() . "', '" . $this->getSecondLastname() . "', '" . $this->getEmail() . "', '" . $this->getPhone() . "', '" . $this->getMunicipalityId() . "', NOW(), 0)";
+		$query = "INSERT INTO register(identifier, names, first_lastname, second_lastname, email, phone, municipalityId, created_at, assistance)
+				    VALUES('" . uniqid() . "', '" . $this->getNames() . "', '" . $this->getFirstLastname() . "', '" . $this->getSecondLastname() . "', '" . $this->getEmail() . "', '" . $this->getPhone() . "', '" . $this->getMunicipalityId() . "', NOW(), 0)";
 		$this->Util()->DB()->setQuery($query);
         $this->Util()->DB()->ExecuteQuery();
 		$complete = "Te has registrado correctamente";
