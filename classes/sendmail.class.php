@@ -33,8 +33,8 @@ class SendMail extends Main
 			$mail->SMTPSecure = "ssl";
 			$mail->Host       = "smtp.gmail.com";
 			$mail->Port       = 465;
-			$mail->Username   = "enlinea@iapchiapas.edu.mx";
-			$mail->Password   = "IAP*chis_2022";
+			$mail->Username   = EMAIL_USERNAME;
+			$mail->Password   = EMAIL_PASSWORD;
 
 			$tmp_body = nl2br($this->Util()->handle_mail_patterns($body,$details_body));
 			if($tmp_body == '')
