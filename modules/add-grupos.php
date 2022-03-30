@@ -1,15 +1,6 @@
 <?php
-		
-	/* For Session Control - Don't remove this */
-	$user->allow_access(37);	
-	/* End Session Control */
+	$user->allow_access(37);
 	$rsubjects =$major->Enumerate();
-
-	
-	// echo "<pre>"; print_r($_GET );
-	// exit;
-	
-
 	$resultC = $course->EnumerateCertificacions();
 
 	$cursos = $subject->Enumerate();
@@ -23,6 +14,4 @@
 	$smarty->assign('mnuMain','cursos');
 	$periods = $period->Enumerate();
     $smarty->assign("periods", $periods);
-
-// exit;
 ?>

@@ -237,7 +237,11 @@ $pages = array(
 	'asistencia-municipios',
 
 	// Registro 2021
-	'registro2021'
+	'registro2021',
+
+	// Examenes Finales
+	'add-final-test',
+	'date-final-test'
 );
 
 if(!in_array($_GET['page'], $pages))

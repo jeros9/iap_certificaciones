@@ -973,5 +973,55 @@
                 
 			return $result;
 		}
+
+		public function checkTemplate($subjectId)
+		{
+			$sql = "SELECT gft.testId 
+						FROM group_final_test gft
+					INNER JOIN course c 
+						ON gft.courseId = c.courseId 
+					WHERE c.subjectId = " . $subjectId . " LIMIT 1";
+			$this->Util()->DB()->setQuery($sql);
+			$testId = $this->Util()->DB()->GetSingle();
+			return $testId;
+		}
+
+		public function AddFinalTest($testIdTemplate, $initialDate, $horaInicial, $finalDate, $ponderation, $timeLimit, $noQuestions, $subject)
+		{
+			$description = 'Las preguntas del examen est&aacute;n vinculadas con los conocimientos generales que deben poseer los candidatos a certificarse el ' . $subject . ', consta de ' . $noQuestions . ' preguntas (reactivos) de opci&oacute;n m&uacute;ltiple. El tiempo para resolver la prueba ser&aacute; de ' . $timeLimit .' minutos, su evaluaci&oacute;n inicia en este momento. Elija la respuesta Correcta.';
+			$resumen = 'Examen Final - ' . $subject;
+
+			$sql = "INSERT INTO group_final_test(courseId, initialDate, horaInicial, finalDate, description, resumen, ponderation, timeLimit, noQuestions, tries) VALUES (" . $this->getCourseId() . ", '" . $initialDate . "', '" . $horaInicial . "', '" . $finalDate . "', '" . $description . "', '" . $resumen . "', " . $ponderation . ", " . $timeLimit . ", " . $noQuestions . ", 1)";
+			$this->Util()->DB()->setQuery($sql);
+			$testId = $this->Util()->DB()->InsertData();
+			$sql = "SELECT * FROM group_questions_final_test WHERE testId = " . $testIdTemplate;
+			$this->Util()->DB()->setQuery($sql);
+			$questions = $this->Util()->DB()->GetResult();
+			foreach($questions as $item)
+			{
+				$sql = "INSERT INTO group_questions_final_test(categoryId, testId, questionType, question, opcionA, opcionB, opcionC, opcionD, opcionE, answer1, answer2, answer3, answer4, answer5, answers, points) VALUES(" . $item['categoryId'] . ", " . $testId . ", '" . $item['questionType'] . "', '" . $item['question'] . "', '" . $item['opcionA'] . "', '" . $item['opcionB'] . "', '" . $item['opcionC'] . "', '" . $item['opcionD'] . "', '" . $item['opcionE'] . "', '" . $item['answer1'] . "', '" . $item['answer2'] . "', '" . $item['answer3'] . "', '" . $item['answer4'] . "', '" . $item['answer5'] . "', " . $item['answers'] . ", " . $item['points'] . ")";
+				$this->Util()->DB()->setQuery($sql);
+				$this->Util()->DB()->InsertData();
+			}
+			return true;
+		}
+
+		public function UpdateFinalTest($initialDate, $horaInicial, $finalDate, $ponderation, $timeLimit, $noQuestions)
+		{
+			$sql = "UPDATE group_final_test
+						SET
+							initialDate = '" . $initialDate . "',
+							horaInicial = '" . $horaInicial . "',
+							finalDate = '" . $finalDate . "',
+							ponderation = " . $ponderation . ",
+							timeLimit = " . $timeLimit . ",
+							noQuestions = " . $noQuestions . "
+						WHERE testId = '" . $this->testId . "'";
+			$this->Util()->DB()->setQuery($sql);
+			$result = $this->Util()->DB()->UpdateData();
+			$this->Util()->setError(90000, 'complete', "Se ha editado la el Examen Final");
+			$this->Util()->PrintErrors();
+			return $result;
+		}
     }	
 ?>

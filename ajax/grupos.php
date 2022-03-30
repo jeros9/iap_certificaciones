@@ -75,6 +75,41 @@ switch($_POST["type"])
 
 	break;	
 		
+	case "AddFinalTest":
+		$courseId = $_POST['courseId'];
+		$testIdTemplate = $_POST['testId'];
+		$subject = $_POST['subject'];
+		$initialDate = $util->FormatDateBack($_POST['initialDate']);
+		$horaInicial = $_POST['horaInicial'] . ':00';
+		$finalDate = $util->FormatDateBack($_POST['finalDate']) . ' ' . $_POST['horaFinal'] . ':00';
+		$ponderation = $_POST['ponderation'];
+		$timeLimit = $_POST['timeLimit'];
+		$noQuestions = $_POST['noQuestions'];
+		$group_final_test->setCourseId($courseId);
+
+		$result = $group_final_test->AddFinalTest($testIdTemplate, $initialDate, $horaInicial, $finalDate, $ponderation, $timeLimit, $noQuestions, $subject);
+		if($result)
+			echo "ok[#]";
+		else
+			echo "fail[#]";
+		break;
+		
+	case "EditFinalTest":
+		$testId = $_POST['testId'];
+		$group_final_test->setTestId($testId);
+		$initialDate = $util->FormatDateBack($_POST['initialDate']);
+		$horaInicial = $_POST['horaInicial'] . ':00';
+		$finalDate = $util->FormatDateBack($_POST['finalDate']) . ' ' . $_POST['horaFinal'] . ':00';
+		$ponderation = $_POST['ponderation'];
+		$timeLimit = $_POST['timeLimit'];
+		$noQuestions = $_POST['noQuestions'];
+
+		$result = $group_final_test->UpdateFinalTest($initialDate, $horaInicial, $finalDate, $ponderation, $timeLimit, $noQuestions);
+		if($result)
+			echo "ok[#]";
+		else
+			echo "fail[#]";
+		break;
 		
 }
 ?>

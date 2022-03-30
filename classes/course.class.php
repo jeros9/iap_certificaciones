@@ -618,7 +618,8 @@
 			$sql = 'SELECT *, 
 						major.name AS majorName, 
 						subject.name AS name,
-						pcp.name AS periodName
+						pcp.name AS periodName,
+						(SELECT gft.testId FROM group_final_test gft WHERE gft.courseId = course.courseId) AS testId
 					FROM course
 					LEFT JOIN subject 
 						ON course.subjectId = subject.subjectId 

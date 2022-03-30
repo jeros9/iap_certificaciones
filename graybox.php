@@ -242,7 +242,9 @@ $pages = array(
     'show-informs',
     'add-group-attendance',
     'show-attendances',
-    'show-municipality-attendances'
+    'show-municipality-attendances',
+    'add-final-test',
+    'date-final-test'
 
 );
 

@@ -1,7 +1,7 @@
 <?php 
 error_reporting(0);
-/* ini_set("display_errors", 1);
-error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED); */
+ini_set("display_errors", 1);
+error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 	
 	if(function_exists('xdebug_disable'))
 		xdebug_disable();
