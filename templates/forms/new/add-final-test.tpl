@@ -26,15 +26,15 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="ponderation">Ponderación:</label>
-                <input type="text" name="ponderation" id="ponderation" class="form-control" required/>
+                <input type="text" name="ponderation" id="ponderation" class="form-control" value="{$test.ponderation}" readonly/>
             </div>
             <div class="form-group col-md-4">
                 <label for="timeLimit">Tiempo Límite (Minutos):</label>
-                <input type="text" name="timeLimit" id="timeLimit" class="form-control" required/>
+                <input type="text" name="timeLimit" id="timeLimit" class="form-control" value="{$test.timeLimit}" required/>
             </div>
             <div class="form-group col-md-4">
                 <label for="noQuestions">Número de Preguntas:</label>
-                <input type="text" name="noQuestions" id="noQuestions" class="form-control" required/>
+                <input type="text" name="noQuestions" id="noQuestions" class="form-control" value="{$test.noQuestions}" readonly/>
             </div>
         </div>
     </form>

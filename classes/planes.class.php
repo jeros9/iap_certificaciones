@@ -275,8 +275,7 @@ class Planes extends Main
                         fecha_resultados = '".$this->fecha_resultados."',
                         horario_resultados = '".$this->horario_resultados."'". $fecha_update ."
 					WHERE 
-					planId = " . $this->planId;	
-		echo $sql;
+					planId = " . $this->planId;
 					
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->UpdateData();

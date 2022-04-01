@@ -229,7 +229,6 @@ switch($_POST["type"])
 	break;
 
 	case "addCedula":
-		
 		if(!$cedulas->hasCedula($_SESSION['User']['userId'], $_POST['user_id'], $_POST['subject_id']))
 		{
 			$smarty->assign("DOC_ROOT", DOC_ROOT);
@@ -244,6 +243,7 @@ switch($_POST["type"])
 			$smarty->assign('id', $cedulaId);
 			$smarty->assign('btnTitle', 'Visualizar Cédula');
 			$smarty->assign('type', 'cedula');
+			$smarty->assign('perfil', $_SESSION['User']['type']);
 			$smarty->display(DOC_ROOT.'/templates/boxes/new/view-doc.tpl');
 		}
 	break;
@@ -292,6 +292,7 @@ switch($_POST["type"])
 			$smarty->assign('editable', $planes->isEditable());
 			$smarty->assign('btnTitle', 'Visualizar Plan');
 			$smarty->assign('type', 'plan');
+			$smarty->assign('perfil', $_SESSION['User']['type']);
 			$smarty->display(DOC_ROOT.'/templates/boxes/new/view-doc.tpl');
 		}
 	break;
@@ -391,7 +392,7 @@ switch($_POST["type"])
 		$requerimientos = $planes->getInfoRequerimientos();
 		$subject->setSubjectId($data_plan['subjectId']);
 		$data_subject = $subject->Info();
-		$edit_fecha = ($_SESSION['User']['type'] == 'Administrador' || $_SESSION['User']['type'] == 'Director' ? true : false);
+		$edit_fecha = ($_SESSION['User']['type'] == 'Administrador' || $_SESSION['User']['type'] == 'Director' || $_SESSION['User']['type'] == 'Docente' ? true : false);
 		$smarty->assign('edit_fecha', $edit_fecha);
 		$smarty->assign('plan', $data_plan);
 		$smarty->assign('requerimientos', $requerimientos);
@@ -408,12 +409,43 @@ switch($_POST["type"])
         $planes->setFechaResultados($_POST['fecha_resultados']);
 		$planes->setHorarioResultados($_POST['horario_resultados']);
 		$planes->setRequerimientos($_POST['requerimientos']);
-		if($_SESSION['User']['type'] == 'Director' || $_SESSION['User']['type'] == 'Administrador')
+		if($_SESSION['User']['type'] == 'Director' || $_SESSION['User']['type'] == 'Administrador' || $_SESSION['User']['type'] == 'Docente')
 		{
 			$planes->setFecha($_POST['fecha']);
 		}
 		
 		if(!$planes->Update())
+        {
+            echo "fail[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/status_on_popup.tpl');
+        }
+        else
+        {
+            echo "ok[#]";
+            $smarty->display(DOC_ROOT.'/templates/boxes/status.tpl');
+            echo "[#]";
+        }
+	break;
+
+	case "editCedula":
+		$cedulas->setCedulaId($_POST['cedulaId']);
+		$data_cedula = $cedulas->getInfo();
+		$edit_fecha = ($_SESSION['User']['type'] == 'Administrador' || $_SESSION['User']['type'] == 'Director' || $_SESSION['User']['type'] == 'Docente' ? true : false);
+		$smarty->assign('cedula', $data_cedula);
+		$smarty->display(DOC_ROOT . '/templates/forms/new/edit-cedula.tpl');
+	break;
+
+	case "saveEditCedula":
+        $cedulas->setCedulaId($_POST['cedulaId']);
+		$cedulas->setMejoresPracticas($_POST['mejores_practicas']);
+		$cedulas->setAreasOportunidad($_POST['areas_oportunidad']);
+		$cedulas->setCriteriosNoCumplidos($_POST['criterios_no_cubrieron']);
+		$cedulas->setRecomendaciones($_POST['recomendaciones']);
+		$cedulas->setJuicioEvaluacion($_POST['juicio_evaluacion']);
+		$cedulas->setObservaciones($_POST['observaciones']);
+		$cedulas->setFecha($util->FormatDateBack($_POST['fecha']));
+		
+		if(!$cedulas->Update())
         {
             echo "fail[#]";
             $smarty->display(DOC_ROOT.'/templates/boxes/status_on_popup.tpl');

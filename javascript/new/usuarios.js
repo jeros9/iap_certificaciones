@@ -411,6 +411,11 @@ $(document).ready(function() {
 		var planId = $(this).data('id');
 		EditPlanDiv(planId);
 	});
+
+	$(document).on('click', '.btnEditCedula', function() {
+		var cedulaId = $(this).data('id');
+		EditCedulaDiv(cedulaId);
+	});
 });
 
 
@@ -636,4 +641,48 @@ function verFormEvaluacion(personalId, userId, subjectId, tipo){
 			alert(msgError);
 		}
     });
+}
+
+function EditCedulaDiv(cedulaId)
+{
+  $.ajax({
+      url : WEB_ROOT+'/ajax/new/usuarios.php',
+      type: "POST",
+      data : {type: "editCedula", cedulaId: cedulaId},
+      success: function(data)
+      {
+        showModal("Editar Cédula", data);
+        $('.submitForm').click(function() {
+          EditCedula();
+        });
+      },
+      error: function ()
+      {
+        alert('Algo salio mal, compruebe su conexion a internet');
+      }
+  });
+}
+
+function EditCedula()
+{
+	$.ajax({
+		url : WEB_ROOT + '/ajax/new/usuarios.php',
+		type: "POST",
+		data :  $('#editCedulaForm').serialize(),
+		success: function(data)
+		{
+			var splitResponse = data.split("[#]");
+			if(splitResponse[0] == "fail")
+				ShowStatusPopUp($(splitResponse[1]));
+			else
+			{
+				ShowStatus($(splitResponse[1]));
+				CloseFview();
+			}
+		},
+		error: function ()
+		{
+			alert('Algo salio mal, compruebe su conexion a internet');
+		}
+	});
 }

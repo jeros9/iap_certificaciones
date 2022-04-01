@@ -169,7 +169,8 @@ class Cedulas extends Main
 
     public function GetInfo()
 	{ 
-		$sql = "SELECT c.mejores_practicas, 
+		$sql = "SELECT c.cedulaId,
+						c.mejores_practicas, 
                         c.areas_oportunidad, 
                         c.criterios_no_cumplidos, 
                         c.recomendaciones, 
@@ -195,77 +196,30 @@ class Cedulas extends Main
 		return $row;
 	}
     
-    
-	
-	/* public function Edit(){
-		
-		if($this->Util()->PrintErrors()){ 
-			return false; 
-		}
-		
-		$sql = "UPDATE 
-					`major` 
-				SET
-					 name = '".$this->name."',
-					 description = '".$this->description."'
-				WHERE
-					majorId = ".$this->cedulaId;	
-					
-		$this->Util()->DB()->setQuery($sql);
-		$this->Util()->DB()->ExecuteQuery();
-		
-		$this->Util()->setError(10075, "complete");
-		$this->Util()->PrintErrors();
-		
-		return true;
-				
-	}
-	
-	public function Delete(){
-		
-		if($this->Util()->PrintErrors()){ 
-			return false; 
-		}
-		
-		$sql = "DELETE FROM 
-					`major`
-				WHERE 
-					majorId = ".$this->cedulaId;		
-		$this->Util()->DB()->setQuery($sql);
-		$this->Util()->DB()->ExecuteQuery();
-		
-				
-		$this->Util()->setError(10074, "complete");
-		$this->Util()->PrintErrors();
-		
-		return true;
-				
-	}
-	
-	public function Info()
-	{
-		$this->Util()->DB()->setQuery("SELECT * FROM major WHERE majorId = '".$this->cedulaId."'");
-		$row = $this->Util()->DB()->GetRow();
-		
-		$row["decodedDescription"] = $this->Util()->DecodeString($row["description"]);
-		return $row;
-	}	
-	
-	public function GetNameById(){
+    public function Update()
+	{	
+		if($this->Util()->PrintErrors())
+			return false;
 			
-		$sql = 'SELECT 
-					name 
-				FROM 
-					major 
-				WHERE 
-					majorId = '.$this->cedulaId;
-		
+		$sql = "UPDATE
+					cedulas 
+					SET
+                        mejores_practicas = '" . $this->mejores_practicas . "',
+                        areas_oportunidad = '" . $this->areas_oportunidad . "',
+                        criterios_no_cumplidos = '" . $this->criterios_no_cumplidos . "',
+                        recomendaciones = '" . $this->recomendaciones . "',
+                        juicio_evaluacion = '" . $this->juicio_evaluacion . "',
+						observaciones = '" . $this->observaciones . "',
+						fecha = '" . $this->fecha . "'
+					WHERE 
+					cedulaId = " . $this->cedulaId;
+		echo $sql;
 		$this->Util()->DB()->setQuery($sql);
-		
-		return $this->Util()->DB()->GetSingle();
-		
-	} */
-	
+		$this->Util()->DB()->UpdateData();
+		$this->Util()->setError(10073, "complete");
+		$this->Util()->PrintErrors();
+		return true;
+    }
 }
 
 
