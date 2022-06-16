@@ -13,6 +13,7 @@ class Cedulas extends Main
     private $juicio_evaluacion;
     private $observaciones;
     private $fecha;
+	private $folio_proceso;
 	
 	public function setCedulaId($value)
 	{
@@ -93,6 +94,11 @@ class Cedulas extends Main
 	{
 		$this->fecha = $value;
 	}
+
+	public function setFolioProceso($value)
+	{
+		$this->folio_proceso = $value;
+	}
 	
 	public function Save(){
 		
@@ -112,20 +118,22 @@ class Cedulas extends Main
                         recomendaciones,
                         juicio_evaluacion,
                         observaciones,
-                        fecha 
+                        fecha,
+						folio_proceso
 					)
 					 VALUES 
 					 (
-					 	'".$this->personalId."',
-						'".$this->userId."',
-						'".$this->subjectId."',
-						'".$this->mejores_practicas."',
-						'".$this->areas_oportunidad."',
-						'".$this->criterios_no_cumplidos."',
-						'".$this->recomendaciones."',
-						'".$this->juicio_evaluacion."',
-						'".$this->observaciones."',
-						CURDATE()
+					 	'" . $this->personalId . "',
+						'" . $this->userId . "',
+						'" . $this->subjectId . "',
+						'" . $this->mejores_practicas . "',
+						'" . $this->areas_oportunidad . "',
+						'" . $this->criterios_no_cumplidos . "',
+						'" . $this->recomendaciones . "',
+						'" . $this->juicio_evaluacion . "',
+						'" . $this->observaciones . "',
+						CURDATE(),
+						'" . $this->folio_proceso . "'
 					)";	
 					
 		$this->Util()->DB()->setQuery($sql);
@@ -176,6 +184,7 @@ class Cedulas extends Main
                         c.recomendaciones, 
                         c.juicio_evaluacion, 
                         c.observaciones, 
+						c.folio_proceso,
                         DATE_FORMAT(c.fecha, '%d-%m-%Y') AS fecha,
                         CONCAT(p.name, ' ', p.lastname_paterno, ' ', p.lastname_materno) AS evaluador,
                         CONCAT(u.names, ' ', u.lastNamePaterno, ' ', u.lastNameMaterno) AS candidato,
@@ -210,7 +219,8 @@ class Cedulas extends Main
                         recomendaciones = '" . $this->recomendaciones . "',
                         juicio_evaluacion = '" . $this->juicio_evaluacion . "',
 						observaciones = '" . $this->observaciones . "',
-						fecha = '" . $this->fecha . "'
+						fecha = '" . $this->fecha . "',
+						folio_proceso = '" . $this->folio_proceso . "'
 					WHERE 
 					cedulaId = " . $this->cedulaId;
 		echo $sql;

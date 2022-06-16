@@ -258,6 +258,7 @@ switch($_POST["type"])
         $cedulas->setRecomendaciones($_POST['recomendaciones']);
         $cedulas->setJuicioEvaluacion($_POST['juicio_evaluacion']);
         $cedulas->setObservaciones($_POST['observaciones']);
+        $cedulas->setFolioProceso($_POST['folio_proceso']);
 		
 		if(!$cedulas->Save())
         {
@@ -429,7 +430,7 @@ switch($_POST["type"])
 
 	case "editCedula":
 		$cedulas->setCedulaId($_POST['cedulaId']);
-		$data_cedula = $cedulas->getInfo();
+		$data_cedula = $cedulas->GetInfo();
 		$edit_fecha = ($_SESSION['User']['type'] == 'Administrador' || $_SESSION['User']['type'] == 'Director' || $_SESSION['User']['type'] == 'Docente' ? true : false);
 		$smarty->assign('cedula', $data_cedula);
 		$smarty->display(DOC_ROOT . '/templates/forms/new/edit-cedula.tpl');
@@ -443,6 +444,7 @@ switch($_POST["type"])
 		$cedulas->setRecomendaciones($_POST['recomendaciones']);
 		$cedulas->setJuicioEvaluacion($_POST['juicio_evaluacion']);
 		$cedulas->setObservaciones($_POST['observaciones']);
+		$cedulas->setFolioProceso($_POST['folio_proceso']);
 		$cedulas->setFecha($util->FormatDateBack($_POST['fecha']));
 		
 		if(!$cedulas->Update())
