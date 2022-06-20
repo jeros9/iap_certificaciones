@@ -58,6 +58,11 @@
                     </a>
                 </li>
             {/if}
+            <li class="nav-item">
+                <a  href="{$WEB_ROOT}/ajax/autorizacion-firma.php?id={$userId}&courseId={$id}" class="nav-link nav-toggle" target="_blank">
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i> <span class="title">Carta de Autorización Firma Digital</span>
+                </a>
+            </li>
         {/if}
         {if $User.positionId == 1 || $AccessMod[1] == 1 || $AccessMod[3] == 1 || $AccessMod[9] == 1}
             {if !$docente}

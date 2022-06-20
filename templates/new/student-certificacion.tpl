@@ -113,6 +113,12 @@
 							</i>	
 						</a>
 
+						<a href="{$WEB_ROOT}/ajax/autorizacion-firma.php?id={$item.userId}&courseId={$item.courseId}"  target="_blank" title="ACTA DE AUTORIZACIÓN FIRMA DIGITAL">
+							<i class="material-icons">
+								grading
+							</i>	
+						</a>
+
 					</td>
 					{else}
 						<td>
