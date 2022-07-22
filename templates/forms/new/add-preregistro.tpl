@@ -2,7 +2,7 @@
     <input type="hidden" id="type" name="type" value="saveAddStudentRegister"/>
     <input type="hidden" id="redireccion" name="redireccion" value="1"/>
     <input type="hidden" id="tipoSolicitante" name="tipoSolicitante" value="2"/>
-    <input type="hidden" id="period" name="period" value="7"/>
+    <input type="hidden" id="period" name="period" value="8"/>
     <input type="hidden" id="tam" name="tam" value="0"/>
     <input type="hidden" id="permiso" name="permiso" value="0"/>
 	<center>
