@@ -15,6 +15,7 @@ class Planes extends Main
     private $horario_resultados;
     private $fecha;
     private $requerimientos;
+	private $courseId;
 	
 	public function setPlanId($value)
 	{
@@ -105,7 +106,16 @@ class Planes extends Main
     {
         $this->requerimientos = json_decode($value);
     }
+
+	public function setCourseId($courseId)
+	{
+		$this->courseId = $courseId;
+	}
 	
+	public function getCourseId()
+	{
+		return $this->courseId;
+	}
 	public function Save(){
 		
 		if($this->Util()->PrintErrors()){ 
@@ -118,6 +128,7 @@ class Planes extends Main
 						personalId,
 						userId,
                         subjectId,
+						courseId,
                         capacitacion,
                         fecha_desarrollo,
                         horario_desarrollo,
@@ -130,6 +141,7 @@ class Planes extends Main
 					 	'".$this->personalId."',
 						'".$this->userId."',
 						'".$this->subjectId."',
+						'".$this->courseId."',
 						'".$this->capacitacion."',
 						'".$this->fecha_desarrollo."',
 						'".$this->horario_desarrollo."',
@@ -269,6 +281,7 @@ class Planes extends Main
 		$sql = "UPDATE
 					`planes` 
 					SET
+						courseId = '".$this->courseId."',
                         capacitacion = '".$this->capacitacion."',
                         fecha_desarrollo = '".$this->fecha_desarrollo."',
                         horario_desarrollo = '".$this->horario_desarrollo."',
@@ -276,7 +289,6 @@ class Planes extends Main
                         horario_resultados = '".$this->horario_resultados."'". $fecha_update ."
 					WHERE 
 					planId = " . $this->planId;
-					
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->UpdateData();
 		

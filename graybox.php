@@ -244,7 +244,9 @@ $pages = array(
     'show-attendances',
     'show-municipality-attendances',
     'add-final-test',
-    'date-final-test'
+    'date-final-test',
+    // EVALUADOR
+    'red-dates'
 
 );
 
@@ -300,6 +302,4 @@ ini_set("display_errors", "ON");
 $showErrors = "E_ALL";
 error_reporting($showErrors);
 $smarty->display(DOC_ROOT.'/templates/graybox.tpl');
-
-
 ?>

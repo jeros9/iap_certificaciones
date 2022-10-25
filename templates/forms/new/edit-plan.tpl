@@ -5,6 +5,7 @@
 <form class="form-horizontal" id="editPlanForm" name="editPlanForm" method="post">
     <input type="hidden" id="type" name="type" value="saveEditPlan"/>
     <input type="hidden" id="planId" name="planId" value="{$plan['planId']}"/>
+    <input type="hidden" id="courseId" name="courseId" value="{$courseId}">
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-3 control-label">Se sugirió capacitación:</label>

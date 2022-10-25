@@ -39,7 +39,7 @@
 			</a>
 		{/if}
 		{if $tipoUs eq "Docente"}
-			<a href="javascript:;" class="btnAddPlan" title="AGREGAR PLAN" data-user="{$item.userId}" data-subject="{$item.subjectId}">
+			<a href="javascript:;" class="btnAddPlan" title="AGREGAR PLAN" data-user="{$item.userId}" data-subject="{$item.subjectId}" data-course="{$id}">
 			<i class="material-icons">
 			calendar_today
 			</i>	

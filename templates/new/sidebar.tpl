@@ -176,6 +176,11 @@
                                 </a>
                             </li>
                         {/if}
+                            <li class="nav-item">
+                                <a href="{$WEB_ROOT}/revision-portafolio" class="nav-link">
+                                    <span class="title">Revisión Portafolios</span>
+                                </a>
+                            </li>
                         {if $User.positionId == 1 || $AccessMod[48] == 1}
                             <li class="nav-item">
                                 <a href="{$WEB_ROOT}/log" class="nav-link">

@@ -7,6 +7,7 @@
     <input type="hidden" id="type" name="personal_id" value="{$personal_id}"/>
     <input type="hidden" id="type" name="user_id" value="{$user_id}"/>
     <input type="hidden" id="type" name="subject_id" value="{$subject_id}"/>
+    <input type="hidden" id="type" name="course_id" value="{$course_id}">
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-3 control-label">Se sugirió capacitación:</label>

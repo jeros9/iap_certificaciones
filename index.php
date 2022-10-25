@@ -225,6 +225,7 @@ $pages = array(
 	'foro',
 	'respuestas',
 	'make-group-final-test',
+	'revision-portafolio',
 
 	// Proceso de Certificacion
 	'invitacion',

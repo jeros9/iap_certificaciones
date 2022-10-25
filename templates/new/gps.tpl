@@ -1,13 +1,3 @@
-<script type="text/javascript" charset="utf-8">
-    $(document).observe('dom:loaded', function() {ldelim}
-        {foreach from=$students item=item key=key}
-        new FancyZoom('foto-{$item.userId}', {ldelim}width:400, height:300{rdelim});
-        {/foreach}
-        {rdelim});
-</script>
-</head>
-<body>
-
 <div class="portlet box red">
     <div class="portlet-title">
         <div class="caption">
@@ -53,6 +43,9 @@
 			<td align="center">{$item.group}</td>
 			<td align="center">{$item.cantidad}</td>
 			<td align="center">
+                <a href="{$WEB_ROOT}/graybox.php?page=red-dates&id={$item.courseId}&subjectId={$subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px">
+                    <i class="fa fa-calendar"></i>
+                </a>
 			  <a href="{$WEB_ROOT}/usuarios/id/{$item.courseId}" >
 				<i class="fa fa-sign-in fa-lg"></i>
 			</a>

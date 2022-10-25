@@ -77,6 +77,12 @@ class Util extends ErrorSystem
 	    return $time;
 	}
 
+	function FormatDateDMY($date){
+		$time = strtotime($date);
+		$date = date("d-m-Y", $time);
+		return $date;
+	}
+
 	function FormatDateMySql($date)
 	{
 		$date = explode("-", $date);

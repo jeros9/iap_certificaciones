@@ -1,4 +1,4 @@
-<select name="certificaciones" class="form-control">
+<select name="certificaciones" class="form-control" required>
 	<option></option>
 	{foreach from=$lstCertificaciones item=item}
         {if $item.countModule >0}

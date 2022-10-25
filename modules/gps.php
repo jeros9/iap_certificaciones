@@ -16,6 +16,7 @@
 		
 	$smarty->assign("tipoUs", $_SESSION["User"]["type"]);	
 	$smarty->assign("registros", $registros);	
-	$smarty->assign('mnuSubmain','alumnos');	
+	$smarty->assign('mnuSubmain','alumnos');
+	$smarty->assign("subjectId",$_GET['id']);
 	
 ?>

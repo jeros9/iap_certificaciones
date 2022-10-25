@@ -389,7 +389,8 @@ $(document).ready(function() {
 	$(document).on('click', '.btnAddPlan', function() {
 		var user = $(this).data('user');
 		var subject = $(this).data('subject');
-		AddPlanDiv(user, subject);
+		var course = $(this).data('course');
+		AddPlanDiv(user, subject, course);
 	});
 
 	$(document).on('click', '.btnAddCedula', function() {
@@ -409,7 +410,8 @@ $(document).ready(function() {
 
 	$(document).on('click', '.btnEditPlan', function() {
 		var planId = $(this).data('id');
-		EditPlanDiv(planId);
+		var courseId = $(this).data('course');
+		EditPlanDiv(planId, courseId);
 	});
 
 	$(document).on('click', '.btnEditCedula', function() {
@@ -468,12 +470,12 @@ function AddCedula()
 }
 
 
-function AddPlanDiv(user_id, subject_id)
+function AddPlanDiv(user_id, subject_id, course_id)
 {
   $.ajax({
       url : WEB_ROOT+'/ajax/new/usuarios.php',
       type: "POST",
-      data : {type: "addPlan", user_id: user_id, subject_id: subject_id},
+      data : {type: "addPlan", user_id: user_id, subject_id: subject_id, course_id: course_id},
       success: function(data)
       {
         showModal("Agregar Plan", data);
@@ -566,12 +568,12 @@ function showStudentInfo(user_id)
 	});
 }
 
-function EditPlanDiv(planId)
+function EditPlanDiv(planId, courseId)
 {
   $.ajax({
       url : WEB_ROOT+'/ajax/new/usuarios.php',
       type: "POST",
-      data : {type: "editPlan", planId: planId},
+      data : {type: "editPlan", planId: planId, courseId: courseId},
       success: function(data)
       {
         showModal("Editar Plan", data);

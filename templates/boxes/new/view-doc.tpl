@@ -6,7 +6,7 @@
         {/if}
         {if ($type eq "plan")}
             {if $editable or ($perfil eq 'Administrador' or $perfil eq 'Director' or $personal_id eq 222 or $perfil eq 'Docente')}
-                <a href='javascript:;' class="btn default green btnEditPlan" data-id="{$id}">Editar Plan</a>
+                <a href='javascript:;' class="btn default green btnEditPlan" data-id="{$id}" data-course="{$course_id}">Editar Plan</a>
             {/if}
         {/if}
         {if ($type eq "cedula")}

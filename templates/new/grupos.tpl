@@ -25,7 +25,6 @@
 			<select class="form-control" style="width:88px" onChange="onBuscar()" name="curricula">
 				<option></option>
 				{foreach from=$lstC item=subject}
-				
 				<option value="{$subject.subjectId}">{$subject.name}</option>
 				{/foreach}
 			</select>
