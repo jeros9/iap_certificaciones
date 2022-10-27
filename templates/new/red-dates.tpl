@@ -27,13 +27,13 @@
                 <tr>
                     <td>{$student.names} {$student.lastNamePaterno} {$student.lastNameMaterno}</td>
                     <td>
-                        <input name="plan[{$student.userId}]" value="{$student.plan_date|date_format:"d-m-Y"}" class="date-picker" required autocomplete="off">
+                        <input name="plan[{$student.userId}]" value="{$student.plan_date|date_format:"d-m-Y"}" class="date-picker" autocomplete="off">
                     </td>
                     <td>
-                        <input name="evaluation[{$student.userId}]" value="{$student.evaluation_date|date_format:"d-m-Y"}" class="date-picker" required autocomplete="off">
+                        <input name="evaluation[{$student.userId}]" value="{$student.evaluation_date|date_format:"d-m-Y"}" class="date-picker" autocomplete="off">
                     </td>
                     <td>
-                        <input name="iec[{$student.userId}]" value="{$student.iec_date|date_format:"d-m-Y"}" class="date-picker" required autocomplete="off">
+                        <input name="iec[{$student.userId}]" value="{$student.iec_date|date_format:"d-m-Y"}" class="date-picker" autocomplete="off">
                     </td>
                 </tr>
             {/foreach}

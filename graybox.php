@@ -246,7 +246,8 @@ $pages = array(
     'add-final-test',
     'date-final-test',
     // EVALUADOR
-    'red-dates'
+    'red-dates',
+    'numero-lote'
 
 );
 

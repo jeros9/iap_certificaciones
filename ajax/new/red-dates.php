@@ -11,9 +11,21 @@ try {
     $subjectId = $_POST['subject'];
     $exist = 0;
     foreach ($plan as $key => $value) {
-        $plan_date = $util->FormatDate(strtotime($value));
-        $evaluation_date = $util->FormatDate(strtotime($evaluation[$key]));
-        $iec_date = $util->FormatDate(strtotime($iec[$key]));
+        $plan_date = "NULL";
+        $evaluation_date = "NULL";
+        $iec_date = "NULL";
+        if (!empty($value)) {
+            $plan_date = $util->FormatDate(strtotime($value));
+            $plan_date = "'$plan_date'";
+        }
+        if (!empty($evaluation[$key])) {
+            $evaluation_date = $util->FormatDate(strtotime($evaluation[$key]));
+            $evaluation_date = "'$evaluation_date'";
+        }
+        if (!empty($iec[$key])) { 
+            $iec_date = $util->FormatDate(strtotime($iec[$key]));
+            $iec_date = "'$iec_date'";
+        }
         $exist = $course->existRedDates($subjectId, $courseId, $key);
         if ($exist) {
             $course->editRedDates($subjectId, $courseId, $key, $plan_date, $evaluation_date, $iec_date);

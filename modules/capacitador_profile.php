@@ -84,10 +84,9 @@ $x=0;
 	$smarty->assign('msjCc', $_SESSION['msjCc']);
 		unset($_SESSION['msjC']);
 		unset($_SESSION['msjCc']);
-		
 	if($_SESSION["User"]["type"]=="Docente"){
 		
-		$resu=$student->certificacionesEval($_SESSION["User"]["userId"]);	
+		$resu=$student->certificacionesCapacitador($_SESSION["User"]["userId"]);	
 	}	
 	
 // echo "<pre>"; print_r($resu);

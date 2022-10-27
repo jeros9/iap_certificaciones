@@ -1865,7 +1865,7 @@ class Course extends Subject
 	}
 	public function addRedDates($subjectId, $courseId, $studentId, $plan_date, $evalution_date, $iec_date)
 	{
-		$sql = "INSERT INTO red_dates(subject_id, course_id, student_id, plan_date, evaluation_date, iec_date) VALUES('{$subjectId}','{$courseId}','{$studentId}','{$plan_date}','{$evalution_date}','{$iec_date}')";
+		$sql = "INSERT INTO red_dates(subject_id, course_id, student_id, plan_date, evaluation_date, iec_date) VALUES({$subjectId},{$courseId},{$studentId},{$plan_date},{$evalution_date},{$iec_date})";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->InsertData();
 		return $result;
@@ -1873,7 +1873,7 @@ class Course extends Subject
 
 	public function editRedDates($subjectId, $courseId, $studentId, $plan_date, $evalution_date, $iec_date)
 	{
-		$sql = "UPDATE red_dates SET plan_date = '{$plan_date}', evaluation_date = '{$evalution_date}', iec_date = '{$iec_date}' WHERE subject_id = '{$subjectId}' AND course_id = '{$courseId}' AND student_id = {$studentId}";
+		$sql = "UPDATE red_dates SET plan_date = {$plan_date}, evaluation_date = {$evalution_date}, iec_date = {$iec_date} WHERE subject_id = {$subjectId} AND course_id = {$courseId} AND student_id = {$studentId}";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->UpdateData();
 		return $result;
@@ -1919,6 +1919,30 @@ class Course extends Subject
 		// echo $sql;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
+	
+	public function getLotNumber($subjectId, $courseId, $studentId)
+	{
+		$sql = "SELECT lot FROM lot_number WHERE subject_id = {$subjectId} AND course_id = {$courseId} AND student_id = {$studentId}";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetRow();
+		return $result;
+	}
+
+	public function addLotNumber($subjectId, $courseId, $studentId, $lot)
+	{
+		$sql = "INSERT INTO lot_number(subject_id, course_id, student_id, lot) VALUES({$subjectId},{$courseId},{$studentId},{$lot})";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->InsertData();
+		return $result;
+	}
+
+	public function editLotNumber($subjectId, $courseId, $studentId, $lot)
+	{
+		$sql = "UPDATE lot_number SET lot = {$lot} WHERE subject_id = {$subjectId} AND course_id = {$courseId} AND student_id = {$studentId}";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->UpdateData();
 		return $result;
 	}
 }

@@ -7,6 +7,7 @@
         <td align="center">{$item.lastNameMaterno|upper}</td>
          <td align="center">{$item.names|upper}</td>
         <td align="center">{$item.controlNumber}</td>
+        <td align="center" id="student_{$item.userId}">{$item.lot}</td>
         <td align="center">{$item.email}</td>
         <td align="center">{$item.password}</td>
         <td align="center">{$item.certificacion}</td>
@@ -79,10 +80,7 @@
 				<i class="material-icons">
 				picture_in_picture
 				</i>
-		</a> 
-		
-		
-			
+		</a>
 		<a href="{$WEB_ROOT}/graybox.php?page=add-certificacion-alumno&id={$item.userId}&auxTpl=1" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR CERTIFICACION">
 				<i class="material-icons">
 				folder_special
@@ -94,9 +92,11 @@
 			<a href="javascript:;" class="btnShowInfo" title="VER INFORMACIÓN" data-user="{$item.userId}">
 				<i class="material-icons">info</i>	
 			</a>
+			<a href="{$WEB_ROOT}/graybox.php?page=numero-lote&id={$item.userId}&courseId={$item.courseId}&subjectId={$item.subjectId}" title="NO. LOTE" data-target="#ajax" data-toggle="modal" data-width="300px">
+				<i class="material-icons">tag</i>
+			</a>
 		{/if}
 		
-		<!--
 		<!--
 		{if $page == "course-student"}
 

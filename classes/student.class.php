@@ -1612,13 +1612,15 @@ class Student extends User
 					sb.name as certificacion,
 					(select count(*) from repositorio as r where r.userId = u.userId and r.subjectId = sb.subjectId) as countRepositorio,
 					(select count(*) from user_subject usub where usub.alumnoId = us.alumnoId) as numCertificaciones,
-					(select count(*) from usuario_personal spusb where spusb.usuarioId = us.alumnoId ) as numEvaluadores
+					(select count(*) from usuario_personal spusb where spusb.usuarioId = us.alumnoId ) as numEvaluadores,
+					IFNULL(lt.lot,'N/A') as lot
 				FROM 
 					user as u
 				left join user_subject as us on us.alumnoId = u.userId
 				left join course as cs on cs.courseId = us.courseId
 				left join subject as sb on sb.subjectId = cs.subjectId
 				inner join usuario_personal as up on (up.usuarioId = u.userId and up.subjectId = sb.subjectId)
+				left join lot_number as lt ON lt.subject_id = sb.subjectId AND course_id = cs.courseId AND lt.student_id = us.alumnoId
 				WHERE 
 					1 " . $sqlSearch . " " . $filtro . "
 				AND
@@ -3905,6 +3907,13 @@ class Student extends User
 		return $result;
 	}
 
+	public function certificacionesCapacitador($id)
+	{
+		$sql = "SELECT subject.* FROM usuario_capacitador INNER JOIN subject ON subject.subjectId = usuario_capacitador.subjectId INNER JOIN user_subject ON user_subject.alumnoId = usuario_capacitador.usuarioId WHERE usuario_capacitador.personalId = {$id} GROUP BY subject.subjectId ORDER BY subject.name";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
 
 	public function GettDocumentos($Id)
 	{

@@ -48,7 +48,26 @@ $(document).ready(function () {
             btnSubmit.prop('disabled',false)
         });
     });
+
+    $(document).on("click","[data-target]", function(){
+        if($(this).data('target') == "#ajax"){
+            var ancho = $(this).data("width");
+            if(typeof ancho !== 'undefined' ){
+                $(".modal-dialog").css({"width":ancho});
+            }
+        }
+    })
+
+    $("body").on('keyup', '.onlynumber', function(){
+        var valor = numero($(this).val());
+        $(this).val(valor);
+    }); 
 });
+
+function numero(v){     
+    v=v.replace(/([^0-9]+)/g,'');
+    return v;  
+} 
 
 function actionPostAjax(form, response){
     if (response.growl) {
@@ -61,7 +80,7 @@ function actionPostAjax(form, response){
         if (response.modal) {
             $("#ajax .modal-body").html(response.html);
         }else{
-            $(response.selector).html(response.html);
+            $(document).find(response.selector).html(response.html);
         }
     }
     if (response.location) {
