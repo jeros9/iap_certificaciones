@@ -1879,11 +1879,11 @@ class Course extends Subject
 		return $result;
 	}
 
-	public function getBriefcase()
+	public function getBriefcase($certification,$evaluator,$group = NULL)
 	{
 		$filtro = "";
-		if($_POST['grupos']){
-			$filtro = " AND course.courseId = '{$_POST['grupos']}' ";
+		if(isset($group) && !empty($group)){
+			$filtro = " AND course.courseId = '{$group}' ";
 		}
 		if ($_POST['certificaciones']) {
 			//$filtro.=" AND subject.subjectId = '{$_POST['certificaciones']}'";
@@ -1893,7 +1893,9 @@ class Course extends Subject
 					user.lastNameMaterno, 
 					usuario_personal.personalId, 
 					user_subject.alumnoId, 
+					user_subject.aprobado,
 					user.actualizado,
+					user.controlNumber,
 					course.courseId, 
 					course.subjectId, 
 					subject.name as certification, 
@@ -1905,8 +1907,10 @@ class Course extends Subject
 					planes.fecha_desarrollo,
 					IFNULL(planes.planId, 'no') AS hasPlan,
 					IFNULL(cedulas.cedulaId, 'no') AS hasCedula,
+					IFNULL(cedulas.folio_proceso,'N/A') AS folio_proceso,
 					IFNULL((SELECT repositorioId FROM repositorio WHERE course.subjectId = repositorio.subjectId AND user_subject.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 2 ORDER BY repositorioId DESC LIMIT 1), 'no') AS hasIec,
-					IFNULL((SELECT repositorioId FROM repositorio WHERE course.subjectId = repositorio.subjectId AND user_subject.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4 ORDER BY repositorioId DESC LIMIT 1), 'no') AS hasProducts
+					IFNULL((SELECT repositorioId FROM repositorio WHERE course.subjectId = repositorio.subjectId AND user_subject.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4 ORDER BY repositorioId DESC LIMIT 1), 'no') AS hasProducts,
+					lot_number.lot
 				FROM usuario_personal 
 				INNER JOIN user_subject ON user_subject.alumnoId = usuario_personal.usuarioId 
 				INNER JOIN user ON user.userId = user_subject.alumnoId 
@@ -1915,7 +1919,8 @@ class Course extends Subject
 				LEFT JOIN red_dates ON red_dates.subject_id = subject.subjectId AND red_dates.course_id = course.courseId AND red_dates.student_id = user_subject.alumnoId
 				LEFT JOIN planes ON planes.subjectId = subject.subjectId AND planes.personalId = usuario_personal.personalId AND planes.userId = user_subject.alumnoId
 				LEFT JOIN cedulas ON course.subjectId = cedulas.subjectId AND user_subject.alumnoId = cedulas.userId
-				WHERE usuario_personal.personalId = '{$_POST['evaluator']}' AND subject.subjectId = '{$_POST['certificaciones']}' {$filtro} GROUP BY course.courseId, user.userId ORDER BY user.names, user.lastNamePaterno";
+				LEFT JOIN lot_number ON lot_number.subject_id = subject.subjectId AND lot_number.course_id = course.courseId AND lot_number.student_id = user_subject.alumnoId
+				WHERE usuario_personal.personalId = '{$evaluator}' AND subject.subjectId = '{$certification}' {$filtro} GROUP BY course.courseId, user.userId ORDER BY course.group, lot_number.lot, user.names, user.lastNamePaterno";
 		// echo $sql;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();

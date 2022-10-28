@@ -3,7 +3,7 @@ include_once('../../init.php');
 include_once('../../config.php');
 include_once(DOC_ROOT.'/libraries.php');
 session_start();
-$list = $course->getBriefcase();
+$list = $course->getBriefcase($_POST["certificaciones"], $_POST['evaluator'], $_POST["grupos"]);
 $smarty->assign("list", $list);
 $smarty->assign("evaluator", $_POST['evaluator']);
 $smarty->assign("certification", $_POST["certificaciones"]);

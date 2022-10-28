@@ -1,3 +1,17 @@
+{if isset($option) && $option == "evaluator"} 
+    <div class="page-content"> 
+        <div class="portlet box red">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bullhorm"></i><b>Revisión de Portafolios</b>
+                </div>
+            </div>
+            <div class="portlet-body">
+                {include file="{$DOC_ROOT}/templates/lists/new/revision-portafolio.tpl"}
+            </div>
+        </div>
+    </div>
+{else} 
 <div class="portlet box red">
     <div class="portlet-title">
         <div class="caption">
@@ -39,3 +53,4 @@
         </div>
     </div>
 </div>
+{/if}

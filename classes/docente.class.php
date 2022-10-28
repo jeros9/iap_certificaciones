@@ -709,6 +709,3 @@ class Docente extends Empresa{
 	
 	
 }//Docente
-
-
-?>

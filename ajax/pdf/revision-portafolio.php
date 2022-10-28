@@ -8,9 +8,23 @@ use Dompdf\Dompdf;
 use Dompdf\Exception;
 
 session_start();
-$list = $course->getBriefcase();
+$list = $course->getBriefcase($_POST['certificaciones'], $_POST['evaluator']);
+$subject->setSubjectId($_POST['certificaciones']);
+$certification = $subject->GetNameById();
+$personal->setPersonalId($_POST['evaluator']);
+$evaluator = $personal->GetNameById();
 $students = $_POST['student'];
+$filterGroups = $util->getUniqueArray($list, 'group');
+$filterLots = $util->getUniqueArray($list, "lot");
+// echo "<pre>";
+// print_r($filterGroups);
+// print_r($filterLots);
+// // print_r($list);
+// echo "</pre>";
+// return $list;
 $html = "";
+$htmlBodyTable = "";
+$pintar = false;
 $html .= "
     <html>
         <head>
@@ -55,105 +69,135 @@ $html .= '  <table style="width:100%;margin-bottom:20px;">
                     <td style="text-align:center;width:33%;">
                         <img src="'.DOC_ROOT.'/images/logoconocer.png" width="150px" >
                     </td>
-                    <td style="text-align:center;width:33%;">
-                        <strong>Revisión de Portafolios</strong>
+                    <td style="text-align:center;width:33%; font-size:16px;">
+                        <strong>Revisión de Portafolios</strong><br>
+                        <strong>'.$certification.'</strong><br>
+                        <strong>Evaluador: '.$evaluator.'</strong>
                     </td>
                     <td style="text-align:center;width:33%;">
                         <img src="' . DOC_ROOT . '/images/logo_correo.jpg" width="150px" >
                     </td>
                 </tr>
             </table>';
-$html.="    <table style='width:100%; text-align:center;' class='tb-border'>
-                <thead>
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Grupo</td>
-                        <td></td>
-                        <td style='width:80px'>Fecha Plan</td>
-                        <td style='width:80px;'>Fecha Evaluación</td>
-                        <td style='width:80px;'>Fecha IEC</td>
-                        <td>Ficha</td>
-                        <td>Plan de Evaluación</td>
-                        <td>Cédula</td>
-                        <td>IEC</td>
-                        <td>Productos</td>
-                    </tr>
-                </thead>
-                <tbody>";
-foreach ($list as $item) {
-    if (isset($students[$item['courseId']][$item['alumnoId']])) {
-            $arrayIconos = [];
-            $item['fecha'] = $util->FormatDateDMY($item['fecha']);
-            $item['fecha_desarrollo'] = $util->FormatDateDMY($item['fecha_desarrollo']);
-            $item['plan_date'] = isset($item['plan_date']) ? $util->FormatDateDMY($item['plan_date']) : "";
-            $item['evaluation_date'] = isset($item['evaluation_date']) ? $util->FormatDateDMY($item['evaluation_date']) : "";
-            $item['iec_date'] = isset($item['iec_date']) ? $util->FormatDateDMY($item['iec_date']) : "";
-            $error='<img src="'.DOC_ROOT.'/images/icons/cancelar.png">';
-            $success="<img src='".DOC_ROOT.'/images/icons/comprobado.png'."'>";
-            $arrayIconos['fecha_plan'] = !empty($item['fecha']) && $item['fecha'] == $item['plan_date'] ? $success: $error;
-            $arrayIconos['fecha_evaluacion'] = !empty($item['fecha_desarrollo']) && $item['fecha_desarrollo'] == $item['evaluation_date'] ? $success: $error;
-            $arrayIconos['fecha_iec'] = !empty($item['iec_date']) ? $success : $error;
-            $arrayIconos['ficha'] =  $item['actualizado'] == 'si' ? $success : $error;
-            $arrayIconos['plan'] =  $item['hasPlan'] == 'no' ? $error : $success;
-            $arrayIconos['cedula'] =  $item['hasCedula'] == 'no' ? $error : $success;
-            $arrayIconos['iec'] =  $item['hasIec'] == 'no' ? $error : $success;
-            $arrayIconos['productos'] =  $item['hasProducts'] == 'no' ? $error : $success;
-            $html.="<tr>
-                        <td>{$item['names']}<br>{$item['lastNamePaterno']}<br>{$item['lastNameMaterno']}</td>
-                        <td>{$item['group']}</td>
-                        <td>
-                            <table style='padding:0;margin:0; border:none;'>
-                                <tr>
-                                    <td style='border:none;'>RC</td>
-                                </tr>
-                                <tr>
-                                    <td style='border:none;'>IAP</td>
-                                </tr>
-                                <tr>
-                                    <td style='height: 5px;border:none;'></td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td>
-                            <div class='text-center'>
-                                <div>{$item['plan_date']}</div>
-                                <div>{$item['fecha']}</div>
-                                <div>{$arrayIconos['fecha_plan']}</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div>{$item['evaluation_date']}</div>
-                            <div>{$item['fecha_desarrollo']}</div>
-                            <div>{$arrayIconos['fecha_evaluacion']}</div>
-                        </td>
-                        <td>
-                            <div>{$item['iec_date']}</div>
-                            <div>{$arrayIconos['fecha_iec']}</div>
-                        </td>
-                        <td>
-                            {$arrayIconos['ficha']}
-                        </td>
-                        <td>
-                            {$arrayIconos['plan']}
-                        </td>
-                        <td>
-                            {$arrayIconos['cedula']}
-                        </td>
-                        <td>
-                            {$arrayIconos['iec']}
-                        </td>
-                        <td>
-                            {$arrayIconos['productos']}
-                        </td>
-                    </tr>";
+foreach ($filterGroups as $keyGroups => $itemGroup) {
+    foreach ($filterLots as $keyLots => $itemLots) {
+        $auxKey = empty($keyLots) ? "N/A" : $keyLots;
+        foreach ($list as $item) {
+            if (isset($students[$item['courseId']][$item['alumnoId']]) && $item['group'] == $keyGroups && $item['lot'] == $keyLots) {
+                $pintar = true;
+                $arrayIconos = [];
+                $item['fecha'] = $util->FormatDateDMY($item['fecha']);
+                $item['fecha_desarrollo'] = $util->FormatDateDMY($item['fecha_desarrollo']);
+                $item['plan_date'] = isset($item['plan_date']) ? $util->FormatDateDMY($item['plan_date']) : "";
+                $item['evaluation_date'] = isset($item['evaluation_date']) ? $util->FormatDateDMY($item['evaluation_date']) : "";
+                $item['iec_date'] = isset($item['iec_date']) ? $util->FormatDateDMY($item['iec_date']) : "";
+                $error='<img src="'.DOC_ROOT.'/images/icons/cancelar.png">';
+                $success="<img src='".DOC_ROOT.'/images/icons/comprobado.png'."'>";
+                $arrayIconos['fecha_plan'] = !empty($item['fecha']) && $item['fecha'] == $item['plan_date'] ? $success: $error;
+                $arrayIconos['fecha_evaluacion'] = !empty($item['fecha_desarrollo']) && $item['fecha_desarrollo'] == $item['evaluation_date'] ? $success: $error;
+                $arrayIconos['fecha_iec'] = !empty($item['iec_date']) ? $success : $error;
+                $arrayIconos['ficha'] =  $item['actualizado'] == 'si' ? $success : $error;
+                $arrayIconos['plan'] =  $item['hasPlan'] == 'no' ? $error : $success;
+                $arrayIconos['cedula'] =  $item['hasCedula'] == 'no' ? $error : $success;
+                $arrayIconos['iec'] =  $item['hasIec'] == 'no' ? $error : $success;
+                $arrayIconos['productos'] =  $item['hasProducts'] == 'no' ? $error : $success;
+                $resultados = $item['aprobado'] == "s/n" ? "No asignado" : ($item['aprobado'] == "si" ? "Competente" : "No Competente");
+                $htmlBodyTable.="<tr>
+                            <td>{$item['names']}<br>{$item['lastNamePaterno']}<br>{$item['lastNameMaterno']}</td>
+                            <td>
+                                {$item['controlNumber']}
+                            </td>
+                            <td>
+                                <table style='padding:0;margin:0; border:none;'>
+                                    <tr>
+                                        <td style='border:none;'>RC</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='border:none;'>IAP</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='height: 5px;border:none;'></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <div class='text-center'>
+                                    <div>{$item['plan_date']}</div>
+                                    <div>{$item['fecha']}</div>
+                                    <div>{$arrayIconos['fecha_plan']}</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>{$item['evaluation_date']}</div>
+                                <div>{$item['fecha_desarrollo']}</div>
+                                <div>{$arrayIconos['fecha_evaluacion']}</div>
+                            </td>
+                            <td>
+                                <div>{$item['iec_date']}</div>
+                                <div>{$arrayIconos['fecha_iec']}</div>
+                            </td>
+                            <td>
+                                {$arrayIconos['ficha']}
+                            </td>
+                            <td>
+                                {$arrayIconos['plan']}
+                            </td>
+                            <td>
+                                {$arrayIconos['cedula']}
+                            </td>
+                            <td>
+                                {$arrayIconos['iec']}
+                            </td>
+                            <td>
+                                {$arrayIconos['productos']}
+                            </td>
+                            <td>
+                                {$item['folio_proceso']}
+                            </td>
+                            <td>
+                                {$resultados}
+                            </td>
+                        </tr>";
+            }
+        }
+        if ($pintar) {
+            $html.="<table style='width:100%; text-align:center; margin-bottom:20px;' class='tb-border'>
+                        <thead>
+                            <tr>
+                                <td colspan='13'>
+                                    <span>Grupo: {$keyGroups}</span>
+                                    <span>Número de Lote: {$auxKey}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nombre</td>
+                                <td>Número Control</td>
+                                <td></td>
+                                <td style='width:80px'>Fecha Plan</td>
+                                <td style='width:80px;'>Fecha Evaluación</td>
+                                <td style='width:80px;'>Fecha IEC</td>
+                                <td>Ficha</td>
+                                <td>Plan de Evaluación</td>
+                                <td>Cédula</td>
+                                <td>IEC</td>
+                                <td>Productos</td>
+                                <td>Folio Proceso</td>
+                                <td>Resultados</td>
+                            </tr>
+                        </thead>
+                        <tbody>";
+            $html.=$htmlBodyTable;
+            $html.="    </tbody>
+                    </table>";
+        }
+        $pintar = false;
+        $htmlBodyTable = "";
     }
 }
-$html.="         </tbody>
-            </table>
-        </body>
-    </html>";
+$html.="    <body>
+        </html>";
 $mipdf = new DOMPDF();
-$mipdf->setPaper("Letter", "portrait");
+$mipdf->setPaper("Letter", "landscape");
 $mipdf->loadHtml($html);
 $mipdf->render();
 $mipdf->stream('revision-portafolio.pdf',array('Attachment' =>0));

@@ -11,7 +11,9 @@
                     </th>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">Grupo</th>
-                    <th class="text-center" colspan="2">Fecha Plan</th>
+                    <th class="text-center">No. Control</th>
+                    <th></th>
+                    <th class="text-center">Fecha Plan</th>
                     <th class="text-center">Fecha Evaluación</th>
                     <th class="text-center">Fecha IEC</th>
                     <th class="text-center">Ficha</th>
@@ -19,6 +21,8 @@
                     <th class="text-center">Cédula</th>
                     <th class="text-center">IEC</th>
                     <th class="text-center">Productos</th>
+                    <th class="text-center">Folio Proceso</th>
+                    <th class="text-center">Resultados</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +31,7 @@
                         <td><input type="checkbox" class="form-control" name="student[{$item.courseId}][{$item.alumnoId}]"></td>
                         <td>{$item.names}<br>{$item.lastNamePaterno}<br>{$item.lastNameMaterno}</td>
                         <td>{$item.group}</td>
+                        <td>{$item.controlNumber}</td>
                         <td>
                             <table>
                                 <tr>
@@ -42,7 +47,6 @@
                                 <div>{$item.plan_date|date_format:"d-m-Y"}</div>
                                 <div>{$item.fecha|date_format:"d-m-Y"}</div>
                                 {if !empty($item.fecha) && $item.plan_date|date_format:"d-m-Y" == $item.fecha|date_format:"d-m-Y"}
-                                    
                                     <i class="fa fa-check-circle text-success"></i>
                                 {else}
                                     <i class="fa fa-times-circle text-danger"></i>
@@ -97,6 +101,18 @@
                                 <i class="fa fa-times-circle text-danger"></i>
                             {else}
                                 <i class="fa fa-check-circle text-success"></i>
+                            {/if}
+                        </td>
+                        <td>
+                            {$item.folio_proceso}
+                        </td>
+                        <td>
+                            {if $item.aprobado eq 's/n'}
+                                Sin asignar
+                            {elseif $item.aprobado eq 'si'}
+                                Competente
+                            {else}
+                                No Competente      
                             {/if}
                         </td>
                     </tr>

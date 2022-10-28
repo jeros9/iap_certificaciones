@@ -35,7 +35,8 @@
     	<tr> 
 			<th width="">Grupo</th>	  
 			<th width="">Cantidad</th>	 
-			<th width="">Acciones</th>	 
+			<th width="">Acciones</th>
+            <th>Reportes</th>
     </thead>
     <tbody>
     	{foreach from=$registros item=item}
@@ -46,10 +47,15 @@
                 <a href="{$WEB_ROOT}/graybox.php?page=red-dates&id={$item.courseId}&subjectId={$subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px">
                     <i class="fa fa-calendar"></i>
                 </a>
-			  <a href="{$WEB_ROOT}/usuarios/id/{$item.courseId}" >
-				<i class="fa fa-sign-in fa-lg"></i>
-			</a>
+			    <a href="{$WEB_ROOT}/usuarios/id/{$item.courseId}" >
+                    <i class="fa fa-sign-in fa-lg"></i>
+                </a>
 			</td>
+            <td align="center">
+                <a href="{$WEB_ROOT}/graybox.php?page=revision-portafolio&id={$item.courseId}&subjectId={$subjectId}&option=evaluator" data-target="#ajax" data-toggle="modal" data-width="1200px">
+                    <i class="fa fa-bar-chart"></i>
+                </a>
+            </td>
 		</tr>
 	{/foreach}
 		
