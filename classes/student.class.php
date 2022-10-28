@@ -3876,19 +3876,11 @@ class Student extends User
 
 	public function gruposCertificacion($Id)
 	{
-
-		$sql = "
-					SELECT 
-						*
-					FROM 
-						course as u
-					WHERE subjectId = " . $Id . "";
+		$sql = "SELECT * FROM  course as u WHERE subjectId = " . $Id . "";
 		$this->Util()->DB()->setQuery($sql);
-		$result = $this->Util()->DB()->GetResult();
-
-
+		$result = $this->Util()->DB()->GetResult(); 
 		return $result;
-	}
+	} 
 
 	public function certificacionesEval($Id)
 	{

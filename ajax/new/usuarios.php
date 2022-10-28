@@ -460,4 +460,12 @@ switch ($_POST["type"]) {
 			echo "fail[#]Debe responder todas las preguntas. ";
 		//$smarty->display(DOC_ROOT.'/templates/boxes/status_on_popup.tpl');
 		break;
+	case "buscarGruposEvaluador":
+		if(isset($_POST['certificaciones']) && !empty($_POST['certificaciones'])){
+			$lstG = $personal->gruposEvaluador($_POST["certificaciones"], $_POST['evaluator']);
+			$smarty->assign("tipoUs", $_SESSION["User"]["type"]);
+			$smarty->assign("lstG", $lstG);
+			$smarty->display(DOC_ROOT . '/templates/lists/select-grupos.tpl');
+		}
+		break;
 }

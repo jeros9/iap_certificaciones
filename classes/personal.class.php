@@ -2062,7 +2062,7 @@ class Personal extends Main
 	}
 
 
-	public function gruposEvalaudor()
+	public function gruposEvaluador($subjectId, $personalId)
 	{
 
 
@@ -2075,8 +2075,8 @@ class Personal extends Main
 								ON user_subject.alumnoId = usuario_personal.usuarioId 
 							INNER JOIN course 
 								ON course.courseId = user_subject.courseId
-							WHERE usuario_personal.subjectId = ".$_GET["id"]." 
-								AND usuario_personal.personalId = ".$_SESSION["User"]["userId"]." 
+							WHERE usuario_personal.subjectId = ".$subjectId." 
+								AND usuario_personal.personalId = ".$personalId." 
 								AND course.group = c.group
 								AND user_subject.courseId = c.courseId 
 					 ) as cantidad
@@ -2085,7 +2085,7 @@ class Personal extends Main
 				left join user_subject u on u.alumnoId = up.usuarioId
 				left join course c on c.courseId = u.courseId
 				WHERE
-					up.personalId  = " . $_SESSION["User"]["userId"] . " and c.subjectId = " . $_GET["id"] . " group by c.courseId";
+					up.personalId  = " . $personalId . " and c.subjectId = " . $subjectId . " group by c.courseId";
 		// exit;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();

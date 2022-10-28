@@ -9,7 +9,7 @@
 	
 	
 	// $students = $student->enumerateOk();
-	$registros = $personal->gruposEvalaudor();
+	$registros = $personal->gruposEvaluador($_GET["id"],$_SESSION["User"]["userId"]);
 	
 		// echo "<pre>"; print_r($registros);
 		// exit;

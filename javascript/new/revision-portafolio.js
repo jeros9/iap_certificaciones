@@ -19,7 +19,7 @@ $("body").on("change", "select[name='certificaciones']", function(){
     $.ajax({
         type:"POST",
         url: WEB_ROOT+'/ajax/new/usuarios.php',
-	  	data: $("#form_revision").serialize(true)+'&type=buscarGrupos&certificacionId='+$(this).val(),
+	  	data: $("#form_revision").serialize(true)+'&type=buscarGruposEvaluador',
         beforeSend: function(){			
             $("#load").html(LOADER3);
         },
