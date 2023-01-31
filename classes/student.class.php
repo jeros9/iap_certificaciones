@@ -3606,6 +3606,20 @@ class Student extends User
 
 			$sql = "
 			SELECT 
+				u.personalId,
+				name,
+				lastname_paterno,
+				lastname_materno
+			FROM 
+				usuario_capacitador_original as u
+			left join personal as p on p.personalId= u.personalId
+			WHERE u.subjectId =  " . $aux["subjectId"] . " and usuarioId = " . $Id . "";
+			$this->Util()->DB()->setQuery($sql);
+
+			$capori = $this->Util()->DB()->GetRow();
+
+			$sql = "
+			SELECT 
 				*
 			FROM 
 				personal_subject as u
@@ -3629,6 +3643,7 @@ class Student extends User
 			$result[$key]["evaluadores"] = $res;
 			$result[$key]["suEvaluador"] = $r;
 			$result[$key]["suCapacitador"] = $cap;
+			$result[$key]["suCapacitadorOriginal"] = $capori;
 			$result[$key]["activityId"] = $acI;
 		}
 

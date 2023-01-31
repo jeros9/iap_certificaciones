@@ -1935,88 +1935,74 @@ class Personal extends Main
 
 	public function saveCalificadorUsuario()
 	{
-
-
-		$sql = 'DELETE FROM usuario_personal WHERE  usuarioId = ' . $_POST["id"] . ' and subjectId = ' . $_POST["subjectId"] . '';
+		$sql = "DELETE FROM usuario_personal WHERE usuarioId = " . $_POST["id"] . " AND subjectId = " . $_POST["subjectId"];
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->ExecuteQuery();
-
-		$sql = "INSERT INTO 
-					usuario_personal 
-					(						
-						personalId, 
-						usuarioId,
-						subjectId
-					)
-				 VALUES 
-					(						
-						" . $_POST["personalId"] . ",
-						" . $_POST["id"] . ",
-						" . $_POST["subjectId"] . "
-					)";
-		// exit;				
+		$sql = "INSERT INTO usuario_personal(personalId, usuarioId, subjectId) VALUES(" . $_POST["personalId"] . ", " . $_POST["id"] . ", " . $_POST["subjectId"] . ")";			
 		$this->Util()->DB()->setQuery($sql);
 		$lastId = $this->Util()->DB()->InsertData();
-		// exit;
 		return true;
 	}
 
 
 	public function saveCapacitadorUsuario()
 	{
-
-
-		$sql = 'DELETE FROM usuario_capacitador WHERE  usuarioId = ' . $_POST["id"] . ' and subjectId = ' . $_POST["subjectId"] . '';
+		$sql = "DELETE FROM usuario_capacitador WHERE  usuarioId = " . $_POST["id"] . " AND subjectId = " . $_POST["subjectId"];
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->ExecuteQuery();
-
-		$sql = "INSERT INTO 
-					usuario_capacitador
-					(						
-						personalId, 
-						usuarioId,
-						subjectId
-					)
-				 VALUES 
-					(						
-						" . $_POST["personalId"] . ",
-						" . $_POST["id"] . ",
-						" . $_POST["subjectId"] . "
-					)";
-		// exit;				
+		$sql = "INSERT INTO usuario_capacitador(personalId, usuarioId, subjectId) VALUES(" . $_POST["personalId"] . ", " . $_POST["id"] . ", " . $_POST["subjectId"] . ")";			
 		$this->Util()->DB()->setQuery($sql);
 		$lastId = $this->Util()->DB()->InsertData();
-		// exit;
+		return true;
+	}
+
+	public function saveCapacitadorOriginalUsuario()
+	{
+		$sql = "DELETE FROM usuario_capacitador_original WHERE  usuarioId = " . $_POST["id"] . " AND subjectId = " . $_POST["subjectId"];
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->ExecuteQuery();
+		$sql = "INSERT INTO usuario_capacitador_original(personalId, usuarioId, subjectId) VALUES(" . $_POST["personalId"] . ", " . $_POST["id"] . ", " . $_POST["subjectId"] . ")";			
+		$this->Util()->DB()->setQuery($sql);
+		$lastId = $this->Util()->DB()->InsertData();
 		return true;
 	}
 
 
 	public function sendInfoEvaluador()
 	{
-
 		// echo "<pre>"; print_r($_POST);
 		// exit;
-		foreach ($_POST as $key => $aux) {
+		foreach ($_POST as $key => $aux) 
+		{
 			$f = explode("_", $key);
-			// echo $f [0];
-			if ($f[0] == "evaluador") {
+			// Evaluador
+			if ($f[0] == "evaluador") 
+			{
 				$_POST["personalId"] = $aux;
 				$_POST["id"] = $_POST["id"];
 				$_POST["subjectId"] = $f[1];
-				if ($aux <> '') {
+				if ($aux <> '')
 					$this->saveCalificadorUsuario();
-				}
 			}
-			if ($f[0] == "capacitador") {
+			// Alineador
+			if ($f[0] == "capacitador") 
+			{
 				$_POST["personalId"] = $aux;
 				$_POST["id"] = $_POST["id"];
 				$_POST["subjectId"] = $f[1];
-				if ($aux <> '') {
+				if ($aux <> '')
 					$this->saveCapacitadorUsuario();
-				}
+			}
+			// Capacitador
+			if ($f[0] == "capacitadororiginal") 
+			{
+				$_POST["personalId"] = $aux;
+				$_POST["id"] = $_POST["id"];
+				$_POST["subjectId"] = $f[1];
+				if ($aux <> '')
+					$this->saveCapacitadorOriginalUsuario();
 			}
 		}
-		// exit;
 		return true;
 	}
 
