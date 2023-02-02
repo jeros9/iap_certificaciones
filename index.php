@@ -209,6 +209,8 @@ $pages = array(
 	// Rutas del Capacitador
 	'capacitador_profile',
 	'gpscap',
+	'capacitador_original_profile',
+	'gpscapori',
 	'edit-modules-group',
 	'add-group-activity',
 	'edit-group-activity',

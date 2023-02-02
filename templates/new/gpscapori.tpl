@@ -11,7 +11,7 @@
 <div class="portlet box red">
     <div class="portlet-title">
         <div class="caption">
-            <i class="fa fa-bullhorm"></i>Grupos del Alineador
+            <i class="fa fa-bullhorm"></i>Grupos del Capacitador
         </div>
         {include file="boxes/status_no_ajax.tpl"}
         <div class="accions"></div>

@@ -3922,6 +3922,14 @@ class Student extends User
 		return $result;
 	}
 
+	public function certificacionesCapacitadorOriginal($id)
+	{
+		$sql = "SELECT subject.* FROM usuario_capacitador_original INNER JOIN subject ON subject.subjectId = usuario_capacitador_original.subjectId INNER JOIN user_subject ON user_subject.alumnoId = usuario_capacitador_original.usuarioId WHERE usuario_capacitador_original.personalId = {$id} GROUP BY subject.subjectId ORDER BY subject.name";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
+
 	public function GettDocumentos($Id)
 	{
 

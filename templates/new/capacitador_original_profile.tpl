@@ -11,7 +11,7 @@
     <div class="page-toolbar">
     </div>
 </div>
-<h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Alineador</strong></h1>
+<h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Capacitador</strong></h1>
 <div class="row">
     <div class="col-md-12">
         <div class="profile-sidebar">
@@ -20,13 +20,13 @@
                     <img src="{$fotoPj}" class="img-responsive" alt=""> </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name"> {$User.username} </div>
-                    <div class="profile-usertitle-job">Alineador</div>
-                    <a href="{$WEB_ROOT}/" class="btn btn-primary">
-                        Ir al Módulo de Evaluador
+                    <div class="profile-usertitle-job">Capacitador</div>
+                    <a href="{$WEB_ROOT}/capacitador_profile" class="btn btn-primary">
+                        Ir al Módulo de Alineador
                     </a>
                     <br><br>
-                    <a href="{$WEB_ROOT}/capacitador_original_profile" class="btn btn-primary">
-                        Ir al Módulo de Capacitador
+                    <a href="{$WEB_ROOT}/" class="btn btn-primary">
+                        Ir al Módulo de Evaluador
                     </a>
                 </div>
                 <div class="profile-usermenu">
@@ -41,7 +41,7 @@
                     <span class="profile-desc-text"> El <b>Instituto de Administración Pública del Estado de Chiapas, A. C.</b><br />te da la mas cordial bienvenida a nuestro Sistema de Educación en Línea.</span>
                     <div class="margin-top-20 profile-desc-link">
                         <i class="fa fa-globe"></i>
-                        <a href="https://iapchiapas.org.mx/">iapchiapas.org.mx</a>
+                        <a href="https://iapchiapas.edu.mx/">iapchiapas.edu.mx</a>
                     </div>
                     <div class="margin-top-20 profile-desc-link">
                         <i class="fa fa-facebook"></i>
@@ -77,7 +77,7 @@
                                         <tr>
                                             <td align="center">{$subject.name}</td>
                                             <td align="center">
-                                                <a href="{$WEB_ROOT}/gpscap/id/{$subject.subjectId}"" title="Entrar a la Certificación">
+                                                <a href="{$WEB_ROOT}/gpscapori/id/{$subject.subjectId}"" title="Entrar a la Certificación">
                                                     <i class="fa fa-sign-in fa-lg"></i>
                                                 </a>
                                             </td>
