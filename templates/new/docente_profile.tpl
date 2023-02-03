@@ -38,10 +38,14 @@
 </div>
 <!-- END PAGE BAR -->
 <!-- BEGIN PAGE TITLE-->
-<h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Evaluador</strong></h1>
 <!-- END PAGE TITLE-->
 <!-- END PAGE HEADER-->
 <div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert">
+            <h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Evaluador</strong></h1>
+        </div>
+    </div>
     <div class="col-md-12">
         <!-- BEGIN PROFILE SIDEBAR -->
         <div class="profile-sidebar">

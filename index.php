@@ -212,6 +212,7 @@ $pages = array(
 	'capacitador_original_profile',
 	'gpscapori',
 	'edit-modules-group',
+	'edit-modules-group-original',
 	'add-group-activity',
 	'edit-group-activity',
 	'configuracion-group-examen',

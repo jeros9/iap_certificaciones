@@ -13,10 +13,10 @@
 	// exit;
 	if($_SESSION["User"]["type"] != "Docente" && $_SESSION["User"]["type"] != "Administrador" && $_SESSION['User']['type'] != "")
 		exit;
-        
+    
     $group->setCourseId($_GET['cId']);
-    $theGroup = $group->DefaultGroupAttendanceCapacitador($_GET['pId']);
-    $personal->setPersonalId($_GET['pId']);
+    $theGroup = $group->DefaultGroupAttendanceCapacitadorOriginal($_GET['coId']);
+    $personal->setPersonalId($_GET['coId']);
     $infoPersonal = $personal->Info();
     $course->setCourseId($_GET['cId']);
     $infoCourse = $course->Info();
@@ -26,10 +26,9 @@
         $date = date("Y-m-d", strtotime($days[$i - 1] . " + 1 days"));
         $days[$i] = $date;
     }
-	
-    //$firma = $student->extraeFirma($info["userId"],1,'course',$_GET['courseId']);
-	// echo "<pre>"; print_r($firma);
-    // exit;
+    /* echo "<pre>"; 
+    print_r($infoCourse);
+    exit; */
     $footer = '<footer><table style="width:100%">
                     <tr>
                         <td style="text-align:center;font-size:12px;">
@@ -92,7 +91,7 @@
                         <tr>
                             <td colspan=2 style="text-align:center; ">
                                 <strong>Lista de Asistencia - ' . $infoPersonal['name'] . ' ' . $infoPersonal['lastname_paterno'] . ' ' . $infoPersonal['lastname_materno'] . '</strong><br>
-                                ' . $infoCourse['name'] . ' (' . $infoCourse['group'] . ')</strong>
+                                ' . preg_replace('/ /', ' Capacitaci&oacute;n en el Estandar ', $infoCourse['name'], 1) . ' (' . $infoCourse['group'] . ')</strong>
                             </td>
                         </tr>
                     </table>';
@@ -118,13 +117,13 @@
                                 foreach($days as $day => $key)
                                 {
     $html .=                        '<td style="text-align: center;">';
-                                        if($student->Attendance($item['userId'], $infoCourse['courseId'], $_GET['pId'], $key, 'Entrada'))
+                                        if($student->AttendanceOriginal($item['userId'], $infoCourse['courseId'], $key, 'Entrada'))
                                             $html .= '<span style="color: white; background: green; padding: 3px;"> </span>';
                                         else
                                             $html .= '<span style="color: white; background: red; padding: 3px;"> </span>';
     $html .=                        '</td>
                                     <td style="text-align: center;">';
-                                        if($student->Attendance($item['userId'], $infoCourse['courseId'], $_GET['pId'], $key, 'Salida'))
+                                        if($student->AttendanceOriginal($item['userId'], $infoCourse['courseId'], $key, 'Salida'))
                                             $html .= '<span style="color: white; background: green; padding: 3px;"> </span>';
                                         else
                                             $html .= '<span style="color: white; background: red; padding: 3px;"> </span>';

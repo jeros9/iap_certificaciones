@@ -11,8 +11,12 @@
     <div class="page-toolbar">
     </div>
 </div>
-<h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Alineador</strong></h1>
 <div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert">
+            <h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Alineador</strong></h1>
+        </div>
+    </div>
     <div class="col-md-12">
         <div class="profile-sidebar">
             <div class="portlet light profile-sidebar-portlet ">
