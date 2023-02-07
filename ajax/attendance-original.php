@@ -26,6 +26,8 @@
         $date = date("Y-m-d", strtotime($days[$i - 1] . " + 1 days"));
         $days[$i] = $date;
     }
+    $total_cols = 1 + (count($days) * 2);
+    $personalId = 0;
     /* echo "<pre>"; 
     print_r($infoCourse);
     exit; */
@@ -112,6 +114,10 @@
                     
                         foreach($theGroup as $item)
                         {
+                            if($personalId != $item['personalId'])
+                            {
+                                $html .= '<tr><td colspan="' . $total_cols . '" style="text-align: center;">' . $item['name'] . ' ' . $item['lastname_paterno'] . ' ' . $item['lastname_materno'] . '</td></tr>';
+                            }
     $html .=               '<tr>
                                 <td class="text-uppercase">' . $item['names'] . ' ' . $item['lastNamePaterno'] . ' ' . $item['lastNameMaterno'] . '<br> / <small>' . $item['municipio'] . '</small></td>';
                                 foreach($days as $day => $key)
