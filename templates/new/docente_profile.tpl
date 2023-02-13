@@ -38,10 +38,14 @@
 </div>
 <!-- END PAGE BAR -->
 <!-- BEGIN PAGE TITLE-->
-<h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Evaluador</strong></h1>
 <!-- END PAGE TITLE-->
 <!-- END PAGE HEADER-->
 <div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert">
+            <h1 class="page-title" style="text-align: center;"><strong>Bienvenido al Módulo de Evaluador</strong></h1>
+        </div>
+    </div>
     <div class="col-md-12">
         <!-- BEGIN PROFILE SIDEBAR -->
         <div class="profile-sidebar">
@@ -56,6 +60,10 @@
                     <div class="profile-usertitle-name"> {$User.username} </div>
                     <div class="profile-usertitle-job">Evaluador</div>
                     <a href="{$WEB_ROOT}/capacitador_profile" class="btn btn-primary">
+                        Ir al Módulo de Alineador
+                    </a>
+                    <br><br>
+                    <a href="{$WEB_ROOT}/capacitador_original_profile" class="btn btn-primary">
                         Ir al Módulo de Capacitador
                     </a>
                 </div>
@@ -127,7 +135,7 @@
                     <span class="profile-desc-text"> El <b>Instituto de Administración Pública del Estado de Chiapas, A. C.</b><br />te da la mas cordial bienvenida a nuestro Sistema de Educación en Línea.</span>
                     <div class="margin-top-20 profile-desc-link">
                         <i class="fa fa-globe"></i>
-                        <a href="https://iapchiapas.org.mx/">iapchiapas.org.mx</a>
+                        <a href="https://iapchiapas.edu.mx/">iapchiapas.edu.mx</a>
                     </div>
                     <div class="margin-top-20 profile-desc-link">
                         <i class="fa fa-facebook"></i>

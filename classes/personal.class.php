@@ -1935,88 +1935,74 @@ class Personal extends Main
 
 	public function saveCalificadorUsuario()
 	{
-
-
-		$sql = 'DELETE FROM usuario_personal WHERE  usuarioId = ' . $_POST["id"] . ' and subjectId = ' . $_POST["subjectId"] . '';
+		$sql = "DELETE FROM usuario_personal WHERE usuarioId = " . $_POST["id"] . " AND subjectId = " . $_POST["subjectId"];
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->ExecuteQuery();
-
-		$sql = "INSERT INTO 
-					usuario_personal 
-					(						
-						personalId, 
-						usuarioId,
-						subjectId
-					)
-				 VALUES 
-					(						
-						" . $_POST["personalId"] . ",
-						" . $_POST["id"] . ",
-						" . $_POST["subjectId"] . "
-					)";
-		// exit;				
+		$sql = "INSERT INTO usuario_personal(personalId, usuarioId, subjectId) VALUES(" . $_POST["personalId"] . ", " . $_POST["id"] . ", " . $_POST["subjectId"] . ")";			
 		$this->Util()->DB()->setQuery($sql);
 		$lastId = $this->Util()->DB()->InsertData();
-		// exit;
 		return true;
 	}
 
 
 	public function saveCapacitadorUsuario()
 	{
-
-
-		$sql = 'DELETE FROM usuario_capacitador WHERE  usuarioId = ' . $_POST["id"] . ' and subjectId = ' . $_POST["subjectId"] . '';
+		$sql = "DELETE FROM usuario_capacitador WHERE  usuarioId = " . $_POST["id"] . " AND subjectId = " . $_POST["subjectId"];
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->ExecuteQuery();
-
-		$sql = "INSERT INTO 
-					usuario_capacitador
-					(						
-						personalId, 
-						usuarioId,
-						subjectId
-					)
-				 VALUES 
-					(						
-						" . $_POST["personalId"] . ",
-						" . $_POST["id"] . ",
-						" . $_POST["subjectId"] . "
-					)";
-		// exit;				
+		$sql = "INSERT INTO usuario_capacitador(personalId, usuarioId, subjectId) VALUES(" . $_POST["personalId"] . ", " . $_POST["id"] . ", " . $_POST["subjectId"] . ")";			
 		$this->Util()->DB()->setQuery($sql);
 		$lastId = $this->Util()->DB()->InsertData();
-		// exit;
+		return true;
+	}
+
+	public function saveCapacitadorOriginalUsuario()
+	{
+		$sql = "DELETE FROM usuario_capacitador_original WHERE  usuarioId = " . $_POST["id"] . " AND subjectId = " . $_POST["subjectId"];
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->ExecuteQuery();
+		$sql = "INSERT INTO usuario_capacitador_original(personalId, usuarioId, subjectId) VALUES(" . $_POST["personalId"] . ", " . $_POST["id"] . ", " . $_POST["subjectId"] . ")";			
+		$this->Util()->DB()->setQuery($sql);
+		$lastId = $this->Util()->DB()->InsertData();
 		return true;
 	}
 
 
 	public function sendInfoEvaluador()
 	{
-
 		// echo "<pre>"; print_r($_POST);
 		// exit;
-		foreach ($_POST as $key => $aux) {
+		foreach ($_POST as $key => $aux) 
+		{
 			$f = explode("_", $key);
-			// echo $f [0];
-			if ($f[0] == "evaluador") {
+			// Evaluador
+			if ($f[0] == "evaluador") 
+			{
 				$_POST["personalId"] = $aux;
 				$_POST["id"] = $_POST["id"];
 				$_POST["subjectId"] = $f[1];
-				if ($aux <> '') {
+				if ($aux <> '')
 					$this->saveCalificadorUsuario();
-				}
 			}
-			if ($f[0] == "capacitador") {
+			// Alineador
+			if ($f[0] == "capacitador") 
+			{
 				$_POST["personalId"] = $aux;
 				$_POST["id"] = $_POST["id"];
 				$_POST["subjectId"] = $f[1];
-				if ($aux <> '') {
+				if ($aux <> '')
 					$this->saveCapacitadorUsuario();
-				}
+			}
+			// Capacitador
+			if ($f[0] == "capacitadororiginal") 
+			{
+				$_POST["personalId"] = $aux;
+				$_POST["id"] = $_POST["id"];
+				$_POST["subjectId"] = $f[1];
+				if ($aux <> '')
+					$this->saveCapacitadorOriginalUsuario();
 			}
 		}
-		// exit;
 		return true;
 	}
 
@@ -2110,6 +2096,27 @@ class Personal extends Main
 					LEFT JOIN user_subject u ON u.alumnoId = uc.usuarioId
 					LEFT JOIN course c ON c.courseId = u.courseId
 			   WHERE uc.personalId  = " . $_SESSION["User"]["userId"] . " and c.subjectId = " . $_GET["id"] . " group by c.courseId";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
+
+	public function gruposCapacitadorOriginal($personalId = 0)
+	{
+		$personal = "";
+		if ($personalId > 0)
+			$personal = " AND uco.personalId = " . $personalId;
+		$sql = "SELECT c.courseId, c.group,
+					(SELECT COUNT(*) FROM user_subject u
+							INNER JOIN course ON course.courseId = u.courseId 
+							INNER JOIN subject ON course.subjectId = subject.subjectId
+        					INNER JOIN usuario_capacitador_original uco ON (uco.usuarioId = u.alumnoId AND uco.subjectId = subject.subjectId) 
+						WHERE uco.personalId  = " . $_SESSION["User"]["userId"] . " AND course.subjectId = " . $_GET["id"] . " AND course.courseId = c.courseId " . $personal  . "
+					) AS cantidad
+			   	FROM usuario_capacitador_original uco
+					LEFT JOIN user_subject u ON u.alumnoId = uco.usuarioId
+					LEFT JOIN course c ON c.courseId = u.courseId
+			   WHERE uco.personalId  = " . $_SESSION["User"]["userId"] . " and c.subjectId = " . $_GET["id"] . " group by c.courseId";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;
