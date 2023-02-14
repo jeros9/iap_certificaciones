@@ -1761,4 +1761,24 @@ class Group extends Module
 		}
 		return $result;
 	}
+
+	public function DefaultGroupAttendanceCapacitadorOriginal($personalId = 0)
+	{
+		$personal = "";
+		if ($personalId > 0)
+			$personal = " AND usuario_capacitador_original.personalId = " . $personalId;
+		$sql = "SELECT user.*, user_subject.status AS status, municipio.nombre AS municipio, personal.name, personal.lastname_paterno, personal.lastname_materno, personal.personalId
+					FROM user_subject
+						LEFT JOIN user ON user_subject.alumnoId = user.userId
+						INNER JOIN course ON user_subject.courseId = course.courseId
+						INNER JOIN subject ON course.subjectId = subject.subjectId
+						INNER JOIN usuario_capacitador_original ON (usuario_capacitador_original.usuarioId = user_subject.alumnoId AND usuario_capacitador_original.subjectId = subject.subjectId)
+						LEFT JOIN municipio ON user.workplaceCity = municipio.municipioId
+						INNER JOIN usuario_capacitador ON (usuario_capacitador.usuarioId = user_subject.alumnoId AND usuario_capacitador.subjectId = subject.subjectId)
+						INNER JOIN personal ON usuario_capacitador.personalId = personal.personalId
+					WHERE user_subject.courseId = '" . $this->getCourseId() . "' AND user.activo = 1 " . $personal . " ORDER BY usuario_capacitador.personalId, user.lastNamePaterno, user.lastNameMaterno, user.names";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
 }

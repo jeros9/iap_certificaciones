@@ -3606,6 +3606,20 @@ class Student extends User
 
 			$sql = "
 			SELECT 
+				u.personalId,
+				name,
+				lastname_paterno,
+				lastname_materno
+			FROM 
+				usuario_capacitador_original as u
+			left join personal as p on p.personalId= u.personalId
+			WHERE u.subjectId =  " . $aux["subjectId"] . " and usuarioId = " . $Id . "";
+			$this->Util()->DB()->setQuery($sql);
+
+			$capori = $this->Util()->DB()->GetRow();
+
+			$sql = "
+			SELECT 
 				*
 			FROM 
 				personal_subject as u
@@ -3629,6 +3643,7 @@ class Student extends User
 			$result[$key]["evaluadores"] = $res;
 			$result[$key]["suEvaluador"] = $r;
 			$result[$key]["suCapacitador"] = $cap;
+			$result[$key]["suCapacitadorOriginal"] = $capori;
 			$result[$key]["activityId"] = $acI;
 		}
 
@@ -3907,6 +3922,14 @@ class Student extends User
 		return $result;
 	}
 
+	public function certificacionesCapacitadorOriginal($id)
+	{
+		$sql = "SELECT subject.* FROM usuario_capacitador_original INNER JOIN subject ON subject.subjectId = usuario_capacitador_original.subjectId INNER JOIN user_subject ON user_subject.alumnoId = usuario_capacitador_original.usuarioId WHERE usuario_capacitador_original.personalId = {$id} GROUP BY subject.subjectId ORDER BY subject.name";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetResult();
+		return $result;
+	}
+
 	public function GettDocumentos($Id)
 	{
 
@@ -4043,6 +4066,17 @@ class Student extends User
 	public function Attendance($userId, $courseId, $personalId, $attendanceDay, $typeAttendance)
 	{
 		$sql = "SELECT COUNT(attendanceId) FROM pc_attendance_list WHERE userId = " . $userId . " AND courseId = " . $courseId . " AND personalId = " . $personalId . " AND attendanceDay = '" . $attendanceDay . "' AND typeAttendance = '" . $typeAttendance . "'";
+		$this->Util()->DB()->setQuery($sql);
+		$total = $this->Util()->DB()->GetSingle();
+		$attendance = true;
+		if ($total == 0)
+			$attendance = false;
+		return $attendance;
+	}
+
+	public function AttendanceOriginal($userId, $courseId, $attendanceDay, $typeAttendance)
+	{
+		$sql = "SELECT COUNT(attendanceId) FROM pc_attendance_list WHERE userId = " . $userId . " AND courseId = " . $courseId . " AND attendanceDay = '" . $attendanceDay . "' AND typeAttendance = '" . $typeAttendance . "'";
 		$this->Util()->DB()->setQuery($sql);
 		$total = $this->Util()->DB()->GetSingle();
 		$attendance = true;

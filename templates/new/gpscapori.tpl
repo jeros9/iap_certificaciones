@@ -11,7 +11,7 @@
 <div class="portlet box red">
     <div class="portlet-title">
         <div class="caption">
-            <i class="fa fa-bullhorm"></i>Grupos del Alineador
+            <i class="fa fa-bullhorm"></i>Grupos del Capacitador
         </div>
         {include file="boxes/status_no_ajax.tpl"}
         <div class="accions"></div>
@@ -31,7 +31,7 @@
                         <td align="center">{$item.group}</td>
                         <td align="center">{$item.cantidad}</td>
                         <td align="center">
-                            <a href="{$WEB_ROOT}/edit-modules-group/id/{$item.courseId}" >
+                            <a href="{$WEB_ROOT}/edit-modules-group-original/id/{$item.courseId}" >
                                 <i class="fa fa-sign-in fa-lg"></i>
                             </a>
                         </td>
