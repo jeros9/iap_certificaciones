@@ -12,6 +12,7 @@
             <input type="hidden" value="{$id}" name="id">
             <input type="hidden" value="{$subjectId}" name="subjectId">
             <input type="hidden" value="{$courseId}" name="courseId">
+            <input type="hidden" value="{$tipo}" name="tipo">
             <div class="form-group">
                 <input class="form-control onlynumber" pattern="{literal}.{6,}{/literal}" title="Mínimo 6 números" type="text" name="lot_number" value="{$lot}" placeholder="Ingrese el número..." required>
             </div>

@@ -35,6 +35,7 @@
     	<tr> 
 			<th width="">Grupo</th>	  
 			<th width="">Cantidad</th>	 
+			<th width="">Lote</th>	 
 			<th width="">Acciones</th>
             <th>Reportes</th>
     </thead>
@@ -43,17 +44,23 @@
     	<tr>
 			<td align="center">{$item.group}</td>
 			<td align="center">{$item.cantidad}</td>
+            <td style="text-align: center;">{$item.numero}</td>
 			<td align="center">
                 <a href="{$WEB_ROOT}/graybox.php?page=red-dates&id={$item.courseId}&subjectId={$subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px">
-                    <i class="fa fa-calendar"></i>
+                    <i class="material-icons">event</i>
                 </a>
 			    <a href="{$WEB_ROOT}/usuarios/id/{$item.courseId}" >
-                    <i class="fa fa-sign-in fa-lg"></i>
+                    <i class="material-icons">login</i>
+                </a>
+                <a href="{$WEB_ROOT}/graybox.php?page=numero-lote&id={$item.courseId}&subjectId={$subjectId}&tipo=general" data-target="#ajax" data-toggle="modal" data-width="300px">
+                    <i class="material-icons">tag</i>
                 </a>
 			</td>
             <td align="center">
                 <a href="{$WEB_ROOT}/graybox.php?page=revision-portafolio&id={$item.courseId}&subjectId={$subjectId}&option=evaluator" data-target="#ajax" data-toggle="modal" data-width="1200px">
-                    <i class="fa fa-bar-chart"></i>
+                    <i class="material-icons">
+                    assessment
+                    </i>
                 </a>
             </td>
 		</tr>

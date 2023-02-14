@@ -2079,7 +2079,8 @@ class Personal extends Main
 								AND usuario_personal.personalId = ".$personalId." 
 								AND course.group = c.group
 								AND user_subject.courseId = c.courseId 
-					 ) as cantidad
+					 ) as cantidad, 
+					 c.numero
 				FROM 
 					usuario_personal up
 				left join user_subject u on u.alumnoId = up.usuarioId

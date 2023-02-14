@@ -1931,7 +1931,15 @@ class Course extends Subject
 	{
 		$sql = "SELECT lot FROM lot_number WHERE subject_id = {$subjectId} AND course_id = {$courseId} AND student_id = {$studentId}";
 		$this->Util()->DB()->setQuery($sql);
-		$result = $this->Util()->DB()->GetRow();
+		$result = $this->Util()->DB()->GetSingle();
+		return $result;
+	}
+
+	public function getLotNumberCourse($subjectId, $courseId)
+	{
+		$sql = "SELECT numero FROM course WHERE subjectId = {$subjectId} AND courseId = {$courseId}";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->GetSingle();
 		return $result;
 	}
 
@@ -1946,6 +1954,14 @@ class Course extends Subject
 	public function editLotNumber($subjectId, $courseId, $studentId, $lot)
 	{
 		$sql = "UPDATE lot_number SET lot = {$lot} WHERE subject_id = {$subjectId} AND course_id = {$courseId} AND student_id = {$studentId}";
+		$this->Util()->DB()->setQuery($sql);
+		$result = $this->Util()->DB()->UpdateData();
+		return $result;
+	}
+
+	public function editLotNumberCourse($subjectId, $courseId, $lot)
+	{
+		$sql = "UPDATE course SET numero = {$lot} WHERE subjectId = {$subjectId} AND courseId = {$courseId}";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->UpdateData();
 		return $result;
