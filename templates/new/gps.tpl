@@ -34,8 +34,7 @@
 	<thead>
     	<tr> 
 			<th width="">Grupo</th>	  
-			<th width="">Cantidad</th>	 
-			<th width="">Lote</th>	 
+			<th width="">Cantidad</th>	  
 			<th width="">Acciones</th>
             <th>Reportes</th>
     </thead>
@@ -44,16 +43,12 @@
     	<tr>
 			<td align="center">{$item.group}</td>
 			<td align="center">{$item.cantidad}</td>
-            <td style="text-align: center;">{$item.numero}</td>
 			<td align="center">
                 <a href="{$WEB_ROOT}/graybox.php?page=red-dates&id={$item.courseId}&subjectId={$subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px">
                     <i class="material-icons">event</i>
                 </a>
 			    <a href="{$WEB_ROOT}/usuarios/id/{$item.courseId}" >
                     <i class="material-icons">login</i>
-                </a>
-                <a href="{$WEB_ROOT}/graybox.php?page=numero-lote&id={$item.courseId}&subjectId={$subjectId}&tipo=general" data-target="#ajax" data-toggle="modal" data-width="300px">
-                    <i class="material-icons">tag</i>
                 </a>
 			</td>
             <td align="center">

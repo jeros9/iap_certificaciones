@@ -1850,7 +1850,14 @@ class Course extends Subject
 
 	public function getRedDates($user)
 	{
-		$sql = "SELECT * FROM usuario_personal INNER JOIN user_subject ON user_subject.alumnoId = usuario_personal.usuarioId INNER JOIN user ON user.userId = user_subject.alumnoId INNER JOIN course ON course.courseId = user_subject.courseId LEFT JOIN red_dates ON red_dates.course_id = {$_GET['id']} AND red_dates.student_id = user_subject.alumnoId WHERE usuario_personal.subjectId = {$_GET['subjectId']} AND usuario_personal.personalId = {$user['userId']} AND user_subject.courseId = {$_GET['id']}";
+		$sql = "SELECT * FROM usuario_personal
+			INNER JOIN user_subject ON user_subject.alumnoId = usuario_personal.usuarioId
+			INNER JOIN USER ON USER.userId = user_subject.alumnoId
+			INNER JOIN course ON course.courseId = user_subject.courseId
+			LEFT JOIN red_dates ON red_dates.course_id = {$_GET['id']} AND red_dates.student_id = user_subject.alumnoId
+			LEFT JOIN lot_number ON lot_number.course_id = {$_GET['id']} AND lot_number.student_id = user_subject.alumnoId AND lot_number.subject_id = {$_GET['subjectId']}
+			WHERE usuario_personal.subjectId = {$_GET['subjectId']} AND usuario_personal.personalId = {$user['userId']} AND user_subject.courseId = {$_GET['id']}";
+			// echo $sql;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;

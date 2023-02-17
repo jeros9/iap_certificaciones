@@ -20,6 +20,7 @@
                     <th>Fecha Plan</th>
                     <th>Fecha Evaluación</th>
                     <th>Fecha IEC</th>
+                    <th>Número de lote</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,20 +28,23 @@
                 <tr>
                     <td>{$student.names} {$student.lastNamePaterno} {$student.lastNameMaterno}</td>
                     <td>
-                        <input name="plan[{$student.userId}]" value="{$student.plan_date|date_format:"d-m-Y"}" class="date-picker" autocomplete="off">
+                        <input name="plan[{$student.userId}]" value="{$student.plan_date|date_format:"d-m-Y"}" class="date-picker form-control" autocomplete="off">
                     </td>
                     <td>
-                        <input name="evaluation[{$student.userId}]" value="{$student.evaluation_date|date_format:"d-m-Y"}" class="date-picker" autocomplete="off">
+                        <input name="evaluation[{$student.userId}]" value="{$student.evaluation_date|date_format:"d-m-Y"}" class="date-picker form-control" autocomplete="off">
                     </td>
                     <td>
-                        <input name="iec[{$student.userId}]" value="{$student.iec_date|date_format:"d-m-Y"}" class="date-picker" autocomplete="off">
+                        <input name="iec[{$student.userId}]" value="{$student.iec_date|date_format:"d-m-Y"}" class="date-picker form-control" autocomplete="off">
+                    </td>
+                    <td>
+                        <input name="lote[{$student.userId}]" value="{$student.lot}" class="form-control" pattern="{literal}.{6,}{/literal}" title="Mínimo 6 números">
                     </td>
                 </tr>
             {/foreach}
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" style="text-align: right;">
+                    <td colspan="5" style="text-align: right;">
                         <button class="btn btn-success" type="submit">Guardar</button>
                     </td>
                 </tr>

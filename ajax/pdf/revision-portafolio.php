@@ -67,7 +67,7 @@ $html .= "
 $html .= '  <table style="width:100%;margin-bottom:20px;">
                 <tr>
                     <td style="text-align:center;width:33%;">
-                        <img src="'.DOC_ROOT.'/images/logoconocer.png" width="150px" >
+                        <img src="' . DOC_ROOT . '/images/logo_correo.jpg" width="150px" >
                     </td>
                     <td style="text-align:center;width:33%; font-size:16px;">
                         <strong>Revisión de Portafolios</strong><br>
@@ -75,7 +75,7 @@ $html .= '  <table style="width:100%;margin-bottom:20px;">
                         <strong>Evaluador: '.$evaluator.'</strong>
                     </td>
                     <td style="text-align:center;width:33%;">
-                        <img src="' . DOC_ROOT . '/images/logo_correo.jpg" width="150px" >
+                        <img src="'.DOC_ROOT.'/images/logoconocer.png" width="150px" >
                     </td>
                 </tr>
             </table>';
