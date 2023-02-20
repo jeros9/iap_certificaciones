@@ -32,13 +32,15 @@ try {
             $course->editRedDates($subjectId, $courseId, $key, $plan_date, $evaluation_date, $iec_date);
         }else{
             $course->addRedDates($subjectId, $courseId, $key, $plan_date, $evaluation_date, $iec_date);
-        }
-
-        $lot = $course->getLotNumber($subjectId,$courseId,$key);
-        if($lot > 0){
-            $course->editLotNumber($subjectId, $courseId, $key, $lotes[$key]);
-        }else{
-            $course->addLotNumber($subjectId, $courseId, $key, $lotes[$key]);    
+        } 
+        
+        if(!empty($lotes[$key])){
+            $lot = $course->getLotNumber($subjectId,$courseId,$key);
+            if($lot > 0){
+                $course->editLotNumber($subjectId, $courseId, $key, $lotes[$key]);
+            }else{
+                $course->addLotNumber($subjectId, $courseId, $key, $lotes[$key]);    
+            }
         }
     }
     echo json_encode(array(
