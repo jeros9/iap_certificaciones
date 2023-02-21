@@ -673,3 +673,14 @@ function DeleteInform(id)
         });
     });
 }
+
+function applyAll(source, index, type)
+{
+    let checkboxes = document.getElementsByClassName(type + '-d' + index);
+    // console.log(source.checked + ' ' + index + ' ' + type);
+    for(i=0; i < checkboxes.length; i++)
+    {
+        if(checkboxes[i].type == "checkbox")
+            checkboxes[i].checked = source.checked;
+    }
+}

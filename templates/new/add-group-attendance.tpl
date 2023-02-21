@@ -18,9 +18,13 @@
                             {/foreach}
                         </tr>
                         <tr>
-                            {foreach from=$days item=item}
-                                <th class="text-center">Entrada</th>
-                                <th class="text-center">Salida</th>
+                            {foreach from=$days item=item key=key}
+                                <th class="text-center">
+                                    <input type="checkbox" onclick="applyAll(this, {$key+1}, 'Entrada')" /> Entrada
+                                </th>
+                                <th class="text-center">
+                                    <input type="checkbox" onclick="applyAll(this, {$key+1}, 'Salida')" /> Salida
+                                </th>
                             {/foreach}
                         </tr>
                     </thead>
@@ -33,14 +37,14 @@
                                         {if ($student->Attendance($item.userId, $course.courseId, $personalId, $day, 'Entrada'))}
                                             <i class="fa fa-check-square text-success"></i>
                                         {else}
-                                            <input type="checkbox" name="asistencia{$key+1}[Entrada][{$item.userId}]" value="{$day}" />
+                                            <input type="checkbox" name="asistencia{$key+1}[Entrada][{$item.userId}]" class="Entrada-d{$key+1}" value="{$day}" />
                                         {/if}
                                     </td>
                                     <td class="text-center">
                                         {if ($student->Attendance($item.userId, $course.courseId, $personalId, $day, 'Salida'))}
                                             <i class="fa fa-check-square text-success"></i>
                                         {else}
-                                            <input type="checkbox" name="asistencia{$key+1}[Salida][{$item.userId}]" value="{$day}" />
+                                            <input type="checkbox" name="asistencia{$key+1}[Salida][{$item.userId}]" class="Salida-d{$key+1}" value="{$day}" />
                                         {/if}
                                     </td>
                                 {/foreach}

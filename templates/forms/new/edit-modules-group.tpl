@@ -61,9 +61,14 @@
     </div>
     <div class="portlet-body">
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-6 text-center">
                 <a href="{$WEB_ROOT}/graybox.php?page=add-group-attendance&id={$infoCourse.courseId}&auxTpl=admin" data-target="#ajax" data-toggle="modal" class="btn btn-circle green" data-backdrop="static" data-keyboard="false">
                     <i class="fa fa-calendar-check-o"></i> Marcar Asistencia
+                </a>
+            </div>
+            <div class="col-md-6 text-center">
+                <a href="{$WEB_ROOT}/ajax/attendance.php?cId={$infoCourse.courseId}&pId={$usuariologId}" target="_blank" title="Lista de Asistencia" class="btn btn-circle green">
+                    <i class="fa fa-list fa-lg"></i> Descargar Lista de Asistencia
                 </a>
             </div>
         </div>
