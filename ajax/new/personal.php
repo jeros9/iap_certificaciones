@@ -601,4 +601,12 @@ switch ($_POST["type"]) {
 		$smarty->assign('lstCertificaciones', $lstCertificaciones);
 		$smarty->display(DOC_ROOT . '/templates/lists/select-certificaciones.tpl');
 		break;
+	case 'personalCapacitado':
+		$course->setCourseId($_POST['curricula']);
+		$curso = $course->Info();
+		$personalCapacitado = $personal->EnumerateSubject($curso['subjectId']);
+		echo json_encode([
+			'personal'	=>$personalCapacitado
+		]);
+		break;
 }

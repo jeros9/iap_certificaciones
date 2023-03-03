@@ -8,6 +8,7 @@ $(document).ready(function(){
     $("#estado").change(function(){ ciudad_dependencia();});
     $("#paist").change(function(){ estado_dependenciat();});
     $("#estadot").change(function(){ ciudad_dependenciat();});
+    $("#curricula").change(function(){ personal();});
 
     $("#estados").change(function() {
         let estado = $(this).val();
@@ -73,6 +74,28 @@ function ciudad_dependenciat()
         {
             alert('Algo salio mal, compruebe su conexión a internet');
         }
+    });
+}
+
+function personal(){
+    var curricula = $("#curricula").val();
+    $.ajax({
+        url : WEB_ROOT+'/ajax/new/personal.php',
+        type: "POST",
+        data : {type: "personalCapacitado",  curricula: curricula}
+    }).done(function(response){ 
+        data = JSON.parse(response);
+        console.log(data);
+        $("#capacitador").html("<option value=''>-Seleccione al capacitador--</option>");
+        $("#alineador").html("<option value=''>-Seleccione al alineador--</option>");
+        $("#evaluador").html("<option value=''>-Seleccione al evaluador--</option>");
+        data.personal.forEach(element => {
+            $("#capacitador").append(`<option value="${element.personalId}">${element.nombrePersona}</option>`);
+            $("#alineador").append(`<option value="${element.personalId}">${element.nombrePersona}</option>`);
+            $("#evaluador").append(`<option value="${element.personalId}">${element.nombrePersona}</option>`);
+        });
+    }).fail(function(response){
+        console.log(response);
     });
 }
 

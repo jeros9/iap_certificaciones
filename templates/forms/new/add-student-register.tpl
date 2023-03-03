@@ -55,6 +55,33 @@
 			{/foreach}
 		</select>
 	</div>
+	<div class="form-group col-md-4">
+		<label for="capacitador">Capacitador</label>
+		<select name="capacitador" id="capacitador" class="form-control">
+			<option value="">-- Seleccione al capacitador --</option>
+			{foreach from=$personalCapacitado item=item}
+				<option value="{$item.personalId}">{$item.nombrePersona}</option>
+			{/foreach}
+		</select>
+	</div>
+	<div class="form-group col-md-4">
+		<label for="alineador">Alineador</label>
+		<select name="alineador" id="alineador" class="form-control">
+			<option value="">-- Seleccione al alineador --</option>
+			{foreach from=$personalCapacitado item=item}
+				<option value="{$item.personalId}">{$item.nombrePersona}</option>
+			{/foreach}
+		</select>
+	</div>
+	<div class="form-group col-md-4">
+		<label for="evaluador">Evaluador</label>
+		<select name="evaluador" id="evaluador" class="form-control">
+			<option value="">-- Seleccione al evaluador --</option>
+			{foreach from=$personalCapacitado item=item}
+				<option value="{$item.personalId}">{$item.nombrePersona}</option>
+			{/foreach}
+		</select>
+	</div>
 </form>
 </div>
 

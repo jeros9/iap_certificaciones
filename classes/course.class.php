@@ -1011,9 +1011,7 @@ class Course extends Subject
 		$this->Util()->PrintErrors();
 		return $result;
 	}
-
-
-
+	
 	public function Info_modality()
 	{
 		//creamos la cadena de seleccion
@@ -1044,9 +1042,7 @@ class Course extends Subject
 		$result["encargado"] = $info;
 		return $result;
 	}
-
-
-
+	
 	public function Info()
 	{
 		//creamos la cadena de seleccion

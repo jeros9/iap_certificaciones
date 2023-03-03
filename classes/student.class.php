@@ -38,7 +38,6 @@ class Student extends User
 	private $autorizoj;
 	private $autorizoFirma;
 	private $typeOrderId;
-
 	//new
 
 	public function setPages($value)
@@ -206,7 +205,7 @@ class Student extends User
 	{
 		$this->alumnoId = $value;
 	}
-
+ 
 	public function setName($value)
 	{
 		$this->name = $value;
@@ -272,7 +271,7 @@ class Student extends User
 							WHERE resourceId = '".$id."'";
 				$this->Util()->DB()->setQuery($sql);
 				$this->Util()->DB()->UpdateData();
-*/
+		*/
 			$this->Util()->setError(10028, "complete", "Has cambiado la foto satisfactoriamente.");
 			$this->Util()->PrintErrors();
 		}
@@ -701,7 +700,7 @@ class Student extends User
 		if ($id = $this->Util()->DB()->InsertData()) {
 			$fecha_aplicacion = date("Y-m-d H:i:s");
 			$enlace = "/student";
-
+			$this->setAlumnoId($id);
 			if ($this->getRegister() == 0) {
 				//$hecho=$this->getNames()." ".$this->getLastNamePaterno()." ".$this->getLastNameMaterno();
 				$hecho = $id . "u";
@@ -3893,9 +3892,9 @@ class Student extends User
 	{
 		$sql = "SELECT * FROM  course as u WHERE subjectId = " . $Id . "";
 		$this->Util()->DB()->setQuery($sql);
-		$result = $this->Util()->DB()->GetResult(); 
+		$result = $this->Util()->DB()->GetResult();
 		return $result;
-	} 
+	}
 
 	public function certificacionesEval($Id)
 	{
@@ -4047,8 +4046,7 @@ class Student extends User
 		$result = $this->Util()->DB()->GetRow();
 		return $result;
 	}
-
-
+	
 	public function UpdateAutorizoFirma()
 	{
 		if ($this->Util()->PrintErrors()) {
