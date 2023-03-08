@@ -208,7 +208,7 @@ $html.="        <table style='width:100%; text-align:center; margin-bottom:20px;
                         </tr>
                         <tr>
                             <td style='padding:10px;width:33%;'>Nombre y firma del evaluador/a independiente</td>
-                            <td style='padding:10px;width:33%;'>Mtra. Erika Aguilar Farrera <br>Directora de Certificación u Evaluación de Competencias Laborales.</td>
+                            <td style='padding:10px;width:33%;'>Mtra. Erika Aguilar Farrera <br>Directora de Certificación y Evaluación de Competencias Laborales.</td>
                             <td style='padding:10px;width:33%;'></td>
                         </tr>
                     </tbody>
