@@ -25,6 +25,7 @@ $filterLots = $util->getUniqueArray($list, "lot");
 $html = "";
 $htmlBodyTable = "";
 $pintar = false;
+$consecutivo = 1;
 $html .= "
     <html>
         <head>
@@ -103,9 +104,11 @@ foreach ($filterGroups as $keyGroups => $itemGroup) {
                 $arrayIconos['productos'] =  $item['hasProducts'] == 'no' ? $error : $success;
                 $resultados = $item['aprobado'] == "s/n" ? "No asignado" : ($item['aprobado'] == "si" ? "Competente" : "No Competente");
                 $htmlBodyTable.="<tr>
+                            <td>{$consecutivo}</td>
                             <td>{$item['names']}<br>{$item['lastNamePaterno']}<br>{$item['lastNameMaterno']}</td>
                             <td>
                                 {$item['controlNumber']}
+                                {$item['municipio']}
                             </td>
                             <td>
                                 <table style='padding:0;margin:0; border:none;'>
@@ -158,20 +161,22 @@ foreach ($filterGroups as $keyGroups => $itemGroup) {
                                 {$resultados}
                             </td>
                         </tr>";
+                $consecutivo++;
             }
         }
         if ($pintar) {
             $html.="<table style='width:100%; text-align:center; margin-bottom:20px;' class='tb-border'>
                         <thead>
                             <tr>
-                                <td colspan='13'>
+                                <td colspan='14'>
                                     <span>Grupo: {$keyGroups}</span>
                                     <span>Número de Lote: {$auxKey}</span>
                                 </td>
                             </tr>
                             <tr>
+                                <td>No.</td>
                                 <td>Nombre</td>
-                                <td>Número Control</td>
+                                <td>Número Control</td> 
                                 <td></td>
                                 <td style='width:80px'>Fecha Plan</td>
                                 <td style='width:80px;'>Fecha Evaluación</td>
@@ -188,13 +193,27 @@ foreach ($filterGroups as $keyGroups => $itemGroup) {
                         <tbody>";
             $html.=$htmlBodyTable;
             $html.="    </tbody>
-                    </table>";
+                    </table>"; 
         }
         $pintar = false;
         $htmlBodyTable = "";
     }
 }
-$html.="    <body>
+$html.="        <table style='width:100%; text-align:center; margin-bottom:20px; font-weight:600; font-size:18px;' class='tb-border'>
+                    <tbody>
+                        <tr>
+                            <td style='padding:10px;width:33%; height:70px; vertical-align:top'>Atentamente<br><br><br><br>{$evaluator}</td>
+                            <td style='padding:10px;width:33%; height:70px; vertical-align:top'>Vo. Bo.</td>
+                            <td style='padding:10px;width:33%; height:70px; vertical-align:top'>Sello de la DCyECL</td>
+                        </tr>
+                        <tr>
+                            <td style='padding:10px;width:33%;'>Nombre y firma del evaluador/a independiente</td>
+                            <td style='padding:10px;width:33%;'>Mtra. Erika Aguilar Farrera <br>Directora de Certificación u Evaluación de Competencias Laborales.</td>
+                            <td style='padding:10px;width:33%;'></td>
+                        </tr>
+                    </tbody>
+                </table> 
+            <body>
         </html>";
 $mipdf = new DOMPDF();
 $mipdf->setPaper("Letter", "landscape");

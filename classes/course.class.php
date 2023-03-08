@@ -1913,7 +1913,8 @@ class Course extends Subject
 					IFNULL(cedulas.folio_proceso,'N/A') AS folio_proceso,
 					IFNULL((SELECT repositorioId FROM repositorio WHERE course.subjectId = repositorio.subjectId AND user_subject.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 2 ORDER BY repositorioId DESC LIMIT 1), 'no') AS hasIec,
 					IFNULL((SELECT repositorioId FROM repositorio WHERE course.subjectId = repositorio.subjectId AND user_subject.alumnoId = repositorio.userId AND repositorio.tipoDocumentoId = 4 ORDER BY repositorioId DESC LIMIT 1), 'no') AS hasProducts,
-					lot_number.lot
+					lot_number.lot,
+					(SELECT nombre FROM municipio WHERE municipioId = user.ciudad) as municipio
 				FROM usuario_personal 
 				INNER JOIN user_subject ON user_subject.alumnoId = usuario_personal.usuarioId 
 				INNER JOIN user ON user.userId = user_subject.alumnoId 
