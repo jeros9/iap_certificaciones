@@ -3537,118 +3537,115 @@ class Student extends User
 
 	public function CertificacionStident($Id)
 	{
-
-
 		$filtro = "";
 
-		if ($Id) {
-			$filtro .= " and alumnoId = " . $Id . "";
-		}
+		if ($Id)
+			$filtro .= " AND alumnoId = " . $Id;
 
-		$sql = "
-			SELECT 
-				s.name as certificacion,
-				u.alumnoId as userId,
-				c.courseId,
-				m.nombre as municipio,
-				c.numero,
-				at.activityId,
-				c.group,
-				s.subjectId,
-				u.aprobado,
-				(
-					(if((select count(*) from repositorio as r where r.userId = u.alumnoId and r.subjectId = s.subjectId and r.tipodocumentoId = 2) > 0, 1, 0)) +
-					(if((select count(*) from repositorio as r where r.userId = u.alumnoId and r.subjectId = s.subjectId and r.tipodocumentoId = 4) > 0, 1, 0)) +
-					(if((select count(*) from cedulas as ced where ced.userId = u.alumnoId and ced.subjectId = s.subjectId) > 0, 1, 0)) + 
-					(if((select count(*) from planes as pla where pla.userId = u.alumnoId and pla.subjectId = s.subjectId) > 0, 1, 0))
-				) as countRepositorio
-			FROM 
-				user_subject as u
-			left join course as c on c.courseId = u.courseId 
-			left join subject as s on s.subjectId = c.subjectId 
-			left join user as us on us.userId = u.alumnoId 
-			left join municipio as m on m.municipioId = us.ciudadt 
-			left join course_module as cm on cm.courseId = c.courseId 
-			left join activity as at on at.courseModuleId = cm.courseModuleId 
-			WHERE 1 AND u.courseId > 0 " . $filtro . "";
+		$sql = "SELECT 
+					s.name as certificacion,
+					u.alumnoId as userId,
+					c.courseId,
+					m.nombre as municipio,
+					c.numero,
+					at.activityId,
+					c.group,
+					s.subjectId,
+					u.aprobado,
+					(
+						(IF((SELECT count(*) FROM repositorio AS r WHERE r.userId = u.alumnoId AND r.subjectId = s.subjectId AND r.tipodocumentoId = 2) > 0, 1, 0)) +
+						(IF((SELECT count(*) FROM repositorio AS r WHERE r.userId = u.alumnoId AND r.subjectId = s.subjectId AND r.tipodocumentoId = 4) > 0, 1, 0)) +
+						(IF((SELECT count(*) FROM cedulas AS ced WHERE ced.userId = u.alumnoId AND ced.subjectId = s.subjectId) > 0, 1, 0)) + 
+						(IF((SELECT count(*) FROM planes AS pla WHERE pla.userId = u.alumnoId AND pla.subjectId = s.subjectId) > 0, 1, 0))
+					) AS countRepositorio,
+					c.initialDate
+				FROM 
+					user_subject AS u
+						LEFT JOIN course AS c ON c.courseId = u.courseId 
+						LEFT JOIN subject AS s ON s.subjectId = c.subjectId 
+						LEFT JOIN user AS us ON us.userId = u.alumnoId 
+						LEFT JOIN municipio AS m ON m.municipioId = us.ciudadt 
+						LEFT JOIN course_module AS cm ON cm.courseId = c.courseId 
+						LEFT JOIN activity AS at ON at.courseModuleId = cm.courseModuleId 
+				WHERE 1 AND u.courseId > 0 " . $filtro;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 
-		foreach ($result as $key => $aux) {
-			$sql = "
-			SELECT 
-				u.personalId,
-				name,
-				lastname_paterno,
-				lastname_materno
-			FROM 
-				usuario_personal as u
-			left join personal as p on p.personalId= u.personalId
-			WHERE u.subjectId =  " . $aux["subjectId"] . " and usuarioId = " . $Id . "";
+		foreach ($result as $key => $aux) 
+		{
+			$sql = "SELECT 
+						u.personalId,
+						name,
+						lastname_paterno,
+						lastname_materno
+					FROM usuario_personal AS u
+						LEFT JOIN personal AS p 
+							ON p.personalId= u.personalId
+					WHERE u.subjectId = " . $aux["subjectId"] . " AND usuarioId = " . $Id;
 			$this->Util()->DB()->setQuery($sql);
-
 			$r = $this->Util()->DB()->GetRow();
 
-			$sql = "
-			SELECT 
-				u.personalId,
-				name,
-				lastname_paterno,
-				lastname_materno
-			FROM 
-				usuario_capacitador as u
-			left join personal as p on p.personalId= u.personalId
-			WHERE u.subjectId =  " . $aux["subjectId"] . " and usuarioId = " . $Id . "";
+			$sql = "SELECT 
+						u.personalId,
+						name,
+						lastname_paterno,
+						lastname_materno
+					FROM 
+						usuario_capacitador AS u
+					LEFT JOIN personal AS p 
+						ON p.personalId = u.personalId
+					WHERE u.subjectId = " . $aux["subjectId"] . " AND usuarioId = " . $Id;
 			$this->Util()->DB()->setQuery($sql);
-
 			$cap = $this->Util()->DB()->GetRow();
 
-			$sql = "
-			SELECT 
-				u.personalId,
-				name,
-				lastname_paterno,
-				lastname_materno
-			FROM 
-				usuario_capacitador_original as u
-			left join personal as p on p.personalId= u.personalId
-			WHERE u.subjectId =  " . $aux["subjectId"] . " and usuarioId = " . $Id . "";
+			$sql = "SELECT 
+						u.personalId,
+						name,
+						lastname_paterno,
+						lastname_materno
+					FROM 
+						usuario_capacitador_original AS u
+					LEFT JOIN personal AS p 
+						ON p.personalId = u.personalId
+					WHERE u.subjectId = " . $aux["subjectId"] . " AND usuarioId = " . $Id;
 			$this->Util()->DB()->setQuery($sql);
-
 			$capori = $this->Util()->DB()->GetRow();
 
-			$sql = "
-			SELECT 
-				*
-			FROM 
-				personal_subject as u
-			left join personal as p on p.personalId= u.personalId
-			WHERE u.subjectId =  " . $aux["subjectId"] . "";
+			$sql = "SELECT *
+						FROM personal_subject AS u
+					LEFT JOIN personal AS p 
+						ON p.personalId= u.personalId
+					WHERE u.subjectId = " . $aux["subjectId"];
 			$this->Util()->DB()->setQuery($sql);
-
 			$res = $this->Util()->DB()->GetResult();
 
-			$sql = "SELECT  activityId
-								FROM course c 
+			$sql = "SELECT activityId
+						FROM course c 
         					LEFT JOIN subject AS s 
-            				ON s.subjectId = c.subjectId 
+            					ON s.subjectId = c.subjectId 
         					LEFT JOIN activity AS a 
-            				ON a.subjectId = s.subjectId 
-    							WHERE c.courseId =  " . $aux["courseId"] . "";
-
+            					ON a.subjectId = s.subjectId 
+    						WHERE c.courseId = " . $aux["courseId"];
 			$this->Util()->DB()->setQuery($sql);
 			$acI = $this->Util()->DB()->GetSIngle();
+
+			$sql = "SELECT c.courseId,
+							c.group,
+							s.name
+						FROM course c
+					INNER JOIN subject AS s 
+						ON c.subjectId= s.subjectId
+					WHERE c.subjectId = " . $aux["subjectId"] . " AND c.initialDate >= '" . $aux["initialDate"] . "'";
+			$this->Util()->DB()->setQuery($sql);
+			$availableGroups = $this->Util()->DB()->GetResult();
 
 			$result[$key]["evaluadores"] = $res;
 			$result[$key]["suEvaluador"] = $r;
 			$result[$key]["suCapacitador"] = $cap;
 			$result[$key]["suCapacitadorOriginal"] = $capori;
 			$result[$key]["activityId"] = $acI;
+			$result[$key]["availableGroups"] = $availableGroups;
 		}
-
-
-		// echo "<pre>"; print_r($result);
-		// exit;
 		return 	$result;
 	}
 

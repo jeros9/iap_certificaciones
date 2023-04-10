@@ -1967,6 +1967,15 @@ class Personal extends Main
 		return true;
 	}
 
+	public function changeGroup()
+	{
+		$sql = "UPDATE user_subject SET courseId = " . $_POST["newCourseId"] . " WHERE courseId = " . $_POST["courseId"] . " AND alumnoId = " . $_POST["alumnoId"];
+		// echo $sql;
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->ExecuteQuery();
+		return true;
+	}
+
 
 	public function sendInfoEvaluador()
 	{
@@ -2001,6 +2010,15 @@ class Personal extends Main
 				$_POST["subjectId"] = $f[1];
 				if ($aux <> '')
 					$this->saveCapacitadorOriginalUsuario();
+			}
+			// Switch Group
+			if ($f[0] == "group") 
+			{
+				$_POST["alumnoId"] = $_POST["id"];
+				$_POST["newCourseId"] = $aux;
+				$_POST["courseId"] = $f[1];
+				if ($_POST["newCourseId"] != $_POST["courseId"])
+					$this->changeGroup();
 			}
 		}
 		return true;
