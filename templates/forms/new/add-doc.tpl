@@ -7,7 +7,8 @@
     <div class="form-body">
 	<form class="form-horizontal" id="frmGral" name="frmGral" method="post"  enctype="multipart/form-data">
 	<input type="hidden" id="type" name="type" value="enviarArchivo"/>
-    <input type="hidden" id="" name="subjectId" value="{$cId}"/>
+    <input type="hidden" name="subjectId" value="{$subjectId}"/>
+    <input type="hidden" name="courseId" value="{$courseId}"/>
     <input type="hidden" id="tipoDocumentoId" name="tipoDocumentoId" value="{$auxTpl}"/>
     <input type="hidden" id="usuarioId" name="usuarioId" value="{$id}"/>
 	

@@ -8,33 +8,7 @@
         <li>
             <span>Perfil</span>
         </li>
-    </ul>
-    <div class="page-toolbar">
-{*        <div class="btn-group pull-right">
-            <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> Actions
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Action</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-shield"></i> Another action</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-user"></i> Something else here</a>
-                </li>
-                <li class="divider"> </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-bag"></i> Separated link</a>
-                </li>
-            </ul>
-        </div>*}
-    </div>
+    </ul> 
 </div>
 <!-- END PAGE BAR -->
 <!-- BEGIN PAGE TITLE-->
@@ -55,34 +29,16 @@
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>La contrasela se actualizo correctamente</strong>
 </div>
-{/if}
-
-<!-- END PAGE TITLE-->
-<!-- END PAGE HEADER-->
+{/if} 
 <div class="row">
-    <div class="col-md-12">
-        <!-- BEGIN PROFILE SIDEBAR -->
-        <div class="profile-sidebar">
-            <!-- PORTLET MAIN -->
-            <div class="portlet light profile-sidebar-portlet ">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">{$imgFoto}</div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
+    <div class="col-md-12"> 
+        <div class="profile-sidebar"> 
+            <div class="portlet light profile-sidebar-portlet "> 
+                <div class="profile-userpic">{$imgFoto}</div> 
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name"> {$User.username} </div>
                     <div class="profile-usertitle-job"> Alumno </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-{*
-                <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-circle green btn-sm">Follow</button>
-                    <button type="button" class="btn btn-circle red btn-sm">Message</button>
-                </div>
-*}
-                <!-- END SIDEBAR BUTTONS -->
-                <!-- SIDEBAR MENU -->
+                </div>  
                 <div class="profile-usermenu">
                     <ul class="nav">
 						<li>
@@ -94,12 +50,7 @@
                            <a href="{$WEB_ROOT}/graybox.php?page=registro-add" data-target="#ajax" data-toggle="modal" data-width="1000px">
                                <i class="fa fa-adn" aria-hidden="true"></i>Registro
 							</a>
-                        </li>
-						{*<li>
-                           <a  href="{$WEB_ROOT}/ajax/acuse.php?id={$id}" target="_blank" >
-                               <i class="fa fa-adn" aria-hidden="true"></i>Acuse de Derecho
-							</a>
-                        </li>*}
+                        </li> 
                         <li>
                            <a href="{$WEB_ROOT}/ajax/datas.php?id={$id}&key={$firma}" target="_blank">
                                <i class="fa fa-adn" aria-hidden="true"></i> Ficha de Registro
@@ -126,96 +77,11 @@
                                     <i class="fa fa-newspaper-o" style="color:#2ab4c0" aria-hidden="true"></i> INE Vuelta
                                 </a>
                             </li>
-                        {/if}
-						<!--<li>
-                            <a href="{$WEB_ROOT}/perfil" >
-                               <i class="fa fa-user" aria-hidden="true"></i>Perfil 
-							</a>
-                        </li>
-                        <li class="">
-                            <a href="{$WEB_ROOT}/alumn-services ">
-                                <i class="icon-settings"></i> Actualizar Información</a>
-                        </li>
-                        <li>
-                            <a href="{$WEB_ROOT}/tv ">
-                                <i class="fa fa-video-camera"></i> VideoConferencias </a>
-                        </li>
-                        <li>
-                            <a href="{$WEB_ROOT}/recorded ">
-                                <i class="fa fa-camera"></i> Grabaciones </a>
-                        </li>-->
-						<!--
-						<li>
-                            <a href="{$WEB_ROOT}/view-solicitud" >
-                               <i class="fa fa-folder-open" aria-hidden="true"></i>Solicitudes 
-							</a>
-                        </li>--><!--
-						<li>
-						<a href="{$WEB_ROOT}/graybox.php?page=referencia-bancaria" data-target="#ajax" data-toggle="modal" data-width="1000px">
-						   <i class="fa fa-university" aria-hidden="true"></i>Referencia Bancaria 
-						</a>
-						</li>
-						<li>
-						<a href="{$WEB_ROOT}/graybox.php?page=formato-reinscripcion" data-target="#ajax" data-toggle="modal" data-width="1000px">
-						  <i class="fa fa-file-text" aria-hidden="true"></i>Descargar Formatos de Inscripción/Reinscripción
-						</a>
-						</li>
-						<li>-->
-						<!--<a href="{$WEB_ROOT}/ver-calendario" ><onClick="verCalendario()"
-						   <i class="fa fa-calendar"></i>Calendario de Pagos
-						</a>
-						</li>-->
-						<!--
-						<li>
-						<a href="{$WEB_ROOT}/estatus-financiero" >
-						  <i class="fa fa-file-text" aria-hidden="true"></i>Estatus Financiero
-						</a>
-						</li>
-						<li>
-						<a href="{$WEB_ROOT}/graybox.php?page=concepto-pago" data-target="#ajax" data-toggle="modal" data-width="1000px">
-						   <i class="fa fa-files-o"></i>Conceptos de Pago
-						</a>
-						</li>
-						<li>
-						<a href="{$WEB_ROOT}/inbox/or/h" >
-						 <i class="fa fa-comments"></i>Inbox 
-						</a>
-						</li>
-						<li>
-						<a href="{$WEB_ROOT}/graybox.php?page=contra" data-target="#ajax" data-toggle="modal" data-width="1000px">
-						   <i class="fa fa-unlock-alt"></i>Cambiar Contraseña
-						</a>
-						</li>
-						<li>
-						<a href="{$WEB_ROOT}/personal-academico" >
-						   <i class="fa fa-sitemap"></i>Personal Academico
-						</a>
-						</li>-->
+                        {/if} 
                     </ul>
-                </div>
-                <!-- END MENU -->
-            </div>
-            <!-- END PORTLET MAIN -->
-            <!-- PORTLET MAIN -->
-            <div class="portlet light ">
-{*
-                <!-- STAT -->
-                <div class="row list-separated profile-stat">
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 37 </div>
-                        <div class="uppercase profile-stat-text"> Projects </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 51 </div>
-                        <div class="uppercase profile-stat-text"> Tasks </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 61 </div>
-                        <div class="uppercase profile-stat-text"> Uploads </div>
-                    </div>
-                </div>
-                <!-- END STAT -->
-*}
+                </div> 
+            </div> 
+            <div class="portlet light "> 
                 <div>
                     <h4 class="profile-desc-title">Acerca del IAP Chiapas</h4>
                     <span class="profile-desc-text"> El <b>Instituto de Administración Pública del Estado de Chiapas, A. C.</b><br />te da la mas cordial bienvenida a nuestro Sistema de Educación en Línea.</span>
@@ -228,11 +94,8 @@
                         <a href="https://www.facebook.com/IAPChiapas">iapchiapas</a>
                     </div>
                 </div>
-            </div>
-            <!-- END PORTLET MAIN -->
-        </div>
-        <!-- END BEGIN PROFILE SIDEBAR -->
-        <!-- BEGIN PROFILE CONTENT -->
+            </div> 
+        </div>  
         <div class="profile-content">
             {if $info.autorizoFirma eq "no"}
                 <div class="row">
@@ -270,8 +133,7 @@
                 </div>
 		    {elseif $info.actualizado eq "no"}
                 <div class="row">
-                    <div class="col-md-12">
-                        <!-- BEGIN PORTLET -->
+                    <div class="col-md-12"> 
                         <div class="portlet light ">
                             <div class="portlet-title tabbable-line">
                                 <div class="caption caption-md">
@@ -279,8 +141,7 @@
                                     <span class="caption-subject font-blue-madison bold uppercase">Datos para fichas de registros CONOCER</span>
                                 </div>
                             </div>
-                            <div class="portlet-body">
-                                <!--BEGIN TABS-->
+                            <div class="portlet-body"> 
                                 <div class="tab-content">
                                     <div class="tab-pane " id="tab_1_2">
                                     </div>
@@ -291,9 +152,7 @@
                                             </div>
                                             <br>
                                             <br>
-                                            <br>
-                                            
-                                            
+                                            <br> 
                                         </div>
                                         <form id="frmConfirma">
                                             <center>
@@ -309,16 +168,13 @@
                                             Al autorizar que el CONOCER publique su información en el RENAP, deberá subir copia de ambos lados de su Credencial de Elector (INE).
                                         </div>
                                     </div>
-                                </div>
-                                <!--END TABS-->
+                                </div> 
                             </div>
-                        </div>
-                        <!-- END PORTLET -->
+                        </div> 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <!-- BEGIN PORTLET -->
+                    <div class="col-md-12"> 
                         <div class="portlet light ">
                             <div class="portlet-title">
                                 <div class="caption caption-md">
@@ -331,8 +187,7 @@
                                     {include file="{$DOC_ROOT}/templates/forms/completo.tpl"}
                                 </div>
                             </div>
-                        </div>
-                        <!-- END PORTLET -->
+                        </div> 
                     </div>
                 </div>
 			{else}
@@ -352,8 +207,7 @@
                     </div>
                 {/if}
                 <div class="row">
-                    <div class="col-md-12">
-                        <!-- BEGIN PORTLET -->
+                    <div class="col-md-12"> 
                         <div class="portlet light ">
                             <div class="portlet-title">
                                 <div class="caption caption-md">
@@ -365,30 +219,21 @@
                                 <div class="table-scrollable table-scrollable-borderless">
                                     <table class="table table-hover table-light" >
                                         <thead>
-                                        <tr class="uppercase">
-
-                                            <!-- <th style="text-align: center"> Tipo </th>-->
+                                        <tr class="uppercase"> 
                                             <th style="text-align: center"> Nombre </th>
-                                            <th style="text-align: center"> Grupo </th>
-                                            <!--<th style="text-align: center"> Modalidad </th>-->
+                                            <th style="text-align: center"> Grupo </th> 
                                             <th style="text-align: center"> Fecha Inicial </th>
-                                            <th style="text-align: center"> Fecha Final </th>
-                                            <!--<th style="text-align: center"> Modulos </th>-->
-                                        
+                                            <th style="text-align: center"> Fecha Final </th>  
                                             <th style="text-align: center"> Ingresar </th>
                                             <th style="text-align: center"> Certificado </th>
                                         </tr>
                                         </thead>
                                         {foreach from=$activeCourses item=subject}
-                                        <tr>
-                                        
-                                        <!-- <td align="center">{$subject.majorName}</td>-->
+                                        <tr> 
                                             <td align="center">{$subject.name}</td>
-                                            <td align="center">{$subject.group}
-                                                <!-- <td align="center">{$subject.modality}</td>-->
+                                            <td align="center">{$subject.group} 
                                             <td align="center">{$subject.initialDate|date_format:"%d-%m-%Y"}</td>
-                                            <td align="center">{$subject.finalDate|date_format:"%d-%m-%Y"}</td>
-                                            <!--<td align="center">{$subject.courseModule}-->
+                                            <td align="center">{$subject.finalDate|date_format:"%d-%m-%Y"}</td> 
                                         
                                             <td align="center">
                                                 {if $subject.evalDocenteCompleta eq 'no'}
@@ -402,10 +247,7 @@
                                                 {/if}
                                             </td>
                                             <td align="center">
-                                                {if $subject.certificacion_pdf != ""}
-                                                    {*<i class="material-icons" title="NO DISPONIBLE">
-                                                        block
-                                                    </i>*}
+                                                {if $subject.certificacion_pdf != ""} 
                                                     <a href="{$WEB_ROOT}/graybox.php?page=student-certificado&userId={$subject.alumnoId}&subjectId={$subject.subjectId}&auxTpl=1" data-target="#ajax" data-toggle="modal" data-width="1000px" title="Descargar Certificado">
                                                         <i class="material-icons">assignment_returned</i>
                                                     </a>
@@ -419,15 +261,12 @@
                                             {foreachelse}
                                             <tr>
                                                 <td colspan="12" align="center">No se encontr&oacute; ning&uacute;n registro.</td>
-                                            </tr>
-
-                                        {/foreach}
-
+                                            </tr> 
+                                        {/foreach} 
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                        <!-- END PORTLET -->
+                        </div> 
                     </div>
                 </div>
                 <div class="row">

@@ -610,13 +610,15 @@ class Docente extends Empresa{
 			(						
 				tipoDocumentoId,
 				userId,
-				subjectId
+				subjectId,
+				courseId
 			)
 		 VALUES 
 			(						
 				'".$_POST["tipoDocumentoId"]."',
 				'".$_POST["usuarioId"]."',
-				'".$_POST["subjectId"]."'
+				'".$_POST["subjectId"]."',
+				'".$_POST['courseId']."'
 				
 			)";
 								
@@ -704,8 +706,5 @@ class Docente extends Empresa{
 			
 		return true;
 		
-	}	
-	
-	
-	
+	}
 }//Docente

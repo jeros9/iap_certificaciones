@@ -1185,13 +1185,16 @@ class Solicitud extends Module
 		
 	public function infoDoc()
 	{
-		
-		 $sqlQuery = "SELECT *
-						FROM repositorio
-					WHERE userId = " . $_GET["id"] . " AND tipoDocumentoId = " . $_GET["auxTpl"] . " AND subjectId = " . $_GET["cId"] . " ORDER BY repositorioId DESC";
+		$sqlQuery = "SELECT * FROM repositorio WHERE userId = " . $_GET["id"] . " AND tipoDocumentoId = " . $_GET["auxTpl"] . " AND subjectId = " . $_GET["subjectId"] . " AND courseId = '".$_GET['courseId']."' ORDER BY repositorioId DESC";
 		// exit;
+		// echo $sqlQuery;
 		$this->Util()->DB()->setQuery($sqlQuery);
 		$infoFol = $this->Util()->DB()->GetRow();
+		if(!$infoFol){
+			$sqlQuery = "SELECT * FROM repositorio WHERE userId = " . $_GET["id"] . " AND tipoDocumentoId = " . $_GET["auxTpl"] . " AND subjectId = " . $_GET["subjectId"] . " AND courseId IS NULL ORDER BY repositorioId DESC"; 
+			$this->Util()->DB()->setQuery($sqlQuery);
+			$infoFol = $this->Util()->DB()->GetRow();
+		}
 		
 		return $infoFol;
 	}
@@ -1199,10 +1202,7 @@ class Solicitud extends Module
 	public function infoCourse()
 	{
 		
-		 $sqlQuery = 'SELECT 
-					*
-				FROM 
-					user_subject
+		 $sqlQuery = 'SELECT * FROM  user_subject
 				WHERE   alumnoId = '.$_GET["id"].' and courseId = '.$_GET["cId"].'';
 		// exit;
 		$this->Util()->DB()->setQuery($sqlQuery);

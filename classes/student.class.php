@@ -2285,7 +2285,7 @@ class Student extends User
 			$active = " AND course.active = '" . $active . "'";
 		}
 		$sql = "SELECT
-					*, subject.name AS name, major.name AS majorName, repositorio.ruta AS certificacion_pdf
+					user_subject.*, course.*, subject.*, major.*, repositorio.repositorioId, repositorio.nombre, repositorio.activo, repositorio.ruta, repositorio.userId, repositorio.tipodocumentoId, repositorio.subjectId, repositorio.courseId as repositorioCourseId, subject.name AS name, major.name AS majorName, repositorio.ruta AS certificacion_pdf
 				FROM
 					user_subject
 				LEFT JOIN course ON course.courseId = user_subject.courseId

@@ -67,7 +67,7 @@ $x=0;
 	//$student->setUserId($_GET["id"]);
 	$activeCourses = $student->StudentCourses();
 	$smarty->assign("courses", $activeCourses);	
-	
+	// print_r($activeCourses);
 	// $activeCourses = $student->StudentCourses("activo", "si");
 	// echo "<pre>"; print_r($activeCourses);
 	// exit;

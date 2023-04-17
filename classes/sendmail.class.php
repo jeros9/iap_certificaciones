@@ -24,7 +24,7 @@ class SendMail extends Main
 			$mail->Send();
 	}
 	
-	public function PrepareAttachment($subject, $body, $details_body, $details_subject, $to, $toName, $attachment = array(), $fileName = array(), $from = "enlinea@iapchiapas.edu.mx", $fromName = "Administrador del Sistema") 
+	public function PrepareAttachment($subject, $body, $details_body, $details_subject, $to, $toName, $attachment = array(), $fileName = array(), $from = EMAIL_USERNAME, $fromName = "Administrador del Sistema") 
 	{
 			$mail = new PHPMailer(); // defaults to using php "mail()"
 			$mail->IsSMTP();
@@ -83,7 +83,7 @@ class SendMail extends Main
 			$mail->Send();
 	}
 
-	public function PrepareMulti($subject, $body, $details_body, $details_subject, $to, $toName, $attachment = "", $fileName = "", $from = "enlinea@iapchiapas.edu.mx", $fromName = "Administrador del Sistema") 
+	public function PrepareMulti($subject, $body, $details_body, $details_subject, $to, $toName, $attachment = "", $fileName = "", $from = EMAIL_USERNAME, $fromName = "Administrador del Sistema") 
 	{
 			$mail = new PHPMailer(); // defaults to using php "mail()"
 			
@@ -117,7 +117,7 @@ class SendMail extends Main
 			$mail->Send();
 	}
 
-	public function enviarEmail($subject, $body, $details_body, $details_subject, $to, $toName, $from = "prodim@iapchiapas.edu.mx", $fromName = "Administrador del Sistema") 
+	public function enviarEmail($subject, $body, $details_body, $details_subject, $to, $toName, $from = EMAIL_PRODIM, $fromName = "Administrador del Sistema") 
 	{
 			$mail = new PHPMailer();
 			$mail->IsSMTP();
@@ -126,8 +126,8 @@ class SendMail extends Main
 			$mail->SMTPSecure = "ssl";
 			$mail->Host       = "smtp.gmail.com";
 			$mail->Port       = 465;
-			$mail->Username   = "prodim@iapchiapas.edu.mx";
-			$mail->Password   = "iap_2020prmx";
+			$mail->Username   = EMAIL_PRODIM;
+			$mail->Password   = EMAIL_PRODIM_PASSWORD;
 
 			$body = nl2br($this->Util()->handle_mail_patterns($body, $details_body));
 			$subject = $this->Util()->handle_mail_patterns($subject, $details_subject);

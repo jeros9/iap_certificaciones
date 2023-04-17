@@ -19,19 +19,6 @@ switch ($_POST["type"]) {
 			$subject->setSubjectId($_POST["subjectId"]);
 			$data_subject = $subject->Info();
 			$text_email = '';
-			/* if($_POST["tipoDocumentoId"] == 5)
-				{
-					$sendmail     = new SendMail;
-					$details_body = [
-						"course"   => utf8_decode($data_subject["name"]),
-						"username" => $data_user["controlNumber"],
-						"password" => $data_user["password"],
-						"screen"   => WEB_ROOT . "/images/download.png"
-					];
-					$details_subject = [];
-					$sendmail->enviarEmail($message[3]["subject"], $message[3]["body"], $details_body, $details_subject, $user_email, $user_names);
-					$text_email = "Se envió la notificación al candidato.";
-				} */
 			if ($_POST["tipoDocumentoId"] == 5) {
 				include_once(DOC_ROOT . "/properties/messages.php");
 				//enviar correo
@@ -182,15 +169,14 @@ switch ($_POST["type"]) {
 		$smarty->display(DOC_ROOT . '/templates/lists/usuarios-doc.tpl');
 		break;
 
-	case "verForm":
-
-
-		$_GET["id"] = $_POST["userId"];
-		$_GET["cId"] = $_POST["subjectId"];
-		$_GET["auxTpl"] = $_POST["tipo"];
-
+	case "verForm":  
+		$_GET['id'] = $_POST['userId'];
+		$_GET['auxTpl'] = $_POST['tipo'];
+		$_GET['subjectId'] = $_POST['subjectId'];
+		$_GET['courseId'] = $_POST['courseId'];
 		$infoDoc = $solicitud->infoDoc();
-		$smarty->assign("cId", $_POST["subjectId"]);
+		$smarty->assign('courseId', $_POST['courseId']);
+		$smarty->assign("subjectId", $_POST["subjectId"]);
 		$smarty->assign("id", $_POST["userId"]);
 		$smarty->assign("auxTpl", $_POST["tipo"]);
 		$smarty->assign("infoDoc", $infoDoc);
