@@ -566,16 +566,17 @@ class Student extends User
 				$course = new Course();
 				$course->setCourseId($_POST["curricula"]);
 				$courseInfo = $course->Info();
+				$nombre = $info['names'] . ' ' . $info['lastNamePaterno'] . ' ' . $info['lastNameMaterno'];
 				$details_body = array(
-					"email" => $info["controlNumber"],
-					"password" => $info["password"],
-					"major" => utf8_decode($courseInfo["majorName"]),
-					"course" => utf8_decode($courseInfo["name"])
+					"email" 	=> $info["controlNumber"],
+					"password" 	=> $info["password"],
+					"major" 	=> utf8_decode($courseInfo["majorName"]),
+					"course" 	=> utf8_decode($courseInfo["name"]),
+					"candidato"	=> $nombre
 				);
 				$details_subject = array();
 				$attachment = "";
 				$fileName = "";
-				$nombre = $info['names'] . ' ' . $info['lastNamePaterno'] . ' ' . $info['lastNameMaterno'];
 				$sendmail->PrepareAttachment($message[1]["subject"], $message[1]["body"], $details_body, $details_subject, $info["email"], $nombre, $attachment, $fileName);
 
 				$this->Util()->setError(10028, "complete", "Registro Exitoso");
@@ -738,8 +739,8 @@ class Student extends User
 			$courseInfo = $course->Info();
 			if ($this->tipo_beca == "Ninguno")
 				$this->por_beca = 0;
-
-			$this->AddUserToCurricula($id, $_POST["curricula"], $this->getNames(), $this->getEmail(), $this->getPassword(), $courseInfo["majorName"], $courseInfo["name"], $this->tipo_beca, $this->por_beca);
+			$nombre = $this->getNames(). ' ' . $this->getLastNamePaterno(). ' ' . $this->getLastNameMaterno();
+			$this->AddUserToCurricula($id, $_POST["curricula"], $nombre, $this->getEmail(), $this->getPassword(), $courseInfo["majorName"], $courseInfo["name"], $this->tipo_beca, $this->por_beca);
 
 			if ($this->getRegister() == 0) {
 				$complete1 = "Te has registrado exitosamente. Te hemos enviado un correo electronico con los datos de ingreso al sistema";
@@ -836,8 +837,8 @@ class Student extends User
 		else
 			$matricula = "";
 
-
-		$complete = $this->AddUserToCurricula($userId, $courseId, $info["names"], $info["email"], $info["password"], $courseInfo["majorName"], $courseInfo["name"], $tipo_beca, $por_beca, $matricula);
+		$nombre = $info['names'] . ' ' . $info['lastNamePaterno'] . ' ' . $info['lastNameMaterno'];
+		$complete = $this->AddUserToCurricula($userId, $courseId, $nombre, $info["email"], $info["password"], $courseInfo["majorName"], $courseInfo["name"], $tipo_beca, $por_beca, $matricula);
 
 		$this->Util()->setError(10028, "complete", $complete);
 		$this->Util()->PrintErrors();
@@ -931,6 +932,7 @@ class Student extends User
 			"password" => $password,
 			"major" => utf8_decode($major),
 			"course" => utf8_decode($course),
+			"candidato" => $nombre
 		);
 		$details_subject = array();
 		$attachment = "";

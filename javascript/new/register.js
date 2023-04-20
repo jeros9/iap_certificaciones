@@ -147,7 +147,7 @@ function ciudad_dependencia()
 
 function AddStudentRegister()
 {
-    //alert("hola");
+    // alert("hola");
     $.ajax({
         url : WEB_ROOT+'/ajax/student.php',
         type: "POST",

@@ -610,7 +610,7 @@
 				$result[$key]["retroFile"] = $this->RetroFile();
 				
 				$realScore = $result[$key]["ponderation"] * $result[$key]["score"] / 100;
-				$result[$key]{"realScore"} = $realScore;
+				$result[$key]["realScore"] = $realScore;
 				
 			}
 			

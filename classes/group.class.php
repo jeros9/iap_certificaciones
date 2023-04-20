@@ -1067,7 +1067,7 @@ class Group extends Module
 						WHERE courseModuleId = '" . $this->coursemoduleId . "' AND userId = '" . $res["alumnoId"] . "'");
 			$result[$key]["equipo"] = $this->Util()->DB()->GetSingle();
 
-			$result[$key]{"addepUp"} = 0;
+			$result[$key]["addepUp"] = 0;
 			foreach ($actividades as $activity) {
 				if ($activity["score"] <= 0) {
 					continue;
@@ -1084,17 +1084,16 @@ class Group extends Module
 				$this->Util()->DB()->setQuery($sqlca);
 				$score = $this->Util()->DB()->GetSingle();
 
-				$result[$key]{"score"}[] = $score;
+				$result[$key]["score"][] = $score;
 				$realScore = $score * $activity["score"] / 100;
-				$result[$key]{"realScore"}[] = $realScore;
-
-				$result[$key]{"addepUp"} += $realScore;
+				$result[$key]["realScore"][] = $realScore; 
+				$result[$key]["addepUp"] += $realScore;
 			}
 
 
 			if ($infoCc["calificacion"] == null or $infoCc["calificacion"] == 0) {
 
-				$at = $result[$key]{"addepUp"} / 10;
+				$at = $result[$key]["addepUp"] / 10;
 				// echo $res["alumnoId"].'__'.$result[$key]{"addepUp"}.'__'.'__'.$at;
 				// echo '<br>';
 				if ($this->tipoMajor == "MAESTRIA" and $at < 7) {
