@@ -318,6 +318,7 @@ switch ($_POST["type"]) {
 			$smarty->assign('personal_id', $_POST['personalId']);
 			$smarty->assign('user_id', $_POST['userId']);
 			$smarty->assign('subject_id', $_POST['subjectId']);
+			$smarty->assign('course_id', $_POST['courseId']);
 			$smarty->display(DOC_ROOT . '/templates/forms/new/add-' . $php_name . '.tpl');
 		} else {
 			$smarty->assign('personal_id', $_SESSION['User']['userId']);

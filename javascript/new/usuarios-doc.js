@@ -355,16 +355,11 @@ function addCertificacion() {
 
 		},
 		success: function (response) {
-			$(".loader").html('');
-			console.log(response)
-			var splitResp = response.split("[#]");
-
-			if ($.trim(splitResp[0]) == "ok") {
-				// $("#msj").html(splitResp[1]);
-				// $("#contenido").html(splitResp[2]);
+			$(".loader").html(''); 
+			var splitResp = response.split("[#]"); 
+			if ($.trim(splitResp[0]) == "ok") { 
 				ShowStatus((splitResp[1]));
-				closeModal();
-				console.log(response)
+				closeModal(); 
 			} else if ($.trim(splitResp[0]) == "fail") {
 				$("#msj").html(splitResp[1]);
 			} else {
@@ -388,13 +383,8 @@ function buscarGrupos() {
 		beforeSend: function () {
 			$("#load").html(LOADER3);
 		},
-		success: function (response) {
-
-			console.log(response)
-
-			$("#divGrupos").html(response);
-
-
+		success: function (response) { 
+			$("#divGrupos").html(response); 
 		},
 		error: function () {
 			alert(msgError);
@@ -414,13 +404,8 @@ function buscarGrupoModal() {
 		beforeSend: function () {
 			$("#load").html(LOADER3);
 		},
-		success: function (response) {
-
-			console.log(response)
-
-			$("#divGps").html(response);
-
-
+		success: function (response) {  
+			$("#divGps").html(response); 
 		},
 		error: function () {
 			alert(msgError);
@@ -466,13 +451,8 @@ function onSendINE() {
 			}, false);
 			return XHR;
 		},
-		success: function (response) {
-
-			console.log(response);
-			// var splitResp = response.split("[#]");
-			// $("#msjCourse").html(response);
-			var splitResp = response.split("[#]");
-
+		success: function (response) { 
+			var splitResp = response.split("[#]"); 
 			if ($.trim(splitResp[0]) == "ok") {
 				closeModal()
 				$('#msjHome').html(splitResp[1]);
@@ -480,19 +460,14 @@ function onSendINE() {
 				alert(splitResp[1])
 			} else {
 				alert('Ocurrio un error....')
-			}
-			// alert('llega')
+			} 
 			closeModal()
 		},
 	})
 
-}
+} 
 
-
-
-
-function verForm(userId, subjectId, tipo, courseId) {
-
+function verForm(userId, subjectId, tipo, courseId) { 
 	$.ajax({
 		type: "POST",
 		url: WEB_ROOT + '/ajax/new/usuarios.php',
@@ -501,13 +476,9 @@ function verForm(userId, subjectId, tipo, courseId) {
 			$("#load").html(LOADER3);
 		},
 		success: function (response) {
-
-			console.log(response)
-
-			$("#r_" + subjectId).toggle();
-			$("#r_" + subjectId).html(response);
-
-
+			console.log(subjectId+"_"+courseId);
+			$("#r_" + subjectId + "_" + courseId).toggle();
+			$("#r_" + subjectId + "_" + courseId).html(response);
 		},
 		error: function () {
 			alert(msgError);
@@ -518,8 +489,7 @@ function verForm(userId, subjectId, tipo, courseId) {
 
 
 
-function verFormEva(userId, subjectId, tipo) {
-
+function verFormEva(userId, subjectId, tipo, courseId) { 
 	$.ajax({
 		type: "POST",
 		url: WEB_ROOT + '/ajax/new/usuarios.php',
@@ -527,14 +497,9 @@ function verFormEva(userId, subjectId, tipo) {
 		beforeSend: function () {
 			$("#load").html(LOADER3);
 		},
-		success: function (response) {
-
-			console.log(response)
-
-			$("#r_" + subjectId).toggle();
-			$("#r_" + subjectId).html(response);
-
-
+		success: function (response) { 
+			$("#r_" + subjectId+"_"+courseId).toggle();
+			$("#r_" + subjectId+"_"+courseId).html(response);  
 		},
 		error: function () {
 			alert(msgError);
@@ -542,25 +507,17 @@ function verFormEva(userId, subjectId, tipo) {
 	});
 }
 
-
-
-function verFormEvaluacion(personalId, userId, subjectId, tipo) {
-
+function verFormEvaluacion(personalId, userId, subjectId, tipo, courseId) { 
 	$.ajax({
 		type: "POST",
 		url: WEB_ROOT + '/ajax/new/usuarios.php',
-		data: $("#frmGral2").serialize(true) + '&type=verFormEvaluacion&userId=' + userId + '&subjectId=' + subjectId + '&tipo=' + tipo + '&personalId=' + personalId,
+		data: $("#frmGral2").serialize(true) + '&type=verFormEvaluacion&userId=' + userId + '&subjectId=' + subjectId + '&tipo=' + tipo + '&personalId=' + personalId+'&courseId='+courseId,
 		beforeSend: function () {
 			$("#load").html(LOADER3);
 		},
-		success: function (response) {
-
-			console.log(response)
-
-			$("#r_" + subjectId).toggle();
-			$("#r_" + subjectId).html(response);
-
-
+		success: function (response) { 
+			$("#r_" + subjectId+"_"+courseId).toggle();
+			$("#r_" + subjectId+"_"+courseId).html(response); 
 		},
 		error: function () {
 			alert(msgError);
@@ -595,6 +552,7 @@ $(document).ready(function () {
 
 function AddCedula() {
 	var subjectId = $('input[name=subject_id]').val();
+	var courseId = $('input[name=course_id]').val();
 	$.ajax({
 		url: WEB_ROOT + '/ajax/new/usuarios.php',
 		type: "POST",
@@ -603,10 +561,10 @@ function AddCedula() {
 			var splitResponse = data.split("[#]");
 
 			if (splitResponse[0] == "fail") {
-				$("#r_" + subjectId).html("<div class='alert alert-danger'>" + splitResponse[1] + "</div>");
+				$("#r_" + subjectId+"_"+courseId).html("<div class='alert alert-danger'>" + splitResponse[1] + "</div>");
 			}
 			else {
-				$("#r_" + subjectId).html("<div class='alert alert-success'>La cédula se añadió correctamente.</div>");
+				$("#r_" + subjectId+"_"+courseId).html("<div class='alert alert-success'>La cédula se añadió correctamente.</div>");
 			}
 		},
 		error: function () {
@@ -618,6 +576,7 @@ function AddCedula() {
 function AddPlan() {
 	var requerimientos = getRowsRequerimientos();
 	var subjectId = $('input[name=subject_id]').val();
+	var courseId = $('input[name=course_id]').val();
 	$.ajax({
 		url: WEB_ROOT + '/ajax/new/usuarios.php',
 		type: "POST",
@@ -626,10 +585,10 @@ function AddPlan() {
 			var splitResponse = data.split("[#]");
 
 			if (splitResponse[0] == "fail") {
-				$("#r_" + subjectId).html("<div class='alert alert-danger'>" + splitResponse[1] + "</div>");
+				$("#r_" + subjectId+"_"+courseId).html("<div class='alert alert-danger'>" + splitResponse[1] + "</div>");
 			}
 			else {
-				$("#r_" + subjectId).html("<div class='alert alert-success'>El plan se añadió correctamente.</div>");
+				$("#r_" + subjectId+"_"+courseId).html("<div class='alert alert-success'>El plan se añadió correctamente.</div>");
 			}
 		},
 		error: function () {

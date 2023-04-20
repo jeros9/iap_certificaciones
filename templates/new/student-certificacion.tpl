@@ -40,13 +40,13 @@
 							{if $cId ne 'usuarios-admin'}						
 								<td align="center" class="id">{$item.suEvaluador.name} {$item.suEvaluador.lastname_paterno} {$item.suEvaluador.lastname_materno}</td>				
 								<td align="center" class="id">
-									<a href="javascript:void(0)" onClick="verFormEvaluacion({$item.suEvaluador.personalId},{$item.userId},{$item.subjectId}_{$item.courseId},1)" title="AGREGAR PLAN">
+									<a href="javascript:void(0)" onClick="verFormEvaluacion({$item.suEvaluador.personalId},{$item.userId},{$item.subjectId},1,{$item.courseId})" title="AGREGAR PLAN">
 										<i class="material-icons">calendar_today</i>	
 									</a>
-									<a href="javascript:void(0)" onClick="verForm({$item.userId},{$item.subjectId}_{$item.courseId},2, {$item.courseId})" title="AGREGAR IEC">
+									<a href="javascript:void(0)" onClick="verForm({$item.userId},{$item.subjectId},2,{$item.courseId})" title="AGREGAR IEC">
 										<i class="material-icons">chrome_reader_mode</i>	
 									</a>
-									<a href="javascript:void(0)" onClick="verFormEvaluacion({$item.suEvaluador.personalId},{$item.userId},{$item.subjectId}_{$item.courseId},3, {$item.courseId})" title="AGREGAR CEDULA">
+									<a href="javascript:void(0)" onClick="verFormEvaluacion({$item.suEvaluador.personalId},{$item.userId},{$item.subjectId},3,{$item.courseId})" title="AGREGAR CEDULA">
 										<i class="material-icons">aspect_ratio</i>	
 									</a>
 									<a href="javascript:void(0)" onClick="verForm({$item.userId},{$item.subjectId},4, {$item.courseId})" title="AGREGAR PRODUCTOS">
