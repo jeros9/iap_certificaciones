@@ -46,7 +46,7 @@
 			</i>	
 			</a>
 		{/if}
-		<a href="{$WEB_ROOT}/graybox.php?page=add-doc&id={$item.userId}&auxTpl=2&cId={$item.subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR IEC">
+		<a href="{$WEB_ROOT}/graybox.php?page=add-doc&id={$item.userId}&auxTpl=2&subjectId={$item.subjectId}&courseId={$item.courseId}" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR IEC">
 		<i class="material-icons">
 			chrome_reader_mode
 			</i>
@@ -65,7 +65,7 @@
 			</i>
 			</a>
 		{/if}
-		<a href="{$WEB_ROOT}/graybox.php?page=add-doc&id={$item.userId}&auxTpl=4&cId={$item.subjectId}" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR PRODUCTOS">
+		<a href="{$WEB_ROOT}/graybox.php?page=add-doc&id={$item.userId}&auxTpl=4&subjectId={$item.subjectId}&courseId={$item.courseId}" data-target="#ajax" data-toggle="modal" data-width="1000px" title="AGREGAR PRODUCTOS">
 		<i class="material-icons">
 			description
 			</i>
