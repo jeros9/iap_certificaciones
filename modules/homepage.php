@@ -95,11 +95,66 @@ $x=0;
 	
 	$announcements = $announcement->Enumerate(0, 0);
 	$smarty->assign('announcements', $announcements);
+
+	$municipalities = [
+		91,
+		88,
+		132,
+		167,
+		151,
+		157,
+		124,
+		189,
+		81,
+		142,
+		193,
+		96,
+		175,
+		147,
+		156,
+		141,
+		109,
+		179,
+		168,
+		2495,
+		176,
+		140,
+		145,
+		2494,
+		128,
+		97,
+		121,
+		112,
+		134,
+		177,
+		110,
+		152,
+		120,
+		89,
+		86,
+		154,
+		183,
+		99,
+		130,
+		158,
+		2498,
+		137,
+		83,
+		119,
+		181
+	];	
+	$allowed = false;
+	if($_SESSION['User']['type'] == 'student')
+	{
+		$municipality = intval($info['workplaceCity']);
+		$allowed = in_array($municipality, $municipalities);
+	}
 	
 	
 	$lstSolicitante=$student->EnumerateSolicitantes();	
 	$lstSector = $student->EnumerateSector();	
 	$smarty->assign('info', $info);
+	$smarty->assign('allowed', $allowed);
 	$smarty->assign('lstSector', $lstSector);
 	$smarty->assign('lstSolicitante', $lstSolicitante);
 	// echo '_'.$_SESSION['msjC'];

@@ -225,7 +225,7 @@
                                             <th style="text-align: center"> Fecha Inicial </th>
                                             <th style="text-align: center"> Fecha Final </th>  
                                             <th style="text-align: center"> Ingresar </th>
-                                            {* <th style="text-align: center"> Certificado </th> *}
+                                            <th style="text-align: center"> Certificado </th>
                                         </tr>
                                         </thead>
                                         {foreach from=$activeCourses item=subject}
@@ -246,8 +246,8 @@
                                                     </a>
                                                 {/if}
                                             </td>
-                                            {* <td align="center">
-                                                {if $subject.certificacion_pdf != ""} 
+                                            <td align="center">
+                                                {if $subject.certificacion_pdf != "" && $allowed} 
                                                     <a href="{$WEB_ROOT}/graybox.php?page=student-certificado&userId={$subject.alumnoId}&subjectId={$subject.subjectId}&auxTpl=1" data-target="#ajax" data-toggle="modal" data-width="1000px" title="Descargar Certificado">
                                                         <i class="material-icons">assignment_returned</i>
                                                     </a>
@@ -256,7 +256,7 @@
                                                         block
                                                     </i>
                                                 {/if}
-                                            </td> *}
+                                            </td>
                                         </tr>
                                             {foreachelse}
                                             <tr>
