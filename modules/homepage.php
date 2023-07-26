@@ -141,7 +141,8 @@ $x=0;
 		137,
 		83,
 		119,
-		181
+		181,
+		180
 	];	
 	$allowed = false;
 	if($_SESSION['User']['type'] == 'student')
