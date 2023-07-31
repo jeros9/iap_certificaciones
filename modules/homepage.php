@@ -152,7 +152,7 @@ $x=0;
 	$allowed = false;
 	if($_SESSION['User']['type'] == 'student')
 	{
-		$municipality = intval($info['workplaceCity']);
+		$municipality = intval($info['ciudadt']);
 		$allowed = in_array($municipality, $municipalities);
 	}
 	
