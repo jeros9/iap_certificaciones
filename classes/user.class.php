@@ -1307,9 +1307,11 @@ class User extends Main
 			
 			$this->Util()->DB()->setQuery(
 				"SELECT 
-					* 
+					user.*, municipio.nombre as municipio_labora, estado.nombre as estado_labora
 			   FROM 
-					user 
+					user
+				INNER JOIN municipio ON municipio.municipioId = user.ciudadt
+				INNER JOIN estado ON estado.estadoId = user.estadot
 				WHERE 
 					controlNumber = '".$this->username."' 
 				
@@ -1333,6 +1335,8 @@ class User extends Main
 						$card['activo'] = $row['activo'];
 						$card['isLogged'] = true;
 						$card['autorizo'] = $row['autorizo'];
+						$card['estado']	= $row['estado_labora'];
+						$card['municipio']	= $row['municipio_labora'];
 						$_SESSION['User'] = $card;
 						$_SESSION["lastClick"] = time();	
 

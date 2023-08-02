@@ -97,57 +97,14 @@ $x=0;
 	$smarty->assign('announcements', $announcements);
 
 	$municipalities = [
-		91,
-		88,
-		132,
-		167,
-		151,
-		157,
-		124,
-		189,
-		81,
-		142,
-		193,
-		96,
-		175,
-		147,
-		156,
-		141,
-		109,
-		179,
-		168,
-		2495,
-		176,
-		140,
-		145,
-		2494,
-		128,
-		97,
-		121,
-		112,
-		134,
-		177,
-		110,
-		152,
-		120,
-		89,
-		86,
-		154,
-		183,
-		99,
-		130,
-		158,
-		2498,
-		137,
-		83,
-		119,
-		181,
-		180,
-		191,
-		146,
-		184,
-		133,
-		165
+		88, //Ángel Albino Corzo
+		151, //Villa Comaltitlán
+		147, //Pantepec
+		119, //Huitihupan
+		122, //Ixhuatán
+		161, //Simojovel
+		107, //Chiapa de Corzo
+		180 //Tuxtla Gutiérrez
 	];	
 	$allowed = false;
 	if($_SESSION['User']['type'] == 'student')

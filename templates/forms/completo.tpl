@@ -47,7 +47,7 @@ return (key <= 13 || (key >= 48 && key <= 57) || key == 46);
 		</tr>
 	  	<tr>
 			<td colspan="3" {if $info.estadot ne ""} style="background:#e7505a33" {/if}>
-				Estado:<br>
+				Estado donde labora:<br>
 				<select id="estadotId" name="estadotId" class="form-control" onChange="ciudad_domt();">
 					<option value="0">Selecciona</option>
 					{foreach from=$lstEstados item=pais}
@@ -58,7 +58,7 @@ return (key <= 13 || (key >= 48 && key <= 57) || key == 46);
                 </select>
 			</td>  
 			<td colspan="3" {if $info.ciudadt ne ""} style="background:#e7505a33" {/if}>
-				Municipio:<br>
+				Municipio donde labora:<br>
 				<div id="divMunicipiot">
 					{include file="{$DOC_ROOT}/templates/forms/new/municipiot.tpl"}
 				</div>

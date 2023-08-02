@@ -38,6 +38,7 @@
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name"> {$User.username} </div>
                     <div class="profile-usertitle-job"> Alumno </div>
+                    <div class="profile-usertitle-job"> {$User.municipio} , {$User.estado} </div>
                 </div>  
                 <div class="profile-usermenu">
                     <ul class="nav">
