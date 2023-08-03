@@ -96,19 +96,15 @@ $x=0;
 	$announcements = $announcement->Enumerate(0, 0);
 	$smarty->assign('announcements', $announcements);
 
-	$municipalities = [
-		88, //Ángel Albino Corzo
-		151, //Villa Comaltitlán
-		147, //Pantepec
-		119, //Huitihupan
-		122, //Ixhuatán
-		161, //Simojovel
-		107, //Chiapa de Corzo
-		180 //Tuxtla Gutiérrez
-	];	
+	
 	$allowed = false;
 	if($_SESSION['User']['type'] == 'student')
 	{
+		$municipalities = [];
+		$municipios_permitidos =  $student->enumerateMunicipio(7,"AND permiso = 1"); 
+		foreach ($municipios_permitidos as $item) {
+			$municipalities[] = $item['municipioId'];
+		} 
 		$municipality = intval($info['ciudadt']);
 		$allowed = in_array($municipality, $municipalities);
 	}

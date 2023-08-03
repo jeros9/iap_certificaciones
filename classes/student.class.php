@@ -205,7 +205,7 @@ class Student extends User
 	{
 		$this->alumnoId = $value;
 	}
- 
+
 	public function setName($value)
 	{
 		$this->name = $value;
@@ -739,7 +739,7 @@ class Student extends User
 			$courseInfo = $course->Info();
 			if ($this->tipo_beca == "Ninguno")
 				$this->por_beca = 0;
-			$nombre = $this->getNames(). ' ' . $this->getLastNamePaterno(). ' ' . $this->getLastNameMaterno();
+			$nombre = $this->getNames() . ' ' . $this->getLastNamePaterno() . ' ' . $this->getLastNameMaterno();
 			$this->AddUserToCurricula($id, $_POST["curricula"], $nombre, $this->getEmail(), $this->getPassword(), $courseInfo["majorName"], $courseInfo["name"], $this->tipo_beca, $this->por_beca);
 
 			if ($this->getRegister() == 0) {
@@ -3490,9 +3490,13 @@ class Student extends User
 
 
 
-	public function enumerateMunicipio($Id)
+	public function enumerateMunicipio($Id, $filter = NULL)
 	{
-		$sql = "SELECT * FROM municipio WHERE estadoId = " . $Id . "";
+		$where = "";
+		if (!empty($filter)) {
+			$where = $filter;
+		}
+		$sql = "SELECT * FROM municipio WHERE estadoId = " . $Id . " {$where} ";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 
@@ -3573,8 +3577,7 @@ class Student extends User
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 
-		foreach ($result as $key => $aux) 
-		{
+		foreach ($result as $key => $aux) {
 			$sql = "SELECT 
 						u.personalId,
 						name,
@@ -4045,7 +4048,7 @@ class Student extends User
 		$result = $this->Util()->DB()->GetRow();
 		return $result;
 	}
-	
+
 	public function UpdateAutorizoFirma()
 	{
 		if ($this->Util()->PrintErrors()) {
@@ -4080,5 +4083,33 @@ class Student extends User
 		if ($total == 0)
 			$attendance = false;
 		return $attendance;
+	}
+
+	public function ActualizarEstadoMunicipio()
+	{
+		$sql = "UPDATE user SET 
+		estadot='" . $this->getEstadoT() . "',
+		ciudadt='" . $this->getCiudadT() . "' 
+		WHERE userId = '" . $this->getUserId() . "' ";
+		$this->Util()->DB()->setQuery($sql);
+		$result = [];
+		$result['actualizado'] = $this->Util()->DB()->UpdateData();
+		if ($result['actualizado']) {
+			$sql = "SELECT nombre FROM municipio WHERE municipioId = '".$this->getCiudadT()."' ";
+			$this->Util()->DB()->setQuery($sql);
+			$municipio = $this->Util()->DB()->GetSingle(); 
+			$sql = "SELECT nombre FROM estado WHERE estadoId = '".$this->getEstadoT()."' ";
+			$this->Util()->DB()->setQuery($sql);
+			$estado = $this->Util()->DB()->GetSingle();
+			$result['municipio'] = $municipio; 
+			$result['estado'] = $estado; 
+		}
+		return $result;
+	}
+
+	public function actualizarPermisoMunicipio($permiso)  {
+		$sql = "UPDATE municipio SET permiso = '{$permiso}' WHERE municipioId = '{$this->getCiudadT()}'";
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->UpdateData();
 	}
 }

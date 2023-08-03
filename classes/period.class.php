@@ -113,7 +113,7 @@ class Period extends Main
 								ON u.typeOrderId = pcto.typeOrderId
 							LEFT JOIN surveys sv
 								ON c.subjectId = sv.subjectId AND us.alumnoId = sv.userId
-						WHERE us.courseId = " . $value['courseId'] . " AND u.workplaceCity = " . $inv['municipalityId'];
+						WHERE us.courseId = " . $value['courseId'] . " AND u.ciudadt = " . $inv['municipalityId'];
 				$this->Util()->DB()->setQuery($sql);
 				$participants = $this->Util()->DB()->GetResult();
 				$result['participants'][$value['courseId']][$inv['municipalityId']] = $participants;

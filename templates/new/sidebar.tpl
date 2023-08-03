@@ -128,6 +128,13 @@
                                 </a>
                             </li>
                         {/if}
+                        {if $User.positionId == 1 || $AccessMod[46] == 1}
+                            <li class="nav-item">
+                                <a href="{$WEB_ROOT}/permisos" class="nav-link">
+                                    <span class="title">Permisos</span>
+                                </a>
+                            </li>
+                        {/if}
                     </ul>
                 </li>
                 {* CANDIDATOS *}

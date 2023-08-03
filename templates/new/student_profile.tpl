@@ -38,8 +38,14 @@
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name"> {$User.username} </div>
                     <div class="profile-usertitle-job"> Alumno </div>
-                    <div class="profile-usertitle-job"> {$User.municipio} , {$User.estado} </div>
-                </div>  
+                    <div class="profile-usertitle-job">
+                        <label style="color: #000;width:100%"><b>Lugar donde labora</b></label>
+                        {$User.municipio} , {$User.estado}
+                        <a href="{$WEB_ROOT}/graybox.php?page=edit-estado-municipio" data-target="#ajax" data-toggle="modal" data-width="1000px">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </div>
+                </div>
                 <div class="profile-usermenu">
                     <ul class="nav">
 						<li>

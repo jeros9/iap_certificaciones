@@ -248,7 +248,8 @@ $pages = array(
     // EVALUADOR
     'red-dates',
     'numero-lote',
-    'revision-portafolio'
+    'revision-portafolio',
+    'edit-estado-municipio'
 
 );
 

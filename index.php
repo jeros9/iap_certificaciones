@@ -245,7 +245,10 @@ $pages = array(
 
 	// Examenes Finales
 	'add-final-test',
-	'date-final-test'
+	'date-final-test',
+
+	'edit-estado-municipio',
+	'permisos'
 );
 
 if(!in_array($_GET['page'], $pages))

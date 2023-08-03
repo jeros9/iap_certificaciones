@@ -86,6 +86,11 @@ function actionPostAjax(form, response){
     if (response.location) {
         window.location.href = response.location;
     }
+    if (response.reload) {
+        setTimeout(() => {
+            location.reload();            
+        }, 1000);
+    }
 }
 function showModal(title, data) {
     bootbox.dialog({
