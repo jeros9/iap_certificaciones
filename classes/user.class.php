@@ -1289,8 +1289,8 @@ class User extends Main
 					user.*, municipio.municipioId, municipio.nombre as municipio_labora, estado.estadoId, estado.nombre as estado_labora
 			   FROM 
 					user
-				INNER JOIN municipio ON municipio.municipioId = user.ciudadt
-				INNER JOIN estado ON estado.estadoId = user.estadot
+				LEFT JOIN municipio ON municipio.municipioId = user.ciudadt
+				LEFT JOIN estado ON estado.estadoId = user.estadot
 				WHERE 
 					controlNumber = '" . $this->username . "' 
 				
