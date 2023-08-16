@@ -99,14 +99,18 @@ $x=0;
 	
 	$allowed = false;
 	if($_SESSION['User']['type'] == 'student')
-	{
-		$municipalities = [];
-		$municipios_permitidos =  $student->enumerateMunicipio(7,"AND permiso = 1"); 
-		foreach ($municipios_permitidos as $item) {
-			$municipalities[] = $item['municipioId'];
-		} 
-		$municipality = intval($info['ciudadt']);
-		$allowed = in_array($municipality, $municipalities);
+	{		
+		if ($info['estadot'] != 7) {
+			$allowed = true;
+		}else{
+			$municipalities = [];
+			$municipios_permitidos =  $student->enumerateMunicipio(7,"AND permiso = 1"); 
+			foreach ($municipios_permitidos as $item) {
+				$municipalities[] = $item['municipioId'];
+			} 
+			$municipality = intval($info['ciudadt']);
+			$allowed = in_array($municipality, $municipalities);
+		}
 	}
 	
 	
