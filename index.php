@@ -229,6 +229,7 @@ $pages = array(
 	'respuestas',
 	'make-group-final-test',
 	'revision-portafolio',
+	'revision-externo',
 
 	// Proceso de Certificacion
 	'invitacion',

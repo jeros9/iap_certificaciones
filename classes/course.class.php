@@ -1882,15 +1882,15 @@ class Course extends Subject
 		return $result;
 	}
 
-	public function getBriefcase($certification,$evaluator,$group = NULL)
+	public function getBriefcase($certification,$evaluator,$group = NULL, $where = '')
 	{
 		$filtro = "";
 		if(isset($group) && !empty($group)){
-			$filtro = " AND course.courseId = '{$group}' ";
+			$filtro = " AND course.courseId = '{$group}'";
 		}
 		if ($_POST['certificaciones']) {
 			//$filtro.=" AND subject.subjectId = '{$_POST['certificaciones']}'";
-		}
+		} 
 		$sql = "SELECT user.names, 
 					user.lastNamePaterno, 
 					user.lastNameMaterno, 
@@ -1924,7 +1924,7 @@ class Course extends Subject
 				LEFT JOIN planes ON planes.subjectId = subject.subjectId AND planes.personalId = usuario_personal.personalId AND planes.userId = user_subject.alumnoId
 				LEFT JOIN cedulas ON course.subjectId = cedulas.subjectId AND user_subject.alumnoId = cedulas.userId
 				LEFT JOIN lot_number ON lot_number.subject_id = subject.subjectId AND lot_number.course_id = course.courseId AND lot_number.student_id = user_subject.alumnoId
-				WHERE usuario_personal.personalId = '{$evaluator}' AND subject.subjectId = '{$certification}' {$filtro} GROUP BY course.courseId, user.userId ORDER BY course.group, lot_number.lot, user.names, user.lastNamePaterno";
+				WHERE usuario_personal.personalId = '{$evaluator}' AND subject.subjectId = '{$certification}' {$filtro} {$where} GROUP BY course.courseId, user.userId ORDER BY course.group, lot_number.lot, user.names, user.lastNamePaterno";
 		// echo $sql;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();

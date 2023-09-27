@@ -1,5 +1,6 @@
 <div class="page-sidebar navbar-collapse collapse">
-    <ul class="page-sidebar-menu  page-header-fixed {if $User.type == "student" || $User.type == "Docente"} page-sidebar-menu-closed {/if}" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+    <ul class="page-sidebar-menu  page-header-fixed {if $User.type == "student" || $User.type == "Docente"} page-sidebar-menu-closed {/if}"
+        data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
         <li class="sidebar-toggler-wrapper hide">
             <div class="sidebar-toggler">
                 <span></span>
@@ -47,7 +48,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a  href="{$WEB_ROOT}/ajax/acuse.php?id={$userId}&courseId={$id}" class="nav-link nav-toggle" target="_blank">
+                <a href="{$WEB_ROOT}/ajax/acuse.php?id={$userId}&courseId={$id}" class="nav-link nav-toggle"
+                    target="_blank">
                     <i class="fa fa-adn" aria-hidden="true"></i> <span class="title">Acuse de Derecho</span>
                 </a>
             </li>
@@ -59,16 +61,19 @@
                 </li>
             {/if}
             <li class="nav-item">
-                <a  href="{$WEB_ROOT}/ajax/autorizacion-firma.php?id={$userId}&courseId={$id}" class="nav-link nav-toggle" target="_blank">
-                    <i class="fa fa-file-text-o" aria-hidden="true"></i> <span class="title">Carta de Autorización Firma Digital</span>
+                <a href="{$WEB_ROOT}/ajax/autorizacion-firma.php?id={$userId}&courseId={$id}" class="nav-link nav-toggle"
+                    target="_blank">
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i> <span class="title">Carta de Autorización Firma
+                        Digital</span>
                 </a>
             </li>
         {/if}
-        {if $User.positionId == 1 || $AccessMod[1] == 1 || $AccessMod[3] == 1 || $AccessMod[9] == 1}
+        {if in_array($User.positionId, [1,33]) || $AccessMod[1] == 1 || $AccessMod[3] == 1 || $AccessMod[9] == 1}
             {if !$docente}
-                {if $vistaPrevia ne 1}
+                {if $vistaPrevia ne 1 && in_array($User.positionId, [1])}
                     {* CATALOGOS *}
-                    <li class="nav-item {if $page == "personal1" || $page == "role" || $page == "major" || $page == "dictum"} active {/if}">
+                    <li
+                        class="nav-item {if $page == "personal1" || $page == "role" || $page == "major" || $page == "dictum"} active {/if}">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
                             <span class="title">Catálogos</span>
@@ -107,122 +112,141 @@
                     </li>
                 {/if}
                 {* CERTIFICACIONES *}
-                <li class="nav-item {if $page == "grupos" || $page == "history-subject"} active {/if}">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-diamond"></i>
-                        <span class="title">Certificaciones</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        {if $User.positionId == 1 || $AccessMod[8] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/history-subject" class="nav-link">
-                                    <span class="title">Certificaciones</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $User.positionId == 1 || $AccessMod[46] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/grupos" class="nav-link">
-                                    <span class="title">Grupos</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $User.positionId == 1 || $AccessMod[46] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/permisos" class="nav-link">
-                                    <span class="title">Permisos</span>
-                                </a>
-                            </li>
-                        {/if}
-                    </ul>
-                </li>
+                {if in_array($User.positionId, [1])}
+                    <li class="nav-item {if $page == "grupos" || $page == "history-subject"} active {/if}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-diamond"></i>
+                            <span class="title">Certificaciones</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            {if $User.positionId == 1 || $AccessMod[8] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/history-subject" class="nav-link">
+                                        <span class="title">Certificaciones</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $User.positionId == 1 || $AccessMod[46] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/grupos" class="nav-link">
+                                        <span class="title">Grupos</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $User.positionId == 1 || $AccessMod[46] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/permisos" class="nav-link">
+                                        <span class="title">Permisos</span>
+                                    </a>
+                                </li>
+                            {/if}
+                        </ul>
+                    </li>
+                {/if}
                 {* CANDIDATOS *}
-                <li class="nav-item {if  $page == "student" || $page == "usuarios"  || $page == "usuarios-admin" || $page == "usuarios-doc" || $page == "usuarios-sol"} active {/if} ">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-diamond"></i>
-                        <span class="title">Candidatos</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        {if $User.positionId == 1 || $AccessMod[4] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/usuarios-admin" class="nav-link">
-                                    <span class="title">Usuarios</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $User.positionId == 1 || $AccessMod[47] == 1}	
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/usuarios-doc" class="nav-link">
-                                    <span class="title">Documentos</span>
-                                </a>
-                            </li>
-                        {/if}
-                    </ul>
-		        </li>
+                {if in_array($User.positionId, [1, 33])}
+                    <li
+                        class="nav-item {if  $page == "student" || $page == "usuarios"  || $page == "usuarios-admin" || $page == "usuarios-doc" || $page == "usuarios-sol"} active {/if} ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-diamond"></i>
+                            <span class="title">Candidatos</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            {if $User.positionId == 1 || $AccessMod[4] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/usuarios-admin" class="nav-link">
+                                        <span class="title">Usuarios</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if in_array($User.positionId, [1,33]) || $AccessMod[47] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/usuarios-doc" class="nav-link">
+                                        <span class="title">Documentos</span>
+                                    </a>
+                                </li>
+                            {/if}
+                        </ul>
+                    </li>
+                {/if}
+
                 {* REPORTES *}
-		        <li class="nav-item {if  $page == "reporte-region" || $page == "reporte-b" || $page == "reporte-certificaciones" || $page == "asistencia-municipios"} active {/if} ">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-diamond"></i>
-                        <span class="title">Reportes</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        {if $User.positionId == 1 || $AccessMod[45] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/reporte-b" class="nav-link">
-                                    <span class="title">Reporte B</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $User.positionId == 1 || $AccessMod[44] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/reporte-region" class="nav-link">
-                                    <span class="title">Reporte</span>
-                                </a>
-                            </li>
-                        {/if}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/revision-portafolio" class="nav-link">
-                                    <span class="title">Revisión Portafolios</span>
-                                </a>
-                            </li>
-                        {if $User.positionId == 1 || $AccessMod[48] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/log" class="nav-link">
-                                    <span class="title">Log</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $User.positionId == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/reporte-evaluadores" class="nav-link">
-                                    <span class="title">Evaluadores</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if  $User.positionId == 1 || $AccessMod[45] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/reporte-certificaciones" class="nav-link">
-                                    <span class="title">Certificaciones</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if  $User.positionId == 1 || $AccessMod[45] == 1}
-                            <li class="nav-item">
-                                <a href="{$WEB_ROOT}/asistencia-municipios" class="nav-link">
-                                    <span class="title">Asistencia de Municipios</span>
-                                </a>
-                            </li>
-                        {/if}
-                    </ul>
-		        </li>
+                {if in_array($User.positionId, [1, 33])}
+                    <li
+                        class="nav-item {if  $page == "reporte-region" || $page == "reporte-b" || $page == "reporte-certificaciones" || $page == "asistencia-municipios" || $page == "revision-externo"} active {/if} ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-diamond"></i>
+                            <span class="title">Reportes</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            {if $User.positionId == 1 || $AccessMod[45] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/reporte-b" class="nav-link">
+                                        <span class="title">Reporte B</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $User.positionId == 1 || $AccessMod[44] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/reporte-region" class="nav-link">
+                                        <span class="title">Reporte</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if in_array($User.positionId, [1])}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/revision-portafolio" class="nav-link">
+                                        <span class="title">Revisión Portafolios</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if in_array($User.positionId, [1, 33])}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/revision-externo" class="nav-link">
+                                        <span class="title">Revisión A. Externo</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $User.positionId == 1 || $AccessMod[48] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/log" class="nav-link">
+                                        <span class="title">Log</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $User.positionId == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/reporte-evaluadores" class="nav-link">
+                                        <span class="title">Evaluadores</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if  $User.positionId == 1 || $AccessMod[45] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/reporte-certificaciones" class="nav-link">
+                                        <span class="title">Certificaciones</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if  $User.positionId == 1 || $AccessMod[45] == 1}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/asistencia-municipios" class="nav-link">
+                                        <span class="title">Asistencia de Municipios</span>
+                                    </a>
+                                </li>
+                            {/if}
+                        </ul>
+                    </li>
+                {/if}
             {/if}
         {/if}
         {* PROCESO DE CERTIFICACION *}
         {if $User.positionId == 1 || $AccessMod[50] == 1 || $AccessMod[51] == 1 || $AccessMod[52] == 1 || $AccessMod[53] == 1}
-            <li class="nav-item {if  $page == "invitacion" || $page == "progreso" || $page == "reporte-evaluaciones" || $page == "reporte-certificados"} active {/if}">
+            <li
+                class="nav-item {if  $page == "invitacion" || $page == "progreso" || $page == "reporte-evaluaciones" || $page == "reporte-certificados"} active {/if}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>
                     <span class="title">Proceso de Certificaci&oacute;n</span>
@@ -274,16 +298,16 @@
                 </li>
             {/if}
         {/if}
-		{* EXAMENES *}
+        {* EXAMENES *}
         {if $mnuMain == "modulo1" || $mnuMain == "modulo"}
-			{if $infoUSubject.acuseDerecho eq "si"}
+            {if $infoUSubject.acuseDerecho eq "si"}
                 <li class="nav-item {if $page == "examen-modules-student"} active {/if} ">
                     <a href="{$WEB_ROOT}/examen-modules-student/id/{$id}" class="nav-link nav-toggle">
                         <i class="fa fa-check-square-o"></i>
                         <span class="title">Examenes</span>
                     </a>
                 </li>
-			{/if}
+            {/if}
         {/if}
     </ul>
 </div>
