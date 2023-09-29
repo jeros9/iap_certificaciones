@@ -1903,6 +1903,7 @@ class Course extends Subject
 					course.subjectId, 
 					subject.name as certification, 
 					course.group, 
+					course.initialDate,
 					red_dates.plan_date, 
 					red_dates.evaluation_date, 
 					red_dates.iec_date,

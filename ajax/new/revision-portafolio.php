@@ -9,7 +9,7 @@ if ($_POST) {
             $fecha_inicio = empty($_POST['fecha_inicio']) ? "1970-01-01" : $_POST['fecha_inicio'];
             $fecha_fin = empty($_POST['fecha_fin']) ? date('Y-m-d') : $_POST['fecha_fin'];
             $resultado = intval($_POST['resultado']);
-            $where = "AND red_dates.plan_date >= '$fecha_inicio' AND red_dates.plan_date <='$fecha_fin'";
+            $where = "AND IFNULL(red_dates.plan_date, course.initialDate) >= '$fecha_inicio' AND IFNULL(red_dates.plan_date, course.initialDate) <='$fecha_fin'";
             if ($resultado != 0) {
                 switch ($resultado) {
                     case 1:
