@@ -249,7 +249,8 @@ $pages = array(
     'red-dates',
     'numero-lote',
     'revision-portafolio',
-    'edit-estado-municipio'
+    'edit-estado-municipio',
+    'student-certificacion-auditor'
 
 );
 

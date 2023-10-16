@@ -12,7 +12,8 @@
                     <th class="text-center">Fecha Inicio Certificación</th>
                     <th class="text-center">Fecha Plan</th>
                     <th class="text-center">Folio Proceso</th>
-                    <th class="text-center">Nombre</th> 
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +25,15 @@
                         <td>
                             {$item.folio_proceso}
                         </td>
-                        <td>{$item.names} {$item.lastNamePaterno} {$item.lastNameMaterno}</td> 
+                        <td>{$item.names} {$item.lastNamePaterno} {$item.lastNameMaterno}</td>
+                        <td>
+                            <a href="{$WEB_ROOT}/graybox.php?page=student-certificacion-auditor&id={$item.alumnoId}&auxTpl=1&course={$item.courseId}"
+                                data-target="#ajax" data-toggle="modal" data-width="1000px" title="VER CERTIFICACIONES">
+                                <i class="material-icons">
+                                    picture_in_picture
+                                </i>
+                            </a>
+                        </td>
                     </tr>
                 {/foreach}
             </tbody>

@@ -3541,13 +3541,14 @@ class Student extends User
 		return true;
 	}
 
-	public function CertificacionStident($Id)
+	public function CertificacionStident($Id, $filtro = NULL)
 	{
-		$filtro = "";
-
+		if (is_null($filtro)) {
+			$filtro = "";
+		} 
 		if ($Id)
 			$filtro .= " AND alumnoId = " . $Id;
-
+		
 		$sql = "SELECT 
 					s.name as certificacion,
 					u.alumnoId as userId,
@@ -3573,7 +3574,7 @@ class Student extends User
 						LEFT JOIN municipio AS m ON m.municipioId = us.ciudadt 
 						LEFT JOIN course_module AS cm ON cm.courseId = c.courseId 
 						LEFT JOIN activity AS at ON at.courseModuleId = cm.courseModuleId 
-				WHERE 1 AND u.courseId > 0 " . $filtro;
+				WHERE 1 AND u.courseId > 0 " . $filtro; 
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 
