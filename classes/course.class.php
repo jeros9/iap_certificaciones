@@ -1011,7 +1011,7 @@ class Course extends Subject
 		$this->Util()->PrintErrors();
 		return $result;
 	}
-	
+
 	public function Info_modality()
 	{
 		//creamos la cadena de seleccion
@@ -1042,7 +1042,7 @@ class Course extends Subject
 		$result["encargado"] = $info;
 		return $result;
 	}
-	
+
 	public function Info()
 	{
 		//creamos la cadena de seleccion
@@ -1853,7 +1853,7 @@ class Course extends Subject
 			LEFT JOIN red_dates ON red_dates.course_id = {$_GET['id']} AND red_dates.student_id = user_subject.alumnoId
 			LEFT JOIN lot_number ON lot_number.course_id = {$_GET['id']} AND lot_number.student_id = user_subject.alumnoId AND lot_number.subject_id = {$_GET['subjectId']}
 			WHERE usuario_personal.subjectId = {$_GET['subjectId']} AND usuario_personal.personalId = {$user['userId']} AND user_subject.courseId = {$_GET['id']}";
-			// echo $sql;
+		// echo $sql;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;
@@ -1882,15 +1882,15 @@ class Course extends Subject
 		return $result;
 	}
 
-	public function getBriefcase($certification,$evaluator,$group = NULL, $where = '')
+	public function getBriefcase($certification, $evaluator, $group = NULL, $where = '')
 	{
 		$filtro = "";
-		if(isset($group) && !empty($group)){
+		if (isset($group) && !empty($group)) {
 			$filtro = " AND course.courseId = '{$group}'";
 		}
 		if ($_POST['certificaciones']) {
 			//$filtro.=" AND subject.subjectId = '{$_POST['certificaciones']}'";
-		} 
+		}
 		$sql = "SELECT user.names, 
 					user.lastNamePaterno, 
 					user.lastNameMaterno, 
@@ -1901,7 +1901,6 @@ class Course extends Subject
 					user.controlNumber,
 					course.courseId, 
 					course.subjectId, 
-					subject.name as certification, 
 					course.group, 
 					course.initialDate,
 					red_dates.plan_date, 
@@ -1917,21 +1916,19 @@ class Course extends Subject
 					lot_number.lot,
 					(SELECT nombre FROM municipio WHERE municipioId = user.ciudad) as municipio
 				FROM usuario_personal 
-				INNER JOIN user_subject ON user_subject.alumnoId = usuario_personal.usuarioId 
-				INNER JOIN user ON user.userId = user_subject.alumnoId 
-				INNER JOIN course ON course.courseId = user_subject.courseId 
-				INNER JOIN subject ON subject.subjectId = course.subjectId 
-				LEFT JOIN red_dates ON red_dates.subject_id = subject.subjectId AND red_dates.course_id = course.courseId AND red_dates.student_id = user_subject.alumnoId
-				LEFT JOIN planes ON planes.subjectId = subject.subjectId AND planes.personalId = usuario_personal.personalId AND planes.userId = user_subject.alumnoId
-				LEFT JOIN cedulas ON course.subjectId = cedulas.subjectId AND user_subject.alumnoId = cedulas.userId
-				LEFT JOIN lot_number ON lot_number.subject_id = subject.subjectId AND lot_number.course_id = course.courseId AND lot_number.student_id = user_subject.alumnoId
-				WHERE usuario_personal.personalId = '{$evaluator}' AND subject.subjectId = '{$certification}' {$filtro} {$where} GROUP BY course.courseId, user.userId ORDER BY course.group, lot_number.lot, user.names, user.lastNamePaterno";
-		// echo $sql;
+				INNER JOIN user_subject ON user_subject.alumnoId = usuario_personal.usuarioId
+				INNER JOIN course ON course.courseId = user_subject.courseId AND course.subjectId = usuario_personal.subjectId
+				INNER JOIN USER ON user.userId = user_subject.alumnoId
+				LEFT JOIN red_dates ON red_dates.subject_id = usuario_personal.subjectId AND red_dates.course_id = course.courseId AND red_dates.student_id = user_subject.alumnoId
+				LEFT JOIN planes ON planes.subjectId = usuario_personal.subjectId AND planes.personalId = usuario_personal.personalId AND planes.userId = user_subject.alumnoId
+				LEFT JOIN cedulas ON usuario_personal.subjectId = cedulas.subjectId AND user_subject.alumnoId = cedulas.userId
+				LEFT JOIN lot_number ON lot_number.subject_id = usuario_personal.subjectId AND lot_number.course_id = course.courseId AND lot_number.student_id = user_subject.alumnoId
+				WHERE usuario_personal.personalId = '{$evaluator}' AND usuario_personal.subjectId = '{$certification}' {$filtro} {$where} GROUP BY course.courseId, user.userId ORDER BY course.group, lot_number.lot, user.names, user.lastNamePaterno";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 		return $result;
 	}
-	
+
 	public function getLotNumber($subjectId, $courseId, $studentId)
 	{
 		$sql = "SELECT lot FROM lot_number WHERE subject_id = {$subjectId} AND course_id = {$courseId} AND student_id = {$studentId}";
