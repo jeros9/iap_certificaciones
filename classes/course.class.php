@@ -1918,7 +1918,7 @@ class Course extends Subject
 				FROM usuario_personal 
 				INNER JOIN user_subject ON user_subject.alumnoId = usuario_personal.usuarioId
 				INNER JOIN course ON course.courseId = user_subject.courseId AND course.subjectId = usuario_personal.subjectId
-				INNER JOIN USER ON user.userId = user_subject.alumnoId
+				INNER JOIN user ON user.userId = user_subject.alumnoId
 				LEFT JOIN red_dates ON red_dates.subject_id = usuario_personal.subjectId AND red_dates.course_id = course.courseId AND red_dates.student_id = user_subject.alumnoId
 				LEFT JOIN planes ON planes.subjectId = usuario_personal.subjectId AND planes.personalId = usuario_personal.personalId AND planes.userId = user_subject.alumnoId
 				LEFT JOIN cedulas ON usuario_personal.subjectId = cedulas.subjectId AND user_subject.alumnoId = cedulas.userId
