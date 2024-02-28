@@ -185,14 +185,13 @@ switch ($_POST["type"]) {
 
 		break;
 
-	case "verFormEva":
-		// echo "<pre>"; print_r($_POST);
-		// exit;
+	case "verFormEva": 
 		$_GET["id"] = $_POST["userId"];
-		$_GET["cId"] = $_POST["subjectId"];
+		$_GET["cId"] = $_POST["courseId"];
 		$infoDoc = $solicitud->infoCourse();
 		// echo "<pre>"; print_r($_POST);
 		$smarty->assign("cId", $_POST["subjectId"]);
+		$smarty->assign("courseId", $_POST["courseId"]);
 		$smarty->assign("id", $_POST["userId"]);
 		$smarty->assign("auxTpl", $_POST["tipo"]);
 		$smarty->assign("infoDoc", $infoDoc);

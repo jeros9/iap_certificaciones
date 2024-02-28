@@ -18,6 +18,7 @@
 	<form class="form-horizontal" id="frmGral" name="frmGral" method="post"  enctype="multipart/form-data">
 	<input type="hidden" id="type" name="type" value="saveEstatus"/>
     <input type="hidden" id="" name="subjectId" value="{$cId}"/>
+    <input type="hidden" name="courseId" value="{$courseId}">
     <input type="hidden" id="tipoDocumentoId" name="tipoDocumentoId" value="{$auxTpl}"/>
     <input type="hidden" id="usuarioId" name="usuarioId" value="{$id}"/>
 	
@@ -39,8 +40,8 @@
         <div class="form-actions">
             <div class="row">
                 <div class="col-md-offset-3 col-md-9">
-                    <button  class="btn green" id="addMajor" name="addMajor" onClick="saveEstatus()">Guardar</button>
-                    <button type="button" class="btn default closeModal" onClick="closeModal()">Cancelar</button>
+                    <button type="button"  class="btn green" id="addMajor" name="addMajor" onClick="saveEstatus()">Guardar</button>
+                    <button type="button" type="button" class="btn default closeModal" onClick="closeModal()">Cancelar</button>
                 </div>
             </div>
         </div>
