@@ -247,6 +247,7 @@ $pages = array(
     'date-final-test',
     // EVALUADOR
     'red-dates',
+    'red-dates-user',
     'numero-lote',
     'revision-portafolio',
     'edit-estado-municipio',

@@ -14,6 +14,7 @@
                     <th class="text-center">Folio Proceso</th>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">Acciones</th>
+                    <th class="text-center">Fechas</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,14 @@
                                 data-target="#ajax" data-toggle="modal" data-width="1000px" title="VER CERTIFICACIONES">
                                 <i class="material-icons">
                                     picture_in_picture
+                                </i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{$WEB_ROOT}/graybox.php?page=red-dates-user&alumnoId={$item.alumnoId}&id={$item.courseId}&userId={$evaluator}&subjectId={$certification}"
+                                data-target="#ajax" data-toggle="modal" data-width="1000px" title="VER FECHAS">
+                                <i class="material-icons">
+                                    event
                                 </i>
                             </a>
                         </td>

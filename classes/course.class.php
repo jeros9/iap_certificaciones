@@ -1844,7 +1844,7 @@ class Course extends Subject
 		return $result;
 	}
 
-	public function getRedDates($user)
+	public function getRedDates($user, $where = "")
 	{
 		$sql = "SELECT * FROM usuario_personal
 			INNER JOIN user_subject ON user_subject.alumnoId = usuario_personal.usuarioId
@@ -1852,7 +1852,7 @@ class Course extends Subject
 			INNER JOIN course ON course.courseId = user_subject.courseId
 			LEFT JOIN red_dates ON red_dates.course_id = {$_GET['id']} AND red_dates.student_id = user_subject.alumnoId
 			LEFT JOIN lot_number ON lot_number.course_id = {$_GET['id']} AND lot_number.student_id = user_subject.alumnoId AND lot_number.subject_id = {$_GET['subjectId']}
-			WHERE usuario_personal.subjectId = {$_GET['subjectId']} AND usuario_personal.personalId = {$user['userId']} AND user_subject.courseId = {$_GET['id']}";
+			WHERE usuario_personal.subjectId = {$_GET['subjectId']} AND usuario_personal.personalId = {$user['userId']} AND user_subject.courseId = {$_GET['id']} {$where}";
 		// echo $sql;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
@@ -1866,6 +1866,7 @@ class Course extends Subject
 		$this->Util()->DB()->setQuery($sql);
 		return $this->Util()->DB()->GetTotalRows();
 	}
+
 	public function addRedDates($subjectId, $courseId, $studentId, $plan_date, $evalution_date, $iec_date)
 	{
 		$sql = "INSERT INTO red_dates(subject_id, course_id, student_id, plan_date, evaluation_date, iec_date) VALUES({$subjectId},{$courseId},{$studentId},{$plan_date},{$evalution_date},{$iec_date})";
