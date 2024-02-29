@@ -249,8 +249,6 @@ function enviarArchivo() {
 
             if ($.trim(splitResp[0]) == "ok") {
                 ShowStatus((splitResp[1]));
-                // $("#msj").html(splitResp[1]);
-                $("#contenido").html(splitResp[2]);
                 closeModal();
                 buscarCertificacion()
             } else if ($.trim(splitResp[0]) == "fail") {
@@ -269,7 +267,6 @@ function enviarArchivo() {
     })
 
 }
-
 
 function closeModal() {
     $('#ajax').hide();
@@ -390,8 +387,6 @@ function saveEstatus(ev) {
 			$("#loader").html("");
 			if ($.trim(splitResp[0]) == "ok") {
 				ShowStatus((splitResp[1]));
-				// $("#msj").html(splitResp[1]);
-				$("#contenido").html(splitResp[2]);
 				closeModal()
 			} else if ($.trim(splitResp[0]) == "fail") {
 				$("#txtErrMsg").show();
