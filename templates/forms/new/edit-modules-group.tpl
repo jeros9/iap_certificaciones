@@ -157,7 +157,7 @@
                             <td>{$item.title}</td>
                             <td>{$item.created_at}</td>
                             <td class="text-center"> 
-                                <a href="https://www.youtube.com/watch?v={$item.code}" class="btn btn-success">
+                                <a href="https://www.youtube.com/watch?v={$item.code}" target="_blank" class="btn btn-success">
                                     Ver Video
                                 </a>
                             </td>
