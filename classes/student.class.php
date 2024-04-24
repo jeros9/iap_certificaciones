@@ -3545,10 +3545,10 @@ class Student extends User
 	{
 		if (is_null($filtro)) {
 			$filtro = "";
-		} 
+		}
 		if ($Id)
 			$filtro .= " AND alumnoId = " . $Id;
-		
+
 		$sql = "SELECT 
 					s.name as certificacion,
 					u.alumnoId as userId,
@@ -3574,7 +3574,7 @@ class Student extends User
 						LEFT JOIN municipio AS m ON m.municipioId = us.ciudadt 
 						LEFT JOIN course_module AS cm ON cm.courseId = c.courseId 
 						LEFT JOIN activity AS at ON at.courseModuleId = cm.courseModuleId 
-				WHERE 1 AND u.courseId > 0 " . $filtro; 
+				WHERE 1 AND u.courseId > 0 " . $filtro;
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
 
@@ -4096,19 +4096,20 @@ class Student extends User
 		$result = [];
 		$result['actualizado'] = $this->Util()->DB()->UpdateData();
 		if ($result['actualizado']) {
-			$sql = "SELECT nombre FROM municipio WHERE municipioId = '".$this->getCiudadT()."' ";
+			$sql = "SELECT nombre FROM municipio WHERE municipioId = '" . $this->getCiudadT() . "' ";
 			$this->Util()->DB()->setQuery($sql);
-			$municipio = $this->Util()->DB()->GetSingle(); 
-			$sql = "SELECT nombre FROM estado WHERE estadoId = '".$this->getEstadoT()."' ";
+			$municipio = $this->Util()->DB()->GetSingle();
+			$sql = "SELECT nombre FROM estado WHERE estadoId = '" . $this->getEstadoT() . "' ";
 			$this->Util()->DB()->setQuery($sql);
 			$estado = $this->Util()->DB()->GetSingle();
-			$result['municipio'] = $municipio; 
-			$result['estado'] = $estado; 
+			$result['municipio'] = $municipio;
+			$result['estado'] = $estado;
 		}
 		return $result;
 	}
 
-	public function actualizarPermisoMunicipio($permiso)  {
+	public function actualizarPermisoMunicipio($permiso)
+	{
 		$sql = "UPDATE municipio SET permiso = '{$permiso}' WHERE municipioId = '{$this->getCiudadT()}'";
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->UpdateData();
