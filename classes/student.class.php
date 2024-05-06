@@ -433,6 +433,9 @@ class Student extends User
 		$sql = "select * from estado where paisId='" . $this->getCountry() . "'";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
+		foreach ($result as $key => $value) {
+			$result[$key]['nombre'] = mb_convert_encoding($value['nombre'], 'UTF-8');
+		}
 		return $result;
 	}
 
