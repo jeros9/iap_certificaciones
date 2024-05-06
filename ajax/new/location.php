@@ -13,7 +13,7 @@ switch($_POST["type"])
         $municipios = $student->EnumerateCiudades();
         $content = '<option value="0">-- Seleccionar Municipio --</option>';
         foreach($municipios as $item)
-            $content .= '<option value="' . $item['municipioId'] . '">' . utf8_encode($item['nombre']) . '</option>';
+            $content .= '<option value="' . $item['municipioId'] . '">' . $item['nombre'] . '</option>';
         echo $content;
 		/* $smarty->assign('lstCertificaciones', $lstCertificaciones);
 		$smarty->display(DOC_ROOT.'/templates/lists/select-certificaciones.tpl'); */
