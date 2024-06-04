@@ -85,8 +85,8 @@
 
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<a href="{$WEB_ROOT}/view-modules-student/id/{$id}&tipo=avisos" title="Ver Modulo de Curso"  class="btn blue" target="_top" >
-				Entrar al Curso
+			<a href="{$WEB_ROOT}" title="Ver Modulo de Curso"  class="btn blue" target="_top" >
+				Aceptar
 			</a>
 		</div>
 	</div>
