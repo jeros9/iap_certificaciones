@@ -1202,8 +1202,7 @@ class Solicitud extends Module
 	public function infoCourse()
 	{
 		
-		 $sqlQuery = 'SELECT * FROM  user_subject
-				WHERE   alumnoId = '.$_GET["id"].' and courseId = '.$_GET["cId"].'';
+		 $sqlQuery = 'SELECT user_subject.*, course.subjectId FROM user_subject INNER JOIN course ON course.courseId = user_subject.courseId WHERE user_subject.alumnoId = '.$_GET["id"].' and user_subject.courseId = '.$_GET["cId"].'';
 		// exit;
 		$this->Util()->DB()->setQuery($sqlQuery);
 		$infoFol = $this->Util()->DB()->GetRow();
