@@ -467,6 +467,9 @@ switch ($_POST["type"]) {
 		$nameRepresentative = strip_tags($_POST['nameRepresentative']);
 		$firstSurnameRepresentative = strip_tags($_POST['firstSurnameRepresentative']);
 		$secondSurnameRepresentative = strip_tags($_POST['secondSurnameRepresentative']);
+		$namePresident = strip_tags($_POST['namePresident']);
+		$firstSurnamePresident = strip_tags($_POST['firstSurnamePresident']);
+		$secondSurnamePresident = strip_tags($_POST['secondSurnamePresident']);
 		$commission = intval($_POST['commission']);
 		$campos = [
 			'names' => 	[
@@ -498,6 +501,37 @@ switch ($_POST["type"]) {
 				'value' => $secondSurnameRepresentative,
 				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
 				'types' => ['required']
+			],
+			'namePresident' => 	[
+				'value' => $namePresident,
+				'messages' => ['required' => "Por favor, no se olvide de poner el nombre del enlace municipal."],
+				'types' => ['required']
+			],
+			'firstSurnamePresident' => [
+				'value' => $firstSurnamePresident,
+				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
+				'types' => ['required']
+			],
+			'secondSurnamePresident' => [
+				'value' => $secondSurnamePresident,
+				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
+				'types' => ['required']
+			],
+			'emailRepresentative' => [
+				'value' => $emailRepresentative,
+				'messages' => [
+					'required' 	=> "Por favor, no se olvide de poner el apellido paterno del enlace municipal.",
+					'email'		=> "Por favor, ingrese un correo electrónico válido"
+				],
+				'types' => ['required', 'email']
+			],
+			'emailPresident' => [
+				'value' => $emailPresident,
+				'messages' => [
+					'required' 	=> "Por favor, no se olvide de poner el apellido paterno del enlace municipal.",
+					'email'		=> "Por favor, ingrese un correo electrónico válido"
+				],
+				'types' => ['required', 'email']
 			],
 			'email' => [
 				'value' => $email,

@@ -479,6 +479,42 @@ class User extends Main
 		$this->secondSurnameRepresentative = $value;
 	}
 
+	protected $namePresident;
+	public function setNamesPresident($value)
+	{
+		$this->namePresident = $value;
+	}
+
+	protected $firstSurnamePresident;
+	public function setFirstSurnamePresident($value)
+	{
+		$this->firstSurnamePresident = $value;
+	}
+
+	protected $secondSurnamePresident;
+	public function setSecondSurnamePresident($value)
+	{
+		$this->secondSurnamePresident = $value;
+	}
+
+	protected $emailRepresentative;
+	function setEmailRepresentative($value) {
+		$this->emailRepresentative = $value;
+	}
+
+	protected $emailPresident;
+	function setEmailPresident($value) {
+		$this->emailPresident = $value;
+	}
+
+	protected $phonePresident;
+	function setPhonePresident($value) {
+		$this->phonePresident = $value;
+	}
+	protected $phoneRepresentative;
+	function setPhoneRepresentative($value) {
+		$this->phoneRepresentative = $value;
+	}
 	protected $commission;
 	function setCommission($value) {
 		$this->commission = $value;
@@ -2348,7 +2384,7 @@ class User extends Main
 			$resultado['message'] = "Ya existe un registro, espere nuestro mensaje.";
 			return $resultado;
 		}
-		$sql = "INSERT INTO prospects(name, firstSurname, secondSurname, email, phone, workplace, stateId, cityId, nameRepresentative, firstSurnameRepresentative, secondSurnameRepresentative, commission) VALUES('{$this->names}', '{$this->lastNamePaterno}', '{$this->lastNameMaterno}', '{$this->email}', '{$this->phone}', '{$this->workplace}', '{$this->state}', '{$this->city}', '{$this->nameRepresentative}', '{$this->firstSurnameRepresentative}', '{$this->secondSurnameRepresentative}','{$this->commission}')"; 
+		$sql = "INSERT INTO prospects(name, firstSurname, secondSurname, email, phone, workplace, cityId, nameRepresentative, firstSurnameRepresentative, secondSurnameRepresentative, commission, emailRepresentative, phoneRepresentative, emailPresident, phonePresident, namePresident, firstSurnamePresident, secondSurnamePresident) VALUES('{$this->names}', '{$this->lastNamePaterno}', '{$this->lastNameMaterno}', '{$this->email}', '{$this->phone}', '{$this->workplace}', '{$this->city}', '{$this->nameRepresentative}', '{$this->firstSurnameRepresentative}', '{$this->secondSurnameRepresentative}','{$this->commission}')"; 
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->InsertData();
 		$resultado['status'] = true;
