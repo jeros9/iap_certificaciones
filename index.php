@@ -249,7 +249,9 @@ $pages = array(
 	'date-final-test',
 
 	'edit-estado-municipio',
-	'permisos'
+	'permisos',
+	'registro-encargo',
+	'prospectos'
 );
 
 if(!in_array($_GET['page'], $pages))

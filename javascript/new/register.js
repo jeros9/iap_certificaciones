@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     $('#btnAddStudent').click(function() {
         AddStudentRegister();
     });
@@ -9,7 +8,6 @@ $(document).ready(function(){
     $("#paist").change(function(){ estado_dependenciat();});
     $("#estadot").change(function(){ ciudad_dependenciat();});
     $("#curricula").change(function(){ personal();});
-
     $("#estados").change(function() {
         let estado = $(this).val();
         $.ajax({
@@ -34,9 +32,6 @@ $(document).ready(function(){
 function LoadCities()
 {
     var idState = $("stateId").value;
-
-
-
 }
 //combo lugar de trabajo
 function estado_dependenciat()
@@ -98,12 +93,6 @@ function personal(){
         console.log(response);
     });
 }
-
-
-
-
-
-
 
 ////////// combox de usurio
 function estado_dependencia()
@@ -203,7 +192,3 @@ function recargarPage()
 	WEB_ROOTDoc = WEB_ROOT+'/login';
 	$(location).attr('href',WEB_ROOTDoc);
 }
-
-
-
-

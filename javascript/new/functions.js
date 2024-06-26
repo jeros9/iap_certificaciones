@@ -34,44 +34,52 @@ $(document).ready(function () {
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
             beforeSend: function () {
-                btnSubmit.prop('disabled',true);
+                btnSubmit.prop('disabled', true);
+                $(".has-error").removeClass("has-error");
+                form.find(".invalid").remove();
             }
-        })
-        .done(function (response) {
+        }).done(function (response) {
             console.log(response)
-            btnSubmit.prop('disabled',false);
+            btnSubmit.prop('disabled', false);
             var response = JSON.parse(response);
             actionPostAjax(form, response);
-        })
-        .fail(function(response){
+        }).fail(function (response) {
             console.log(response);
-            btnSubmit.prop('disabled',false)
+            btnSubmit.prop('disabled', false);
+            if (response.status == 422) {
+                response = JSON.parse(response.responseText);
+                growl("Existe un error con los campos requeridos, revise por favor.", "danger");
+                actionPostAjax(form, response);
+                $.each(response.errors, function (index, value) {
+                    form.find("input[name=" + index + "],textarea[name=" + index + "],select[name=" + index + "]").parent().addClass('has-error').append(`<span class="invalid" style="padding:5px;background-color: #ab2e2e;color: white;border-radius: 5px;margin-top: 5px;display: block;">${value}</span>`).focus();
+                });
+            }
         });
     });
 
-    $(document).on("click","[data-target]", function(){
-        if($(this).data('target') == "#ajax"){
+    $(document).on("click", "[data-target]", function () {
+        if ($(this).data('target') == "#ajax") {
             var ancho = $(this).data("width");
-            if(typeof ancho !== 'undefined' ){
-                $(".modal-dialog").css({"width":ancho});
+            if (typeof ancho !== 'undefined') {
+                $(".modal-dialog").css({ "width": ancho });
             }
         }
     })
 
-    $("body").on('keyup', '.onlynumber', function(){
+    $("body").on('keyup', '.onlynumber', function () {
         var valor = numero($(this).val());
         $(this).val(valor);
-    }); 
+    });
 });
 
-function numero(v){     
-    v=v.replace(/([^0-9]+)/g,'');
-    return v;  
-} 
+function numero(v) {
+    v = v.replace(/([^0-9]+)/g, '');
+    return v;
+}
 
-function actionPostAjax(form, response){
+function actionPostAjax(form, response) {
     if (response.growl) {
-        growl(response.message,response.type);
+        growl(response.message, response.type);
     }
     if (response.modal_close) {
         $("#ajax").modal('hide');
@@ -79,7 +87,7 @@ function actionPostAjax(form, response){
     if (response.html) {
         if (response.modal) {
             $("#ajax .modal-body").html(response.html);
-        }else{
+        } else {
             $(document).find(response.selector).html(response.html);
         }
     }
@@ -88,10 +96,11 @@ function actionPostAjax(form, response){
     }
     if (response.reload) {
         setTimeout(() => {
-            location.reload();            
+            location.reload();
         }, 1000);
     }
 }
+
 function showModal(title, data) {
     bootbox.dialog({
         message: data,

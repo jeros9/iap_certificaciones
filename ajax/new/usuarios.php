@@ -9,7 +9,6 @@ include_once(DOC_ROOT . "/properties/messages.php");
 session_start();
 
 switch ($_POST["type"]) {
-
 	case 'enviarArchivo':
 		if ($docente->guadarDoc()) {
 			$student->setUserId($_POST["usuarioId"]);
@@ -79,7 +78,7 @@ switch ($_POST["type"]) {
 	case "buscarGrupos":
 
 		// echo "<pre>"; print_r($_POST);
-		if(isset($_POST['certificacionId']) && !empty($_POST['certificacionId'])){
+		if (isset($_POST['certificacionId']) && !empty($_POST['certificacionId'])) {
 			$lstG = $student->gruposCertificacion($_POST["certificacionId"]);
 			$smarty->assign("tipoUs", $_SESSION["User"]["type"]);
 			$smarty->assign("lstG", $lstG);
@@ -170,7 +169,7 @@ switch ($_POST["type"]) {
 		$smarty->display(DOC_ROOT . '/templates/lists/usuarios-doc.tpl');
 		break;
 
-	case "verForm":  
+	case "verForm":
 		$_GET['id'] = $_POST['userId'];
 		$_GET['auxTpl'] = $_POST['tipo'];
 		$_GET['subjectId'] = $_POST['subjectId'];
@@ -185,7 +184,7 @@ switch ($_POST["type"]) {
 
 		break;
 
-	case "verFormEva": 
+	case "verFormEva":
 		$_GET["id"] = $_POST["userId"];
 		$_GET["cId"] = $_POST["courseId"];
 		$infoDoc = $solicitud->infoCourse();
@@ -271,7 +270,7 @@ switch ($_POST["type"]) {
 			$smarty->assign('btnTitle', 'Visualizar Plan');
 			$smarty->assign('type', 'plan');
 			$smarty->assign('perfil', $_SESSION['User']['type']);
-			$smarty->assign('course_id',$_POST['course_id']);
+			$smarty->assign('course_id', $_POST['course_id']);
 			$smarty->display(DOC_ROOT . '/templates/boxes/new/view-doc.tpl');
 		}
 		break;
@@ -367,7 +366,7 @@ switch ($_POST["type"]) {
 		$smarty->assign('requerimientos', $requerimientos);
 		$smarty->assign('file_pdf', $data_subject['file_pdf']);
 		$smarty->assign("DOC_ROOT", DOC_ROOT);
-		$smarty->assign("courseId",$_POST['courseId']);
+		$smarty->assign("courseId", $_POST['courseId']);
 		$smarty->display(DOC_ROOT . '/templates/forms/new/edit-plan.tpl');
 		break;
 
@@ -448,11 +447,126 @@ switch ($_POST["type"]) {
 		//$smarty->display(DOC_ROOT.'/templates/boxes/status_on_popup.tpl');
 		break;
 	case "buscarGruposEvaluador":
-		if(isset($_POST['certificaciones']) && !empty($_POST['certificaciones'])){
+		if (isset($_POST['certificaciones']) && !empty($_POST['certificaciones'])) {
 			$lstG = $personal->gruposEvaluador($_POST["certificaciones"], $_POST['evaluator']);
 			$smarty->assign("tipoUs", $_SESSION["User"]["type"]);
 			$smarty->assign("lstG", $lstG);
 			$smarty->display(DOC_ROOT . '/templates/lists/select-grupos.tpl');
+		}
+		break;
+	case 'registerProspect':
+		$names = strip_tags($_POST['names']);
+		$firstSurname = strip_tags($_POST['firstSurname']);
+		$secondSurname = strip_tags($_POST['secondSurname']);
+		$email = strip_tags($_POST['email']);
+		$phone = str_replace(" ", "", trim($_POST['mobile']));
+		$workPlace = strip_tags($_POST['workPlace']);
+		$state = intval($_POST['estados']);
+		$city = intval($_POST['ciudad']);
+		$typeApplicant = intval($_POST['tipoSolicitante']);
+		$nameRepresentative = strip_tags($_POST['nameRepresentative']);
+		$firstSurnameRepresentative = strip_tags($_POST['firstSurnameRepresentative']);
+		$secondSurnameRepresentative = strip_tags($_POST['secondSurnameRepresentative']);
+		$commission = intval($_POST['commission']);
+		$campos = [
+			'names' => 	[
+				'value' => $names,
+				'messages' => ['required' => "Por favor, no se olvide de poner el nombre."],
+				'types' => ['required']
+			],
+			'firstSurname' => [
+				'value' => $firstSurname,
+				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno."],
+				'types' => ['required']
+			],
+			'secondSurname' => [
+				'value' => $secondSurname,
+				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno."],
+				'types' => ['required']
+			],
+			'nameRepresentative' => 	[
+				'value' => $nameRepresentative,
+				'messages' => ['required' => "Por favor, no se olvide de poner el nombre del enlace municipal."],
+				'types' => ['required']
+			],
+			'firstSurnameRepresentative' => [
+				'value' => $firstSurnameRepresentative,
+				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
+				'types' => ['required']
+			],
+			'secondSurnameRepresentative' => [
+				'value' => $secondSurnameRepresentative,
+				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
+				'types' => ['required']
+			],
+			'email' => [
+				'value' => $email,
+				'messages' => [
+					'required' => "Por favor, no se olvide de poner el correo electrónico.",
+					'email' => "Por favor, ingrese un correo electrónico válido."
+				],
+				'types' => ['required', 'email']
+			],
+			'mobile' => [
+				'value'	=> $phone,
+				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono"],
+				'types'	=> ['required']
+			],
+			'workPlace' => [
+				'value'	=> $workPlace,
+				'messages' => ['required' => "Por favor, no se olvide de poner el lugar de trabajo"],
+				'types'	=> ['required']
+			],
+			'estados' => [
+				'value'	=> $state,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar el estado"],
+				'types'	=> ['required']
+			],
+			'ciudad' => [
+				'value'	=> $city,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar el municipio"],
+				'types'	=> ['required']
+			],
+			'commission' => [
+				'value'	=> $commission,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar el encargo"],
+				'types'	=> ['required']
+			],
+		];
+		$errors = $util->validationData($campos);
+		if (!empty($errors)) {
+			header('HTTP/1.1 422 Unprocessable Entity');
+			header('Content-Type: application/json; charset=UTF-8');
+			echo json_encode([
+				'errors'    => $errors
+			]);
+			exit;
+		}
+		$user->setNames($names);
+		$user->setLastNamePaterno($firstSurname);
+		$user->setLastNameMaterno($secondSurname);
+		$user->setEmail($email);
+		$user->setPhone($phone);
+		$user->setWorkplace($workPlace);
+		$user->setState($state);
+		$user->setCity($city);
+		$user->setNamesRepresentative($nameRepresentative);
+		$user->setFirstSurnameRepresentative($firstSurnameRepresentative);
+		$user->setSecondSurnameRepresentative($secondSurnameRepresentative);
+		$user->setCommission($commission);
+		$response = $user->createProspect();
+		if ($response['status']) {
+			echo json_encode([
+				'growl'		=> true,
+				'type'		=> 'success',
+				'message'	=> 'Muchas gracias, pronto lo contactaremos.'
+			]);
+		} else {
+			echo json_encode([
+				'growl'		=> true,
+				'type'		=> 'danger',
+				'message'	=> $response['message'],
+			]);
 		}
 		break;
 }

@@ -105,6 +105,7 @@ include_once(DOC_ROOT . '/classes/period.class.php');
 include_once(DOC_ROOT . '/classes/order.class.php');
 include_once(DOC_ROOT . '/classes/course_inform.class.php');
 include_once(DOC_ROOT . '/classes/course_attendance.class.php');
+include_once(DOC_ROOT . '/classes/ssp.class.php'); 
 $docente = new Docente();
 
 $db = new DB;

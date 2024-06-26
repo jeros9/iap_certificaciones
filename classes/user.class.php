@@ -270,16 +270,6 @@ class User extends Main
 		$this->ciudadT = $value;
 	}
 
-
-
-
-
-
-
-
-
-
-
 	public function setCountry($value)
 	{
 		if ($this->permiso == 0) {
@@ -469,6 +459,29 @@ class User extends Main
 	{
 
 		$this->schGpoId = $value;
+	}
+
+	protected $nameRepresentative;
+	public function setNamesRepresentative($value)
+	{
+		$this->nameRepresentative = $value;
+	}
+
+	protected $firstSurnameRepresentative;
+	public function setFirstSurnameRepresentative($value)
+	{
+		$this->firstSurnameRepresentative = $value;
+	}
+
+	protected $secondSurnameRepresentative;
+	public function setSecondSurnameRepresentative($value)
+	{
+		$this->secondSurnameRepresentative = $value;
+	}
+
+	protected $commission;
+	function setCommission($value) {
+		$this->commission = $value;
 	}
 
 	/* Gets */
@@ -2323,5 +2336,54 @@ class User extends Main
 
 		return $result;
 	}
+
+
+	function createProspect()
+	{
+		$sql = "SELECT * FROM prospects WHERE email = '{$this->email}'";
+		$this->Util()->DB()->setQuery($sql);
+		$existe = $this->Util()->DB()->GetTotalRows();
+		if ($existe) {
+			$resultado['status'] = false;
+			$resultado['message'] = "Ya existe un registro, espere nuestro mensaje.";
+			return $resultado;
+		}
+		$sql = "INSERT INTO prospects(name, firstSurname, secondSurname, email, phone, workplace, stateId, cityId, nameRepresentative, firstSurnameRepresentative, secondSurnameRepresentative, commission) VALUES('{$this->names}', '{$this->lastNamePaterno}', '{$this->lastNameMaterno}', '{$this->email}', '{$this->phone}', '{$this->workplace}', '{$this->state}', '{$this->city}', '{$this->nameRepresentative}', '{$this->firstSurnameRepresentative}', '{$this->secondSurnameRepresentative}','{$this->commission}')"; 
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->InsertData();
+		$resultado['status'] = true;
+		return $resultado;
+	}
+
+	function dt_prospects_request()
+	{ 
+		$table = 'prospects INNER JOIN commissions ON commissions.id = prospects.commission';
+		$primaryKey = 'prospects.id';
+		$columns = array(
+			array('db' => 'prospects.id',		'dt' => 'id'), 
+			array('db' => 'email',				'dt' => 'correo'), 
+			array('db' => 'phone',				'dt' => 'telefono'), 
+			array('db' => 'workplace',			'dt' => 'lugar'), 
+			array('db' => 'CONCAT(prospects.name, " ", firstSurname," ", secondSurname)',  'dt' => 'nombre'),
+			array('db' => '(SELECT name FROM state WHERE state.stateId = prospects.stateId)',  'dt' => 'estado'),
+			array('db' => '(SELECT nombre FROM municipio WHERE municipio.estadoId = prospects.stateId AND municipioId = prospects.cityId )',  'dt' => 'municipio'), 
+			array('db' => 'CONCAT(nameRepresentative, " ", firstSurnameRepresentative," ", secondSurnameRepresentative)',  'dt' => 'representante'), 
+			array('db' => 'commissions.name',  'dt' => 'encargo'), 
+			array(
+				'db' => 'prospects.id', 'dt' => 'acciones',
+				'formatter' => function ($d, $row) {
+					return "";
+					// return '
+					// <a href="' . WEB_ROOT . '/graybox.php?page=edit-student&id=' . $d . '" data-target="#ajax" data-toggle="modal" data-width="1000px">
+					//  	Editar
+					// </a>
+					// <a href="' . WEB_ROOT . '/graybox.php?page=student-curricula&id=' . $d . '" data-target="#ajax" data-toggle="modal" data-width="1000px">
+					// 	Currícula
+					// </a>';
+				}
+			)
+		);
+
+		return SSP::complex($_POST, $table, $primaryKey, $columns);
+	}
 }
-?>

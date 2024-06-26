@@ -156,6 +156,11 @@
                         <ul class="sub-menu">
                             {if $User.positionId == 1 || $AccessMod[4] == 1}
                                 <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/prospectos" class="nav-link">
+                                        <span class="title">Prospectos</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{$WEB_ROOT}/usuarios-admin" class="nav-link">
                                         <span class="title">Usuarios</span>
                                     </a>

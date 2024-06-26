@@ -1364,14 +1364,50 @@ class Util extends ErrorSystem
 		return $data;
 	} //HandleMultipagesAjax
 
-	function getUniqueArray($array, $key) {
+	function getUniqueArray($array, $key)
+	{
 		$uniqueItems = array();
-		foreach($array as $item) {
-		  $aux = $item[$key];
-		  if(array_key_exists($aux, $uniqueItems)) continue;
-		  $uniqueItems[$aux] = $item;
+		foreach ($array as $item) {
+			$aux = $item[$key];
+			if (array_key_exists($aux, $uniqueItems)) continue;
+			$uniqueItems[$aux] = $item;
 		}
-	  
+
 		return $uniqueItems;
-	  }
+	}
+
+	// Función de validación
+	function validar($value, $type)
+	{
+		switch ($type) {
+			case 'required':
+				return $value == '';
+			case 'email':
+				return !filter_var($value, FILTER_VALIDATE_EMAIL);
+			default:
+				return false;
+		}
+	}
+
+	function validationData($campos = [])
+	{
+		$errors = [];
+		// Validar cada campo
+		foreach ($campos as $key => $campo) {
+			foreach ($campo['types'] as $type) {
+				if ($this->validar($campo['value'], $type)) {
+					$errors[$key] = $campo['messages'][$type];
+					break;
+				}
+			}
+		}
+
+		return $errors;
+	}
+
+	function getCommissions(){
+		$sql = "SELECT * FROM commissions";
+		$this->Util()->DB()->setQuery($sql);
+		return $this->Util()->DB()->GetResult();
+	}
 }
