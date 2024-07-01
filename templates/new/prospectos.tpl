@@ -14,8 +14,7 @@
                     <td>Nombre</td> 
                     <td>Correo</td>
                     <td>Teléfono</td>
-                    <td>Ayuntamiento</td> 
-                    <td>Municipio</td>
+                    <td>Ayuntamiento</td>  
                     <td>Representante</td>
                     <td>Encargo</td>
                     <td>Acciones</td>
