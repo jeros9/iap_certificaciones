@@ -464,8 +464,7 @@ switch ($_POST["type"]) {
 		$phoneRepresentative = strip_tags($_POST['phoneRepresentative']);
 		$phonePresident = strip_tags($_POST['phonePresident']);
 		$phone = str_replace(" ", "", trim($_POST['mobile']));
-		$phonePresident = str_replace(" ", "", trim($_POST['phonePresident']));
-		$workPlace = strip_tags($_POST['workPlace']); 
+		$phonePresident = str_replace(" ", "", trim($_POST['phonePresident'])); 
 		$city = intval($_POST['ciudad']);
 		$typeApplicant = intval($_POST['tipoSolicitante']);
 		$nameRepresentative = strip_tags($_POST['nameRepresentative']);
@@ -559,12 +558,7 @@ switch ($_POST["type"]) {
 				'value'	=> $phoneRepresentative,
 				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono del enlace municipal."],
 				'types'	=> ['required']
-			],
-			'workPlace' => [
-				'value'	=> $workPlace,
-				'messages' => ['required' => "Por favor, no se olvide de poner el lugar de trabajo"],
-				'types'	=> ['required']
-			],
+			], 
 			'ciudad' => [
 				'value'	=> $city,
 				'messages' => ['required' => "Por favor, no se olvide de seleccionar el municipio"],
@@ -589,8 +583,7 @@ switch ($_POST["type"]) {
 		$user->setLastNamePaterno($firstSurname);
 		$user->setLastNameMaterno($secondSurname);
 		$user->setEmail($email);
-		$user->setPhone($phone);
-		$user->setWorkplace($workPlace); 
+		$user->setPhone($phone); 
 		$user->setCity($city);
 		$user->setNamesRepresentative($nameRepresentative);
 		$user->setFirstSurnameRepresentative($firstSurnameRepresentative);

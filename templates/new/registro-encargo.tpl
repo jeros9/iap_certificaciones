@@ -33,13 +33,9 @@
                         <i class="fa fa-build"></i> Datos laborales
                     </span>
                     <hr />
-                </div>
+                </div> 
                 <div class="form-group col-md-4">
-                    <label for="workPlace">Ayuntamiento</label>
-                    <input type="text" id="workPlace" name="workPlace" class="form-control">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="ciudad">Municipio:</label>
+                    <label for="ciudad">Ayuntamiento:</label>
                     <select id="ciudad" name="ciudad" class="form-control">
                         <option value="0">--Selecciona el municipio--</option>
                         {foreach from=$ciudades item=item}
@@ -58,7 +54,7 @@
                 </div>
                 <div class="col-md-12">
                     <span class="badge badge-dark">
-                        <i class="fa fa-user"></i> Datos del presidente municipal
+                        <i class="fa fa-user"></i> Datos del presidente municipal electo
                     </span>
                     <hr />
                 </div>
