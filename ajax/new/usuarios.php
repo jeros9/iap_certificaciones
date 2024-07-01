@@ -459,9 +459,13 @@ switch ($_POST["type"]) {
 		$firstSurname = strip_tags($_POST['firstSurname']);
 		$secondSurname = strip_tags($_POST['secondSurname']);
 		$email = strip_tags($_POST['email']);
+		$emailRepresentative = strip_tags($_POST['emailRepresentative']);
+		$emailPresident = strip_tags($_POST['emailPresident']);
+		$phoneRepresentative = strip_tags($_POST['phoneRepresentative']);
+		$phonePresident = strip_tags($_POST['phonePresident']);
 		$phone = str_replace(" ", "", trim($_POST['mobile']));
-		$workPlace = strip_tags($_POST['workPlace']);
-		$state = intval($_POST['estados']);
+		$phonePresident = str_replace(" ", "", trim($_POST['phonePresident']));
+		$workPlace = strip_tags($_POST['workPlace']); 
 		$city = intval($_POST['ciudad']);
 		$typeApplicant = intval($_POST['tipoSolicitante']);
 		$nameRepresentative = strip_tags($_POST['nameRepresentative']);
@@ -504,17 +508,17 @@ switch ($_POST["type"]) {
 			],
 			'namePresident' => 	[
 				'value' => $namePresident,
-				'messages' => ['required' => "Por favor, no se olvide de poner el nombre del enlace municipal."],
+				'messages' => ['required' => "Por favor, no se olvide de poner el nombre del presidente municipal."],
 				'types' => ['required']
 			],
 			'firstSurnamePresident' => [
 				'value' => $firstSurnamePresident,
-				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
+				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del presidente municipal."],
 				'types' => ['required']
 			],
 			'secondSurnamePresident' => [
 				'value' => $secondSurnamePresident,
-				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
+				'messages' => ['required' => "Por favor, no se olvide de poner el apellido materno del presidente municipal."],
 				'types' => ['required']
 			],
 			'emailRepresentative' => [
@@ -528,7 +532,7 @@ switch ($_POST["type"]) {
 			'emailPresident' => [
 				'value' => $emailPresident,
 				'messages' => [
-					'required' 	=> "Por favor, no se olvide de poner el apellido paterno del enlace municipal.",
+					'required' 	=> "Por favor, no se olvide de poner el apellido paterno del presidente municipal.",
 					'email'		=> "Por favor, ingrese un correo electrónico válido"
 				],
 				'types' => ['required', 'email']
@@ -543,17 +547,22 @@ switch ($_POST["type"]) {
 			],
 			'mobile' => [
 				'value'	=> $phone,
-				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono"],
+				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono."],
+				'types'	=> ['required']
+			],
+			'phonePresident' => [
+				'value'	=> $phonePresident,
+				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono del presidente municipal."],
+				'types'	=> ['required']
+			],
+			'phoneRepresentative' => [
+				'value'	=> $phoneRepresentative,
+				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono del enlace municipal."],
 				'types'	=> ['required']
 			],
 			'workPlace' => [
 				'value'	=> $workPlace,
 				'messages' => ['required' => "Por favor, no se olvide de poner el lugar de trabajo"],
-				'types'	=> ['required']
-			],
-			'estados' => [
-				'value'	=> $state,
-				'messages' => ['required' => "Por favor, no se olvide de seleccionar el estado"],
 				'types'	=> ['required']
 			],
 			'ciudad' => [
@@ -581,25 +590,33 @@ switch ($_POST["type"]) {
 		$user->setLastNameMaterno($secondSurname);
 		$user->setEmail($email);
 		$user->setPhone($phone);
-		$user->setWorkplace($workPlace);
-		$user->setState($state);
+		$user->setWorkplace($workPlace); 
 		$user->setCity($city);
 		$user->setNamesRepresentative($nameRepresentative);
 		$user->setFirstSurnameRepresentative($firstSurnameRepresentative);
 		$user->setSecondSurnameRepresentative($secondSurnameRepresentative);
+		$user->setNamesPresident($namePresident);
+		$user->setFirstSurnamePresident($firstSurnamePresident);
+		$user->setSecondSurnamePresident($secondSurnamePresident);
+		$user->setEmailPresident($emailPresident);
+		$user->setEmailRepresentative($emailRepresentative);
+		$user->setPhoneRepresentative($phoneRepresentative);
+		$user->setPhonePresident($phonePresident);
 		$user->setCommission($commission);
 		$response = $user->createProspect();
 		if ($response['status']) {
 			echo json_encode([
 				'growl'		=> true,
 				'type'		=> 'success',
-				'message'	=> 'Muchas gracias, pronto lo contactaremos.'
+				'message'	=> 'Muchas gracias, pronto lo contactaremos.',
+				'reload'	=> true
 			]);
 		} else {
 			echo json_encode([
 				'growl'		=> true,
 				'type'		=> 'danger',
 				'message'	=> $response['message'],
+				'reload'	=> true
 			]);
 		}
 		break;

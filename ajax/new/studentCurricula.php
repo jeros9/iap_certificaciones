@@ -366,5 +366,105 @@ switch ($_POST["type"]) {
 		}
 
 
-		break; 
+		break;
+	case 'addProspectCourse':
+		$courseId = intval($_POST['courseId']);
+		$userId = intval($_POST['userId']);
+		$campos = [
+			'courseId' => 	[
+				'value' => $courseId,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar la currícula."],
+				'types' => ['required']
+			],
+		];
+		$errors = $util->validationData($campos);
+		if (!empty($errors)) {
+			header('HTTP/1.1 422 Unprocessable Entity');
+			header('Content-Type: application/json; charset=UTF-8');
+			echo json_encode([
+				'errors'    => $errors
+			]);
+			exit;
+		}
+
+		$user->setUserId($userId);
+		$dataProspect = $user->getProspect();
+		$password = date("His") . rand(5, 15);
+		$student->setControlNumber();
+
+		break;
+
+		case "saveAddStudentRegister":
+
+
+			$_POST['password'] = date("His") . rand(5, 15);
+	
+			$status = $_POST['status'];
+	
+			//datos personales
+			$student->setPermiso($_POST['permiso']);
+			$student->setControlNumber();
+			$student->setNames($_POST['names']);
+			$student->setLastNamePaterno($_POST['lastNamePaterno']);
+			$student->setLastNameMaterno($_POST['lastNameMaterno']);
+			// $student->setSexo($_POST['sexo']);
+			// $student->setBirthdate($_POST['day'],$_POST['month'],$_POST['year']);
+			// $student->setMaritalStatus($_POST['maritalStatus']);
+			$student->setPassword(trim($_POST['password']));
+	
+			//domicilio
+			// $student->setStreet($_POST['street']);
+			// $student->setNumber($_POST['number']);
+			// $student->setColony($_POST['colony']);
+			$student->setCiudadT($_POST['ciudad']);
+			// $student->setState($_POST['estado']);
+			// $student->setCountry($_POST['pais']);
+			// $student->setPostalCode($_POST['postalCode']);
+			$student->setTipoSolitante($_POST['tipoSolicitante']);
+			//datos de contacto
+			$student->setEmail($_POST['email']);
+			// $student->setPhone($_POST['phone']);
+			// $student->setFax($_POST['fax']);
+			$student->setMobile($_POST['mobile']);
+			if (isset($_POST['typeOrder'])) {
+				$pcOrder->setTypeOrderId($_POST['typeOrder']);
+				$typeOrder = $pcOrder->Info();
+				$period->setPeriodId($_POST['period']);
+				$courseInfo = $period->GetCourse($_POST['typeOrder']);
+				$student->setWorkplacePosition($typeOrder['orderName']);
+				$student->setTypeOrderId($_POST['typeOrder']);
+				$_POST["curricula"] = $courseInfo['courseId'];
+			}
+	 
+	
+			if (!$student->Save("createCurricula")) {
+				echo "fail[#]";
+	
+				$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
+				echo "[#]" . $student->getStudentId();
+				echo "[#]" . $student->getFirma();
+			} else {
+				$course->setCourseId($_POST['curricula']);
+				$courseInfo = $course->Info();
+				$_POST['id'] = $student->getStudentId();
+				$_POST['subjectId'] = $courseInfo['subjectId'];
+				if($_POST['capacitador'] != ""){
+					$_POST["personalId"] = $_POST['capacitador'];
+					$personal->saveCalificadorUsuario();
+				}
+				if($_POST['alineador'] != ""){
+					$_POST["personalId"] = $_POST['alineador'];
+					$personal->saveCapacitadorUsuario();
+				}
+				if($_POST['evaluador'] != ""){
+					$_POST["personalId"] = $_POST['evaluador'];
+					$personal->saveCapacitadorOriginalUsuario();
+				}
+				echo "ok[#]"; 
+				$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
+				echo "[#]" . $student->getStudentId();
+				echo "[#]" . $student->getFirma();
+			} 
+			break;
+		
 }

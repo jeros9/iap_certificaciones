@@ -72,7 +72,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label name="secondSurnamePresident">Apellido materno</label>
-                    <input class="form-control" id="secondSurnamePresident" name="secondSurnameRepresentative">
+                    <input class="form-control" id="secondSurnamePresident" name="secondSurnamePresident">
                 </div>
                 <div class="form-group col-md-4">
                     <label name="emailPresident">Correo electrónico</label>

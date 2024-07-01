@@ -2384,7 +2384,45 @@ class User extends Main
 			$resultado['message'] = "Ya existe un registro, espere nuestro mensaje.";
 			return $resultado;
 		}
-		$sql = "INSERT INTO prospects(name, firstSurname, secondSurname, email, phone, workplace, cityId, nameRepresentative, firstSurnameRepresentative, secondSurnameRepresentative, commission, emailRepresentative, phoneRepresentative, emailPresident, phonePresident, namePresident, firstSurnamePresident, secondSurnamePresident) VALUES('{$this->names}', '{$this->lastNamePaterno}', '{$this->lastNameMaterno}', '{$this->email}', '{$this->phone}', '{$this->workplace}', '{$this->city}', '{$this->nameRepresentative}', '{$this->firstSurnameRepresentative}', '{$this->secondSurnameRepresentative}','{$this->commission}')"; 
+		$sql = "INSERT INTO prospects(
+			name, 
+			firstSurname, 
+			secondSurname, 
+			email, 
+			phone, 
+			workplace, 
+			cityId, 
+			nameRepresentative, 
+			firstSurnameRepresentative, 
+			secondSurnameRepresentative, 
+			commission, 
+			emailRepresentative, 
+			phoneRepresentative, 
+			emailPresident, 
+			phonePresident, 
+			namePresident, 
+			firstSurnamePresident, 
+			secondSurnamePresident
+		) VALUES(
+			'{$this->names}', 
+			'{$this->lastNamePaterno}', 
+			'{$this->lastNameMaterno}', 
+			'{$this->email}', 
+			'{$this->phone}', 
+			'{$this->workplace}', 
+			'{$this->city}', 
+			'{$this->nameRepresentative}', 
+			'{$this->firstSurnameRepresentative}', 
+			'{$this->secondSurnameRepresentative}',
+			'{$this->commission}', 
+			'{$this->emailRepresentative}', 
+			'{$this->phoneRepresentative}', 
+			'{$this->emailPresident}', 
+			'{$this->phonePresident}', 
+			'{$this->namePresident}',
+			'{$this->firstSurnamePresident}',
+			'{$this->secondSurnamePresident}'
+		)"; 
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->InsertData();
 		$resultado['status'] = true;
@@ -2400,26 +2438,30 @@ class User extends Main
 			array('db' => 'email',				'dt' => 'correo'), 
 			array('db' => 'phone',				'dt' => 'telefono'), 
 			array('db' => 'workplace',			'dt' => 'lugar'), 
-			array('db' => 'CONCAT(prospects.name, " ", firstSurname," ", secondSurname)',  'dt' => 'nombre'),
-			array('db' => '(SELECT name FROM state WHERE state.stateId = prospects.stateId)',  'dt' => 'estado'),
-			array('db' => '(SELECT nombre FROM municipio WHERE municipio.estadoId = prospects.stateId AND municipioId = prospects.cityId )',  'dt' => 'municipio'), 
+			array('db' => 'CONCAT(prospects.name, " ", firstSurname," ", secondSurname)',  'dt' => 'nombre'), 
+			array('db' => '(SELECT nombre FROM municipio WHERE municipio.estadoId = 7 AND municipioId = prospects.cityId )',  'dt' => 'municipio'), 
 			array('db' => 'CONCAT(nameRepresentative, " ", firstSurnameRepresentative," ", secondSurnameRepresentative)',  'dt' => 'representante'), 
 			array('db' => 'commissions.name',  'dt' => 'encargo'), 
 			array(
 				'db' => 'prospects.id', 'dt' => 'acciones',
-				'formatter' => function ($d, $row) {
-					return "";
-					// return '
-					// <a href="' . WEB_ROOT . '/graybox.php?page=edit-student&id=' . $d . '" data-target="#ajax" data-toggle="modal" data-width="1000px">
-					//  	Editar
-					// </a>
-					// <a href="' . WEB_ROOT . '/graybox.php?page=student-curricula&id=' . $d . '" data-target="#ajax" data-toggle="modal" data-width="1000px">
-					// 	Currícula
-					// </a>';
+				'formatter' => function ($d, $row) {  
+					return '
+					<a href="' . WEB_ROOT . '/graybox.php?page=prospect-details&id=' . $row['id'] . '" data-target="#ajax" data-toggle="modal" data-width="1000px" style="display:inline-block;">
+					 	<img src="'.WEB_ROOT.'/images/icons/ver-mas.png" class="img-responsive" title="Ver más" style="max-width:20px">
+					</a> 
+					<a href="' . WEB_ROOT . '/graybox.php?page=student-curricula&id=' . $row['id'] . '" data-target="#ajax" data-toggle="modal" data-width="1000px" style="display:inline-block;">
+						<img src="'.WEB_ROOT.'/images/icons/contratacion.png" class="img-responsive" title="Cursos" style="max-width:20px">
+					</a>';
 				}
 			)
 		);
 
 		return SSP::complex($_POST, $table, $primaryKey, $columns);
+	}
+
+	function getProspect() {
+		$sql = "SELECT *, (SELECT nombre FROM municipio WHERE municipio.estadoId = 7 AND municipioId = prospects.cityId ) as municipio FROM prospects WHERE id = {$this->userId}";
+		$this->Util()->DB()->setQuery($sql);
+		return $this->Util()->DB()->GetRow();
 	}
 }

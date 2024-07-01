@@ -97,7 +97,7 @@ function actionPostAjax(form, response) {
     if (response.reload) {
         setTimeout(() => {
             location.reload();
-        }, 1000);
+        }, 3000);
     }
 }
 

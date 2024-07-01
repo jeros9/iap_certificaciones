@@ -14,8 +14,7 @@
                     <td>Nombre</td> 
                     <td>Correo</td>
                     <td>Teléfono</td>
-                    <td>Lugar de trabajo</td>
-                    <td>Estado</td>
+                    <td>Ayuntamiento</td> 
                     <td>Municipio</td>
                     <td>Representante</td>
                     <td>Encargo</td>

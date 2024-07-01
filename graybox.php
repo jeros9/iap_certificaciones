@@ -251,8 +251,8 @@ $pages = array(
     'numero-lote',
     'revision-portafolio',
     'edit-estado-municipio',
-    'student-certificacion-auditor'
-
+    'student-certificacion-auditor',
+    'prospect-details'
 );
 
 if(!in_array($_GET['page'], $pages))
