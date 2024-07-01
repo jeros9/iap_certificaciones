@@ -22,11 +22,7 @@
                     <td>{$prospect.phone}</td>
                 </tr>
                 <tr>
-                    <td>Ayuntamiento:</td>
-                    <td>{$prospect.workplace}</td>
-                </tr>
-                <tr>
-                    <td>Municipio:</td>
+                    <td>Ayuntamiento:</td> 
                     <td>{$prospect.municipio}</td>
                 </tr>
                 <tr>
