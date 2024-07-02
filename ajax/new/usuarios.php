@@ -489,53 +489,7 @@ switch ($_POST["type"]) {
 				'value' => $secondSurname,
 				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno."],
 				'types' => ['required']
-			],
-			'nameRepresentative' => 	[
-				'value' => $nameRepresentative,
-				'messages' => ['required' => "Por favor, no se olvide de poner el nombre del enlace municipal."],
-				'types' => ['required']
-			],
-			'firstSurnameRepresentative' => [
-				'value' => $firstSurnameRepresentative,
-				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
-				'types' => ['required']
-			],
-			'secondSurnameRepresentative' => [
-				'value' => $secondSurnameRepresentative,
-				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del enlace municipal."],
-				'types' => ['required']
-			],
-			'namePresident' => 	[
-				'value' => $namePresident,
-				'messages' => ['required' => "Por favor, no se olvide de poner el nombre del presidente municipal."],
-				'types' => ['required']
-			],
-			'firstSurnamePresident' => [
-				'value' => $firstSurnamePresident,
-				'messages' => ['required' => "Por favor, no se olvide de poner el apellido paterno del presidente municipal."],
-				'types' => ['required']
-			],
-			'secondSurnamePresident' => [
-				'value' => $secondSurnamePresident,
-				'messages' => ['required' => "Por favor, no se olvide de poner el apellido materno del presidente municipal."],
-				'types' => ['required']
-			],
-			'emailRepresentative' => [
-				'value' => $emailRepresentative,
-				'messages' => [
-					'required' 	=> "Por favor, no se olvide de poner el apellido paterno del enlace municipal.",
-					'email'		=> "Por favor, ingrese un correo electrónico válido"
-				],
-				'types' => ['required', 'email']
-			],
-			'emailPresident' => [
-				'value' => $emailPresident,
-				'messages' => [
-					'required' 	=> "Por favor, no se olvide de poner el apellido paterno del presidente municipal.",
-					'email'		=> "Por favor, ingrese un correo electrónico válido"
-				],
-				'types' => ['required', 'email']
-			],
+			], 
 			'email' => [
 				'value' => $email,
 				'messages' => [
@@ -547,16 +501,6 @@ switch ($_POST["type"]) {
 			'mobile' => [
 				'value'	=> $phone,
 				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono."],
-				'types'	=> ['required']
-			],
-			'phonePresident' => [
-				'value'	=> $phonePresident,
-				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono del presidente municipal."],
-				'types'	=> ['required']
-			],
-			'phoneRepresentative' => [
-				'value'	=> $phoneRepresentative,
-				'messages' => ['required' => "Por favor, no se olvide de poner el teléfono del enlace municipal."],
 				'types'	=> ['required']
 			], 
 			'ciudad' => [
