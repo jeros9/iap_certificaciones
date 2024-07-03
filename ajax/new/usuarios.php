@@ -455,9 +455,9 @@ switch ($_POST["type"]) {
 		}
 		break;
 	case 'registerProspect':
-		$names = strip_tags($_POST['names']);
-		$firstSurname = strip_tags($_POST['firstSurname']);
-		$secondSurname = strip_tags($_POST['secondSurname']);
+		$names = $util->eliminar_acentos(strip_tags($_POST['names']));
+		$firstSurname = $util->eliminar_acentos(strip_tags($_POST['firstSurname']));
+		$secondSurname = $util->eliminar_acentos(strip_tags($_POST['secondSurname']));
 		$email = strip_tags($_POST['email']);
 		$emailRepresentative = strip_tags($_POST['emailRepresentative']);
 		$emailPresident = strip_tags($_POST['emailPresident']);
@@ -467,12 +467,12 @@ switch ($_POST["type"]) {
 		$phonePresident = str_replace(" ", "", trim($_POST['phonePresident'])); 
 		$city = intval($_POST['ciudad']);
 		$typeApplicant = intval($_POST['tipoSolicitante']);
-		$nameRepresentative = strip_tags($_POST['nameRepresentative']);
-		$firstSurnameRepresentative = strip_tags($_POST['firstSurnameRepresentative']);
-		$secondSurnameRepresentative = strip_tags($_POST['secondSurnameRepresentative']);
-		$namePresident = strip_tags($_POST['namePresident']);
-		$firstSurnamePresident = strip_tags($_POST['firstSurnamePresident']);
-		$secondSurnamePresident = strip_tags($_POST['secondSurnamePresident']);
+		$nameRepresentative = $util->eliminar_acentos(strip_tags($_POST['nameRepresentative']));
+		$firstSurnameRepresentative = $util->eliminar_acentos(strip_tags($_POST['firstSurnameRepresentative']));
+		$secondSurnameRepresentative = $util->eliminar_acentos(strip_tags($_POST['secondSurnameRepresentative']));
+		$namePresident = $util->eliminar_acentos(strip_tags($_POST['namePresident']));
+		$firstSurnamePresident = $util->eliminar_acentos(strip_tags($_POST['firstSurnamePresident']));
+		$secondSurnamePresident = $util->eliminar_acentos(strip_tags($_POST['secondSurnamePresident']));
 		$commission = intval($_POST['commission']);
 		$campos = [
 			'names' => 	[
