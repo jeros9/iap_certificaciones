@@ -2435,14 +2435,10 @@ class User extends Main
 			array('db' => 'prospects.id',		'dt' => 'id'), 
 			array('db' => 'email',				'dt' => 'correo'), 
 			array('db' => 'phone',				'dt' => 'telefono'),  
-			array('db' => 'CONCAT(prospects.name, " ", firstSurname," ", secondSurname)',  'dt' => 'nombre', 'formatter' => function($d, $row){
-				return  mb_convert_encoding($row['nombre'], 'ISO-8859-1', 'UTF-8') ;
-			}), 
+			array('db' => 'CONCAT(prospects.name, " ", firstSurname," ", secondSurname)',  'dt' => 'nombre'), 
 			array('db' => '(SELECT nombre FROM municipio WHERE municipio.estadoId = 7 AND municipioId = prospects.cityId )',  'dt' => 'municipio'), 
 			array('db' => 'CONCAT(nameRepresentative, " ", firstSurnameRepresentative," ", secondSurnameRepresentative)',  'dt' => 'representante'), 
-			array('db' => 'commissions.name',  'dt' => 'encargo', 'formatter' => function($d, $row){ 
-				return  mb_convert_encoding($row['encargo'], 'ISO-8859-1', 'UTF-8');
-			}), 
+			array('db' => 'commissions.name',  'dt' => 'encargo'), 
 			array(
 				'db' => 'prospects.id', 'dt' => 'acciones',
 				'formatter' => function ($d, $row) {  
@@ -2456,7 +2452,7 @@ class User extends Main
 				}
 			)
 		);
-		$_POST['search']['value'] =  mb_convert_encoding($_POST['search']['value'], 'ISO-8859-1', 'UTF-8');
+
 		return SSP::complex($_POST, $table, $primaryKey, $columns);
 	}
 
