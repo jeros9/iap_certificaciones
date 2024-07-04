@@ -2436,7 +2436,9 @@ class User extends Main
 			array('db' => 'email',				'dt' => 'correo'), 
 			array('db' => 'phone',				'dt' => 'telefono'),  
 			array('db' => 'CONCAT(prospects.name, " ", firstSurname," ", secondSurname)',  'dt' => 'nombre'), 
-			array('db' => '(SELECT nombre FROM municipio WHERE municipio.estadoId = 7 AND municipioId = prospects.cityId )',  'dt' => 'municipio'), 
+			array('db' => '(SELECT nombre FROM municipio WHERE municipio.estadoId = 7 AND municipioId = prospects.cityId )',  'dt' => 'municipio', 'formatter' => function($d, $row){
+				return $this->Util()->eliminar_acentos($row['municipio']);
+			}), 
 			array('db' => 'CONCAT(nameRepresentative, " ", firstSurnameRepresentative," ", secondSurnameRepresentative)',  'dt' => 'representante'), 
 			array('db' => 'commissions.name',  'dt' => 'encargo'), 
 			array(
