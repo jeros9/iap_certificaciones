@@ -2390,36 +2390,16 @@ class User extends Main
 			secondSurname, 
 			email, 
 			phone,   
-			cityId, 
-			nameRepresentative, 
-			firstSurnameRepresentative, 
-			secondSurnameRepresentative, 
-			commission, 
-			emailRepresentative, 
-			phoneRepresentative, 
-			emailPresident, 
-			phonePresident, 
-			namePresident, 
-			firstSurnamePresident, 
-			secondSurnamePresident
+			cityId,  
+			commission			 
 		) VALUES(
 			'{$this->names}', 
 			'{$this->lastNamePaterno}', 
 			'{$this->lastNameMaterno}', 
 			'{$this->email}', 
 			'{$this->phone}',  
-			'{$this->city}', 
-			'{$this->nameRepresentative}', 
-			'{$this->firstSurnameRepresentative}', 
-			'{$this->secondSurnameRepresentative}',
-			'{$this->commission}', 
-			'{$this->emailRepresentative}', 
-			'{$this->phoneRepresentative}', 
-			'{$this->emailPresident}', 
-			'{$this->phonePresident}', 
-			'{$this->namePresident}',
-			'{$this->firstSurnamePresident}',
-			'{$this->secondSurnamePresident}'
+			'{$this->city}',  
+			'{$this->commission}'
 		)"; 
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->InsertData();

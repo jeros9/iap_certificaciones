@@ -458,22 +458,12 @@ switch ($_POST["type"]) {
 		$names = $util->eliminar_acentos(strip_tags($_POST['names']));
 		$firstSurname = $util->eliminar_acentos(strip_tags($_POST['firstSurname']));
 		$secondSurname = $util->eliminar_acentos(strip_tags($_POST['secondSurname']));
-		$email = strip_tags($_POST['email']);
-		$emailRepresentative = strip_tags($_POST['emailRepresentative']);
-		$emailPresident = strip_tags($_POST['emailPresident']);
-		$phoneRepresentative = strip_tags($_POST['phoneRepresentative']);
-		$phonePresident = strip_tags($_POST['phonePresident']);
-		$phone = str_replace(" ", "", trim($_POST['mobile']));
-		$phonePresident = str_replace(" ", "", trim($_POST['phonePresident'])); 
+		$email = strip_tags($_POST['email']);		
+		$phone = str_replace(" ", "", trim($_POST['mobile']));		
 		$city = intval($_POST['ciudad']);
-		$typeApplicant = intval($_POST['tipoSolicitante']);
-		$nameRepresentative = $util->eliminar_acentos(strip_tags($_POST['nameRepresentative']));
-		$firstSurnameRepresentative = $util->eliminar_acentos(strip_tags($_POST['firstSurnameRepresentative']));
-		$secondSurnameRepresentative = $util->eliminar_acentos(strip_tags($_POST['secondSurnameRepresentative']));
-		$namePresident = $util->eliminar_acentos(strip_tags($_POST['namePresident']));
-		$firstSurnamePresident = $util->eliminar_acentos(strip_tags($_POST['firstSurnamePresident']));
-		$secondSurnamePresident = $util->eliminar_acentos(strip_tags($_POST['secondSurnamePresident']));
-		$commission = intval($_POST['commission']);
+		$typeApplicant = intval($_POST['tipoSolicitante']); 
+		$commission = intval($_POST['commission']); 
+
 		$campos = [
 			'names' => 	[
 				'value' => $names,
@@ -529,16 +519,6 @@ switch ($_POST["type"]) {
 		$user->setEmail($email);
 		$user->setPhone($phone); 
 		$user->setCity($city);
-		$user->setNamesRepresentative($nameRepresentative);
-		$user->setFirstSurnameRepresentative($firstSurnameRepresentative);
-		$user->setSecondSurnameRepresentative($secondSurnameRepresentative);
-		$user->setNamesPresident($namePresident);
-		$user->setFirstSurnamePresident($firstSurnamePresident);
-		$user->setSecondSurnamePresident($secondSurnamePresident);
-		$user->setEmailPresident($emailPresident);
-		$user->setEmailRepresentative($emailRepresentative);
-		$user->setPhoneRepresentative($phoneRepresentative);
-		$user->setPhonePresident($phonePresident);
 		$user->setCommission($commission);
 		$response = $user->createProspect();
 		if ($response['status']) {
