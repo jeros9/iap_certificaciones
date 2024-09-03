@@ -2438,9 +2438,9 @@ class User extends Main
 		return SSP::complex($_POST, $table, $primaryKey, $columns);
 	}
 
-	function getProspect() {
-		$sql = "SELECT *, (SELECT nombre FROM municipio WHERE municipio.estadoId = 7 AND municipioId = prospects.cityId ) as municipio FROM prospects WHERE id = {$this->userId}";
+	function getProspect($where = NULL) { 
+		$sql = "SELECT prospects.id, prospects.name, prospects.firstSurname, prospects.secondSurname, prospects.email, prospects.phone, (SELECT municipio.nombre FROM municipio WHERE municipio.municipioId = prospects.cityId) as municipio, commissions.name as encargo FROM `prospects` INNER JOIN commissions ON commissions.id = prospects.commission WHERE prospects.id > 2 $where ORDER BY prospects.name, prospects.firstSurname, prospects.secondSurname";
 		$this->Util()->DB()->setQuery($sql);
-		return $this->Util()->DB()->GetRow();
+		return $this->Util()->DB()->GetResult();
 	}
 }

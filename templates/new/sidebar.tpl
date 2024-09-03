@@ -243,6 +243,14 @@
                                     </a>
                                 </li>
                             {/if}
+
+                            {if in_array($User.positionId, [1, 33])}
+                                <li class="nav-item">
+                                    <a href="{$WEB_ROOT}/ajax/new/reportes.php?option=prospects&page=export-excel" target="_blank" class="nav-link">
+                                        <span class="title">Prospectos</span>
+                                    </a>
+                                </li>
+                            {/if}
                         </ul>
                     </li>
                 {/if}
