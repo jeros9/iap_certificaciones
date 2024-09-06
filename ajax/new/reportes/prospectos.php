@@ -40,13 +40,14 @@ $sheet->getStyle('G')->getAlignment()->setHorizontal('center')->setVertical('cen
 $sheet->getStyle('G')->getFont()->setSize(14)->setBold(true); 
 $row = 2;
 foreach ($prospects as $item) {
+    $encargo = mb_convert_encoding($item['encargo'], "UTF-8", "ISO-8859-1");
     $sheet->setCellValue("A{$row}", $item['name']);
     $sheet->setCellValue("B{$row}", $item['firstSurname']);
     $sheet->setCellValue("C{$row}", $item['secondSurname']);
     $sheet->setCellValue("D{$row}", $item['email']);
     $sheet->setCellValue("E{$row}", $item['phone']);
     $sheet->setCellValue("F{$row}", $item['municipio']); 
-    $sheet->setCellValue("G{$row}", $item['encargo']); 
+    $sheet->setCellValue("G{$row}", $encargo); 
     $row++;
 }
 
