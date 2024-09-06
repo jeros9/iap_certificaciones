@@ -17,13 +17,14 @@ $spreadsheet->getProperties()->setCreator('William Ramírez')
     ->setCategory('Reportes');
 $sheet = $spreadsheet->getActiveSheet();
 
-$sheet->setCellValue('A1', 'Nombre');
-$sheet->setCellValue('B1', 'Apellido Paterno');
-$sheet->setCellValue('C1', 'Apellido Materno');
-$sheet->setCellValue('D1', 'Correo');
-$sheet->setCellValue('E1', 'Teléfono');
-$sheet->setCellValue('F1', 'Ayuntamiento');
-$sheet->setCellValue('G1', 'Encargo'); 
+$sheet->setCellValue('A1', 'ID');
+$sheet->setCellValue('B1', 'Nombre');
+$sheet->setCellValue('C1', 'Apellido Paterno');
+$sheet->setCellValue('D1', 'Apellido Materno');
+$sheet->setCellValue('E1', 'Correo');
+$sheet->setCellValue('F1', 'Teléfono');
+$sheet->setCellValue('G1', 'Ayuntamiento');
+$sheet->setCellValue('H1', 'Encargo'); 
 $sheet->getStyle('A')->getAlignment()->setHorizontal('center')->setVertical('center');
 $sheet->getStyle('A')->getFont()->setSize(14)->setBold(true);
 $sheet->getStyle('B')->getAlignment()->setHorizontal('center')->setVertical('center');
@@ -41,13 +42,14 @@ $sheet->getStyle('G')->getFont()->setSize(14)->setBold(true);
 $row = 2;
 foreach ($prospects as $item) {
     $encargo = mb_convert_encoding($item['encargo'], "UTF-8", "ISO-8859-1");
-    $sheet->setCellValue("A{$row}", $item['name']);
-    $sheet->setCellValue("B{$row}", $item['firstSurname']);
-    $sheet->setCellValue("C{$row}", $item['secondSurname']);
-    $sheet->setCellValue("D{$row}", $item['email']);
-    $sheet->setCellValue("E{$row}", $item['phone']);
-    $sheet->setCellValue("F{$row}", $item['municipio']); 
-    $sheet->setCellValue("G{$row}", $encargo); 
+    $sheet->setCellValue("A{$row}", $item['id']);
+    $sheet->setCellValue("B{$row}", $item['name']);
+    $sheet->setCellValue("C{$row}", $item['firstSurname']);
+    $sheet->setCellValue("D{$row}", $item['secondSurname']);
+    $sheet->setCellValue("E{$row}", $item['email']);
+    $sheet->setCellValue("F{$row}", $item['phone']);
+    $sheet->setCellValue("G{$row}", $item['municipio']); 
+    $sheet->setCellValue("H{$row}", $encargo); 
     $row++;
 }
 
