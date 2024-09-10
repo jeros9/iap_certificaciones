@@ -8,7 +8,7 @@ if ($_GET['option']) {
 }
 switch ($_POST["option"]) {
     case 'prospects':
-        $prospects = $user->getProspect();
+        $prospects = $user->getProspect("prospects.id > 2");
         include DOC_ROOT."/ajax/new/reportes/prospectos.php";
         break;
 }

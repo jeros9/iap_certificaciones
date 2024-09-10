@@ -923,8 +923,6 @@ class Student extends User
 
 	public function AddUserToCurricula($id, $curricula, $nombre, $email, $password, $major, $course, $tipo_beca, $por_beca, $matricula = null)
 	{
-
-
 		include_once(DOC_ROOT . "/properties/messages.php");
 		$this->setUserId($id);
 		$info = $this->GetInfo();

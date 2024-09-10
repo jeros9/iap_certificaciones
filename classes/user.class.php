@@ -498,25 +498,30 @@ class User extends Main
 	}
 
 	protected $emailRepresentative;
-	function setEmailRepresentative($value) {
+	function setEmailRepresentative($value)
+	{
 		$this->emailRepresentative = $value;
 	}
 
 	protected $emailPresident;
-	function setEmailPresident($value) {
+	function setEmailPresident($value)
+	{
 		$this->emailPresident = $value;
 	}
 
 	protected $phonePresident;
-	function setPhonePresident($value) {
+	function setPhonePresident($value)
+	{
 		$this->phonePresident = $value;
 	}
 	protected $phoneRepresentative;
-	function setPhoneRepresentative($value) {
+	function setPhoneRepresentative($value)
+	{
 		$this->phoneRepresentative = $value;
 	}
 	protected $commission;
-	function setCommission($value) {
+	function setCommission($value)
+	{
 		$this->commission = $value;
 	}
 
@@ -2400,7 +2405,7 @@ class User extends Main
 			'{$this->phone}',  
 			'{$this->city}',  
 			'{$this->commission}'
-		)"; 
+		)";
 		$this->Util()->DB()->setQuery($sql);
 		$this->Util()->DB()->InsertData();
 		$resultado['status'] = true;
@@ -2408,39 +2413,88 @@ class User extends Main
 	}
 
 	function dt_prospects_request()
-	{ 
+	{
 		$table = 'prospects INNER JOIN commissions ON commissions.id = prospects.commission';
 		$primaryKey = 'prospects.id';
 		$columns = array(
-			array('db' => 'prospects.id',		'dt' => 'id'), 
-			array('db' => 'email',				'dt' => 'correo'), 
-			array('db' => 'phone',				'dt' => 'telefono'),  
-			array('db' => 'CONCAT(prospects.name, " ", firstSurname," ", secondSurname)',  'dt' => 'nombre'), 
-			array('db' => '(SELECT nombre FROM municipio WHERE municipio.estadoId = 7 AND municipioId = prospects.cityId )',  'dt' => 'municipio', 'formatter' => function($d, $row){
+			array('db' => 'prospects.id',		'dt' => 'id'),
+			array('db' => 'email',				'dt' => 'correo'),
+			array('db' => 'phone',				'dt' => 'telefono'),
+			array('db' => 'CONCAT(prospects.name, " ", firstSurname," ", secondSurname)',  'dt' => 'nombre'),
+			array('db' => '(SELECT nombre FROM municipio WHERE municipio.estadoId = 7 AND municipioId = prospects.cityId )',  'dt' => 'municipio', 'formatter' => function ($d, $row) {
 				return $this->Util()->eliminar_acentos($row['municipio']);
-			}), 
-			array('db' => 'CONCAT(nameRepresentative, " ", firstSurnameRepresentative," ", secondSurnameRepresentative)',  'dt' => 'representante'), 
-			array('db' => 'commissions.name',  'dt' => 'encargo'), 
+			}),
+			array('db' => 'CONCAT(nameRepresentative, " ", firstSurnameRepresentative," ", secondSurnameRepresentative)',  'dt' => 'representante'),
+			array('db' => 'commissions.name',  'dt' => 'encargo'),
 			array(
-				'db' => 'prospects.id', 'dt' => 'acciones',
-				'formatter' => function ($d, $row) {  
+				'db' => 'prospects.id',
+				'dt' => 'acciones',
+				'formatter' => function ($d, $row) {
 					return '
 					<a href="' . WEB_ROOT . '/graybox.php?page=prospect-details&id=' . $row['id'] . '" data-target="#ajax" data-toggle="modal" data-width="1000px" style="display:inline-block;">
-					 	<img src="'.WEB_ROOT.'/images/icons/ver-mas.png" class="img-responsive" title="Ver más" style="max-width:20px">
+					 	<img src="' . WEB_ROOT . '/images/icons/ver-mas.png" class="img-responsive" title="Ver más" style="max-width:20px">
 					</a> 
 					<a href="' . WEB_ROOT . '/graybox.php?page=student-curricula&id=' . $row['id'] . '" data-target="#ajax" data-toggle="modal" data-width="1000px" style="display:inline-block;">
-						<img src="'.WEB_ROOT.'/images/icons/contratacion.png" class="img-responsive" title="Cursos" style="max-width:20px">
+						<img src="' . WEB_ROOT . '/images/icons/contratacion.png" class="img-responsive" title="Cursos" style="max-width:20px">
 					</a>';
 				}
 			)
 		);
-
-		return SSP::complex($_POST, $table, $primaryKey, $columns);
+		$where = "prospects.deleted_at IS NULL";
+		return SSP::complex($_POST, $table, $primaryKey, $columns, $where);
 	}
 
-	function getProspect($where = NULL) { 
-		$sql = "SELECT prospects.id, prospects.name, prospects.firstSurname, prospects.secondSurname, prospects.email, prospects.phone, (SELECT municipio.nombre FROM municipio WHERE municipio.municipioId = prospects.cityId) as municipio, commissions.name as encargo FROM `prospects` INNER JOIN commissions ON commissions.id = prospects.commission WHERE prospects.id > 2 $where ORDER BY prospects.name, prospects.firstSurname, prospects.secondSurname";
+	function getProspect($where = 1)
+	{
+		$sql = "SELECT prospects.id, prospects.name, prospects.firstSurname, prospects.secondSurname, prospects.email, prospects.phone, (SELECT municipio.nombre FROM municipio WHERE municipio.municipioId = prospects.cityId) as municipio, commissions.name as encargo, prospects.cityId FROM `prospects` INNER JOIN commissions ON commissions.id = prospects.commission WHERE $where ORDER BY prospects.name, prospects.firstSurname, prospects.secondSurname";
 		$this->Util()->DB()->setQuery($sql);
 		return $this->Util()->DB()->GetResult();
 	}
+
+	public function prospectToUser()
+	{
+		$sql = "INSERT INTO user(
+							controlNumber, 
+							names,
+							lastNamePaterno,
+							lastNameMaterno,
+							email,
+							phone,
+							password,
+							type,
+							estadot,
+							ciudadt,
+							estado,
+							ciudad,
+							workplaceOcupation
+							) VALUES(
+							{$this->getControlNumber()},
+							'{$this->names}',
+							'{$this->lastNamePaterno}',
+							'{$this->lastNameMaterno}',
+							'{$this->email}',
+							'{$this->phone}',
+							'{$this->password}',
+							'student',
+							7,
+							{$this->ciudadT},
+							7,
+							{$this->ciudadT},
+							'{$this->workplaceOcupation}'
+						)";
+		$this->Util()->DB()->setQuery($sql);
+		return $this->Util()->DB()->InsertData();
+	}
+
+	public function updateProspect($where = 1){
+		$sql = "UPDATE prospects SET deleted_at = NOW() WHERE $where";
+		$this->Util()->DB()->setQuery($sql);
+		$this->Util()->DB()->UpdateData();
+	}
+
+	public function getUser($where = 1){
+		$sql = "SELECT * FROM user WHERE $where";
+		$this->Util()->DB()->setQuery($sql);
+		return $this->Util()->DB()->GetRow();
+	} 
 }

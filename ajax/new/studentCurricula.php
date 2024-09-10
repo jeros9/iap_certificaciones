@@ -370,10 +370,28 @@ switch ($_POST["type"]) {
 	case 'addProspectCourse':
 		$courseId = intval($_POST['courseId']);
 		$userId = intval($_POST['userId']);
+		$capacitador = $_POST['capacitador'];
+		$alineador = $_POST['alineador'];
+		$evaluador = $_POST['evaluador'];
 		$campos = [
 			'courseId' => 	[
 				'value' => $courseId,
 				'messages' => ['required' => "Por favor, no se olvide de seleccionar la currícula."],
+				'types' => ['required']
+			],
+			'capacitador' => 	[
+				'value' => $capacitador,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar el capacitador."],
+				'types' => ['required']
+			],
+			'alineador' => 	[
+				'value' => $alineador,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar el alineador."],
+				'types' => ['required']
+			],
+			'evaluador' => 	[
+				'value' => $evaluador,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar el evaluador."],
 				'types' => ['required']
 			],
 		];
@@ -387,84 +405,153 @@ switch ($_POST["type"]) {
 			exit;
 		}
 
-		$user->setUserId($userId);
-		$dataProspect = $user->getProspect();
-		$password = date("His") . rand(5, 15);
-		$student->setControlNumber();
+		$course->setCourseId($courseId);
+		$infoCourse = $course->Info();
+		$dataProspect = $user->getProspect("prospects.id = {$userId}");
+		$dataProspect = $dataProspect[0];
+		$dataUser = $user->getUser("email = '{$dataProspect['email']}'");
+		if (isset($dataUser['email'])) { //Ya existe un usuario con este correo 
+			$course->setCourseId($courseId);
+			$courseInfo = $course->Info();
+			$id = $dataUser['userId'];
+			$password = $dataUser['password'];
+			$response = $student->AddUserToCurricula($id, $courseId, $dataProspect['name'] . " " . $dataProspect['firstSurname'] . " " . $dataProspect['secondSurname'], $dataProspect['email'], $password, $courseInfo["majorName"],  $courseInfo["name"], 0, '');
 
+			 
+			if ($response == "Este alumno ya esta registrado en esta curricula. Favor de Seleccionar otra Curricula") {
+				header('HTTP/1.1 422 Unprocessable Entity');
+				header('Content-Type: application/json; charset=UTF-8');
+				echo json_encode([
+					'errors'    => [
+						'courseId' => $response
+					]
+				]);
+				exit;
+			}
+			$_POST['id'] = $id;
+			$_POST['subjectId'] = $courseInfo['subjectId'];
+			$_POST["personalId"] = $capacitador;
+			$personal->saveCalificadorUsuario();
+
+			$_POST["personalId"] = $alineador;
+			$personal->saveCapacitadorUsuario();
+
+			$_POST["personalId"] = $evaluador;
+			$personal->saveCapacitadorOriginalUsuario();
+			echo json_encode([
+				'growl'		=> true,
+				'type'		=> 'success',
+				'message'	=> $response,
+				'reload'	=> true
+			]);
+			exit;
+		} else { //No existe, así que se creará
+			$password = date("His") . rand(5, 15);
+			$user->setControlNumber();
+			$usuario = $user->getControlNumber();
+			$user->setCiudadT($dataProspect['cityId']);
+			$user->setNames($dataProspect['name']);
+			$user->setLastNamePaterno($dataProspect['firstSurname']);
+			$user->setLastNameMaterno($dataProspect['secondSurname']);
+			$user->setEmail($dataProspect['email']);
+			$user->setPhone($dataProspect['phone']);
+			$user->setWorkplaceOcupation($dataProspect['encargo']);
+			$user->setPassword($password);
+			$id = $user->prospectToUser();
+			$course->setCourseId($courseId);
+			$courseInfo = $course->Info();
+			$_POST['id'] = $id;
+			$_POST['subjectId'] = $courseInfo['subjectId'];
+			$_POST["personalId"] = $capacitador;
+			$personal->saveCalificadorUsuario();
+
+			$_POST["personalId"] = $_POST['alineador'];
+			$personal->saveCapacitadorUsuario();
+
+			$_POST["personalId"] = $_POST['evaluador'];
+			$personal->saveCapacitadorOriginalUsuario();
+
+			$student->AddUserToCurricula($id, $courseId, $dataProspect['name'] . " " . $dataProspect['firstSurname'] . " " . $dataProspect['secondSurname'], $dataProspect['email'], $password, $courseInfo["majorName"],  $courseInfo["name"], 0, '');
+		}
+
+		echo json_encode([
+			'growl'		=> true,
+			'type'		=> 'success',
+			'message'	=> 'Prospecto convertido en usuario y agregado a la currícula',
+			'reload'	=> true
+		]);
 		break;
 
-		case "saveAddStudentRegister":
+	case "saveAddStudentRegister":
 
 
-			$_POST['password'] = date("His") . rand(5, 15);
-	
-			$status = $_POST['status'];
-	
-			//datos personales
-			$student->setPermiso($_POST['permiso']);
-			$student->setControlNumber();
-			$student->setNames($_POST['names']);
-			$student->setLastNamePaterno($_POST['lastNamePaterno']);
-			$student->setLastNameMaterno($_POST['lastNameMaterno']);
-			// $student->setSexo($_POST['sexo']);
-			// $student->setBirthdate($_POST['day'],$_POST['month'],$_POST['year']);
-			// $student->setMaritalStatus($_POST['maritalStatus']);
-			$student->setPassword(trim($_POST['password']));
-	
-			//domicilio
-			// $student->setStreet($_POST['street']);
-			// $student->setNumber($_POST['number']);
-			// $student->setColony($_POST['colony']);
-			$student->setCiudadT($_POST['ciudad']);
-			// $student->setState($_POST['estado']);
-			// $student->setCountry($_POST['pais']);
-			// $student->setPostalCode($_POST['postalCode']);
-			$student->setTipoSolitante($_POST['tipoSolicitante']);
-			//datos de contacto
-			$student->setEmail($_POST['email']);
-			// $student->setPhone($_POST['phone']);
-			// $student->setFax($_POST['fax']);
-			$student->setMobile($_POST['mobile']);
-			if (isset($_POST['typeOrder'])) {
-				$pcOrder->setTypeOrderId($_POST['typeOrder']);
-				$typeOrder = $pcOrder->Info();
-				$period->setPeriodId($_POST['period']);
-				$courseInfo = $period->GetCourse($_POST['typeOrder']);
-				$student->setWorkplacePosition($typeOrder['orderName']);
-				$student->setTypeOrderId($_POST['typeOrder']);
-				$_POST["curricula"] = $courseInfo['courseId'];
+		$_POST['password'] = date("His") . rand(5, 15);
+
+		$status = $_POST['status'];
+
+		//datos personales
+		$student->setPermiso($_POST['permiso']);
+		$student->setControlNumber();
+		$student->setNames($_POST['names']);
+		$student->setLastNamePaterno($_POST['lastNamePaterno']);
+		$student->setLastNameMaterno($_POST['lastNameMaterno']);
+		// $student->setSexo($_POST['sexo']);
+		// $student->setBirthdate($_POST['day'],$_POST['month'],$_POST['year']);
+		// $student->setMaritalStatus($_POST['maritalStatus']);
+		$student->setPassword(trim($_POST['password']));
+
+		//domicilio
+		// $student->setStreet($_POST['street']);
+		// $student->setNumber($_POST['number']);
+		// $student->setColony($_POST['colony']);
+		$student->setCiudadT($_POST['ciudad']);
+		// $student->setState($_POST['estado']);
+		// $student->setCountry($_POST['pais']);
+		// $student->setPostalCode($_POST['postalCode']);
+		$student->setTipoSolitante($_POST['tipoSolicitante']);
+		//datos de contacto
+		$student->setEmail($_POST['email']);
+		// $student->setPhone($_POST['phone']);
+		// $student->setFax($_POST['fax']);
+		$student->setMobile($_POST['mobile']);
+		if (isset($_POST['typeOrder'])) {
+			$pcOrder->setTypeOrderId($_POST['typeOrder']);
+			$typeOrder = $pcOrder->Info();
+			$period->setPeriodId($_POST['period']);
+			$courseInfo = $period->GetCourse($_POST['typeOrder']);
+			$student->setWorkplacePosition($typeOrder['orderName']);
+			$student->setTypeOrderId($_POST['typeOrder']);
+			$_POST["curricula"] = $courseInfo['courseId'];
+		}
+
+
+		if (!$student->Save("createCurricula")) {
+			echo "fail[#]";
+
+			$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
+			echo "[#]" . $student->getStudentId();
+			echo "[#]" . $student->getFirma();
+		} else {
+			$course->setCourseId($_POST['curricula']);
+			$courseInfo = $course->Info();
+			$_POST['id'] = $student->getStudentId();
+			$_POST['subjectId'] = $courseInfo['subjectId'];
+			if ($_POST['capacitador'] != "") {
+				$_POST["personalId"] = $_POST['capacitador'];
+				$personal->saveCalificadorUsuario();
 			}
-	 
-	
-			if (!$student->Save("createCurricula")) {
-				echo "fail[#]";
-	
-				$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
-				echo "[#]" . $student->getStudentId();
-				echo "[#]" . $student->getFirma();
-			} else {
-				$course->setCourseId($_POST['curricula']);
-				$courseInfo = $course->Info();
-				$_POST['id'] = $student->getStudentId();
-				$_POST['subjectId'] = $courseInfo['subjectId'];
-				if($_POST['capacitador'] != ""){
-					$_POST["personalId"] = $_POST['capacitador'];
-					$personal->saveCalificadorUsuario();
-				}
-				if($_POST['alineador'] != ""){
-					$_POST["personalId"] = $_POST['alineador'];
-					$personal->saveCapacitadorUsuario();
-				}
-				if($_POST['evaluador'] != ""){
-					$_POST["personalId"] = $_POST['evaluador'];
-					$personal->saveCapacitadorOriginalUsuario();
-				}
-				echo "ok[#]"; 
-				$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
-				echo "[#]" . $student->getStudentId();
-				echo "[#]" . $student->getFirma();
-			} 
-			break;
-		
+			if ($_POST['alineador'] != "") {
+				$_POST["personalId"] = $_POST['alineador'];
+				$personal->saveCapacitadorUsuario();
+			}
+			if ($_POST['evaluador'] != "") {
+				$_POST["personalId"] = $_POST['evaluador'];
+				$personal->saveCapacitadorOriginalUsuario();
+			}
+			echo "ok[#]";
+			$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
+			echo "[#]" . $student->getStudentId();
+			echo "[#]" . $student->getFirma();
+		}
+		break;
 }
