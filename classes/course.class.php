@@ -1094,16 +1094,17 @@ class Course extends Subject
 		return $result;
 	}
 
-	public function EnumerateActive()
+	public function EnumerateActive($where = NULL)
 	{
-		//TODO porque tenia IN(0) no logro recordar -> Para mostrar solo los cursos en donde si se pueden inscribir
-		//				WHERE course.active = 'si' AND courseId IN (0)
+		 if (is_null($where)) {
+			$where = "course.active = 'si' AND listar = 'si'";
+		 }
 
 		$this->Util()->DB()->setQuery("
 				SELECT *, major.name AS majorName, subject.name AS name FROM course
 				LEFT JOIN subject ON course.subjectId = subject.subjectId 
 				LEFT JOIN major ON major.majorId = subject.tipo
-				WHERE course.active = 'si' AND listar = 'si'
+				WHERE $where
 				ORDER BY subject.tipo, subject.name, course.group");
 		//echo $this->Util()->DB()->query;
 		$result = $this->Util()->DB()->GetResult();
