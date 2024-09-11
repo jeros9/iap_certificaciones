@@ -379,21 +379,21 @@ switch ($_POST["type"]) {
 				'messages' => ['required' => "Por favor, no se olvide de seleccionar la currícula."],
 				'types' => ['required']
 			],
-			'capacitador' => 	[
-				'value' => $capacitador,
-				'messages' => ['required' => "Por favor, no se olvide de seleccionar el capacitador."],
-				'types' => ['required']
-			],
-			'alineador' => 	[
-				'value' => $alineador,
-				'messages' => ['required' => "Por favor, no se olvide de seleccionar el alineador."],
-				'types' => ['required']
-			],
-			'evaluador' => 	[
-				'value' => $evaluador,
-				'messages' => ['required' => "Por favor, no se olvide de seleccionar el evaluador."],
-				'types' => ['required']
-			],
+			// 'capacitador' => 	[
+			// 	'value' => $capacitador,
+			// 	'messages' => ['required' => "Por favor, no se olvide de seleccionar el capacitador."],
+			// 	'types' => ['required']
+			// ],
+			// 'alineador' => 	[
+			// 	'value' => $alineador,
+			// 	'messages' => ['required' => "Por favor, no se olvide de seleccionar el alineador."],
+			// 	'types' => ['required']
+			// ],
+			// 'evaluador' => 	[
+			// 	'value' => $evaluador,
+			// 	'messages' => ['required' => "Por favor, no se olvide de seleccionar el evaluador."],
+			// 	'types' => ['required']
+			// ],
 		];
 		$errors = $util->validationData($campos);
 		if (!empty($errors)) {
@@ -417,7 +417,6 @@ switch ($_POST["type"]) {
 			$password = $dataUser['password'];
 			$response = $student->AddUserToCurricula($id, $courseId, $dataProspect['name'] . " " . $dataProspect['firstSurname'] . " " . $dataProspect['secondSurname'], $dataProspect['email'], $password, $courseInfo["majorName"],  $courseInfo["name"], 0, '');
 
-			 
 			if ($response == "Este alumno ya esta registrado en esta curricula. Favor de Seleccionar otra Curricula") {
 				header('HTTP/1.1 422 Unprocessable Entity');
 				header('Content-Type: application/json; charset=UTF-8');
@@ -430,14 +429,19 @@ switch ($_POST["type"]) {
 			}
 			$_POST['id'] = $id;
 			$_POST['subjectId'] = $courseInfo['subjectId'];
-			$_POST["personalId"] = $capacitador;
-			$personal->saveCalificadorUsuario();
+			if (!empty($capacitador)) {
+				$_POST["personalId"] = $capacitador;
+				$personal->saveCalificadorUsuario();
+			}
+			if (!empty($alineador)) {
+				$_POST["personalId"] = $alineador;
+				$personal->saveCapacitadorUsuario();
+			}
+			if (!empty($evaluador)) {
+				$_POST["personalId"] = $evaluador;
+				$personal->saveCapacitadorOriginalUsuario();
+			}
 
-			$_POST["personalId"] = $alineador;
-			$personal->saveCapacitadorUsuario();
-
-			$_POST["personalId"] = $evaluador;
-			$personal->saveCapacitadorOriginalUsuario();
 			echo json_encode([
 				'growl'		=> true,
 				'type'		=> 'success',
@@ -462,15 +466,18 @@ switch ($_POST["type"]) {
 			$courseInfo = $course->Info();
 			$_POST['id'] = $id;
 			$_POST['subjectId'] = $courseInfo['subjectId'];
-			$_POST["personalId"] = $capacitador;
-			$personal->saveCalificadorUsuario();
-
-			$_POST["personalId"] = $_POST['alineador'];
-			$personal->saveCapacitadorUsuario();
-
-			$_POST["personalId"] = $_POST['evaluador'];
-			$personal->saveCapacitadorOriginalUsuario();
-
+			if (!empty($capacitador)) {
+				$_POST["personalId"] = $capacitador;
+				$personal->saveCalificadorUsuario();
+			}
+			if (!empty($alineador)) {
+				$_POST["personalId"] = $alineador;
+				$personal->saveCapacitadorUsuario();
+			}
+			if (!empty($evaluador)) {
+				$_POST["personalId"] = $evaluador;
+				$personal->saveCapacitadorOriginalUsuario();
+			}
 			$student->AddUserToCurricula($id, $courseId, $dataProspect['name'] . " " . $dataProspect['firstSurname'] . " " . $dataProspect['secondSurname'], $dataProspect['email'], $password, $courseInfo["majorName"],  $courseInfo["name"], 0, '');
 		}
 
