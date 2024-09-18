@@ -1,5 +1,6 @@
 <tr>
     <th class="text-center">ID</th>
+    <th class="text-center">Periodo</th>
     <th class="text-center">Presidente Electo</th>
     <th class="text-center">Municipio</th>
     <th class="text-center">Partido Pol&iacute;tico</th>

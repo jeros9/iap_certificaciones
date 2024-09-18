@@ -161,12 +161,18 @@ class Invitation extends Main
 	}
 
 	// Listar Invitaciones
-	public function Enumerate()
+	public function Enumerate($periodId = 0)
 	{
-		$sql = "SELECT pc_invitations.*, municipio.nombre AS municipio 
+		$filter = "";
+		if($periodId > 0)
+			$filter = " WHERE pc_invitations.periodId = " . $periodId;
+		$sql = "SELECT pc_invitations.*, municipio.nombre AS municipio, pc_periods.name AS periodName
 					FROM pc_invitations
 						INNER JOIN municipio 
 							ON pc_invitations.municipalityId = municipio.municipioId 
+						INNER JOIN pc_periods
+							ON pc_invitations.periodId = pc_periods.periodId
+					" . $filter . "
 					ORDER BY presidentName ASC";
 		$this->Util()->DB()->setQuery($sql);
 		$result = $this->Util()->DB()->GetResult();
@@ -179,7 +185,7 @@ class Invitation extends Main
 		if($this->Util()->PrintErrors()) 
 			return false; 
 
-		$sql = "SELECT count(*) FROM pc_invitations WHERE municipalityId = " . $this->municipalityId;
+		$sql = "SELECT count(*) FROM pc_invitations WHERE municipalityId = " . $this->municipalityId . " AND periodId = " . $this->periodId;
 		$this->Util()->DB()->setQuery($sql);
 		$totalInvitations = $this->Util()->DB()->GetSingle();
 		
