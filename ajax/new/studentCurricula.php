@@ -554,9 +554,9 @@ switch ($_POST["type"]) {
 			exit;
 		}
 
-		$names = strip_tags($_POST['names']);
-		$lastNamePaterno = strip_tags($_POST['lastNamePaterno']);
-		$lastNameMaterno = strip_tags($_POST['lastNameMaterno']);
+		$names = strip_tags($util->eliminar_acentos($_POST['names']));
+		$lastNamePaterno = strip_tags($util->eliminar_acentos($_POST['lastNamePaterno']));
+		$lastNameMaterno = strip_tags($util->eliminar_acentos($_POST['lastNameMaterno']));
 		$email = $_POST['email'];
 		$mobile = $_POST['mobile'];
 		$estados = intval($_POST['estados']) == 0 ? "" : intval($_POST['estados']);
