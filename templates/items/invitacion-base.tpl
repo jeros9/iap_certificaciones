@@ -1,6 +1,7 @@
 {foreach from=$invitations item=item key=key}    
     <tr>
         <td class="text-center">{$item.invitationId}</td>
+        <td>{$item.periodName}</td>
         <td>{$item.presidentName}</td>
         <td>{$item.municipio}</td>
         <td>{$item.politicalGroup}</td>
