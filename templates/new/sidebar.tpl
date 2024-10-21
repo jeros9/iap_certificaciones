@@ -1,5 +1,5 @@
 <div class="page-sidebar navbar-collapse collapse">
-    <ul class="page-sidebar-menu  page-header-fixed {if $User.type == "student" || $User.type == "Docente"} page-sidebar-menu-closed {/if}"
+    <ul class="page-sidebar-menu  page-header-fixed {if $User.type == "student" || $User.type == "Docente" || $page == "register-multiple"} page-sidebar-menu-closed {/if}"
         data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
         <li class="sidebar-toggler-wrapper hide">
             <div class="sidebar-toggler">

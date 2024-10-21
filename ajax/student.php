@@ -288,23 +288,23 @@ switch ($_POST["type"]) {
 			$courseInfo = $course->Info();
 			$_POST['id'] = $student->getStudentId();
 			$_POST['subjectId'] = $courseInfo['subjectId'];
-			if($_POST['capacitador'] != ""){
+			if ($_POST['capacitador'] != "") {
 				$_POST["personalId"] = $_POST['capacitador'];
 				$personal->saveCalificadorUsuario();
 			}
-			if($_POST['alineador'] != ""){
+			if ($_POST['alineador'] != "") {
 				$_POST["personalId"] = $_POST['alineador'];
 				$personal->saveCapacitadorUsuario();
 			}
-			if($_POST['evaluador'] != ""){
+			if ($_POST['evaluador'] != "") {
 				$_POST["personalId"] = $_POST['evaluador'];
 				$personal->saveCapacitadorOriginalUsuario();
 			}
-			echo "ok[#]"; 
+			echo "ok[#]";
 			$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
 			echo "[#]" . $student->getStudentId();
 			echo "[#]" . $student->getFirma();
-		} 
+		}
 		break;
 	case "saveEditStudent":
 
@@ -1106,6 +1106,41 @@ switch ($_POST["type"]) {
 			echo "ok[#]";
 			$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
 			echo "[#]<div class='alert alert-success text-center' role='alert'><p>El registro se realizó de manera exitosa. Gracias..</p><a href='registro2021' class='btn btn-info'>Realizar otro registro</a></div>";
+		}
+		break;
+
+	case "saveAddStudentRegisterMultiple":
+		$_POST['password'] = date("His") . rand(5, 15);
+		$status = $_POST['status'];
+		$student->setPermiso($_POST['permiso']);
+		$student->setControlNumber();
+		$student->setNames($_POST['names']);
+		$student->setLastNamePaterno($_POST['lastNamePaterno']);
+		$student->setLastNameMaterno($_POST['lastNameMaterno']);
+		$student->setPassword(trim($_POST['password']));
+		$student->setCiudadT($_POST['ciudad']);
+		$student->setTipoSolitante($_POST['tipoSolicitante']);
+		$student->setEmail($_POST['email']);
+		$student->setMobile($_POST['mobile']);
+		if (isset($_POST['typeOrder'])) {
+			$pcOrder->setTypeOrderId($_POST['typeOrder']);
+			$typeOrder = $pcOrder->Info();
+			$period->setPeriodId($_POST['period']);
+			$courseInfo = $period->GetCourse($_POST['typeOrder']);
+			$student->setWorkplacePosition($typeOrder['orderName']);
+			$student->setTypeOrderId($_POST['typeOrder']);
+			$_POST["curricula"] = $courseInfo['courseId'];
+		} 
+		if (!$student->SaveMultiple("createCurricula")) {
+			echo "fail[#]"; 
+			$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
+			echo "[#]" . $student->getStudentId();
+			echo "[#]" . $student->getFirma();
+		} else { 
+			echo "ok[#]";
+			$smarty->display(DOC_ROOT . '/templates/boxes/status.tpl');
+			echo "[#]" . $student->getStudentId();
+			echo "[#]" . $student->getFirma();
 		}
 		break;
 }

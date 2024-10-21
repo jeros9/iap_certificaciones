@@ -490,36 +490,17 @@ switch ($_POST["type"]) {
 		break;
 
 	case "saveAddStudentRegister":
-
-
 		$_POST['password'] = date("His") . rand(5, 15);
-
 		$status = $_POST['status'];
-
-		//datos personales
 		$student->setPermiso($_POST['permiso']);
 		$student->setControlNumber();
 		$student->setNames($_POST['names']);
 		$student->setLastNamePaterno($_POST['lastNamePaterno']);
 		$student->setLastNameMaterno($_POST['lastNameMaterno']);
-		// $student->setSexo($_POST['sexo']);
-		// $student->setBirthdate($_POST['day'],$_POST['month'],$_POST['year']);
-		// $student->setMaritalStatus($_POST['maritalStatus']);
 		$student->setPassword(trim($_POST['password']));
-
-		//domicilio
-		// $student->setStreet($_POST['street']);
-		// $student->setNumber($_POST['number']);
-		// $student->setColony($_POST['colony']);
 		$student->setCiudadT($_POST['ciudad']);
-		// $student->setState($_POST['estado']);
-		// $student->setCountry($_POST['pais']);
-		// $student->setPostalCode($_POST['postalCode']);
 		$student->setTipoSolitante($_POST['tipoSolicitante']);
-		//datos de contacto
 		$student->setEmail($_POST['email']);
-		// $student->setPhone($_POST['phone']);
-		// $student->setFax($_POST['fax']);
 		$student->setMobile($_POST['mobile']);
 		if (isset($_POST['typeOrder'])) {
 			$pcOrder->setTypeOrderId($_POST['typeOrder']);
@@ -560,5 +541,112 @@ switch ($_POST["type"]) {
 			echo "[#]" . $student->getStudentId();
 			echo "[#]" . $student->getFirma();
 		}
+		break;
+	case 'saveAddStudentRegisterMultiple':
+		if (empty($_POST['curricula'])) {
+			header('HTTP/1.1 422 Unprocessable Entity');
+			header('Content-Type: application/json; charset=UTF-8');
+			echo json_encode([
+				'growl'		=> true,
+				'message'	=> 'Debe seleccionar al menos una certificación',
+				'type'		=> 'danger'
+			]);
+			exit;
+		}
+
+		$names = strip_tags($_POST['names']);
+		$lastNamePaterno = strip_tags($_POST['lastNamePaterno']);
+		$lastNameMaterno = strip_tags($_POST['lastNameMaterno']);
+		$email = $_POST['email'];
+		$mobile = $_POST['mobile'];
+		$estados = intval($_POST['estados']) == 0 ? "" : intval($_POST['estados']);
+		$ciudad =  intval($_POST['ciudad']) == 0 ? "" : intval($_POST['ciudad']);
+		$messageDefault = "Por favor, no se olvide de completar el campo";
+		$campos = [
+			'names' => 	[
+				'value' => $names,
+				'messages' => ['required' => $messageDefault],
+				'types' => ['required']
+			],
+			'lastNamePaterno' => 	[
+				'value' => $lastNamePaterno,
+				'messages' => ['required' => $messageDefault],
+				'types' => ['required']
+			],
+			'lastNameMaterno' => 	[
+				'value' => $lastNameMaterno,
+				'messages' => ['required' => $messageDefault],
+				'types' => ['required']
+			],
+			'email' => 	[
+				'value' => $email,
+				'messages' => ['required' => $messageDefault, 'email' => 'Por favor, no se olvide de poner un correo válido'],
+				'types' => ['required', 'email']
+			],
+			'mobile' => 	[
+				'value' => $mobile,
+				'messages' => ['required' => $messageDefault],
+				'types' => ['required']
+			],
+			'estados' => 	[
+				'value' => $estados,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar el estado"],
+				'types' => ['required']
+			],
+			'ciudad' => 	[
+				'value' => $ciudad,
+				'messages' => ['required' => "Por favor, no se olvide de seleccionar la ciudad."],
+				'types' => ['required']
+			],
+		];
+		$errors = $util->validationData($campos);
+		if (!empty($errors)) {
+			header('HTTP/1.1 422 Unprocessable Entity');
+			header('Content-Type: application/json; charset=UTF-8');
+			echo json_encode([
+				'errors'    => $errors
+			]);
+			exit;
+		}
+
+		$dataUser = $user->getUser("email = '{$email}'");
+		if (isset($dataUser['email'])) { //Ya existe un usuario con este correo 
+			foreach ($_POST['curricula'] as $curricula) {
+				$course->setCourseId($curricula);
+				$courseInfo = $course->Info();
+				$id = $dataUser['userId'];
+				$password = $dataUser['password'];
+				$response = $student->AddUserToCurricula($id, $curricula, $names . " " . $lastNamePaterno . " " . $lastNameMaterno, $email, $password, $courseInfo["majorName"],  $courseInfo["name"], 0, '');
+			}
+
+			echo json_encode([
+				'growl'		=> true,
+				'type'		=> 'success',
+				'message'	=> "Has registrado al alumno exitosamente, le hemos enviado un correo electronico para continuar con el proceso de inscripcion",
+				'reload'	=> true
+			]);
+			exit;
+		} else { //No existe, así que se creará
+			$password = date("His") . rand(5, 15);
+
+			$student->setControlNumber();
+			$student->setEstadoT($estados);
+			$student->setCiudadT($ciudad);
+			$student->setNames($names);
+			$student->setLastNamePaterno($lastNamePaterno);
+			$student->setLastNameMaterno($lastNameMaterno);
+			$student->setEmail($email);
+			$student->setPhone($mobile);
+			$student->setTipoSolitante(intval($_POST['tipoSolicitante']));
+			$student->setPassword($password);
+			$student->SaveMultiple();
+			echo json_encode([
+				'growl'		=> true,
+				'type'		=> 'success',
+				'message'	=> "Has registrado al alumno exitosamente, le hemos enviado un correo electronico para continuar con el proceso de inscripcion",
+				'reload'	=> true
+			]);
+		}
+
 		break;
 }

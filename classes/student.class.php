@@ -774,6 +774,74 @@ class Student extends User
 		return true;
 	}
 
+	public function SaveMultiple()
+	{
+		$firma = uniqid();
+		$sqlQuery = "INSERT INTO 
+						user 
+						(
+							type,
+							names, 
+							lastNamePaterno, 
+							lastNameMaterno,
+							controlNumber, 					
+							email, 
+							phone, 
+							password, 
+							ciudad, 
+							estado, 
+							pais,  
+							paist,
+							estadot,
+							ciudadt, 
+							tipoSolicitanteId,
+							firma 
+						)
+							VALUES
+						(
+							'student',
+							'" . $this->getNames() . "', 
+							'" . $this->getLastNamePaterno() . "', 
+							'" . $this->getLastNameMaterno() . "',
+							'" . $this->getControlNumber() . "', 
+							'" . $this->getEmail() . "', 
+							'" . $this->getPhone() . "', 
+							'" . $this->getPassword() . "', 
+							'" . $this->getCiudadT() . "', 
+							'" . $this->getEstadoT() . "', 
+							'1',  
+							'1', 
+							'" . $this->getEstadoT() . "', 
+							'" . $this->getCiudadT() . "',
+							'" . $this->tipoSolicitante . "',
+							'" . $firma . "' 
+						)";
+
+		$this->Util()->DB()->setQuery($sqlQuery);
+		$studentId = $this->Util()->DB()->InsertData();
+		$fecha_aplicacion = date("Y-m-d H:i:s");
+		$enlace = "/student";
+		$this->setAlumnoId($studentId);
+		$hecho = $studentId . "u";
+		$actividad = "Se ha Registrado un nuevo Alumno";
+		$visto = $studentId . "u,1p";
+		$sqlNot = "insert into notificacion(notificacionId,actividad,vista,hecho,fecha_aplicacion,tablas,enlace)
+			   values('',  '" . $actividad . "',  '" . $visto . "', '" . $hecho . "', '" . $fecha_aplicacion . "', 'reply', '" . $enlace . "')";
+		$this->Util()->DB()->setQuery($sqlNot);
+		//ejecutamos la consulta y guardamos el resultado, que sera el ultimo positionId generado
+		$this->Util()->DB()->InsertData();
+
+		foreach ($_POST['curricula'] as $curricula) {
+			// Envio de Correo
+			$course = new Course(); 
+			$course->setCourseId($curricula);
+			$courseInfo = $course->Info();
+			$nombre = $this->getNames() . ' ' . $this->getLastNamePaterno() . ' ' . $this->getLastNameMaterno();
+			$this->AddUserToCurricula($studentId, $curricula, $nombre, $this->getEmail(), $this->getPassword(), $courseInfo["majorName"], $courseInfo["name"], 0, '');
+		}		 
+		return true;
+	}
+
 
 	function DeleteStudentCurricula()
 	{
@@ -884,39 +952,24 @@ class Student extends User
 				break;
 
 			case 'ESPECIALIDAD':
-
 				$year = date('Y');
-				//print_r($year);
 				$year = substr($year, -2);
-
 				$this->Util()->DB()->setQuery("
 				SELECT *, user_subject.status AS status FROM user_subject
 				LEFT JOIN user ON user_subject.alumnoId = user.userId
 				WHERE matricula like '5046%'
 				ORDER BY lastNamePaterno ASC, lastNameMaterno ASC, names ASC");
-
 				$maestrias = $this->Util()->DB()->GetResult();
-
 				foreach ($maestrias as $fila) {
 					$num = $fila['matricula'];
 				}
-
 				$num = substr($num, -3);    // devuelve "ef"
 				$num = $num + 1;
-
 				if (strlen($num) == 2) {
 					$num = "0" . $num;
 				}
-
-
 				$matricula = "5046101" . $year . $num;
-
 				return $matricula;
-
-
-
-
-
 				break;
 		}
 	}
@@ -957,7 +1010,7 @@ class Student extends User
 		} else {
 			$status = 'activo';
 		}
-		//print_r($count);
+
 		if ($count > 0) {
 			return $complete = "Este alumno ya esta registrado en esta curricula. Favor de Seleccionar otra Curricula";
 		}
@@ -987,66 +1040,15 @@ class Student extends User
 		} else {
 			$complete = "no";
 		}
-		// if($this->getNames() == "")
-		// {
-
-		// echo ""
-		// exit;
-		//datos personales
 		$this->setControlNumber();
 		$this->setNames($info['names']);
 		$this->setLastNamePaterno($info['lastNamePaterno']);
 		$this->setLastNameMaterno($info['lastNameMaterno']);
-		// $this->setSexo($info['sexo']);
-		// $info['birthdate'] = explode("-", $info['birthdate']);
-		// $this->setBirthdate($info['birthdate']);
-		// $this->setMaritalStatus($info['maritalStatus']);
 		$this->setPassword(trim($info['password']));
-
-		//domicilio
-		//print_r($info);
-		// $this->setStreet($info['street']);
-		// $this->setNumber($info['number']);
-		// $this->setColony($info['colony']);
-		// $this->setCity($info['ciudad']);
-		// $this->setState($info['estado']);
-		// $this->setCountry($info['pais']);
-		// $this->setPostalCode($info['postalCode']);
-
-		//datos de contacto
 		$this->setEmail($info['email']);
-		// $this->setPhone($info['phone']);
-		// $this->setFax($info['fax']);
-		// $this->setMobile($info['mobile']);
-
-		//datos laborales
-		// $this->setWorkplace($info['workplace']);
-		// $this->setWorkplaceOcupation($info['workplaceOcupation']);
-		// $this->setWorkplaceAddress($info['workplaceAddress']);
-		// $this->setWorkplaceArea($info['workplaceArea']);
-		// $this->setWorkplacePosition($info['workplacePosition']);
-		// $this->setWorkplaceCity($info['nombreciudad']);
-		// $this->setWorkplacePhone($info['workplacePhone']);
-		// $this->setWorkplaceEmail($info['workplaceEmail']);
-
-		//Estudios
-		// $this->setAcademicDegree($info['academicDegree']);
-		// $this->setSchool($info['school']);
-		// $this->setHighSchool($info['highSchool']);
-		// $this->setMasters($info['masters']);
-		// $this->setMastersSchool($info['mastersSchool']);
-		// $this->setProfesion($info['profesion']);				
-
-		// }
-		//crear vencimientos
 		$this->AddInvoices($id, $curricula);
-
-
-		//create file to attach
 		$files  = new Files;
-		//print_r($this);        //pdf del correo electronico
 		$file = $files->CedulaInscripcion($id, $curricula, $this, $major, $course);
-
 		return $complete;
 	}
 

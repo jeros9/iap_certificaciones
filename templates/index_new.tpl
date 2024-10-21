@@ -131,17 +131,17 @@ $page == 'view-inbox' or
 <!-- END HEAD -->
 
 <body
-	class="page-header-fixed page-sidebar-closed-hide-logo {if $User.type == "student" || $User.type == "Docente" || $vistaPrevia eq 1 || $page == "register" || $page == 'registro2021' || $page == "registro" || $page == "preregistro" || $page == "registro-encargo"} page-sidebar-closed {/if} page-content-white page-md {if ($page == 'homepage' && $User.type == 'student') || ($page == 'homepage' && $User.type == 'Docente') || $vistaPrevia eq 1 || ($page == 'capacitador_profile' && $User.type == 'Docente') || ($page == 'capacitador_original_profile' && $User.type == 'Docente')} page-container-bg-solid {/if}">
+	class="page-header-fixed page-sidebar-closed-hide-logo {if $User.type == "student" || $User.type == "Docente" || $vistaPrevia eq 1 || $page == "register" || $page == "register-multiple" || $page == 'registro2021' || $page == "registro" || $page == "preregistro" || $page == "registro-encargo"} page-sidebar-closed {/if} page-content-white page-md {if ($page == 'homepage' && $User.type == 'student') || ($page == 'homepage' && $User.type == 'Docente') || $vistaPrevia eq 1 || ($page == 'capacitador_profile' && $User.type == 'Docente') || ($page == 'capacitador_original_profile' && $User.type == 'Docente')} page-container-bg-solid {/if}">
 	<div class="page-wrapper">
 		{include file="new/header.tpl"}
 		<!-- BEGIN CONTAINER -->
 		<div class="page-container">
 			<!-- BEGIN SIDEBAR -->
 			<div class="page-sidebar-wrapper">
-				{if $vistaPrevia eq 1}
+				{if $vistaPrevia eq 1} 
 					{include file="new/sidebar_vp.tpl"}
 				{else}
-					{if ($User.type ne "Docente" or $page ne 'homepage')}
+					{if ($User.type ne "Docente" or $page ne 'homepage')} 
 						{include file="new/sidebar.tpl"}
 					{/if}
 				{/if}

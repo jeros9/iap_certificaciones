@@ -251,7 +251,8 @@ $pages = array(
 	'edit-estado-municipio',
 	'permisos',
 	'registro-encargo',
-	'prospectos'
+	'prospectos',
+	'register-multiple'
 );
 
 if(!in_array($_GET['page'], $pages))
