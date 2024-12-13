@@ -5,7 +5,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="{$WEB_ROOT}">
-                <img src="{$WEB_ROOT}/images/logos/Logo_4.png" style="position:relative; top:-15px" alt="logo" class="logo-default" height="45" /> </a>
+                <img src="{$WEB_ROOT}/images/logos/logo-humanismo.webp" style="position:relative; top:-15px" alt="logo" class="logo-default" height="45" /> </a>
             <div class="menu-toggler sidebar-toggler">
                 <span></span>
             </div>
