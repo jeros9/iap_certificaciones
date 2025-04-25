@@ -1,402 +1,395 @@
+ciudad_domt();
 
-function comprueba_extension(archivo) { 
-   extensiones_permitidas = new Array(".png",".jpg");  
-      extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase(); 
-      permitida = false; 
-      for (var i = 0; i < extensiones_permitidas.length; i++) { 
-         if (extensiones_permitidas[i] == extension) { 
-         permitida = true; 
-         break; 
-         } 
-      } 
-      if (!permitida) { 
-         return "no";
-      	}else{ 
-         return "si"; 
-      	} 
-   return 0; 
+
+function comprueba_extension(archivo) {
+	extensiones_permitidas = new Array(".png", ".jpg");
+	extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase();
+	permitida = false;
+	for (var i = 0; i < extensiones_permitidas.length; i++) {
+		if (extensiones_permitidas[i] == extension) {
+			permitida = true;
+			break;
+		}
+	}
+	if (!permitida) {
+		return "no";
+	} else {
+		return "si";
+	}
+	return 0;
 }
 
 
 
-  
-function onVerPass(){
-	 // $('#show').attr('checked', false);
 
-      name = $('#nuevo').attr('name'); 
-      value = $('#nuevo').attr('value');
+function onVerPass() {
+	// $('#show').attr('checked', false);
 
-      if($('#nuevo').attr('checked'))
-      {
-         html = '<input type="text" name="'+ name + '" value="' + value + '" id="nuevo"/>';
-         $('#nuevo').after(html).remove();
-      }
+	name = $('#nuevo').attr('name');
+	value = $('#nuevo').attr('value');
 
-      else
-      {
-         html = '<input type="nuevo" name="'+ name + '" value="' + value + '" id="nuevo"/>';
-         $('#nuevo').after(html).remove();
-      }
-  
+	if ($('#nuevo').attr('checked')) {
+		html = '<input type="text" name="' + name + '" value="' + value + '" id="nuevo"/>';
+		$('#nuevo').after(html).remove();
+	}
+
+	else {
+		html = '<input type="nuevo" name="' + name + '" value="' + value + '" id="nuevo"/>';
+		$('#nuevo').after(html).remove();
+	}
+
 }
 
 
-function onSavePass(){
-	
+function onSavePass() {
+
 	$("#type").val("onSavePass")
 
 	$.ajax({
-	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/student.php',
-	  	data: $("#frmPass").serialize(true)+'&type=onSavePass',
-		beforeSend: function(){			
+		type: "POST",
+		url: WEB_ROOT + '/ajax/student.php',
+		data: $("#frmPass").serialize(true) + '&type=onSavePass',
+		beforeSend: function () {
 			$("#res_").html('Cargando..');
 		},
-	  	success: function(response) {	
+		success: function (response) {
 			$("#res_").html('');
 			console.log(response)
 			var splitResp = response.split("[#]");
-			
-			if($.trim(splitResp[0]) == "ok"){
-					location.reload();
-				}
-			else if($.trim(splitResp[0]) == "fail"){
+
+			if ($.trim(splitResp[0]) == "ok") {
+				location.reload();
+			}
+			else if ($.trim(splitResp[0]) == "fail") {
 
 				$("#res_").html(splitResp[1]);
-			
+
 			}
-			
+
 
 		},
-		error:function(){
+		error: function () {
 			alert(msgError);
 		}
-    });
-	
+	});
+
 }//activar
 
-function CalificacionesAct(id){
+function CalificacionesAct(id) {
 	$.ajax({
-	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/studentCurricula.php',
-	  	data: "type=calificaciones&id="+id,
-		beforeSend: function(){			
+		type: "POST",
+		url: WEB_ROOT + '/ajax/studentCurricula.php',
+		data: "type=calificaciones&id=" + id,
+		beforeSend: function () {
 			// $("#td_"+id).html(LOADER3);
 		},
-	  	success: function(response) {	
-		
-			  $("#td_"+id).html(response);
-			  $("#td_"+id).toggle();
+		success: function (response) {
+
+			$("#td_" + id).html(response);
+			$("#td_" + id).toggle();
 
 
 		},
-		error:function(){
+		error: function () {
 			alert(msgError);
 		}
-    });
-	
+	});
+
 }//AddReg
 
 
-function closeModal(){
-	
+function closeModal() {
+
 	$("#ajax").hide();
 	$("#ajax").modal("hide");
-	
+
 }
 
 
 // function CalificacionesAct(id){
 
 // grayOut(true);
-	// $('fview').show();
+// $('fview').show();
 
-		
-	// new Ajax.Request(WEB_ROOT+'/ajax/studentCurricula.php', 
-	// {
-		// method:'post',
-		// parameters: {type: "calificaciones", id:id},
-    // onSuccess: function(transport){
-			// var response = transport.responseText || "no response text";
-			// FViewOffSet(response);
-			// Event.observe($('closePopUpDiv'), "click", function(){ CancelFview(); });
-			// Event.observe($('btnCancel'), "click", function(){ CancelFview(); });
-			// Event.observe($('editRole'), "click", EditRole);
 
-		// },
-    // onFailure: function(){ alert('Something went wrong...') }
-  // });
+// new Ajax.Request(WEB_ROOT+'/ajax/studentCurricula.php', 
+// {
+// method:'post',
+// parameters: {type: "calificaciones", id:id},
+// onSuccess: function(transport){
+// var response = transport.responseText || "no response text";
+// FViewOffSet(response);
+// Event.observe($('closePopUpDiv'), "click", function(){ CancelFview(); });
+// Event.observe($('btnCancel'), "click", function(){ CancelFview(); });
+// Event.observe($('editRole'), "click", EditRole);
+
+// },
+// onFailure: function(){ alert('Something went wrong...') }
+// });
 // }
 
 
-function addxxx(){
-//alert(WEB_ROOT)
+function addxxx() {
+	//alert(WEB_ROOT)
 
-new Ajax.Request(WEB_ROOT+'/ajax/student.php', 
-	{
-		method:'post',
-		parameters: $('frmAddCurricula').serialize(true),
-    onSuccess: function(transport){
-			var response = transport.responseText || "no response text";
-			//alert(response);
-			var splitResponse = response.split("[#]");
-			if(splitResponse[0] == "fail")
-			{
-				ShowStatus(splitResponse[1])
-			}
-			else
-			{
-				ShowStatus(splitResponse[1])
-				$('tblContent').innerHTML = splitResponse[2];
-				CloseFview();
-			}
+	new Ajax.Request(WEB_ROOT + '/ajax/student.php',
+		{
+			method: 'post',
+			parameters: $('frmAddCurricula').serialize(true),
+			onSuccess: function (transport) {
+				var response = transport.responseText || "no response text";
+				//alert(response);
+				var splitResponse = response.split("[#]");
+				if (splitResponse[0] == "fail") {
+					ShowStatus(splitResponse[1])
+				}
+				else {
+					ShowStatus(splitResponse[1])
+					$('tblContent').innerHTML = splitResponse[2];
+					CloseFview();
+				}
 
-		},
-    onFailure: function(){ alert('Something went wrong...') }
-  });
-   
+			},
+			onFailure: function () { alert('Something went wrong...') }
+		});
+
 }
 
-function borrarNot(id){
-new Ajax.Request(WEB_ROOT+'/ajax/notificacion.php', 
-	{
-		method:'post',
-		parameters: {type: "deleteNot",id : id},
-    onSuccess: function(transport){
-			var response = transport.responseText || "no response text";
-			alert(response)
-			var splitResponse = response.split("[#]");
-			if(splitResponse[0] == "fail")
-			{
-				ShowStatus(splitResponse[1])
-			}
-			else
-			{
-				ShowStatus(splitResponse[1])
-				$('tblNot').innerHTML = splitResponse[2];
-				CloseFview();
-			}
+function borrarNot(id) {
+	new Ajax.Request(WEB_ROOT + '/ajax/notificacion.php',
+		{
+			method: 'post',
+			parameters: { type: "deleteNot", id: id },
+			onSuccess: function (transport) {
+				var response = transport.responseText || "no response text";
+				alert(response)
+				var splitResponse = response.split("[#]");
+				if (splitResponse[0] == "fail") {
+					ShowStatus(splitResponse[1])
+				}
+				else {
+					ShowStatus(splitResponse[1])
+					$('tblNot').innerHTML = splitResponse[2];
+					CloseFview();
+				}
 
-		},
-    onFailure: function(){ alert('Something went wrong...') }
-  });
+			},
+			onFailure: function () { alert('Something went wrong...') }
+		});
 
 }//CalificacionesAct
 
 
-function CalificacionesExa(id){
+function CalificacionesExa(id) {
 
-$.ajax({
-	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/studentCurricula.php',
-	  	data: "type=calificacionesExa&id="+id,
-		beforeSend: function(){			
+	$.ajax({
+		type: "POST",
+		url: WEB_ROOT + '/ajax/studentCurricula.php',
+		data: "type=calificacionesExa&id=" + id,
+		beforeSend: function () {
 			// $("#td_"+id).html(LOADER3);
 		},
-	  	success: function(response) {	
-		
-			  $("#td_"+id).html(response);
-			  $("#td_"+id).toggle();
+		success: function (response) {
+
+			$("#td_" + id).html(response);
+			$("#td_" + id).toggle();
 
 		},
-		error:function(){
+		error: function () {
 			alert(msgError);
 		}
-    });
+	});
 
 
 }
 
 
 
-function solicitarReferencia(id){
+function solicitarReferencia(id) {
 
-$.ajax({
-	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/homepage.php',
-	  	data: "type=solicitarReferencia&id="+id,
-		beforeSend: function(){			
+	$.ajax({
+		type: "POST",
+		url: WEB_ROOT + '/ajax/homepage.php',
+		data: "type=solicitarReferencia&id=" + id,
+		beforeSend: function () {
 			// $("#td_"+id).html(LOADER3);
 			$("#load").html(LOADER3);
 		},
-	  	success: function(response) {	
+		success: function (response) {
 			console.log(response)
 			var splitResponse = response.split("[#]");
-			if($.trim(splitResponse[0]) == "ok"){
+			if ($.trim(splitResponse[0]) == "ok") {
 				$("#msj5").html(splitResponse[1]);
 				$("#load").html('');
-			}else if ($.trim(splitResponse[0]) == "ok"){
+			} else if ($.trim(splitResponse[0]) == "ok") {
 				$("#msj5").html(splitResponse[2]);
 			}
-			  
+
 
 		},
-		error:function(){
+		error: function () {
 			alert(msgError);
 		}
-    });
+	});
 
 
 }
 
 
-function descargaFormato(courseId,semestreId){
-	url=WEB_ROOT+"/ajax/formato-reinscripcion.php?"+$('#frmfiltro').serialize(true)+'&courseId='+courseId+'&semestreId='+semestreId;
-	open(url,"voucher","toolbal=0,width=800,resizable=1");
+function descargaFormato(courseId, semestreId) {
+	url = WEB_ROOT + "/ajax/formato-reinscripcion.php?" + $('#frmfiltro').serialize(true) + '&courseId=' + courseId + '&semestreId=' + semestreId;
+	open(url, "voucher", "toolbal=0,width=800,resizable=1");
 }
 
 
 
-function abrirReins(subjectId,courseId,semesterId){
-	
+function abrirReins(subjectId, courseId, semesterId) {
+
 	$("#tabla1").hide();
-	
+
 	$.ajax({
-	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/homepage.php',
-	  	data: "type=abrirReins&subjectId="+subjectId+'&courseId='+courseId+'&semesterId='+semesterId,
-		beforeSend: function(){			
+		type: "POST",
+		url: WEB_ROOT + '/ajax/homepage.php',
+		data: "type=abrirReins&subjectId=" + subjectId + '&courseId=' + courseId + '&semesterId=' + semesterId,
+		beforeSend: function () {
 			// $("#td_"+id).html(LOADER3);
 		},
-	  	success: function(response) {	
+		success: function (response) {
 			console.log(response)
 			var splitResponse = response.split("[#]");
-			
-				$("#modal1").html(splitResponse[1]);
-	
+
+			$("#modal1").html(splitResponse[1]);
+
 		},
-		error:function(){
+		error: function () {
 			alert(msgError);
 		}
-    });
+	});
 }
 
 
 
-function verCalendario(){
-	url=WEB_ROOT+"/ajax/pagos.php?"+$('#frmfiltro').serialize(true);
-	open(url,"voucher","toolbal=0,width=800,resizable=1");
+function verCalendario() {
+	url = WEB_ROOT + "/ajax/pagos.php?" + $('#frmfiltro').serialize(true);
+	open(url, "voucher", "toolbal=0,width=800,resizable=1");
 }
 
 
 
 
-function printReferencia(){
-	url=WEB_ROOT+"/ajax/referencia_pdf.php?"+$('#frmfiltro').serialize(true);
-	open(url,"voucher","toolbal=0,width=800,resizable=1");
+function printReferencia() {
+	url = WEB_ROOT + "/ajax/referencia_pdf.php?" + $('#frmfiltro').serialize(true);
+	open(url, "voucher", "toolbal=0,width=800,resizable=1");
 }
 
 
 
-function AddStudentRegister()
-{
-    
-    $.ajax({
-        url : WEB_ROOT+'/ajax/student.php',
-        type: "POST",
-        data :  $('#addStudentForm').serialize()+'&'+$('#frmConfirma').serialize(),  
-		beforeSend: function(){		
+function AddStudentRegister() {
+
+	$.ajax({
+		url: WEB_ROOT + '/ajax/student.php',
+		type: "POST",
+		data: $('#addStudentForm').serialize() + '&' + $('#frmConfirma').serialize(),
+		beforeSend: function () {
 			$("#addStudent").hide();
 			$("#loader").html(LOADER3);
 		},
-        success: function(data)
-        {
+		success: function (data) {
 			console.log(data)
 			$("#loader").html('');
-			 var splitResponse = data.split("[#]");
-			if($.trim(splitResponse[0]) == "ok"){
+			var splitResponse = data.split("[#]");
+			if ($.trim(splitResponse[0]) == "ok") {
 				ShowStatus($(splitResponse[1]));
 				CloseFview();
-                // $('#res_').html(splitResponse[1]);
-                $('#tblContent').html(splitResponse[2]);
-				setTimeout("recargarPage()",2000);
-			}else{
+				// $('#res_').html(splitResponse[1]);
+				$('#tblContent').html(splitResponse[2]);
+				setTimeout("recargarPage()", 2000);
+			} else {
 				$("#addStudent").show();
-				 // $('#res_').html(splitResponse[1]);
+				// $('#res_').html(splitResponse[1]);
 				ShowStatusPopUp($(splitResponse[1]));
-			}	
+			}
 			// $("#loader").html('');
-            // var splitResponse = data.split("[#]");
-            // if(splitResponse[0] == "fail")
-            // {
-                // ShowStatusPopUp($(splitResponse[1]));
-            // }
-            // else
-            // {
-                // ShowStatus($(splitResponse[1]));
-				// CloseFview();
-                // $('#tblContent').html(splitResponse[2]);
-				// setTimeout("recargarPage()",5000);
+			// var splitResponse = data.split("[#]");
+			// if(splitResponse[0] == "fail")
+			// {
+			// ShowStatusPopUp($(splitResponse[1]));
+			// }
+			// else
+			// {
+			// ShowStatus($(splitResponse[1]));
+			// CloseFview();
+			// $('#tblContent').html(splitResponse[2]);
+			// setTimeout("recargarPage()",5000);
 
-				
-            // }
-        },
-        // error: function ()
-        // {
-            // alert('En breve recibirás un correo con la confirmación de tu registro, favor de verificar en tu bandeja de correo no deseado');
-        // }
-    });
+
+			// }
+		},
+		// error: function ()
+		// {
+		// alert('En breve recibirás un correo con la confirmación de tu registro, favor de verificar en tu bandeja de correo no deseado');
+		// }
+	});
 
 
 }
 
 
-function recargarPage()
-{
-	WEB_ROOTDoc = WEB_ROOT+'/';
-	$(location).attr('href',WEB_ROOTDoc);
+function recargarPage() {
+	WEB_ROOTDoc = WEB_ROOT + '/';
+	$(location).attr('href', WEB_ROOTDoc);
 }
 
 
-function onSendINE(){
-	
-	
+function onSendINE() {
+
+
 	var ine = $("#ine").val();
 
 	var res = comprueba_extension(ine);
-	
-	if(res == "no"){
+
+	if (res == "no") {
 		alert("Solo se permiten archivos con extencion PNG y JPG")
-		return ;
+		return;
 	}
-	
+
 
 	// En esta var va incluido $_POST y $_FILES
 	var fd = new FormData(document.getElementById("frmGral"));
-	fd.append('type','onSendINE');
+	fd.append('type', 'onSendINE');
 	$.ajax({
-		url: WEB_ROOT+'/ajax/homepage.php',
+		url: WEB_ROOT + '/ajax/homepage.php',
 		data: fd,
 		processData: false,
 		contentType: false,
 		type: 'POST',
-		xhr: function(){
-				var XHR = $.ajaxSettings.xhr();
-				XHR.upload.addEventListener('progress',function(e){
-					console.log(e)
-					var Progress = ((e.loaded / e.total)*100);
-					Progress = (Progress);
-					console.log(Progress)
-					$('#progress').val(Math.round(Progress));
-					$('#porcentaje').html(Math.round(Progress)+'%');
+		xhr: function () {
+			var XHR = $.ajaxSettings.xhr();
+			XHR.upload.addEventListener('progress', function (e) {
+				console.log(e)
+				var Progress = ((e.loaded / e.total) * 100);
+				Progress = (Progress);
+				console.log(Progress)
+				$('#progress').val(Math.round(Progress));
+				$('#porcentaje').html(Math.round(Progress) + '%');
 
 
-				},false);
+			}, false);
 			return XHR;
 		},
-		success: function(response){
+		success: function (response) {
 
 			console.log(response);
 			// var splitResp = response.split("[#]");
 			// $("#msjCourse").html(response);
 			var splitResp = response.split("[#]");
 
-			if($.trim(splitResp[0])=="ok"){
+			if ($.trim(splitResp[0]) == "ok") {
 				closeModal()
 				$('#msjHome').html(splitResp[1]);
-			}else if($.trim(splitResp[0])=="fail"){
+			} else if ($.trim(splitResp[0]) == "fail") {
 				alert(splitResp[1])
-			}else{
+			} else {
 				alert('Ocurrio un error....')
 			}
 			// alert('llega')
@@ -407,152 +400,140 @@ function onSendINE(){
 }
 
 
-function ciudad_dependenciat(subjectId){
-	
+function ciudad_dependenciat(subjectId) {
+
 	var e = $("#estado").val();
-	
+
 	$.ajax({
-	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/student.php',
-	  	data: "type=ciudad_dependenciat&estadoId="+e,
-		beforeSend: function(){			
+		type: "POST",
+		url: WEB_ROOT + '/ajax/student.php',
+		data: "type=ciudad_dependenciat&estadoId=" + e,
+		beforeSend: function () {
 			// $("#td_"+id).html(LOADER3);
 		},
-	  	success: function(response) {	
+		success: function (response) {
 			console.log(response)
-			
-			
-				$("#divMunicipio").html(response);
-	
+
+
+			$("#divMunicipio").html(response);
+
 		},
-		error:function(){
+		error: function () {
 			alert(msgError);
 		}
-    });
+	});
 }
 
-function ciudad_domt(){
+function ciudad_domt() {
 	var e = $("#estadotId").val();
-	
-	$.ajax({
-	  	type: "POST",
-	  	url: WEB_ROOT+'/ajax/student.php',
-	  	data: "type=ciudad_domt&estadotId="+e,
-		beforeSend: function(){			
-			// $("#td_"+id).html(LOADER3);
-		},
-	  	success: function(response) {	
-			console.log(response)
-			$("#divMunicipiot").html(response);
-		},
-		error:function(){
-			alert(msgError);
-		}
-    });
+	if (e != "") {
+		$.ajax({
+			type: "POST",
+			url: WEB_ROOT + '/ajax/student.php',
+			data: "type=ciudad_domt&estadotId=" + e,
+			beforeSend: function () {
+				// $("#td_"+id).html(LOADER3);
+			},
+			success: function (response) {
+				console.log(response)
+				$("#divMunicipiot").html(response);
+			},
+			error: function () {
+				alert(msgError);
+			}
+		});
+	}
+
 }
 
 
 
 
-function onDeleteCarta(id,ti)
-{
+function onDeleteCarta(id, ti) {
 
 	var resp = confirm("Seguro de  eliminar el Documento?");
 
-		if(!resp)
-			return;
+	if (!resp)
+		return;
 
-    $.ajax({
-		url: WEB_ROOT+'/ajax/homepage.php',
-        type: "POST",
-        data : {type: "onDeleteCarta", id:id,ti:ti},
-        success: function(data)
-        {
-           console.log(data);
-		    var splitResp = data.split("[#]");
-			 if($.trim(splitResp[0]) == "ok")
-            {
-               closeModal();
-			   $('#msjHome').html(splitResp[1]);
-			   
-            }
-            else
-            {
-               alert('Ocurrio un error');
-            }
-        },
-        error: function ()
-        {
-            alert('Algo salio mal, compruebe su conexión a internet');
-        }
-    });
+	$.ajax({
+		url: WEB_ROOT + '/ajax/homepage.php',
+		type: "POST",
+		data: { type: "onDeleteCarta", id: id, ti: ti },
+		success: function (data) {
+			console.log(data);
+			var splitResp = data.split("[#]");
+			if ($.trim(splitResp[0]) == "ok") {
+				closeModal();
+				$('#msjHome').html(splitResp[1]);
+
+			}
+			else {
+				alert('Ocurrio un error');
+			}
+		},
+		error: function () {
+			alert('Algo salio mal, compruebe su conexión a internet');
+		}
+	});
 }
 
 
-function sendSurvey()
-{
+function sendSurvey() {
 	let form = document.getElementById('frmSurvey');
-	if(!form.acuse.checked)
-	{
+	if (!form.acuse.checked) {
 		ShowStatusPopUp("<div>Por favor indique estar de acuerdo con las condiciones del sistema.</div>");
 		form.acuse.focus();
 	}
-	else
-	{
+	else {
 		let data = $('#frmSurvey').serialize();
 		$.ajax({
-			url : WEB_ROOT+'/ajax/new/usuarios.php',
+			url: WEB_ROOT + '/ajax/new/usuarios.php',
 			type: "POST",
-			data :  data,
-			success: function(data)
-			{
-					var splitResponse = data.split("[#]");
+			data: data,
+			success: function (data) {
+				var splitResponse = data.split("[#]");
 
-					if(splitResponse[0] == "fail")
-					{
-						ShowStatusPopUp(splitResponse[1]);
-					}
-					else
-					{
-						$("#tblContent").html(splitResponse[2]);
-						ShowStatus(splitResponse[1]);
-					}
+				if (splitResponse[0] == "fail") {
+					ShowStatusPopUp(splitResponse[1]);
+				}
+				else {
+					$("#tblContent").html(splitResponse[2]);
+					ShowStatus(splitResponse[1]);
+				}
 			},
-			error: function ()
-			{
-					alert('Algo salio mal, compruebe su conexion a internet');
+			error: function () {
+				alert('Algo salio mal, compruebe su conexion a internet');
 			}
 		});
 	}
 }
 
-function authorizeSignature()
-{
-    
-    $.ajax({
-        url : WEB_ROOT+'/ajax/student.php',
-        type: "POST",
-        data :  $('#frmAutorizaFirma').serialize(),  
-		beforeSend: function(){		
+function authorizeSignature() {
+
+	$.ajax({
+		url: WEB_ROOT + '/ajax/student.php',
+		type: "POST",
+		data: $('#frmAutorizaFirma').serialize(),
+		beforeSend: function () {
 			$("#addStudent").hide();
 			$("#loader").html(LOADER3);
 		},
-        success: function(data)
-        {
+		success: function (data) {
 			console.log(data)
 			$("#loader").html('');
-			 var splitResponse = data.split("[#]");
-			if($.trim(splitResponse[0]) == "ok"){
+			var splitResponse = data.split("[#]");
+			if ($.trim(splitResponse[0]) == "ok") {
 				ShowStatus($(splitResponse[1]));
 				CloseFview();
-                $('#tblContent').html(splitResponse[2]);
-				setTimeout("recargarPage()",2000);
-			}else{
+				$('#tblContent').html(splitResponse[2]);
+				setTimeout("recargarPage()", 2000);
+			} else {
 				$("#addStudent").show();
 				ShowStatusPopUp($(splitResponse[1]));
 			}
-        },
-    });
+		},
+	});
 
 
 }
